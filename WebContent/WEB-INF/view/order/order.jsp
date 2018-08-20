@@ -31,7 +31,7 @@
 				<div id="Demo1" class="w3-hide">
 					<ul class="w3-ul w3-card-4">
 						<li class="w3-bar"><img
-							src="${pageContext.request.contextPath}/image/1.jpg"
+							src="../../../1.jpg"
 							class="w3-bar-item w3-circle w3-hide-small w3-right"
 							style="width: 150px">
 							<div class="w3-bar-item">
