@@ -11,9 +11,20 @@ public class WelcomeController {
 		return "index";
 		
 	}
-	@RequestMapping({"/reg"})
-	public String RegHandle() {
-		return "reg";
+	@RequestMapping({"/loginForm"})
+	public String LoginFormHandle() {
+		return "loginForm";
 	}
-
+	@RequestMapping({"/main"})
+	public String MainHandle() {
+		return "main";
+	}
+	@RequestMapping({"/regForm"})
+	public String RegFormHandle() {
+		return "regForm";
+	}
+	@RequestMapping({"/memberUpdate"})
+	public String MemberUpdateHandle() {
+		return "memberUpdate";
+	}
 }

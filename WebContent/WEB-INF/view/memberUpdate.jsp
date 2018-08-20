@@ -12,13 +12,22 @@
 <link rel="stylesheet" href="include/common/css/reset.css">
 <link rel="stylesheet" href="include/common/css/reg.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<head>
+<meta charset="UTF-8">
+<title>회원정보수정</title>
+<style>
+	#wrap {margin:0 auto; width:100%; height:100%; margin-top:50px; margin-right:10px;}
+	h3 {text-align:center; margin-top:100px;}
+	form {margin:0 auto; width:600px; margin-top:50px;}
+</style>
 </head>
 <body>
-	<div>
-		<h1>Jugiyo(요기요)</h1>
-		<form action="login.jsp">
-			<img src="" alt="logo" title="로고" />
+	<div id="wrap">
+		<hr />
+		<h3>회원정보수정페이지</h3>
+		<form action="memberUpdate.jsp" name="memberUpdateForm" method="post">
+		
 		</form>
-	</div>
+	</div>	
 </body>
 </html>
