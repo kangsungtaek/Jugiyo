@@ -17,4 +17,9 @@ public class WelcomeController {
 		System.out.println("[controller] addr");
 		return "addr";
 	}
+	
+	@RequestMapping("/layout")
+	public String testHanle() {
+		return "layout";
+	}
 }
