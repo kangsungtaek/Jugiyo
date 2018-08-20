@@ -8,8 +8,8 @@ public class WelcomeController {
 	
 	@RequestMapping({"/index", "/"})
 	public String WelcomeHandle() {
+		System.out.println("[controller] welcome");
 		return "index";
-		
 	}
 
 }

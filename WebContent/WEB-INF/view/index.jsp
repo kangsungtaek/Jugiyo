@@ -8,10 +8,10 @@
 </head>
 <body>
 	<div align="center">
-		<img src="./img/logo.png"
-			onclick=<c:redirect url="/WEB-INF/view/index.do" />>
-		<input type="text" style="width: 250px;" placeholder="배달받으실 주소를 입력해주세요." 
-			onclick=<c:redirect url="/WEB-INF/view/addr.do" /> />
+		<img src="../imgages/logo.png" style="width: 270px; height: 90px;"
+			onclick=<c:redirect url="/WEB-INF/view/index" />>
+		<input type="text" style="width: 270px;" placeholder="배달받으실 주소를 입력해주세요." 
+			onclick=<c:redirect url="/WEB-INF/view/addr" /> />
 	</div>
 </body>
 </html>
