@@ -30,16 +30,14 @@
 			<div class="w3-container">
 				<div id="Demo1" class="w3-hide">
 					<ul class="w3-ul w3-card-4">
-						<li class="w3-bar"><img
-							src="../../../1.jpg"
+						<li class="w3-bar"><img src="../../image/1.jpg"
 							class="w3-bar-item w3-circle w3-hide-small w3-right"
 							style="width: 150px">
 							<div class="w3-bar-item">
 								<span class="w3-large">음식1</span><br> <span>3500원</span>
 							</div></li>
 
-						<li class="w3-bar"><img
-							src="${pageContext.request.contextPath}/image/1.jpg"
+						<li class="w3-bar"><img src="../../image/1.jpg"
 							class=" w3-round w3-bar-item w3-xlarge w3-right "
 							style="width: 100px">
 							<div class="w3-bar-item">
@@ -88,10 +86,13 @@
 			</div>
 		</div>
 		<div id="review" class="w3-container tabs" style="display: none">
-			<h2>리뷰</h2>
-			<p>Paris is the capital of France.</p>
+			<div class="w3-container w3-border w3-large">
+				<div class="w3-center">
+					<p>4.2</p>
+				</div>
+			</div>
+		
 		</div>
-
 	</div>
 
 	<script>
