@@ -12,4 +12,9 @@ public class WelcomeController {
 		return "index";
 	}
 
+	@RequestMapping("/addr")
+	public String AddrHandle() {
+		System.out.println("[controller] addr");
+		return "addr";
+	}
 }
