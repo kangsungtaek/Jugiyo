@@ -38,7 +38,7 @@ public class OwnerController {
 		ModelAndView mav = new ModelAndView();
 		boolean r = addMenuDao.addMenu(vo);
 		if(r) {
-			mav.setViewName("index");
+			mav.setViewName("owner/addmenu");
 			mav.addObject("success",r);
 		}
 		return mav;

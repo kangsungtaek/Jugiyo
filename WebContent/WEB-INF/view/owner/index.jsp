@@ -6,5 +6,9 @@
 
 <title>사장님 페이지</title>
 
+<h1>사장님 페이지</h1>
+	<a href = "/owner/addmenu"><input type="submit" value="메뉴등록"/></a>
+<hr/>
+
 
 

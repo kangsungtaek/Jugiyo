@@ -4,24 +4,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<title>사장님 페이지</title>
+<title>메뉴 등록</title>
 
-<form>
+<form action="/owner/addmenu" method="post" name="menuInfo">
 	<table>
 		<tr>
 			<td>메뉴:</td>
-				<td><input type="text">
+				<td><input type="text" name="name">
 			</td>
 			
 		</tr>
 		<tr>
-			<td>가격</td>
-			<td><input type="text"></td>
+			<td>가격:</td>
+			<td><input type="text" name="price"></td>
 		</tr>
 		<tr>
 			<td>가게명:</td>
-			<td><input type="text"></td>
+			<td><input type="text" name="store"></td>
 		</tr>
+		<tr><td><input type="submit" value="확인"/></td></tr>
 	</table>
 </form>
 
