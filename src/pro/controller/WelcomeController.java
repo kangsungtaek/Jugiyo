@@ -11,5 +11,9 @@ public class WelcomeController {
 		return "index";
 		
 	}
+	@RequestMapping({"/reg"})
+	public String RegHandle() {
+		return "reg";
+	}
 
 }

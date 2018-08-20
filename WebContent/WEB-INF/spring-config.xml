@@ -71,10 +71,10 @@
 	<bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	
 	<!-- mongoDB설정 -->
-	<mongo:mongo-client host="13.209.76.210" port="51249" id="mongo" />
+<!--<mongo:mongo-client host="13.209.76.210" port="51249" id="mongo" />
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongoClient" ref="mongo" />
 		<constructor-arg name="databaseName" value="jugiyo" />
-	</bean>
+	</bean>	 -->	
 
 </beans>
