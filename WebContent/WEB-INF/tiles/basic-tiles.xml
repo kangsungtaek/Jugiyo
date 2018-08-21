@@ -6,4 +6,10 @@
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp"/>	
 	</definition>
 	
+	<definition name="order/order" template="/WEB-INF/view/layout/layout.jsp"> 
+		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/view/order/order.jsp"/>
+		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp"/>	
+	</definition>
+	
 </tiles-definitions>

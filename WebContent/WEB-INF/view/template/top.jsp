@@ -75,10 +75,6 @@ ul {
   
 </div>
 </div>
-				
-			
-
-
 
 	<hr />
-	<div style="min-height: 500px; margin-left: 70px; margin-right: 70px;">
+	

@@ -26,7 +26,7 @@
 		<div id="menu" class="w3-container tabs" style="display: block">
 			<button onclick="myFunction('Demo1')"
 				class="w3-button w3-block w3-left-align w3-light-grey">
-				Accordion 1</button>
+				추천 메뉴</button>
 			<div class="w3-container">
 				<div id="Demo1" class="w3-hide">
 					<ul class="w3-ul w3-card-4">
@@ -54,7 +54,7 @@
 			</div>
 			<button onclick="myFunction('Demo2')"
 				class="w3-button w3-block w3-black w3-left-align">
-				Accordion 2</button>
+				인기 메뉴</button>
 			<div class="w3-container">
 				<div id="Demo2" class="w3-hide">
 					<ul class="w3-ul w3-card-4">
