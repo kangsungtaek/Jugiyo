@@ -41,15 +41,15 @@ public class OwnerController {
 		
 		System.out.println(vo.toString());
 		
-		StoreVo storeVo=(StoreVo)webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
-		vo.setName(storeVo.getName());
+//		StoreVo storeVo=(StoreVo)webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
+//		vo.setName(storeVo.getName());
 		
 		ModelAndView mav = new ModelAndView();
-		boolean r = addMenuDao.addMenu(vo);
-		if(r) {
-			mav.setViewName("owner/addmenu");
-			mav.addObject("success",r);
-		}
+//		boolean r = addMenuDao.addMenu(vo);
+//		if(r) {
+//			mav.setViewName("owner/addmenu");
+//			mav.addObject("success",r);
+//		}
 		return mav;
 	}
 }

@@ -17,15 +17,17 @@
 				
 				<div class="w3-half">
 					<label>메뉴명</label>
-					<input class="w3-input w3-border" name="name" type="text" id="name">
+					<input class="w3-input w3-border" name="name" type="text" id="name" placeholder="ex)후라이드치킨"/>
+					<span id = "menuidx" style="font-size: 11px"></span>
 				</div>
 				<div class="w3-half">
-					<label>가격</label>
-					<input class="w3-input w3-border" name="price" type="text" id="price">
+					<label>가격(숫자만 입력해주세요)</label>
+					<input class="w3-input w3-border" name="price" type="text" id="price" placeholder="ex)10000"/>
+					<span id = "priceidx" style="font-size: 11px"></span>
 				</div>
 				
 				<p>
-					<input type="submit" value="확인" />
+					<input type="submit" value="확인" onclick="return checkValue()"/>
 				</p>
 			</form>
 		</div>
@@ -34,6 +36,20 @@
 </body>
 
 <script>
-		document.getElementById("")
+		function checkValue(){
+			var form = document.menuInfo;
+			var check = true;
+			
+			if(!form.name.value){
+				document.getElementById("menuidx").innerHTML="메뉴를 입력하세요";
+				check = false;
+			}
+			if(!form.price.value){
+				document.getElementById("priceidx").innerHTML="가격을 입력하세요";
+				check = false;
+			}
+			return check;
+			
+		}
 </script>
 </html>
