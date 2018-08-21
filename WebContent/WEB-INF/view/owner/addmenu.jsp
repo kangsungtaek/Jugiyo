@@ -20,6 +20,9 @@
 					<input class="w3-input w3-border" name="name" type="text" id="name" placeholder="ex)후라이드치킨"/>
 					<span id = "menuidx" style="font-size: 11px"></span>
 				</div>
+
+
+
 				<div class="w3-half">
 					<label>가격(숫자만 입력해주세요)</label>
 					<input class="w3-input w3-border" name="price" type="text" id="price" placeholder="ex)10000"/>
@@ -53,3 +56,5 @@
 		}
 </script>
 </html>
+
+
