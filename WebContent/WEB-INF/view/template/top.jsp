@@ -84,7 +84,6 @@ body, html {
 </style>
 </head>
 <body>
-
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar" id="myNavbar">

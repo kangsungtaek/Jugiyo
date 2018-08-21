@@ -26,25 +26,25 @@
 		<div id="menu" class="w3-container tabs" style="display: block">
 			<button onclick="myFunction('Demo1')"
 				class="w3-button w3-block w3-left-align w3-light-grey">
-				Accordion 1</button>
+				추천 메뉴</button>
 			<div class="w3-container">
 				<div id="Demo1" class="w3-hide">
 					<ul class="w3-ul w3-card-4">
 						<li class="w3-bar" id="f01"><img
-							src="${pageContext.request.contextPath}/image/1.jpg"
+							src="${pageContext.request.contextPath}/images/1.jpg"
 							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item">
 								<span class="w3-large">음식1</span><br> <span>3500원</span>
 							</div></li>
 						<li class="w3-bar" id="f02"><img
-							src="${pageContext.request.contextPath}/image/1.jpg"
+							src="${pageContext.request.contextPath}/images/1.jpg"
 							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item">
 								<span class="w3-large">음식2</span><br> <span>7000원</span>
 							</div></li>
 
 						<li class="w3-bar" id="f03"><img
-							src="${pageContext.request.contextPath}/image/1.jpg"
+							src="${pageContext.request.contextPath}/images/1.jpg"
 							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item ">
 								<span class="w3-large">음식3</span><br> <span>10000원</span>
@@ -54,26 +54,26 @@
 			</div>
 			<button onclick="myFunction('Demo2')"
 				class="w3-button w3-block w3-black w3-left-align">
-				Accordion 2</button>
+				인기 메뉴</button>
 			<div class="w3-container">
 				<div id="Demo2" class="w3-hide">
 					<ul class="w3-ul w3-card-4">
 						<li class="w3-bar"><img
-							src="${pageContext.request.contextPath}/image/1.jpg"
+							src="${pageContext.request.contextPath}/images/1.jpg"
 							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item">
 								<span class="w3-large">음식1</span><br> <span>3500원</span>
 							</div></li>
 
 						<li class="w3-bar"><img
-							src="${pageContext.request.contextPath}/image/1.jpg"
+							src="${pageContext.request.contextPath}/images/1.jpg"
 							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item">
 								<span class="w3-large">음식2</span><br> <span>7000원</span>
 							</div></li>
 
 						<li class="w3-bar"><img
-							src="${pageContext.request.contextPath}/image/1.jpg"
+							src="${pageContext.request.contextPath}/images/1.jpg"
 							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item ">
 								<span class="w3-large">음식3</span><br> <span>10000원</span>
