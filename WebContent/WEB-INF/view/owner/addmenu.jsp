@@ -15,7 +15,7 @@
 			<form class="w3-container w3-card-4 w3-white"
 				action="/owner/addmenu" method="post" name="menuInfo">
 				
-				<div class="w3-half">
+				<div class="w3-half" style="padding-right: 10px">
 					<label>메뉴명</label>
 					<input class="w3-input w3-border" name="name" type="text" id="name" placeholder="ex)후라이드치킨"/>
 					<span id = "menuidx" style="font-size: 11px"></span>
