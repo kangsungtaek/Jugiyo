@@ -8,18 +8,20 @@ public class WelcomeController {
 	 
 	@RequestMapping({"/index", "/"})
 	public String WelcomeHandle() {
-		System.out.println("[controller]welcome");
+		System.out.println("[controller] welcome");
 		return "index";
 	}
 	
 	@RequestMapping("/addr")
 	public String AddrHandle() {
-		System.out.println("[controller]addr");
+		System.out.println("[controller] addr");
 		return "addr";
 	}
 	
+
 	@RequestMapping({"/memberUpdate"})
 	public String MemberUpdateHandle() {
 		return "memberUpdate";
+
 	}
 }

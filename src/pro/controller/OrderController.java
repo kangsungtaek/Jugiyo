@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OrderController {
 	
 	@RequestMapping("/order")
-	public void OrderHandle01() {
-
+	public String OrderHandle01() {
+		return "order/order";
 	}
 
 }
