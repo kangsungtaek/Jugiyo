@@ -31,20 +31,20 @@
 				<div id="Demo1" class="w3-hide">
 					<ul class="w3-ul w3-card-4">
 						<li class="w3-bar" id="f01"><img
-							src="${pageContext.request.contextPath}/image/1.jpg"
+							src="${pageContext.request.contextPath}/images/1.jpg"
 							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item">
 								<span class="w3-large">음식1</span><br> <span>3500원</span>
 							</div></li>
 						<li class="w3-bar" id="f02"><img
-							src="${pageContext.request.contextPath}/image/1.jpg"
+							src="${pageContext.request.contextPath}/images/1.jpg"
 							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item">
 								<span class="w3-large">음식2</span><br> <span>7000원</span>
 							</div></li>
 
 						<li class="w3-bar" id="f03"><img
-							src="${pageContext.request.contextPath}/image/1.jpg"
+							src="${pageContext.request.contextPath}/images/1.jpg"
 							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item ">
 								<span class="w3-large">음식3</span><br> <span>10000원</span>
@@ -59,21 +59,21 @@
 				<div id="Demo2" class="w3-hide">
 					<ul class="w3-ul w3-card-4">
 						<li class="w3-bar"><img
-							src="${pageContext.request.contextPath}/image/1.jpg"
+							src="${pageContext.request.contextPath}/images/1.jpg"
 							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item">
 								<span class="w3-large">음식1</span><br> <span>3500원</span>
 							</div></li>
 
 						<li class="w3-bar"><img
-							src="${pageContext.request.contextPath}/image/1.jpg"
+							src="${pageContext.request.contextPath}/images/1.jpg"
 							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item">
 								<span class="w3-large">음식2</span><br> <span>7000원</span>
 							</div></li>
 
 						<li class="w3-bar"><img
-							src="${pageContext.request.contextPath}/image/1.jpg"
+							src="${pageContext.request.contextPath}/images/1.jpg"
 							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item ">
 								<span class="w3-large">음식3</span><br> <span>10000원</span>
