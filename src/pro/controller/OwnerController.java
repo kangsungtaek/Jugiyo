@@ -1,15 +1,19 @@
 package pro.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.AddMenuDao;
 import pro.vo.AddMenuVo;
+import pro.vo.StoreVo;
 
 
 
@@ -33,8 +37,13 @@ public class OwnerController {
 	}
 	
 	@PostMapping("/addmenu")
-	public ModelAndView indexHandle02(@ModelAttribute AddMenuVo vo) {
+	public ModelAndView indexHandle02(@ModelAttribute List<AddMenuVo> vo,WebRequest webRequest) {
+		
 		System.out.println(vo.toString());
+		
+		StoreVo storeVo=(StoreVo)webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
+		vo.setName(storeVo.getName());
+		
 		ModelAndView mav = new ModelAndView();
 		boolean r = addMenuDao.addMenu(vo);
 		if(r) {
