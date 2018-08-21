@@ -40,11 +40,11 @@ placeholder {font:10px dotum, sanserif;}
 				</tr>
 				<tr>
 					<td class="n"><span class="asterisk">*</span> 아이디</td>
-					<td><input type="text" name="userid" placeholder=" 아이디입력" maxlength="20"> <small class="c">20자 이내 입력</samll></td> 
+					<td><input type="text" name="id" placeholder=" 아이디입력" maxlength="20"> <small class="c">20자 이내 입력</samll></td> 
 				</tr>	
 				<tr>
 					<td class="n"><span class="asterisk">*</span> 비밀번호</td>
-					<td><input type="password" name="pwd" placeholder=" 비밀번호입력" maxlength="20"> <small class="c">20자 이내 입력</samll></td> 
+					<td><input type="password" name="password" placeholder=" 비밀번호입력" maxlength="20"> <small class="c">20자 이내 입력</samll></td> 
 				</tr>
 				<tr>
 					<td class="n"><span class="asterisk">*</span> 비밀번호확인</td>
