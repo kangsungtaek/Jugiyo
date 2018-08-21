@@ -5,7 +5,7 @@
 <html>
 <head>
 <%-- web.xml 에 context-param 설정하고 그것 출력되게 EL--%>
-<title>GroupWare #</title>
+<title>JUGIYO</title>
 <style>
 input, button, select {
 	padding: 5px;
@@ -68,10 +68,6 @@ ul {
   
 </div>
 </div>
-				
-			
-
-
 
 	<hr />
 	<div style="min-height: 500px; margin-left: 70px; margin-right: 70px;">

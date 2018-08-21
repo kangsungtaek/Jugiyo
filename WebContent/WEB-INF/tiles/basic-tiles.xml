@@ -5,5 +5,8 @@
 		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp"/>	
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
 	</definition>
-	
+	<definition name="index" template="/WEB-INF/view/index.jsp"> 
+		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp"/>	
+		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
+	</definition>
 </tiles-definitions>

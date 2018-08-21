@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<html>
-<title>JUGIYO</title>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<tiles:insertAttribute name="top" />
+
 <div class="w3-container">
 	<p>
 	
@@ -23,5 +26,4 @@
 	}
 </script>
 
-</body>
-</html>
+<tiles:insertAttribute name="bottom" />
