@@ -5,9 +5,15 @@
 <!DOCTYPE html>
 <html>
 <title>W3.CSS</title>
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<body>
+</head>
+<body class="w3-content" style="max-width: 1000px">
 
 	<div class="w3-container">
 		<h2>주문하기</h2>
@@ -15,10 +21,10 @@
 		<div class="w3-row">
 			<a href="javascript:void(0)" onclick="openTabs(event, 'menu');">
 				<div
-					class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red">메뉴</div>
+					class="w3-half tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red">메뉴</div>
 			</a> <a href="javascript:void(0)" onclick="openTabs(event, 'review');">
 				<div
-					class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">리뷰</div>
+					class="w3-half tablink w3-bottombar w3-hover-light-grey w3-padding">리뷰</div>
 			</a>
 
 		</div>
@@ -30,21 +36,20 @@
 			<div class="w3-container">
 				<div id="Demo1" class="w3-hide">
 					<ul class="w3-ul w3-card-4">
-						<li class="w3-bar"><img src="../../image/1.jpg"
-							class="w3-bar-item w3-circle w3-hide-small w3-right"
-							style="width: 150px">
+						<li class="w3-bar" id="f01"><img
+							src="${pageContext.request.contextPath}/image/1.jpg"
+							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item">
 								<span class="w3-large">음식1</span><br> <span>3500원</span>
 							</div></li>
-
-						<li class="w3-bar"><img src="../../image/1.jpg"
-							class=" w3-round w3-bar-item w3-xlarge w3-right "
-							style="width: 100px">
+						<li class="w3-bar" id="f02"><img
+							src="${pageContext.request.contextPath}/image/1.jpg"
+							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item">
 								<span class="w3-large">음식2</span><br> <span>7000원</span>
 							</div></li>
 
-						<li class="w3-bar"><img
+						<li class="w3-bar" id="f03"><img
 							src="${pageContext.request.contextPath}/image/1.jpg"
 							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item ">
@@ -61,16 +66,14 @@
 					<ul class="w3-ul w3-card-4">
 						<li class="w3-bar"><img
 							src="${pageContext.request.contextPath}/image/1.jpg"
-							class="w3-bar-item w3-circle w3-hide-small w3-right"
-							style="width: 150px">
+							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item">
 								<span class="w3-large">음식1</span><br> <span>3500원</span>
 							</div></li>
 
 						<li class="w3-bar"><img
 							src="${pageContext.request.contextPath}/image/1.jpg"
-							class=" w3-round w3-bar-item w3-xlarge w3-right "
-							style="width: 100px">
+							class="w3-round w3-right " style="width: 100px">
 							<div class="w3-bar-item">
 								<span class="w3-large">음식2</span><br> <span>7000원</span>
 							</div></li>
@@ -86,12 +89,40 @@
 			</div>
 		</div>
 		<div id="review" class="w3-container tabs" style="display: none">
-			<div class="w3-container w3-border w3-large">
-				<div class="w3-center">
-					<p>4.2</p>
-				</div>
+			<div class="w3-container w3-border w3-large w3-center">
+				<p>
+					<span>4.2</span><br /> <span>ㅁㅁㅁㅁ</span>
+				</p>
 			</div>
-		
+
+			<div class="w3-container w3-border">
+				<form action="리뷰넘기기" method="post" enctype="multipart/form-data">
+					<textarea rows="3" placeholder="리뷰를 작성해주세요"
+						style="height: 100px; width: 900px; margin-top: 10px"></textarea>
+					<div class="w3-row">
+						<div class="w3-half w3-container w3-right-left">
+							<input type="file" id="file" style="padding-bottom: 5px;">
+						</div>
+						<div class="w3-half w3-container w3-right-align">
+							<input type="submit" value="등록">
+						</div>
+					</div>
+
+
+
+
+				</form>
+			</div>
+
+			<div class="w3-container w3-border" style="min-height: 150px">
+				<span class="w3-large">강성택님</span> <span class="w3-small">2018-08-24</span>
+				<br /> <span class="w3-small">별점</span><br /> <span
+					class="w3-small"> 시킨거 </span>
+				<div class="w3-left-align w3-large">
+					<p>리뷰</p>
+				</div>
+
+			</div>
 		</div>
 	</div>
 
@@ -119,7 +150,12 @@
 				x.className = x.className.replace(" w3-show", "");
 			}
 		}
+		
+		$(".w3-bar").on("click",function(){
+			window.alert($(this).attr("id"));
+		});
 	</script>
 
 </body>
+
 </html>
