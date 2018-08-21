@@ -32,13 +32,12 @@ public class LoginController {
 		MemberVo vo = memberDao.findById(id);
 		
 		//.equals(password) 맞으면(if-else) 어디로 보내야겠죠(index) 틀리면 다시하라고 보내야함 
-		/*
-		if() { //session에다가 vo를 올려주세요.
+		
+		if(vo.getPassword().equals(password)) { //session에다가 vo를 올려주세요.
 			mav.setViewName("index");
 		} else {
 			mav.setViewName("login/loginForm");
 		}
-		*/
 		return mav;
 	}
 	
