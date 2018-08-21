@@ -18,8 +18,8 @@ public class WelcomeController {
 		return "addr";
 	}
 	
-	@RequestMapping("/layout")
+	@RequestMapping("/sample")
 	public String testHanle() {
-		return "layout";
+		return "sample";
 	}
 }
