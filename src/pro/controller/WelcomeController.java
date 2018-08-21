@@ -11,7 +11,7 @@ public class WelcomeController {
 		System.out.println("[controller] welcome");
 		return "index";
 	}
-
+	
 	@RequestMapping("/addr")
 	public String AddrHandle() {
 		System.out.println("[controller] addr");
