@@ -4,8 +4,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <%-- web.xml 에 context-param 설정하고 그것 출력되게 EL--%>
-<title>GroupWare #</title>
+<title>JUGIYO</title>
+
+
 <style>
 input, button, select {
 	padding: 5px;
