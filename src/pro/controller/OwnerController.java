@@ -23,14 +23,14 @@ public class OwnerController {
 	@Autowired
 	AddMenuDao addMenuDao;
 	
-	
+	//사장님 페이지
 	@GetMapping("/index")
 	public String indexHandle01() {
 		return "owner/index";
 	}
 	
 	
-	
+	//메뉴추가 컨트롤러 만드는중
 	@GetMapping("/addmenu")
 	public String addMenuHandle01() {
 		return "owner/addmenu";
