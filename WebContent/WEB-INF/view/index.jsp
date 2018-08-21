@@ -3,40 +3,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
+
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<title>W3.CSS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="include/common/css/reset.css">
-<link rel="stylesheet" href="include/common/css/reg.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<style>
-	div,ul,li,ol,img {list-style:none;}
-	#wrap {margin:0 auto; width:100%; height:100%; margin-top:10%;border:1px solid blue;}
-	form {margin:0 auto; width:700px; margin-top:50px;}
-	div ul.search_box {width:100%; height:100%;}
-	div ul.search_box li {width:100%; height:100%;}
-	div ul.mem_login {width:100%; height:100%;}
-	div ul.mem_login li {margin:0 20px; display:inline;}
-</style>
-</head>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
-	<div id="wrap">
-		<div>			<form action="login.jsp">
-				<img src="../../../images/logo.png"  class="tit" alt="logo" title="로고" />
-				<ul class="search_box">
-					<li>
-						<input type="text" style="padding:5px 5px" size="60" name="search" placeholder=" 검 색 " />
-					</li>
-				</ul>
-				<ul class="mem_login">
-					<li><a href="login">로그인</a></li> |
-					<li><a href="mem_ship">회원가입</a></li>
-				</ul>
-			</form>
-		</div>
+
+	<div class="w3-container">
+		<p></p>
 	</div>
+
+	<div class="w3-panel w3-padding-64 w3-orange" align="center">
+		<img src="../images/logo.png" onclick="location.href='/index'" style="width: 500px; height: 200px;" />
+		<br />
+		<input type="text" style="width: 500px;" placeholder="배달받으실 주소를 입력해주세요." onclick="getAddr()" />
+	</div>
+
+	<script>
+		function getAddr() {
+			window.open("/addr", "new browser", "width=500, height=250");
+		}
+	</script>
+
+
 </body>
 </html>

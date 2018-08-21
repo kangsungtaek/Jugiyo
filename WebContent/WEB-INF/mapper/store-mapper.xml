@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store"> 
+	<!-- sequence검색 -->
+	<select id="getSeq" resultType="java.lang.Integer">
+		select store_seq.nextval from dual
+	</select>
+	<!-- 상점등록 -->
+	<insert id="addStore">
+		insert into store(no, id, password, name, addr, type, contact) values(
+			#{no}, #{id}, #{password}, #{name}, #{addr}, #{type}, #{contact}
+		)
+	</insert>
+</mapper>

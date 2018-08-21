@@ -17,5 +17,4 @@ public class MemberDao {
 		return template.selectOne("member.findById", id);
 		//member가 mapper이름 findById는 sql문 이름
 	}
-	
 }
