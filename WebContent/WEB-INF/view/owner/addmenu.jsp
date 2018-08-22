@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<div style="height: 200px"></div>
 	<div class="w3-row">
 		<div class="w3-quarter">&nbsp;</div>
 		<div class="w3-half">
@@ -15,6 +16,11 @@
 							class="w3-input w3-border" name="gg" type="text" readOnly
 							id="fake">
 					</div>
+					<div>
+						<input type="file" name="file"/>
+						
+					</div>
+					
 					<div class="w3-half">
 						<img src="aa" />
 					</div>

@@ -5,12 +5,20 @@ public class AddMenuVo {
 	String name;
 	int price;
 	String store;
-	String menu_img;
-	public String getMenu_img() {
-		return menu_img;
+	String file_name;
+	String file_url;
+	
+	public String getFile_name() {
+		return file_name;
 	}
-	public void setMenu_img(String menu_img) {
-		this.menu_img = menu_img;
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
+	}
+	public String getFile_url() {
+		return file_url;
+	}
+	public void setFile_url(String file_url) {
+		this.file_url = file_url;
 	}
 	public int getNo() {
 		return no;
@@ -38,7 +46,7 @@ public class AddMenuVo {
 	}
 	@Override
 	public String toString() {
-		return "AddMenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + ", menu_img="
-				+ menu_img + "]";
+		return "AddMenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + ", file_name="
+				+ file_name + ", file_url=" + file_url + "]";
 	}
 }

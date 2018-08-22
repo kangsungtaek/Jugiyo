@@ -15,8 +15,12 @@ public class UploadService {
 	@Autowired
 	ServletContext ctx;
 
-	public AddMenuVo execute(MultipartFile file) throws Exception {
-		File dir = new File(ctx.getRealPath("/image"));
+	public AddMenuVo execute(MultipartFile file, String store) throws Exception {
+		
+		File dir = new File(ctx.getRealPath("/image"),store);
+		
+		System.out.println(ctx.getRealPath("/image"));
+		
 		if (!dir.exists())
 			dir.mkdirs();
 
@@ -25,7 +29,9 @@ public class UploadService {
 		file.transferTo(dest);
 
 		AddMenuVo vo = new AddMenuVo();
-		//vo.setMenu_img();
+		vo.setFile_name(file.getOriginalFilename());
+		vo.setFile_url("/image/"+store+"/"+file.getOriginalFilename());
+		
 		return vo;
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.AddMenuDao;
+import pro.service.UploadService;
 import pro.vo.AddMenuVo;
 import pro.vo.StoreVo;
 
@@ -24,6 +25,10 @@ import pro.vo.StoreVo;
 public class OwnerController {
 	@Autowired
 	AddMenuDao addMenuDao;
+	@Autowired
+	UploadService uploadService;
+	
+	
 	
 	//사장님 페이지
 	@GetMapping("/index")
@@ -38,26 +43,52 @@ public class OwnerController {
 		return "owner/addmenu";
 	}
 	
-	@PostMapping("/addmenu")
-	public ModelAndView indexHandle02(@ModelAttribute List<AddMenuVo> vo,WebRequest webRequest,@RequestParam("attach")MultipartFile[] files) {
-		System.out.println(vo.toString());
-		
-		if(!files[0].isEmpty()) {
-			for(MultipartFile file : files) {
-				AddMenuVo avo=
-			}
-		}
-		
-		
+//	@PostMapping("/addmenu")
+//	public ModelAndView indexHandle02(@ModelAttribute List<AddMenuVo> vo,WebRequest webRequest,@RequestParam("file")MultipartFile[] files) {
+//		System.out.println(vo.toString());
+//		
+//		if(!files[0].isEmpty()) {
+//			for(MultipartFile file : files) {
+//				AddMenuVo avo=
+//			}
+//		}
+//		
+//		
 //		StoreVo storeVo=(StoreVo)webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
 //		vo.setName(storeVo.getName());
-		
-		ModelAndView mav = new ModelAndView();
+//		
+//		ModelAndView mav = new ModelAndView();
 //		boolean r = addMenuDao.addMenu(vo);
 //		if(r) {
 //			mav.setViewName("owner/addmenu");
 //			mav.addObject("success",r);
 //		}
+//		return mav;
+//	}
+	@PostMapping("/addmenu")
+	public ModelAndView indexHandle02(@ModelAttribute List<AddMenuVo> vo,WebRequest webRequest,@RequestParam("file")MultipartFile[] files) {
+		System.out.println(vo.toString());
+		
+		
+		int cnt=0;
+		if(!files[0].isEmpty()) {
+			for(MultipartFile file : files) {
+				AddMenuVo avo= uploadService.execute(file, store);
+				addMenuDao.addMenu(avo);
+				cnt++;
+			}
+		}
+		
+		
+		StoreVo storeVo=(StoreVo)webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
+		vo.setName(storeVo.getName());
+		
+		ModelAndView mav = new ModelAndView();
+		boolean r = addMenuDao.addMenu(vo);
+		if(r) {
+			mav.setViewName("owner/addmenu");
+			mav.addObject("success",r);
+		}
 		return mav;
 	}
 }
