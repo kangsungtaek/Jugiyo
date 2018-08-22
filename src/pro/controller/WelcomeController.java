@@ -23,6 +23,6 @@ public class WelcomeController {
 	public String getAddrHandle(@RequestParam("addr") String addr) {
 		System.out.println("[controller:getAddr]" + addr);
 		
-		return ""; //음식점 전체메뉴로 이동하도록
+		return "order/"; //음식점 전체메뉴로 이동하도록
 	}
 }
