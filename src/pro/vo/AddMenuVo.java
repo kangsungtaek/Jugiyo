@@ -5,6 +5,13 @@ public class AddMenuVo {
 	String name;
 	int price;
 	String store;
+	String menu_img;
+	public String getMenu_img() {
+		return menu_img;
+	}
+	public void setMenu_img(String menu_img) {
+		this.menu_img = menu_img;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -31,6 +38,7 @@ public class AddMenuVo {
 	}
 	@Override
 	public String toString() {
-		return "OwnerMenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + "]";
+		return "AddMenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + ", menu_img="
+				+ menu_img + "]";
 	}
 }
