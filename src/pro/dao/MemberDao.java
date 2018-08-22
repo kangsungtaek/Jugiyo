@@ -20,16 +20,14 @@ public class MemberDao {
 		//member가 mapper이름 findById는 sql문 이름
 	}
 	
-	public int getSequence() {
-		return template.selectOne("member.getSequence");
-	}
-	
+	//회원가입용 함수
 	public int addMember(MemberVo vo) {
-		return template.insert("member.addMemberVo", vo);
+		return template.insert("member.addMember", vo);
 	}
 	
-	public List<MemberVo> findStartWith(String id) {
-		return template.selectList("member.findStartWith", id);
-		
+	//아이디 중복체크용 함수
+	public List<String> findAll() {
+		return template.selectList("member.findAll");  // mapper이름==member이고, .findAll은 sql문 이름을 말함.
 	}
+	
 }

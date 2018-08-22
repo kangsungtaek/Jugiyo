@@ -9,17 +9,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
 <head>
 <meta charset="UTF-8">
 <title>메인페이지</title>
 <style>
-/*	#wrap {margin:0 auto; width:100%; height:100%; margin-top:50px; margin-right:10px;}
-	h3 {text-align:center; margin-top:100px;}
-	form {margin:0 auto; width:600px; margin-top:50px;}
-	table { text-align:center;}*/
-	
 	div,ul,li,ol,img {list-style:none;}
 	#wrap {margin:0 auto; width:100%; height:100%; margin-top:10%; padding:10px; background-color:#CC3D3D;}
 	form {margin:0 auto; width:700px; margin-top:50px;}
@@ -41,7 +34,6 @@
 					<li><input type="password" name="password" placeholder=" 비밀번호입력" maxlength="20" style="height:30px;"></li> 
 					<li><button type="submit" class="btn">로그인</button></li>
 			</ul>	
-			
 		</form>
 	</div>	
 </body>
