@@ -2,15 +2,22 @@ package pro.dao;
 
 import java.util.List;
 
+import org.bson.Document;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.BasicQuery;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import pro.vo.LogVo;
 import pro.vo.MemberVo;
 
 @Repository
 public class MemberDao {
 
+	@Autowired
+	MongoTemplate mongoTemplate;
 	@Autowired
 	SqlSessionTemplate template;
 	
@@ -29,5 +36,10 @@ public class MemberDao {
 	public List<String> findAll() {
 		return template.selectList("member.findAll");  // mapper이름==member이고, .findAll은 sql문 이름을 말함.
 	}
-	
+	//주문내역불러오기
+	public List<LogVo> readAllById(String id) {
+		Query query = new BasicQuery(new Document().append("_id", id));
+		return mongoTemplate.find(query, LogVo.class, "log");
+	}
+
 }
