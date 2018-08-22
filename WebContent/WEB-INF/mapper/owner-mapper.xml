@@ -5,6 +5,4 @@
 		insert into menu values(menu_seq.nextval,#{name},#{price},#{store},#{menu_img})
 	</insert>
 
-
-
 </mapper>

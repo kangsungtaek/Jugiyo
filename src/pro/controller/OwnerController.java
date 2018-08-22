@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.AddMenuDao;
@@ -37,9 +39,15 @@ public class OwnerController {
 	}
 	
 	@PostMapping("/addmenu")
-	public ModelAndView indexHandle02(@ModelAttribute List<AddMenuVo> vo,WebRequest webRequest) {
-		
+	public ModelAndView indexHandle02(@ModelAttribute List<AddMenuVo> vo,WebRequest webRequest,@RequestParam("attach")MultipartFile[] files) {
 		System.out.println(vo.toString());
+		
+		if(!files[0].isEmpty()) {
+			for(MultipartFile file : files) {
+				AddMenuVo avo=
+			}
+		}
+		
 		
 //		StoreVo storeVo=(StoreVo)webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
 //		vo.setName(storeVo.getName());

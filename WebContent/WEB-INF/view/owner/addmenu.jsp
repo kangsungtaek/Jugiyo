@@ -7,7 +7,7 @@
 		<div class="w3-quarter">&nbsp;</div>
 		<div class="w3-half">
 			<form class="w3-container w3-card-4 w3-white" action="/owner/addmenu"
-				method="post" name="menuInfo">
+				method="post" name="menuInfo" enctype="multipart/form-data">
 				<div class="w3-row">
 					<div class="w3-half">
 						<label>메뉴 이미지</label> <input class="w3-input w3-border" name="gg"
