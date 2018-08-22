@@ -1,18 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
+<title>JUGIYO</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<%-- web.xml 에 context-param 설정하고 그것 출력되게 EL--%>
-<title>JUGIYO</title>
-
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 input, button, select {
 	padding: 5px;
@@ -53,32 +49,56 @@ a {
 ul {
 	list-style: none;
 	padding: 5px 0px 5px 5px;
-	margin-bottom: 5px;
+}
+
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+body, html {
+    height: 100%;
+    color: #777;
+    line-height: 1.8;
+}
+
+/* Create a Parallax Effect */
+.bgimg-1, .bgimg-2, .bgimg-3 {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* First image (Logo. Full height) */
+.bgimg-1 {
+    background-image: url("/images/logo.png");
+    min-height: 100%;
+}
+
+.w3-wide {letter-spacing: 10px;}
+.w3-hover-opacity {cursor: pointer;}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: scroll;
+    }
 }
 </style>
 </head>
 <body>
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar" id="myNavbar">
+    <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <a href="index" class="w3-bar-item w3-button">HOME</a>
+    <a href="./login/loginForm" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> 로그인</a>
+    <a href="#portfolio" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"><i class="fa fa-th"></i> 회원가입</a>
+  </div>
 
-<div class="w3-container">
-<div class="w3-bar w3-padding-16 w3-red">
-  <button class="w3-button w3-left"><img src="../images/logo.png" onclick="location.href='/index'" style="width: 110px; height: 30px;" /></button>
-  <c:choose>
-  	<c:when test="${ empty sessionScope.log }">
-  		<button class="w3-button w3-white w3-border w3-large w3-right">로그인</button> 
-  		<button class="w3-button w3-white w3-border w3-large w3-right">회원가입</button>
-  	</c:when>
-  	<c:otherwise>
-  		<button class="w3-button w3-white w3-border w3-large w3-right">로그아웃</button> 
-  		<button class="w3-button w3-white w3-border w3-large w3-right">내정보</button>
-  	</c:otherwise>
-  </c:choose>
-  
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+    <a href="index" class="w3-bar-item w3-button" onclick="toggleFunction()">HOME</a>
+     <a href="${pageContext.request.localAddr}/login/loginForm" class="w3-bar-item w3-button "><i class="fa fa-user"></i> 로그인</a>
+    <a href="#portfolio" class="w3-bar-item w3-button w3-right w3-hover-red"><i class="fa fa-th"></i> 회원가입</a>
+  </div>
 </div>
-</div>
-				
-			
-
-
-
-	<hr />
-	<div style="min-height: 500px; margin-left: 70px; margin-right: 70px;">
