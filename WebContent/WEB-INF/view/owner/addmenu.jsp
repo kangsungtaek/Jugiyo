@@ -4,6 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<div style="height: 200px"></div>
+	
+	<!--메뉴 추가 css + 파일업로드 시 필요한 css-->
 	<div class="w3-row">
 		<div class="w3-quarter">&nbsp;</div>
 		<div class="w3-half">
@@ -47,6 +49,9 @@
 		<div class="w3-quarter">&nbsp;</div>
 	</div>
 
+
+
+<!--입력안하면 못넘어가게 하는 스크립트처리 + 파일업로드 css처리할때 스크립트 처리 jquary-->
 <script>
 	function checkValue() {
 		var form = document.menuInfo;
