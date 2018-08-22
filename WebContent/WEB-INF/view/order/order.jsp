@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <style>
 <!-- 장바구니 -->
 .scroll-menu {
@@ -14,7 +15,7 @@
 	top: 0px;
 }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
 
 <div class="w3-container"
 	style="padding-left: 150px; padding-right: 150px">
@@ -32,7 +33,7 @@
 	<div id="menu" class="w3-container tabs" style="display: block">
 		<div class="w3-row">
 			<div class="w3-container w3-threequarter">
-				<button onclick="myFunction('Demo1')"
+				<button onclick="menubarSelect('Demo1')"
 					class="w3-button w3-block w3-left-align w3-light-grey">추천
 					메뉴</button>
 				<div class="w3-container">
@@ -60,7 +61,7 @@
 						</ul>
 					</div>
 				</div>
-				<button onclick="myFunction('Demo2')"
+				<button onclick="menubarSelect('Demo2')"
 					class="w3-button w3-block w3-black w3-left-align">인기 메뉴</button>
 				<div class="w3-container">
 					<div id="Demo2" class="w3-hide">
@@ -148,7 +149,7 @@
 
 <script>
 	// 메뉴 / 리뷰 탭 전환 함수 
-	function openTabs(evt, tabsName) {
+	function openTabs(evt, tabsName) { 
 		var i, x, tablinks;
 		x = document.getElementsByClassName("tabs");
 		for (i = 0; i < x.length; i++) {
@@ -164,7 +165,7 @@
 	}
 
 	// 메뉴 텝에서 추천메뉴/인기메뉴 bar 클릭할경우 음식리스트 나오게 하는 함수.
-	function myFunction(id) {
+	function menubarSelect(id) {
 		var x = document.getElementById(id);
 		if (x.className.indexOf("w3-show") == -1) {
 			x.className += " w3-show";
