@@ -3,25 +3,28 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
+<!-- 장바구니 -->
 .scroll-menu {
 	text-align: center;
 	padding: 10px 10px;
 	width: 250px;
 }
-
 .scroll-fixed {
 	position: fixed;
 	top: 0px;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <div class="w3-container"
 	style="padding-left: 150px; padding-right: 150px">
 	<div class="w3-row">
 		<a href="javascript:void(0)" onclick="openTabs(event, 'menu');">
-			<div class="w3-half tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red">메뉴</div>
+			<div
+				class="w3-half tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red">메뉴</div>
 		</a> <a href="javascript:void(0)" onclick="openTabs(event, 'review');">
-			<div class="w3-half tablink w3-bottombar w3-hover-light-grey w3-padding">리뷰</div>
+			<div
+				class="w3-half tablink w3-bottombar w3-hover-light-grey w3-padding">리뷰</div>
 		</a>
 
 	</div>
@@ -89,7 +92,6 @@
 			</div>
 			<div class="w3-container w3-quarter">
 				<!-- --------장바구니 --------- -->
-
 				<div class="scroll-menu  w3-border w3-container">
 					
 					<div class="w3-container w3-border-bottom">

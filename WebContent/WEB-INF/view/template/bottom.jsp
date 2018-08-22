@@ -8,22 +8,22 @@
 
 
 <hr />
-<div class="w3-container">
-	<div class="w3-panel w3-pale-yellow w3-border w3-border-yellow">
-		<div class="w3-cell-row">
-			<div class="w3-container w3-cell">
-				<p>
-					<b>"저기요(JUGIYO)"</b><br /> 사장님을 흔히 부를 때 쓰는 표현과 장소를 가리키는 표현의 이중적인
-					의미를 가지고 있습니다.
-				</p>
-			</div>
-			<div class="w3-container w3-pale-green w3-cell">
-				<h5>상점 등록문의</h5>
-				<h6>02-1588-1588</h6>
-			</div>
-		</div>
-	</div>
-</div>
+ <!-- Footer -->
+  <footer class="w3-row-padding w3-padding-16 ">
+    <div class="w3-col l10 s6 w3-red">
+      <p>
+		<b>"저기요(JUGIYO)"</b><br />
+		사장님을 흔히 부를 때 쓰는 표현과 장소를 가리키는 표현의 이중적인 의미를 가지고 있습니다.
+	  </p>
+    </div>
+  
+    <div class="w3-col l2 s6 w3-dark-grey">
+      <p>
+      	<b>상점 등록 문의</b><br/>
+      	02-1588-1588
+      </p>
+    </div>
+  </footer>
 
 
 </body>
