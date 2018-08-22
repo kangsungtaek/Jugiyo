@@ -65,10 +65,14 @@ public class OwnerController {
 //		}
 //		return mav;
 //	}
+//	@RequestParam("file")MultipartFile[] files
 	@PostMapping("/addmenu")
-	public ModelAndView indexHandle02(@ModelAttribute List<AddMenuVo> vo,WebRequest webRequest,@RequestParam("file")MultipartFile[] files) {
+	public ModelAndView indexHandle02(@ModelAttribute AddMenuVo vo,WebRequest webRequest) {
 		System.out.println(vo.toString());
 		
+//		for(AddMenuVo vo1 : vo) {
+//			System.out.println(vo1.toString());
+//		}
 		
 //		int cnt=0;
 //		if(!files[0].isEmpty()) {
