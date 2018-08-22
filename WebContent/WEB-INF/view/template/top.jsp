@@ -94,15 +94,23 @@ body, html {
     <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
       <i class="fa fa-bars"></i>
     </a>
-    <a href="index" class="w3-bar-item w3-button">HOME</a>
-    <a href="./login/loginForm" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> 로그인</a>
-    <a href="#portfolio" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"><i class="fa fa-th"></i> 회원가입</a>
+    <a href="/index" class="w3-bar-item w3-button">HOME</a>
+    <c:choose>
+    	<c:when test="${ empty sessionScope.vo }">
+    		<a href="/login/loginForm" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> 로그인</a>
+    		<a href="/login/regForm" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"><i class="fa fa-th"></i> 회원가입</a>
+    	</c:when>
+    	<c:otherwise>
+    		<a href="/member/memInfo" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i>내정보</a>
+    		<a href="/login/logout" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"><i class="fa fa-th"></i> 로그아웃</a>
+    	</c:otherwise>
+    </c:choose>
   </div>
 
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
-    <a href="index" class="w3-bar-item w3-button" onclick="toggleFunction()">HOME</a>
-     <a href="${pageContext.request.localAddr}/login/loginForm" class="w3-bar-item w3-button "><i class="fa fa-user"></i> 로그인</a>
-    <a href="#portfolio" class="w3-bar-item w3-button w3-right w3-hover-red"><i class="fa fa-th"></i> 회원가입</a>
+    <a href="/index" class="w3-bar-item w3-button" onclick="toggleFunction()">HOME</a>
+     <a href="/login/loginForm" class="w3-bar-item w3-button "><i class="fa fa-user"></i> 로그인</a>
+    <a href="/login/regForm" class="w3-bar-item w3-button w3-right w3-hover-red"><i class="fa fa-th"></i> 회원가입</a>
   </div>
 </div>
