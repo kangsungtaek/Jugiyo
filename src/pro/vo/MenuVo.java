@@ -1,10 +1,26 @@
 package pro.vo;
 
-public class AddMenuVo {
+public class MenuVo {
 	int no;
 	String name;
 	int price;
 	String store;
+	String fileUrl;
+	String fileName;
+	
+	
+	public String getFileUrl() {
+		return fileUrl;
+	}
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	public int getNo() {
 		return no;
 	}

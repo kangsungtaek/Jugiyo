@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import pro.dao.AddMenuDao;
-import pro.vo.AddMenuVo;
-import pro.vo.StoreVo;
+import pro.dao.MenuDao;
+import pro.vo.MenuVo;
 
 
 
@@ -21,7 +20,7 @@ import pro.vo.StoreVo;
 @RequestMapping("/owner")
 public class OwnerController {
 	@Autowired
-	AddMenuDao addMenuDao;
+	MenuDao addMenuDao;
 	
 	
 	@GetMapping("/index")
@@ -37,7 +36,7 @@ public class OwnerController {
 	}
 	
 	@PostMapping("/addmenu")
-	public ModelAndView indexHandle02(@ModelAttribute List<AddMenuVo> vo,WebRequest webRequest) {
+	public ModelAndView indexHandle02(@ModelAttribute List<MenuVo> vo,WebRequest webRequest) {
 		
 		System.out.println(vo.toString());
 		

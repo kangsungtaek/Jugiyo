@@ -4,21 +4,61 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <style>
-<!-- 장바구니 -->
-.scroll-menu {
+<!--
+장바구니 -->.scroll-menu {
 	text-align: center;
 	padding: 10px 10px;
 	width: 250px;
 }
+
 .scroll-fixed {
 	position: fixed;
 	top: 0px;
 }
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
 
-<div class="w3-container"
-	style="padding-left: 150px; padding-right: 150px">
+<div class="w3-row" style="padding-left: 150px; padding-right: 150px">
+
+	<div class="w3-container">
+		<div class="w3-half">
+			<div class="w3-bar" id="${storeVo.no}">
+				<span class="w3-bar-item w3-xlarge w3-right">${storeVo.star }</span> <img
+					src="${storeVo.img}"
+					class="w3-bar-item w3-circle w3-hide-small w3-padding-small"
+					style="width: 85px">
+				<div class="w3-bar-item">
+					<span class="w3-large">${storeVo.name }</span><br> <span>${storeVo.addr }</span>
+					<br /> <span class="w3-right-align w3-small">리뷰 : xxxx개</span>
+
+				</div>
+
+			</div>
+		</div>
+		<div class="w3-half">
+		<div class="w3-container w3-quarter">
+				<!-- --------장바구니 --------- -->
+				<div class="scroll-menu  w3-border w3-container">
+
+					<div class="w3-container w3-border-bottom">주문표</div>
+					<div class="w3-container" >
+						<ul id="orderList">
+							<c:forEach items="${sessionScope.orderList}" var="orderList">
+								<li> ${orderList.name } </li>
+							</c:forEach>
+							
+						</ul>
+					</div>
+
+				</div>
+
+
+				<!-- ------장바구니 끝  -->
+			</div>
+		</div>
+	</div>
+
 	<div class="w3-row">
 		<a href="javascript:void(0)" onclick="openTabs(event, 'menu');">
 			<div
@@ -39,25 +79,14 @@
 				<div class="w3-container">
 					<div id="Demo1">
 						<ul class="w3-ul w3-card-4">
-							<li class="w3-bar" id="f01"><img
-								src="${pageContext.request.contextPath}/images/1.jpg"
+						<c:forEach items="${menuList}" var="menu">
+							<li class="w3-bar menu" id="${menu.no }"><img
+								src="${menu.fileUrl }"
 								class="w3-round w3-right " style="width: 100px">
 								<div class="w3-bar-item">
-									<span class="w3-large">음식1</span><br> <span>3500원</span>
+									<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
 								</div></li>
-							<li class="w3-bar" id="f02"><img
-								src="${pageContext.request.contextPath}/images/1.jpg"
-								class="w3-round w3-right " style="width: 100px">
-								<div class="w3-bar-item">
-									<span class="w3-large">음식2</span><br> <span>7000원</span>
-								</div></li>
-
-							<li class="w3-bar" id="f03"><img
-								src="${pageContext.request.contextPath}/images/1.jpg"
-								class="w3-round w3-right " style="width: 100px">
-								<div class="w3-bar-item ">
-									<span class="w3-large">음식3</span><br> <span>10000원</span>
-								</div></li>
+						</c:forEach>
 						</ul>
 					</div>
 				</div>
@@ -91,25 +120,7 @@
 				</div>
 
 			</div>
-			<div class="w3-container w3-quarter">
-				<!-- --------장바구니 --------- -->
-				<div class="scroll-menu  w3-border w3-container">
-					
-					<div class="w3-container w3-border-bottom">
-					주문표
-					</div>
-					<div class="w3-container">
-						<ul>
-							<li>피자</li>
-							<li>치킨</li>
-						</ul>
-					</div>
-					
-				</div>
-
-
-				<!-- ------장바구니 끝  -->
-			</div>
+			
 		</div>
 	</div>
 	<div id="review" class="w3-container tabs" style="display: none">
@@ -149,7 +160,7 @@
 
 <script>
 	// 메뉴 / 리뷰 탭 전환 함수 
-	function openTabs(evt, tabsName) { 
+	function openTabs(evt, tabsName) {
 		var i, x, tablinks;
 		x = document.getElementsByClassName("tabs");
 		for (i = 0; i < x.length; i++) {
@@ -174,8 +185,20 @@
 		}
 	}
 	// 음식 클릭 이벤트 .
-	$(".w3-bar").on("click", function() {
-		window.alert($(this).attr("id"));
+	$(".menu").on("click", function() {
+		
+		var xhr = new XMLHttpRequest();
+		var no = this.id;
+		xhr.open("get", "/sendJson?no=" + no, true);
+
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4) {
+				var obj = JSON.parse(this.responseText);
+				window.alert(";");
+			}
+		}
+		xhr.send();
+		
 	});
 
 	// 장바구니

@@ -32,5 +32,9 @@ public class StoreDao {
 			return template.selectList("store.getType",type);
 		}
 	}
+
+	public StoreVo getStore(int storeNo) {
+		return template.selectOne("store.getStore", storeNo);
+	}
 	
 }
