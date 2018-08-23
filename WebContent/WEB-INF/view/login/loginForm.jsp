@@ -3,28 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<head>
-<meta charset="UTF-8">
-<title>메인페이지</title>
+
 <style>
 	div,ul,li,ol,img {list-style:none;}
-	#wrap {margin:0 auto; width:100%; height:100%; margin-top:10%; padding:10px; background-color:#CC3D3D;}
-	form {margin:0 auto; width:700px; margin-top:50px;}
-	h1 {text-align:center;}
-	div ul.search_box {width:100%; height:100%;}
-	div ul.search_box li {width:100%; height:100%;}
-	div ul.mem_login {width:100%; height:100%;}
-	div ul.mem_login li {margin:0 20px; display:inline;}
-	div ul.mem_login li button.btn {height:35px;}
+	#wrap {margin:0 auto; width:100%; max-height:250px; margin-top:5%; padding:10px; background-color:#FF9436;}
+	#wrap form {margin:0 auto; width:700px; margin-top:50px;}
+	#wrap h1 {text-align:center;}
+	#wrap ul.search_box {width:100%; height:100%;}
+	#wrap ul.search_box li {width:100%; height:100%;}
+	#wrap ul.mem_login {width:100%; height:100%;}
+	#wrap ul.mem_login li {margin:0 20px; display:inline;}
+	#wrap ul.mem_login li button.btn {height:35px;}
 </style>
-</head>
-<body>
+
 	<div id="wrap">
 		<h1>로그인</h1>
 		<form action="loginForm" name="loginForm" method="post">
@@ -36,5 +29,3 @@
 			</ul>	
 		</form>
 	</div>	
-</body>
-</html>
