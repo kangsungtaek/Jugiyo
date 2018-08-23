@@ -25,14 +25,14 @@ table tr td.mInfo {width:120px; color:#000000; font-weight:bold; text-align:cent
 table tr td.n {background:#D5D5D5;  text-align:center;}
 table tr td span.asterisk {color:#FF0000;}
 table tr td span.attention_asterisk {color:#FF0000; padding-left:10px;}
+table tr td input.zip {text-align:center;}
 table tr td small.c {color:#FF0000; font-size:10px;}
-/* table tr td input.zip {text-align:center;}  */
 .size::-webkit-input-placeholder {font:11px nanumGothic sanserif;}
 	
 </style>
 <script>
 	//ID 중복체크.
-	$(document).ready(function() {
+/*	$(document).ready(function() {
 		$("regFrom").click(function() {
 			if($("#id").val()) {
 				var query = {id:$("#id").val()};
@@ -55,7 +55,65 @@ table tr td small.c {color:#FF0000; font-size:10px;}
 			}	
 		});	
 	});
-	/*=========== 주소입력 ======================*/
+*/	
+
+	/*-------- //ID 중복체크 -----------*/ 
+	document.getElementById("#id").onkeyup = function() {
+		if (this.value.length > 2) {
+		/*	if (!this.value.match("^\\d{1,4}$")) {
+				window.alert("아이디형식에 맞지 않습니다.");
+				this.value = "";
+			}else {	*/
+				var xhr = new XMLHttpRequest();
+				xhr.open("get", "/ajax/regFrom.jsp?id="+this.value, true);
+				xhr.onreadystatechange =function() {
+					if(xhr.readyState==4) {
+						var ar = JSON.parse(xhr.responseText);
+						var op = "";
+						for(var i=0; i<ar.length; i++) {
+/*							op += "<option value=\"" + ar[i].id + "\">"
+							op += ar[i].name + " - "+ar[i].dname+" " +ar[i].pname;
+							op += "</option>";		*/
+						}
+						document.getElementById("regFrom").innerHTML = op;
+					}
+			/*  }	*/
+				xhr.send();
+			}
+		}
+	}
+	
+	//비밀번호 체크 : 숫자랑 영문조합으로 -> document.getElementById("pwajax").innerHTML="사용가능합니다.";
+	function password(id, password) {
+		if(!/^[a-zA-Z0-9]{8,20}$/.test(password)) {
+	 		//alert("비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다.");
+	 		document.getElementById("pwajax").innerHTML="사용가능합니다.";
+			return false;
+		}
+		var chk_num = password.search(/[0-9]/g);
+		var chk_eng = password.search(/[a-z]/ig);
+	
+		if(chk_num < 0 || chk_eng < 0) {
+			 alert("비밀번호는 숫자와 영문자를 혼용하여야 합니다.");
+			 return false;
+	 	}
+	
+		if(/(\w)\1\1\1/.test(password)) {
+			alert("비밀번호에 같은 문자를 4번 이상 사용하실 수 없습니다.");
+			return false;
+	 	}
+	
+		if(password.search(id)>-1) {
+			alert("ID가 포함된 비밀번호는 사용하실 수 없습니다.");
+			return false;
+	 	}
+	 	return true;
+	}
+
+	/*-----------------------*/
+
+	
+	/*=========== 주소입력 ======================
 	
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
@@ -104,11 +162,11 @@ table tr td small.c {color:#FF0000; font-size:10px;}
     /*=================================*/
 	
   //비밀번호 체크 : 숫자랑 영문조합으로 -> document.getElementById("pwajax").innerHTML="사용가능합니다.";
-
+  
   //이메일 체크 : 이메일 형식이 맞는지 --@--.--
 
   //핸드폰번호 체크 : 01[06789]\\d{3,4}\\d{4}가 맞는지
-
+	 
 </script>
 
 </head>
@@ -124,8 +182,8 @@ table tr td small.c {color:#FF0000; font-size:10px;}
 				</tr>
 				<tr>
 					<td class="n"> 아이디</td>
-					<td><input type="text" name="id" id="id" class="size" placeholder=" 아이디입력" maxlength="20" required />
-					<small class="c" id="ajax">20자 이내 입력</samll></td> 
+					<td><input type="text" name="id" id="id" class="size" placeholder=" 아이디입력" maxlength="10" required />
+					<small class="c" id="ajax">10자 이내 입력</samll></td> 
 				</tr>	
 				<tr>
 					<td class="n"> 비밀번호</td>
@@ -151,7 +209,7 @@ table tr td small.c {color:#FF0000; font-size:10px;}
 				</tr>
 				<tr>
 					<td class="n"> 핸드폰</td>
-					<td><input type="text" name="contact" class="size" placeholder=" - (하이픈)없이입력(11자이내)" maxlength="11" required /><span id="phoneajax"></span></td>
+			 	 	<td><input type="text" name="contact" class="size" placeholder=" - (하이픈) 없이입력 (11자이내 )" maxlength="11" required /><span id="phoneajax"></span></td> 
 				</tr>
 				<tr>
                     <td colspan="2" align="center">
