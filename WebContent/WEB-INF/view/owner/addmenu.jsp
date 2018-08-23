@@ -21,25 +21,24 @@
 <div class="w3-container"
 	style="padding-left: 100px; padding-right: 100px">
 	<form class="w3-container w3-card-4 w3-white" action="/owner/addmenu"
-		method="post" name="menuInfo" enctype="multipart/form-data" id="addform" onsubmit="return checkValue();">
+		method="post" name="menuInfo" enctype="multipart/form-data"
+		id="addform" onsubmit="return checkValue();">
 		<!-- 여기서부터 클론 -->
 		<div id="each">
 			<div class="w3-half" style="padding-right: 10px">
 				<label>메뉴명</label> <input class="w3-input w3-border idx" name="name"
-					type="text" id="name" placeholder="ex)후라이드치킨"  /> <span
-					id="menuidx" class="idx2" style="font-size: 11px"></span>
+					type="text" id="name" placeholder="ex)후라이드치킨" /><span
+					id="menuidx" class="idx2" style="font-size: 11px"> </span>
 			</div>
-
 			<div class="w3-half">
 				<label>가격(숫자만 입력해주세요)</label> <input class="w3-input w3-border idx"
-					name="price" type="text" id="price" placeholder="ex)10000" /> <span
-					id="priceidx" class="idx2" style="font-size: 11px"></span>
+					name="price" type="text" id="price" placeholder="ex)10000" /><span
+					id="priceidx" class="idx2" style="font-size: 11px"> </span>
 			</div>
-
 			<div class="w3-row">
 				<div class="w3-half" style="padding-right: 10px">
 					<label>메뉴 이미지</label> <input class="w3-input w3-border" name="gg"
-						type="file" id="ori" style="display: none;"> <input
+						type="file" id="ori" style="display: none;"><input
 						class="w3-input w3-border" name="gg" type="text" readOnly
 						id="fake">
 				</div>
@@ -51,8 +50,7 @@
 			</div>
 		</div>
 		<!-- 여기까지 클론 -->
-		<div id="plus">
-		</div>
+		<div id="plus"></div>
 		<p>
 			<button type="submit">확인</button>
 		</p>
@@ -61,37 +59,23 @@
 		</p>
 	</form>
 </div>
-
-
 <!--입력안하면 못넘어가게 하는 스크립트처리 + 파일업로드 css처리할때 스크립트 처리 jquary-->
 <script>
-	var e = $("#each").clone();
-
-	
 	function checkValue() {
-		var cnt=0;
-		window.alert($(".idx").length);
-		for(var i=0; $(".idx").length; i++) {
-			if($(".idx").eq(i).val()=="") {
-				window.alert($(".idx").eq(i).val());
+		var cnt = 0;
+		for (var i = 0; i<$(".idx").length; i++) {
+			if ($(".idx").eq(i).val() == "") {
+				$(".idx").eq(i).next().html("REQUIRED");
 				cnt++;
-				
-			}else {
-				
+			} else {
+				$(".idx").eq(i).next().html("OKAY");
 			}
 		}
-		window.alert(cnt);
-		return false;
+		return cnt==0;	
 	}
 	
-	
-	
-	
+	var e = $("#each").clone();
 
-	
-	
-	
-	
 	$("#fake").on("click", function() {
 		$("#ori").trigger("click");
 	});
@@ -122,19 +106,16 @@
 			}
 			reader.readAsDataURL(f);
 		});
-		/*function clone(){
-			$("#clone").clone().appendTo("#cloneidx");
-		}
 		
-		$("bt").click(function(){
-			
-		$("#clone").clone().appendTo("#cloneidx");
-		});
-		 */
 	}
-	$("#bt").click(function(){
-		window.alert("?");
-		$("#plus").append(e);
+	$("#bt").click(function() {
+		
+		e.removeAttr("id");	
+		$("#plus").append(e.html());
+		$("#plus").append("<button id='del' type ='button' >삭제</button>");
+		$("#del").click(function(){
+			$(this).remove();
+		});
 	});
 </script>
 
