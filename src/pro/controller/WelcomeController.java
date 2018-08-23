@@ -24,5 +24,6 @@ public class WelcomeController {
 		System.out.println("[controller:getAddr]" + addr);
 		
 		return "order/"; //음식점 전체메뉴로 이동하도록
+
 	}
 }
