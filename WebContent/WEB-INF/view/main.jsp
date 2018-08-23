@@ -15,7 +15,7 @@
 
 					class="w3-bar-item w3-xlarge w3-right">${store.star }</span>
 					
-					<img src="${store.img}"
+				 	<img src="${store.img}"
 					class="w3-bar-item w3-circle w3-hide-small w3-padding-small" style="width: 85px">
 					<div class="w3-bar-item">
 						<span class="w3-large">${store.name }</span><br> <span>${store.addr }</span>
@@ -25,7 +25,6 @@
 					</div>
 					
 					</li>
-
 			</c:forEach>
 		</ul>
 	</div>
