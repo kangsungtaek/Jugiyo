@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="include/common/css/reg.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
-#wrap {margin:0 auto; width:100%; margin-top:50px; margin-right:10px;}
+#wrapreg {margin:0 auto; width:100%; margin-top:50px; margin-right:10px;}
 h3 {text-align:center; margin-top:80px;}
 form {margin:0 auto; width:650px; margin-top:30px;}
 small {padding:0 0 0 10px; color:red;}
@@ -55,7 +55,7 @@ small {padding:0 0 0 10px; color:red;}
 	
 </script>
 
-	<div id="wrap">
+	<div id="wrapreg">
 		<hr />
 		<h3>회원가입페이지</h3>
 		<form action="/login/regForm" name="regForm" method="post">
