@@ -8,14 +8,6 @@
 
 <style>
 	div,ul,li,ol,img {list-style:none;}
-	#wrap {margin:0 auto; width:100%; max-height:250px; margin-top:5%; padding:10px; background-color:#FF9436;}
-	#wrap form {margin:0 auto; width:700px; margin-top:50px;}
-	#wrap h1 {text-align:center;}
-	#wrap ul.search_box {width:100%; height:100%;}
-	#wrap ul.search_box li {width:100%; height:100%;}
-	#wrap ul.mem_login {width:100%; height:100%;}
-	#wrap ul.mem_login li {margin:0 20px; display:inline;}
-	#wrap ul.mem_login li button.btn {height:35px;}
 </style>
 
 	<div id="wrap">
