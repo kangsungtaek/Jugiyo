@@ -51,7 +51,9 @@ public class LoginController {
 	}
 	
 	@PostMapping("/regForm")
-	public ModelAndView RegFormPostHandle(@ModelAttribute MemberVo member) {
+	public ModelAndView RegFormPostHandle(@ModelAttribute MemberVo member, @RequestParam String addr,@RequestParam String addr1) {
+		member.setAddress(addr+" "+addr1 );
+		int result = memberDao.addMember(member); 
 		ModelAndView mav = new ModelAndView();
 		
 		//member를 db에 넣어줘야겠죠: insert 작업
