@@ -26,4 +26,5 @@ public class MenuDao {
 	public MenuVo getMenu(int no) {
 		return template.selectOne("owner.getMenu", no);
 	}
+	
 }

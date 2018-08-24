@@ -14,7 +14,7 @@
 <body>
 <div class="w3-container">
 	<a href = "/owner/addmenu"><input type="submit" value="메뉴등록"/></a>
-
+	<a href = "/owner/addedmenu"><input type="submit" value="등록된메뉴"/></a>
 
 <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-black w3-left-align">미확인 주문내역</button>
 <div id="Demo1" class="w3-hide w3-container">

@@ -40,17 +40,18 @@ public class OwnerController {
 	}
 	
 //	@RequestParam("file")MultipartFile[] files
+	
 	@PostMapping("/addmenu")
 	public ModelAndView indexHandle02(@ModelAttribute MenuVo [] vo, WebRequest webRequest, @RequestParam("attach") MultipartFile[] files) {
 		System.out.println(vo.toString());
-		
+//		String store = "";
 		ModelAndView mav = new ModelAndView();
 		
 		int cnt=0;
 		if(!files[0].isEmpty()) {
 			for(MultipartFile file : files) {
-			//	MenuVo avo= uploadService.execute(file, store);
-				//menuDao.addMenu(avo);
+//				MenuVo avo= uploadService.execute(file, store);
+//				menuDao.addMenu(avo);
 				cnt++;
 			}
 		}
@@ -61,8 +62,16 @@ public class OwnerController {
 		return mav;
 	}
 	@GetMapping("/addedmenu")
-	public ModelAndView addedMenuHandle() {
+	public ModelAndView addedMenuHandle01() {
 		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+
+	@PostMapping("/addedmenu")
+	public ModelAndView addedMenuHandle02() {
+		ModelAndView mav = new ModelAndView();
+		
+		
 		return mav;
 	}
 }
