@@ -1,6 +1,8 @@
 package pro.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,38 +21,55 @@ import pro.vo.MenuVo;
 
 @Controller
 public class JsonController {
-	
-	
+
 	@Autowired
 	MenuDao menuDao;
-	
+
 	@Autowired
 	Gson gson;
-	
-	
+
 	/*
-	 * 사용자가 메뉴 클릭시(ajax send)  
-	 *  세션에 menuList 에 사용자가 눌른 메뉴 add ( menuList가 없다면 생성)
-	 *  눌른 메뉴 다시 보내줌.
+	 * 사용자가 메뉴 클릭시(ajax send) 세션에 menuList 에 사용자가 눌른 메뉴 add ( menuList가 없다면 생성) 눌른
+	 * 메뉴 다시 보내줌.
 	 */
-	@RequestMapping(value = "/sendJson", produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/sendJson", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public ModelAndView JsonController(@RequestParam int no, WebRequest webRequest) {
 		
-		MenuVo vo = menuDao.getMenu(no);
-		System.out.println(vo);
-		
+		ModelAndView mav = new ModelAndView();
 		ArrayList<MenuVo> menuList = (ArrayList<MenuVo>) webRequest.getAttribute("orderList", WebRequest.SCOPE_SESSION);
-		if(menuList == null) {
+
+		if (menuList == null) {
 			menuList = new ArrayList<MenuVo>();
 		}
-		menuList.add(vo);
+
+		boolean overLapCheck = false;
+
+		for (MenuVo mVo : menuList) {
+			if (mVo.getNo() == no) {
+				overLapCheck = true;
+				mVo.setCnt(mVo.getCnt() + 1);
+			}
+		}
+		Map map = new HashMap<>();
+		if (overLapCheck) {
+			map.put("overLap", true);
+			map.put("menu", no);
+			
+		} else {
+			map.put("overLap", false);
+			MenuVo vo = menuDao.getMenu(no);
+			vo.setCnt(1);
+			menuList.add(vo);
+			map.put("menu", vo);
+			
+		}
+
 		webRequest.setAttribute("orderList", menuList, WebRequest.SCOPE_SESSION);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("sendJson");
-		String aa = gson.toJson(vo);
+		String aa = gson.toJson(map);
 		mav.addObject("json", aa);
-		
+		mav.setViewName("sendJson");
+
 		return mav;
 	}
 }

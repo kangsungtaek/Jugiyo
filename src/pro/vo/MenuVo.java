@@ -8,7 +8,17 @@ public class MenuVo {
 	String fileUrl;
 	String fileName;
 	
+	// 강성택 메뉴 카운트 추가
+	int cnt;
 	
+	
+	
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
 	public String getFileUrl() {
 		return fileUrl;
 	}

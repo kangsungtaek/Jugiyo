@@ -22,7 +22,7 @@
 <!-- 전체 영역 - -->
 <div class="w3-row">
 	<!-- 왼쪽 공백  -->
-	<div class="w3-col" style="width: 100px">&nbsp;</div>
+	<div class="w3-col" style="width: 10%">&nbsp;</div>
 	<div class="w3-col" style="width: 70%">
 
 		<!--  가게정보  -->
@@ -48,8 +48,8 @@
 					class="w3-half tablink w3-bottombar w3-hover-light-grey w3-padding">리뷰</div>
 			</a>
 		</div>
-		<!--  메뉴 / 리뷰]] 탭 끝 -->
-		
+		<!--  메뉴 / 리뷰 탭 끝 -->
+
 		<!--  추천 메뉴 -->
 		<div id="menu" class="w3-container tabs" style="display: block">
 
@@ -65,12 +65,13 @@
 								style="width: 100px">
 								<div class="w3-bar-item">
 									<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
+									<span>34343</span>
 								</div></li>
 						</c:forEach>
 					</ul>
 				</div>
 			</div>
-			
+
 			<!--  인기메뉴  -->
 			<button onclick="menubarSelect('Demo2')"
 				class="w3-button w3-block w3-black w3-left-align">인기 메뉴</button>
@@ -84,7 +85,7 @@
 								<div class="w3-bar-item">
 									<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
 								</div></li>
-						</c:forEach> 
+						</c:forEach>
 					</ul>
 				</div>
 			</div>
@@ -128,14 +129,27 @@
 
 	</div>
 	<!-- 장바구니 -->
-	<div class="w3-col" style="width: 100px">
+	<div class="w3-col"
+		style="width: 20%; padding-left: 10px; padding-right: 30px">
 		<div class="scroll-menu  w3-border w3-container">
 			<div class="w3-container w3-border-bottom">주문표</div>
 			<div class="w3-container">
 				<ul id="orderList">
+
 					<c:forEach items="${sessionScope.orderList}" var="orderList">
-						<li>${orderList.name }</li>
+
+						<li id="${orderList.no}">
+							<div class='w3-row'>${orderList.name }</div>
+							<div class='w3-left-align'>
+								<span class='w3-button w3-small'>X</span> 
+								${orderList.price } 
+								<span class='w3-button w3-small'>-</span> 
+								<span id="count">${orderList.cnt }</span>
+								<span class='w3-button w3-small'>+</span>
+							</div>
+						</li>
 					</c:forEach>
+
 				</ul>
 			</div>
 
@@ -176,17 +190,29 @@
 		var xhr = new XMLHttpRequest();
 		var no = this.id;
 		xhr.open("get", "/sendJson?no=" + no, true);
-
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				var obj = JSON.parse(this.responseText);
-				console.log(obj);
-				$("#orderList").append("<li>"+obj.name+"</li>");
-			}
-		}
-		xhr.send();
+					if (obj.overLap) {
+						
+						$("#orderList").find("#"+obj.menu).find("#count").text(parseInt($("#orderList").find("#"+obj.menu).find("#count").text())+1);
+						//$("#orderList").find("#count").text(parseInt($("#orderList").find("#count").text())+1);
+						
+					} else {
+						$("#orderList").append("<li id="+obj.menu.no+"> <div class='w3-row'>"
+															+ obj.menu.name
+															+ "</div>"
+															+ "<div class='w3-left-align w3-small'><span class='w3-button w3-small'>X</span> "
+															+ obj.menu.price
+															+ " <span class='w3-button w3-small'>-</span> <span id='count'>"
+															+ obj.menu.cnt
+															+ "</span> <span class='w3-button w3-small'>+</span> </div></li>");
+								}
+							}
+						}
+						xhr.send();
 
-	});
+					});
 
 	// 장바구니
 	$(function() {
