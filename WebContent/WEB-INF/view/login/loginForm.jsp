@@ -17,7 +17,7 @@
 			<ul class="mem_login">
 					<li><input type="text" name="id" placeholder=" 아이디입력" maxlength="20" style="height:30px;"></li> 
 					<li><input type="password" name="password" placeholder=" 비밀번호입력" maxlength="20" style="height:30px;"></li> 
-					<li><button type="submit" class="btn">로그인</button></li>
+					<li><button type="submit" class="btn" >로그인</button></li>
 			</ul>	
 		</form>
 	</div>	
