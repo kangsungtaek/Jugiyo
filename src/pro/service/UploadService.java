@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import pro.vo.AddMenuVo;
+import pro.vo.MenuVo;
 
 @Service
 public class UploadService {
 	@Autowired
 	ServletContext ctx;
 
-	public AddMenuVo execute(MultipartFile file, String store) throws Exception {
+	public MenuVo execute(MultipartFile file, String store) throws Exception {
 		
 		File dir = new File(ctx.getRealPath("/image"),store);
 		
@@ -28,9 +28,10 @@ public class UploadService {
 
 		file.transferTo(dest);
 
-		AddMenuVo vo = new AddMenuVo();
-		vo.setFile_name(file.getOriginalFilename());
-		vo.setFile_url("/image/"+store+"/"+file.getOriginalFilename());
+		MenuVo vo = new MenuVo();
+		vo.setFileName(file.getOriginalFilename());
+		vo.setFileUrl("/image/"+store+"/"+file.getOriginalFilename());
+		
 		
 		return vo;
 	}

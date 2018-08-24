@@ -1,7 +1,5 @@
 package pro.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.MenuDao;
+import pro.service.UploadService;
 import pro.vo.MenuVo;
 
 
@@ -22,8 +21,9 @@ import pro.vo.MenuVo;
 @RequestMapping("/owner")
 public class OwnerController {
 	@Autowired
-	MenuDao addMenuDao;
-	
+	MenuDao menuDao;
+	@Autowired
+	UploadService uploadService;
 	
 	
 	//사장님 페이지
@@ -41,32 +41,28 @@ public class OwnerController {
 	
 //	@RequestParam("file")MultipartFile[] files
 	@PostMapping("/addmenu")
-	public ModelAndView indexHandle02(@ModelAttribute MenuVo vo,WebRequest webRequest) {
+	public ModelAndView indexHandle02(@ModelAttribute MenuVo [] vo, WebRequest webRequest, @RequestParam("attach") MultipartFile[] files) {
 		System.out.println(vo.toString());
 		
-//		for(AddMenuVo vo1 : vo) {
-//			System.out.println(vo1.toString());
-//		}
-		
-//		int cnt=0;
-//		if(!files[0].isEmpty()) {
-//			for(MultipartFile file : files) {
-//				AddMenuVo avo= uploadService.execute(file, store);
-//				addMenuDao.addMenu(avo);
-//				cnt++;
-//			}
-//		}
-//		
-//		
-//		StoreVo storeVo=(StoreVo)webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
-//		vo.setName(storeVo.getName());
-//		
 		ModelAndView mav = new ModelAndView();
-//		boolean r = addMenuDao.addMenu(vo);
-//		if(r) {
-//			mav.setViewName("owner/addmenu");
-//			mav.addObject("success",r);
-//		}
+		
+		int cnt=0;
+		if(!files[0].isEmpty()) {
+			for(MultipartFile file : files) {
+			//	MenuVo avo= uploadService.execute(file, store);
+				//menuDao.addMenu(avo);
+				cnt++;
+			}
+		}
+		mav.setViewName("owner/addedmenu");
+
+		
+
+		return mav;
+	}
+	@GetMapping("/addedmenu")
+	public ModelAndView addedMenuHandle() {
+		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
 }

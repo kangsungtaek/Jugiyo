@@ -38,9 +38,8 @@
 			<div class="w3-row">
 				<div class="w3-half" style="padding-right: 10px">
 					<label>메뉴 이미지</label> <input class="w3-input w3-border" name="gg"
-						type="file" id="ori" style="display: none;"><input
-						class="w3-input w3-border" name="gg" type="text" readOnly
-						id="fake">
+						type="file" id="ori" style="display: none;" onchange="preview(this);"><input
+						class="w3-input w3-border fake" name="gg" type="text" readOnly onclick="choose(this);"/>
 				</div>
 				<div class="w3-half">
 					<div class="img_wrap">
@@ -74,20 +73,34 @@
 		return cnt==0;	
 	}
 	
-	var e = $("#each").clone();
+	
 
+
+	/*
 	$("#fake").on("click", function() {
 		$("#ori").trigger("click");
 	});
 	$("#ori").on("change", function() {
 		$("#fake").val(this.files[0].name);
 	});
-
-	var sel_file;
-
 	$(document).ready(function() {
 		$("#ori").on("change", handleImgFileSelect);
 	});
+	var sel_file;
+	*/
+	function choose(target) {
+		$(target).prev().trigger("click");
+	};
+	function preview(target) {
+		$(target).next().val(target.files[0].name);
+		
+		var reader = new FileReader();
+		reader.readAsDataURL(target.files[0]);
+		
+		reader.onload = function() {
+			$(target).parent().next().find("img").attr("src", this.result);
+		}
+	}
 
 	function handleImgFileSelect(e) {
 		var files = e.target.files;
@@ -100,14 +113,12 @@
 			}
 			sel_file = f;
 
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$("#img").attr("src", e.target.result);
-			}
-			reader.readAsDataURL(f);
+			
 		});
 		
 	}
+	
+	var e = $("#each").clone();
 	$("#bt").click(function() {
 		
 		e.removeAttr("id");	
