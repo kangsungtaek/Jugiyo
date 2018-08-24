@@ -28,7 +28,6 @@ table tr td span.attention_asterisk {color:#FF0000; padding-left:10px;}
 table tr td input.zip {text-align:center;}
 table tr td small.c {color:#FF0000; font-size:10px;}
 .size::-webkit-input-placeholder {font:11px nanumGothic sanserif;}
-	
 </style>
 <script>
 	// ID 중복체크(ajax).
@@ -106,7 +105,7 @@ table tr td small.c {color:#FF0000; font-size:10px;}
 	 	}
 	}
 	
-	/*-- 이메일(email) 체크 : 이메일 형식이 맞는지 --@--.-- */
+	// 이메일(email) 체크 : 이메일 형식이 맞는지 --@--.-- 
 	function validateEmail(elementValue) {
 		
 		var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 

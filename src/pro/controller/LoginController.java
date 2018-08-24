@@ -64,8 +64,7 @@ public class LoginController {
 		
 		//addObject(변수명, object); -> member를 member 에다가 넣어서
 		mav.addObject("member", member);
-		
-		
+	
 		
 		return mav;
 	}
