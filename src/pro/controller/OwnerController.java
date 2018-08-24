@@ -32,7 +32,6 @@ public class OwnerController {
 		return "owner/index";
 	}
 	
-	
 	//메뉴추가 컨트롤러 만드는중
 	@GetMapping("/addmenu")
 	public String addMenuHandle01() {
@@ -61,6 +60,13 @@ public class OwnerController {
 
 		return mav;
 	}
+	//오늘 주문 내역 전부 보여주는거
+	@GetMapping("/today")
+	public ModelAndView todayHandle01() {
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+	//현재 등록 되어 있는 메뉴들 전부다 보여주는거
 	@GetMapping("/addedmenu")
 	public ModelAndView addedMenuHandle01() {
 		ModelAndView mav = new ModelAndView();
@@ -72,6 +78,19 @@ public class OwnerController {
 		ModelAndView mav = new ModelAndView();
 		
 		
+		return mav;
+	}
+	
+	//메뉴통계
+	@GetMapping("/menustats")
+	public ModelAndView menuStatsHandle01() {
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+	//매출관련 통계
+	@GetMapping("/salesstats")
+	public ModelAndView salesStatsHandle01() {
+		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
 }

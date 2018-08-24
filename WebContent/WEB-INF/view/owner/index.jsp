@@ -6,48 +6,73 @@
 
 
 
-<!DOCTYPE html>
-<html>
-<title>사장님 페이지</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<body>
+<!-- 메뉴bar에 있는 dropdown -->
 <div class="w3-container">
-	<a href = "/owner/addmenu"><input type="submit" value="메뉴등록"/></a>
-	<a href = "/owner/addedmenu"><input type="submit" value="등록된메뉴"/></a>
+<div class="w3-bar w3-light-gray w3-bottombar">
+  <div class="w3-dropdown-hover">
+    <button class="w3-button w3-light-gray">주문관리</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border">
+      <a href="/owner/index" class="w3-bar-item w3-button">지금 도착한 주문</a>
+      <a href="/owner/today" class="w3-bar-item w3-button">주문현황</a>
+    </div>
+  </div>
+  <div class="w3-dropdown-hover">
+    <button class="w3-button w3-light-gray">메뉴관리</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border">
+      <a href="/owner/addedmenu" class="w3-bar-item w3-button">메뉴현황/수정</a>
+      <a href="/owner/addmenu" class="w3-bar-item w3-button">메뉴추가</a>
+    </div>
+  </div>
+  <div class="w3-dropdown-hover">
+    <button class="w3-button w3-light-gray">리뷰관리</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border">
+      <a href="#" class="w3-bar-item w3-button">공지등록</a>
+      <a href="#" class="w3-bar-item w3-button">리뷰관리</a>
+    </div>
+  </div>
+  <div class="w3-dropdown-hover">
+    <button class="w3-button w3-light-gray">통계</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border">
+      <a href="/owner/salesstats" class="w3-bar-item w3-button">매출통계</a>
+      <a href="/owner/menustats" class="w3-bar-item w3-button">메뉴통계</a>
+    </div>
+  </div>
+</div>
+
+<!-- 주문 관리 드롭다운 + 주문 테이블 -->
+<div style="padding-top:50px;">
 
 <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-black w3-left-align">미확인 주문내역</button>
-<div id="Demo1" class="w3-hide w3-container">
-    <p><span id="idx">나 내려가고 싶어</span></p>
+
+<div id="Demo1" class="w3-show w3-container">
+    <ul class="w3-ul w3-card-4">
+  <li class="w3-bar">
+    <span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+    
+    <div class="w3-bar-item">
+      <span class="w3-large">콜라+사이다+치킨</span><br>
+      <span>~님의 주문</span>
+    </div>
+  </li>
+
+	<li class="w3-bar">
+    <span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+    
+    <div class="w3-bar-item">
+      <span class="w3-large">123457</span><br>
+      <span>~님의 주문</span>
+    </div>
+  </li>
+	
+</ul>
+    
 </div>
 
-<button onclick="myFunction('Demo2')" class="w3-button w3-block w3-black w3-left-align">확인 주문내역</button>
-<div id="Demo2" class="w3-hide w3-container">
-    <p>Some other text..</p>
-    <p id="idx2"><span id="sp"></span></p>
-</div>
 
+</div>
 </div>
 <script>
-function myFunction(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className = 
-        x.previousElementSibling.className.replace("w3-black", "w3-red");
-    } else { 
-        x.className = x.className.replace(" w3-show", "");
-        x.previousElementSibling.className = 
-        x.previousElementSibling.className.replace("w3-red", "w3-black");
-    }
-}
-	document.getElementById("idx").onclick=function(){
-		var idx2=document.getElementsByTagName("idx");
-		console.log(idx2);
-		document.getElementById("sp").innerHTML=idx2;
-	}
+
 
 </script>
 
-</body>
-</html>
