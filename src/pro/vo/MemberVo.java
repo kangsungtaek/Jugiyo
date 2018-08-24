@@ -8,7 +8,7 @@ public class MemberVo {
 	String password;
 	String contact;
 	String nickname;
-	String addr;
+	String address;
 	int point;
 	String email;
 	
@@ -36,11 +36,11 @@ public class MemberVo {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public String getAddr() {
-		return addr;
+	public String getaAddress() {
+		return address;
 	}
-	public void setAddr(String addr) {
-		this.addr = addr;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public int getPoint() {
 		return point;
@@ -58,7 +58,7 @@ public class MemberVo {
 	@Override
 	public String toString() {
 		return "MemberVo [id=" + id + ", password=" + password + ", contact=" + contact + ", nickname=" + nickname
-				+ ", addr=" + addr + ", point=" + point + ", email=" + email + "]";
+				+ ", addr=" + address + ", point=" + point + ", email=" + email + "]";
 	}  
 
 }
