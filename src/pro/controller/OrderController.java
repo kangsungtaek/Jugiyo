@@ -39,6 +39,6 @@ public class OrderController {
 			}
 		}
 		num = set[1 + (int)Math.random()*set.length];
-		return "main?no="+num;
+		return "/main?type="+num;
 	}
 }
