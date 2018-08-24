@@ -1,5 +1,7 @@
 package pro.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,4 +24,17 @@ public class StoreDao {
 		Integer i = template.insert("store.addStore", vo);
 		return i==1;
 	}
+	// 음식점 조회 전체보기 / 음식점 종류별
+	public List<StoreVo> storeLIst(String type){
+		if(type.equals("all")) {
+			return template.selectList("store.getAll");
+		}else {
+			return template.selectList("store.getType",type);
+		}
+	}
+
+	public StoreVo getStore(int storeNo) {
+		return template.selectOne("store.getStore", storeNo);
+	}
+	
 }

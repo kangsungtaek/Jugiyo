@@ -3,34 +3,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="w3-bar w3-black">
-	<button class="w3-bar-item w3-button tablink"
-		onclick="openLink(event, 'Flight');">
-		<i class="fa fa-plane w3-margin-right"></i>Flight
-	</button>
-	<button class="w3-bar-item w3-button tablink"
-		onclick="openLink(event, 'Hotel');">
-		<i class="fa fa-bed w3-margin-right"></i>Hotel
-	</button>
-	<button class="w3-bar-item w3-button tablink"
-		onclick="openLink(event, 'Car');">
-		<i class="fa fa-car w3-margin-right"></i>Rental
-	</button>
+<div class="w3-bar w3-border w3-round w3-light-grey">
+  <a href="/main?type=all" class="w3-bar-item w3-button">전체보기</a>
+  <a href="/main?type=1" class="w3-bar-item w3-button">프랜차이즈</a>
+  <a href="/main?type=2" class="w3-bar-item w3-button">치킨</a>
+  <a href="/main?type=3" class="w3-bar-item w3-button">피자/양식</a>
+  <a href="/main?type=4" class="w3-bar-item w3-button">중국집</a>
+  <a href="/main?type=5" class="w3-bar-item w3-button">한식</a>
+  <a href="/main?type=6" class="w3-bar-item w3-button">일식/돈까스</a>
+  <a href="/main?type=7" class="w3-bar-item w3-button">족발/보쌈</a>
+  <a href="/main?type=8" class="w3-bar-item w3-button">야식</a>
+  <a href="/main?type=9" class="w3-bar-item w3-button">분식</a>
+  <a href="/main?type=10" class="w3-bar-item w3-button">카페/디저트</a>
+  
 </div>
 
-<script>
-	// Tabs
-	function openLink(evt, linkName) {
-		var i, x, tablinks;
-		x = document.getElementsByClassName("myLink");
-		for (i = 0; i < x.length; i++) {
-			x[i].style.display = "none";
-		}
-		tablinks = document.getElementsByClassName("tablink");
-		for (i = 0; i < x.length; i++) {
-			tablinks[i].className = tablinks[i].className
-					.replace(" w3-red", "");
-		}
-		document.getElementById(linkName).style.display = "block";
-		evt.currentTarget.className += " w3-red";
-	}
