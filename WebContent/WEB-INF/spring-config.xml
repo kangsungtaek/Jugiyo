@@ -17,8 +17,7 @@
 	<context:annotation-config />
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
-
-
+	
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">

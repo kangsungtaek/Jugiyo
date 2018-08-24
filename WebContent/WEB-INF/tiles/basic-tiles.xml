@@ -55,4 +55,16 @@
 		<put-attribute name="content" value="/WEB-INF/view/member/writeReview.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
 	</definition>
+	<!-- 사장님 메뉴추가 페이지 -->
+	<definition name="owner/addmenu" template="/WEB-INF/view/layout/layout.jsp">
+		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
+		<put-attribute name="content" value="/WEB-INF/view/owner/addmenu.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
+</definition>
+<!-- 사장님 등록되어있는 메뉴 페이지 -->
+	<definition name="owner/addedmenu" template="/WEB-INF/view/layout/layout.jsp">
+		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
+		<put-attribute name="content" value="/WEB-INF/view/owner/addedmenu.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
+</definition>
 </tiles-definitions>

@@ -16,9 +16,13 @@
 	<select id="getAll" resultType="pro.vo.StoreVo">
 		select * from store
 	</select>
-	
+	<!--  스토어 음식점별 조회 -->
 	<select id="getType" resultType="pro.vo.StoreVo" parameterType="java.lang.String">
 		select s.*, t.id tid, t.name tname from (select * from store where type = #{type}) s join type t on s.type = t.id
+	</select>
+	
+	<select id="getStore" resultType="pro.vo.StoreVo" parameterType="java.lang.Integer">
+		select * from store where no = #{storeNo} 
 	</select>
 	
 	

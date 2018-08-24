@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="owner">
-	<insert id="addMenu" parameterType="pro.vo.AddMenuVo">
-		insert into menu values(menu_seq.nextval,#{name},#{price},#{store})
+	
+	<!-- 메뉴추가 -->
+	<insert id="addMenu" parameterType="pro.vo.MenuVo">
+		insert into menu
+		values(menu_seq.nextval,#{name},#{price},#{store})
 	</insert>
+	
+	<select id="getMenuList" parameterType="java.lang.String"
+		resultType="pro.vo.MenuVo">
+		select * from menu where store = #{name}
+	</select>
 
-
-
+	<select id="getMenu" parameterType="java.lang.Integer"
+		resultType="pro.vo.MenuVo">
+		select * from menu where no = #{no}
+	</select>
 </mapper>
