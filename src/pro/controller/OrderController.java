@@ -12,4 +12,9 @@ public class OrderController {
 		return "order/order";
 	}
 
+	@RequestMapping("/random")
+	public String randomHandle() {
+		
+		return null;
+	}
 }
