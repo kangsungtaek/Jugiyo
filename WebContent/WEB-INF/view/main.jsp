@@ -34,6 +34,6 @@
 <script>
 
 $(".w3-bar").on("click", function() {
-	location.href = "order/order?no=" + $(this).attr("id");
+	location.href = "order/order?storeNo=" + $(this).attr("id");
 });
 </script>
