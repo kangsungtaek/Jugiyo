@@ -31,7 +31,7 @@ table tr td small.c {color:#FF0000; font-size:10px;}
 	
 </style>
 <script>
-	//ID 중복체크.
+	// ID 중복체크(ajax).
 /*	$(document).ready(function() {
 		$("regFrom").click(function() {
 			if($("#id").val()) {
@@ -60,60 +60,63 @@ table tr td small.c {color:#FF0000; font-size:10px;}
 	/*-------- //ID 중복체크 -----------*/ 
 	document.getElementById("#id").onkeyup = function() {
 		if (this.value.length > 2) {
-		/*	if (!this.value.match("^\\d{1,4}$")) {
+			if (!this.value.match("^[a-zA-Z0-9]*$")) {
 				window.alert("아이디형식에 맞지 않습니다.");
 				this.value = "";
-			}else {	*/
+			}else {	
 				var xhr = new XMLHttpRequest();
 				xhr.open("get", "/ajax/regFrom.jsp?id="+this.value, true);
 				xhr.onreadystatechange =function() {
 					if(xhr.readyState==4) {
 						var ar = JSON.parse(xhr.responseText);
 						var op = "";
-						for(var i=0; i<ar.length; i++) {
-/*							op += "<option value=\"" + ar[i].id + "\">"
-							op += ar[i].name + " - "+ar[i].dname+" " +ar[i].pname;
-							op += "</option>";		*/
-						}
+	/*					if() {
+							
+						}else {
+							
+						}*/
 						document.getElementById("regFrom").innerHTML = op;
 					}
-			/*  }	*/
+			  }	
 				xhr.send();
 			}
 		}
 	}
 	
-	//비밀번호 체크 : 숫자랑 영문조합으로 -> document.getElementById("pwajax").innerHTML="사용가능합니다.";
-	function password(id, password) {
+	// 비밀번호 체크 : 숫자랑 영문조합으로 -> document.getElementById("pwajax").innerHTML="사용가능합니다.";
+	document.getElementById("password").onkeyup = function password(){
+		var password = this.value;
 		if(!/^[a-zA-Z0-9]{8,20}$/.test(password)) {
 	 		//alert("비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다.");
 	 		document.getElementById("pwajax").innerHTML="사용가능합니다.";
-			return false;
 		}
 		var chk_num = password.search(/[0-9]/g);
 		var chk_eng = password.search(/[a-z]/ig);
 	
 		if(chk_num < 0 || chk_eng < 0) {
-			 alert("비밀번호는 숫자와 영문자를 혼용하여야 합니다.");
-			 return false;
+			document.getElementById("pwajax").innerHTML="비밀번호는 숫자와 영문자를 혼용하여야 합니다.";
 	 	}
 	
 		if(/(\w)\1\1\1/.test(password)) {
-			alert("비밀번호에 같은 문자를 4번 이상 사용하실 수 없습니다.");
-			return false;
+			document.getElementById("pwajax").innerHTML="비밀번호에 같은 문자를 4번 이상 사용하실 수 없습니다.";
 	 	}
 	
 		if(password.search(id)>-1) {
-			alert("ID가 포함된 비밀번호는 사용하실 수 없습니다.");
-			return false;
+			document.getElementById("pwajax").innerHTML="ID가 포함된 비밀번호는 사용하실 수 없습니다.";
 	 	}
-	 	return true;
 	}
-
-	/*-----------------------*/
-
 	
-	/*=========== 주소입력 ======================
+	/*-- 이메일(email) 체크 : 이메일 형식이 맞는지 --@--.-- */
+	function validateEmail(elementValue) {
+		
+		var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
+		
+		// 또는 var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+		// return emailPattern.test(elementValue);
+	}	
+	/*-------------------//---------------------------*/
+
+	/*== 주소입력 ==
 	
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
@@ -182,7 +185,7 @@ table tr td small.c {color:#FF0000; font-size:10px;}
 				</tr>
 				<tr>
 					<td class="n"> 아이디</td>
-					<td><input type="text" name="id" id="id" class="size" placeholder=" 아이디입력" maxlength="10" required />
+					<td><input type="text" name="id" id="id" class="size"  placeholder=" 아이디입력" maxlength="10" required />
 					<small class="c" id="ajax">10자 이내 입력</samll></td> 
 				</tr>	
 				<tr>

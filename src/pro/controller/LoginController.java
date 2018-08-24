@@ -1,6 +1,7 @@
 package pro.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators.Add;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -58,9 +59,13 @@ public class LoginController {
 		
 		//member를 db에 넣어줘야겠죠: insert 작업
 		
-		mav.setViewName("login/reg");//회원가입되셨습니다.
+		mav.setViewName("login/reg");	//회원가입되셨습니다.
 		//login/reg.jsp를 만들어서 "${ nickname } 님 회원가입되셨습니다. 감사합니다." 이렇게 나타나도록. 
+		
 		//addObject(변수명, object); -> member를 member 에다가 넣어서
+		mav.addObject("member", member);
+		
+		
 		
 		return mav;
 	}
