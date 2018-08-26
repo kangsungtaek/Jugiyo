@@ -10,9 +10,10 @@
 	<select id="getSeq" resultType="java.lang.Integer">
 		select menu_seq.nextval from dual
 	</select>
-	<select id="getMenuList" parameterType="java.lang.String"
+	
+	<select id="getMenuList" parameterType="java.lang.Integer"
 		resultType="pro.vo.MenuVo">
-		select * from menu where store = #{name}
+		select * from menu where store = #{no}
 	</select>
 
 	<select id="getMenu" parameterType="java.lang.Integer"

@@ -22,8 +22,9 @@ public class MenuDao {
 	public int getSequence() {
 		return template.selectOne("owner.getSeq");
 	}
-	public List<MenuVo> getMenu(String name) {
-		return template.selectList("owner.getMenuList",name);
+
+	public List<MenuVo> getMenuList(int no) {
+		return template.selectList("owner.getMenuList",no);
 	}
 
 	public MenuVo getMenu(int no) {
