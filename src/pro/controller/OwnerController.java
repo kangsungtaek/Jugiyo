@@ -13,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.MenuDao;
 import pro.service.UploadService;
+import pro.vo.MenuAttachVo;
 import pro.vo.MenuVo;
+import pro.vo.StoreVo;
 
 
 
@@ -42,16 +44,23 @@ public class OwnerController {
 //	@RequestParam("file")MultipartFile[] files
 	
 	@PostMapping("/addmenu")
-	public ModelAndView indexHandle02(@ModelAttribute MenuVo [] vo, WebRequest webRequest, @RequestParam("attach") MultipartFile[] files) {
+	public ModelAndView indexHandle02(@ModelAttribute MenuVo vo, WebRequest webRequest, @RequestParam("attach") MultipartFile[] files) throws Exception {
+		StoreVo store = (StoreVo)webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
+		int menuNo=menuDao.getSequence();
+		vo.setNo(menuNo);
+		vo.setStore(store.getNo());
+		menuDao.addMenu(vo);
 		System.out.println(vo.toString());
-//		String store = "";
-		ModelAndView mav = new ModelAndView();
+
 		
+		
+		ModelAndView mav = new ModelAndView();
 		int cnt=0;
 		if(!files[0].isEmpty()) {
 			for(MultipartFile file : files) {
-//				MenuVo avo= uploadService.execute(file, store);
-//				menuDao.addMenu(avo);
+				MenuAttachVo avo= uploadService.execute(file,store.getNo());
+				avo.setParent(menuNo);
+				menuDao.addMenuAttach(avo);
 				cnt++;
 			}
 		}
