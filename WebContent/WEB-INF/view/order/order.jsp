@@ -65,7 +65,6 @@
 								style="width: 100px">
 								<div class="w3-bar-item">
 									<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
-									<span>34343</span>
 								</div></li>
 						</c:forEach>
 					</ul>
@@ -141,18 +140,16 @@
 						<li id="${orderList.no}">
 							<div class='w3-row'>${orderList.name }</div>
 							<div class='w3-left-align'>
-								<span class='w3-button w3-small'>X</span> 
-								${orderList.price } 
-								<span class='w3-button w3-small'>-</span> 
-								<span id="count">${orderList.cnt }</span>
-								<span class='w3-button w3-small'>+</span>
+								<span class='w3-button w3-small orderRemove' onclick='orderListRemove(this)'>X</span>
+								${orderList.price } <span class='w3-button w3-small'>-</span> <span
+									id="count">${orderList.cnt }</span> <span
+									class='w3-button w3-small'>+</span>
 							</div>
 						</li>
 					</c:forEach>
 
 				</ul>
 			</div>
-
 		</div>
 	</div>
 	<!-- ------장바구니 끝  -->
@@ -184,37 +181,59 @@
 			x.className = x.className.replace(" w3-show", "");
 		}
 	}
+	// 장바구니 x 버튼
+	
+	//$(".orderRemove").on("click", function() {
+	function orderListRemove(target){
+		console.log(target);
+		var no = $(target).closest('li').attr('id');
+		console.log(no);
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "/sendJson?no=" + no+"&mode=remove", true);
+		console.log("11");
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4) {
+					var obj = JSON.parse(this.responseText);
+					console.log(obj);
+					if(obj.result){
+						$("#orderList").find("#"+no).remove();	
+					}
+				}
+			}
+		xhr.send();
+	};
+	//});
+	
 	// 음식 클릭 이벤트 .
 	$(".menu").on("click", function() {
-
 		var xhr = new XMLHttpRequest();
 		var no = this.id;
-		xhr.open("get", "/sendJson?no=" + no, true);
+		xhr.open("get", "/sendJson?no=" + no+"&mode=add", true);
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				var obj = JSON.parse(this.responseText);
+					// 이미 클릭한 메뉴를 또 누를 경우 숫자만 증가 
 					if (obj.overLap) {
-						
 						$("#orderList").find("#"+obj.menu).find("#count").text(parseInt($("#orderList").find("#"+obj.menu).find("#count").text())+1);
 						//$("#orderList").find("#count").text(parseInt($("#orderList").find("#count").text())+1);
-						
+					// 새로운 메뉴 클릭시 메뉴 추가.
 					} else {
 						$("#orderList").append("<li id="+obj.menu.no+"> <div class='w3-row'>"
 															+ obj.menu.name
 															+ "</div>"
-															+ "<div class='w3-left-align w3-small'><span class='w3-button w3-small'>X</span> "
+															+ "<div class='w3-left-align w3-small'><span class='w3-button w3-small orderRemove' onclick='orderListRemove(this)' >X</span> "
 															+ obj.menu.price
 															+ " <span class='w3-button w3-small'>-</span> <span id='count'>"
 															+ obj.menu.cnt
 															+ "</span> <span class='w3-button w3-small'>+</span> </div></li>");
 								}
-							}
+							} 
 						}
 						xhr.send();
 
 					});
 
-	// 장바구니
+	// 장바구니 스크롤
 	$(function() {
 		$(document).ready(function() {
 

@@ -34,15 +34,57 @@ public class JsonController {
 	 */
 	@RequestMapping(value = "/sendJson", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public ModelAndView JsonController(@RequestParam int no, WebRequest webRequest) {
+	public ModelAndView JsonController(@RequestParam int no, String mode, WebRequest webRequest) {
+		ModelAndView mav = null;
 		
-		ModelAndView mav = new ModelAndView();
 		ArrayList<MenuVo> menuList = (ArrayList<MenuVo>) webRequest.getAttribute("orderList", WebRequest.SCOPE_SESSION);
 
 		if (menuList == null) {
 			menuList = new ArrayList<MenuVo>();
 		}
+		
+		switch(mode) {
+		case "add":
+			mav = menuAdd(menuList,no,webRequest);
+			System.out.println("menu add");
+			break;
+		case "remove":
+			mav = menuRemove(menuList,no,webRequest);
+			System.out.println("menu remove");
+			break;
+		}
+		
+		mav.setViewName("sendJson");
 
+		return mav;
+	}
+	
+	private ModelAndView menuRemove(ArrayList<MenuVo> menuList, int no, WebRequest webRequest) {
+		
+		ModelAndView mav = new ModelAndView();
+		boolean result = false;
+		for(MenuVo mVo : menuList) {
+			if( mVo.getNo() == no) {
+				menuList.remove(mVo);
+				result =true;
+				break;
+			}
+		}
+		
+		webRequest.setAttribute("orderList", menuList, WebRequest.SCOPE_SESSION);
+		
+		Map map = new HashMap<>();
+		map.put("result", result);
+		String aa = gson.toJson(map);
+		mav.addObject("json", aa);
+		
+		
+		return mav;
+		
+	}
+
+	private ModelAndView menuAdd(ArrayList<MenuVo> menuList, int no, WebRequest webRequest) {
+		ModelAndView mav = new ModelAndView();
 		boolean overLapCheck = false;
 
 		for (MenuVo mVo : menuList) {
@@ -64,12 +106,13 @@ public class JsonController {
 			map.put("menu", vo);
 			
 		}
-
 		webRequest.setAttribute("orderList", menuList, WebRequest.SCOPE_SESSION);
 		String aa = gson.toJson(map);
 		mav.addObject("json", aa);
-		mav.setViewName("sendJson");
-
+		
 		return mav;
+		
+		
 	}
+
 }
