@@ -37,7 +37,7 @@ $(".cate").on("click", function() {
 function submit(target) {
 	var search = target.value;
 	console.log(search + "/" + typeof search);
-	location.href="/order/search?search="+search;
+	location.href="/main/search?search="+search;
 }
 
 </script>

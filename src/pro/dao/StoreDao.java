@@ -37,4 +37,7 @@ public class StoreDao {
 		return template.selectOne("store.getStore", storeNo);
 	}
 	
+	public List<StoreVo> searchStoreMenu(String search) {
+		return template.selectList("store.searchStoreMenu", search);
+	}
 }

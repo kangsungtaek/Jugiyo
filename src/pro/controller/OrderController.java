@@ -70,9 +70,4 @@ public class OrderController {
 		return "/main?type=" + num;
 	}
 	
-	@RequestMapping("/search")
-	public String searchHandle(@RequestParam("search") String search) {
-		System.out.println("[controller:order] search : " + search);
-		return null;
-	}
 }

@@ -25,5 +25,12 @@
 		select * from store where no = #{storeNo} 
 	</select>
 	
-	
+	<!-- 검색어를 통한 상점검색 -->
+	<select id="searchStoreMenu" resultType="pro.vo.StoreVo">
+		select * from(
+    		select * from STORE s join MENU m
+   			on s.no = m.store
+    		where (s.name like '%' || #{search} || '%' or m.name like '%' || #{search} || '%')
+		)
+	</select>
 </mapper>
