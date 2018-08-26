@@ -22,6 +22,8 @@ public class WelcomeController {
 	@RequestMapping("/getAddr")
 	public String getAddrHandle(@RequestParam("addr") String addr) {
 		System.out.println("[controller:getAddr]" + addr);
+		
 		return "main"; //음식점 전체메뉴로 이동하도록
+
 	}
 }

@@ -1,6 +1,8 @@
 package pro.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,38 +21,98 @@ import pro.vo.MenuVo;
 
 @Controller
 public class JsonController {
-	
-	
+
 	@Autowired
 	MenuDao menuDao;
-	
+
 	@Autowired
 	Gson gson;
-	
-	
+
 	/*
-	 * 사용자가 메뉴 클릭시(ajax send)  
-	 *  세션에 menuList 에 사용자가 눌른 메뉴 add ( menuList가 없다면 생성)
-	 *  눌른 메뉴 다시 보내줌.
+	 * 사용자가 메뉴 클릭시(ajax send) 세션에 menuList 에 사용자가 눌른 메뉴 add ( menuList가 없다면 생성) 눌른
+	 * 메뉴 다시 보내줌.
 	 */
-	@RequestMapping(value = "/sendJson", produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/sendJson", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public ModelAndView JsonController(@RequestParam int no, WebRequest webRequest) {
-		
-		MenuVo vo = menuDao.getMenu(no);
-		System.out.println(vo);
+	public ModelAndView JsonController(@RequestParam int no, String mode, WebRequest webRequest) {
+		ModelAndView mav = null;
 		
 		ArrayList<MenuVo> menuList = (ArrayList<MenuVo>) webRequest.getAttribute("orderList", WebRequest.SCOPE_SESSION);
-		if(menuList == null) {
+
+		if (menuList == null) {
 			menuList = new ArrayList<MenuVo>();
 		}
-		menuList.add(vo);
-		webRequest.setAttribute("orderList", menuList, WebRequest.SCOPE_SESSION);
-		ModelAndView mav = new ModelAndView();
+		
+		switch(mode) {
+		case "add":
+			mav = menuAdd(menuList,no,webRequest);
+			System.out.println("menu add");
+			break;
+		case "remove":
+			mav = menuRemove(menuList,no,webRequest);
+			System.out.println("menu remove");
+			break;
+		}
+		
 		mav.setViewName("sendJson");
-		String aa = gson.toJson(vo);
+
+		return mav;
+	}
+	
+	private ModelAndView menuRemove(ArrayList<MenuVo> menuList, int no, WebRequest webRequest) {
+		
+		ModelAndView mav = new ModelAndView();
+		boolean result = false;
+		for(MenuVo mVo : menuList) {
+			if( mVo.getNo() == no) {
+				menuList.remove(mVo);
+				result =true;
+				break;
+			}
+		}
+		
+		webRequest.setAttribute("orderList", menuList, WebRequest.SCOPE_SESSION);
+		
+		Map map = new HashMap<>();
+		map.put("result", result);
+		String aa = gson.toJson(map);
+		mav.addObject("json", aa);
+		
+		
+		return mav;
+		
+	}
+
+	private ModelAndView menuAdd(ArrayList<MenuVo> menuList, int no, WebRequest webRequest) {
+		ModelAndView mav = new ModelAndView();
+		boolean overLapCheck = false;
+
+		for (MenuVo mVo : menuList) {
+			if (mVo.getNo() == no) {
+				overLapCheck = true;
+				mVo.setCnt(mVo.getCnt() + 1);
+			}
+		}
+		Map map = new HashMap<>();
+		if (overLapCheck) {
+			map.put("overLap", true);
+			map.put("menu", no);
+			
+		} else {
+			map.put("overLap", false);
+			MenuVo vo = menuDao.getMenu(no);
+			vo.setCnt(1);
+			menuList.add(vo);
+			map.put("menu", vo);
+			
+		}
+		webRequest.setAttribute("orderList", menuList, WebRequest.SCOPE_SESSION);
+		String aa = gson.toJson(map);
 		mav.addObject("json", aa);
 		
 		return mav;
+		
+		
 	}
+
 }
