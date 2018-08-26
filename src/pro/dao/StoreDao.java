@@ -1,6 +1,7 @@
 package pro.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,11 @@ public class StoreDao {
 	public StoreVo getStore(int storeNo) {
 		return template.selectOne("store.getStore", storeNo);
 	}
+	
+	public StoreVo login(Map m) {
+		return template.selectOne("store.login",m);
+	}
+	
+	
 	
 }
