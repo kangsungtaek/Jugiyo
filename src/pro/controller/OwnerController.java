@@ -1,5 +1,7 @@
 package pro.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,7 +80,9 @@ public class OwnerController {
 	}
 	//현재 등록 되어 있는 메뉴들 전부다 보여주는거
 	@GetMapping("/addedmenu")
-	public ModelAndView addedMenuHandle01() {
+	public ModelAndView addedMenuHandle01(WebRequest webRequest) {
+		StoreVo store = (StoreVo)webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
+		List<MenuVo> menuList = menuDao.getMenu(store.getNo());
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
