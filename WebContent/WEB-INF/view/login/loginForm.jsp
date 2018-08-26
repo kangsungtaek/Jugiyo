@@ -14,10 +14,15 @@
 		<h1>로그인</h1>
 		<form action="loginForm" name="loginForm" method="post">
 			<!-- 아이디 입력창/ 비밀번호 입력창 : placeholder로 아이디, 비밀번호 -->
+			<ul style="padding-left: 30">
+			 <li>개인<input type="radio" name="section" value="person" checked="checked">사업자<input type="radio" name="section" value="owner"></li>
+			</ul>
 			<ul class="mem_login">
 					<li><input type="text" name="id" placeholder=" 아이디입력" maxlength="20" style="height:30px;"></li> 
 					<li><input type="password" name="password" placeholder=" 비밀번호입력" maxlength="20" style="height:30px;"></li> 
-					<li><button type="submit" class="btn" >로그인</button></li>
-			</ul>	
+
+					<li><button type="submit" class="btn">로그인</button></li>
+			</ul>
 		</form>
-	</div>	
+	</div>
+	
