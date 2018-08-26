@@ -10,10 +10,10 @@
 	
 	<select id="getMenuList" parameterType="java.lang.String"
 		resultType="pro.vo.MenuVo">
-		select * from menu where store = #{name}
+		select * from menu where store = #{no}
 	</select>
 
-	<select id="getMenu" parameterType="java.lang.Integer"
+	<select id="getMenu" parameterType="java.lang.String"
 		resultType="pro.vo.MenuVo">
 		select * from menu where no = #{no}
 	</select>

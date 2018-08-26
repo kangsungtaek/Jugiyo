@@ -19,8 +19,8 @@ public class MenuDao {
 		return r==1;
 	}
 
-	public List<MenuVo> getMenu(String name) {
-		return template.selectList("owner.getMenuList",name);
+	public List<MenuVo> getMenuList(int no) {
+		return template.selectList("owner.getMenuList",no);
 	}
 
 	public MenuVo getMenu(int no) {

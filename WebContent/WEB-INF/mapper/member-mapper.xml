@@ -15,4 +15,6 @@
 	<select id="findStartWith" parameterType="java.lang.String" resultType="pro.vo.MemberVo">
 		select * from member where id like #{id} order by id asc
 	</select>
+	
+	
 </mapper>

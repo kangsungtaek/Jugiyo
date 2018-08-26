@@ -133,24 +133,27 @@
 		<div class="scroll-menu  w3-border w3-container">
 			<div class="w3-container w3-border-bottom">주문표</div>
 			<div class="w3-container">
+			
 				<ul id="orderList">
-
 					<c:forEach items="${sessionScope.orderList}" var="orderList">
 
 						<li id="${orderList.no}">
 							<div class='w3-row'>${orderList.name }</div>
 							<div class='w3-left-align'>
 								<span class='w3-button w3-small orderRemove' onclick='orderListRemove(this)'>X</span>
-								${orderList.price } <span class='w3-button w3-small'>-</span> <span
-									id="count">${orderList.cnt }</span> <span
-									class='w3-button w3-small'>+</span>
+								<span id="price" >${orderList.price * orderList.cnt } </span> 
+								<span class='w3-button w3-small' onclick='orderListMinus(this)'>-</span> 
+								<span id="count">${orderList.cnt }</span> 
+								<span class='w3-button w3-small' onclick='orderListPlus(this)'>+</span>
 							</div>
 						</li>
 					</c:forEach>
-
 				</ul>
+				
+				
 			</div>
 		</div>
+		<div class='w3-row'  > <button class="w3-button w3-red" style="width:100%;">주문하기</button> </div>
 	</div>
 	<!-- ------장바구니 끝  -->
 </div>
@@ -182,15 +185,11 @@
 		}
 	}
 	// 장바구니 x 버튼
-	
 	//$(".orderRemove").on("click", function() {
 	function orderListRemove(target){
-		console.log(target);
 		var no = $(target).closest('li').attr('id');
-		console.log(no);
 		var xhr = new XMLHttpRequest();
 		xhr.open("get", "/sendJson?no=" + no+"&mode=remove", true);
-		console.log("11");
 			xhr.onreadystatechange = function() {
 				if (this.readyState == 4) {
 					var obj = JSON.parse(this.responseText);
@@ -204,6 +203,41 @@
 	};
 	//});
 	
+	// 장바구니 + 버튼
+	function orderListPlus(target){
+		var no = $(target).closest('li').attr('id');
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "/sendJson?no=" + no+"&mode=plus", true);
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4) {
+					var obj = JSON.parse(this.responseText);
+					if(obj.result){
+						//$("#orderList").find("#"+no).find("#count").text(parseInt($("#orderList").find("#"+no).find("#count").text())+1);
+						$("#orderList").find("#"+no).find("#count").text(obj.menu.cnt);
+						$("#orderList").find("#"+no).find("#price").text(obj.price);
+					}
+				}
+			}
+		xhr.send();
+	};
+	// 장바구니 - 버튼
+	function orderListMinus(target){
+		var no = $(target).closest('li').attr('id');
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "/sendJson?no=" + no+"&mode=minus", true);
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4) {
+					var obj = JSON.parse(this.responseText);
+					if(obj.result){
+						//$("#orderList").find("#"+no).find("#count").text(parseInt($("#orderList").find("#"+no).find("#count").text())-1);
+						$("#orderList").find("#"+no).find("#count").text(obj.menu.cnt);
+						$("#orderList").find("#"+no).find("#price").text(obj.price);
+					}
+				}
+			}
+		xhr.send();
+	};
+	
 	// 음식 클릭 이벤트 .
 	$(".menu").on("click", function() {
 		var xhr = new XMLHttpRequest();
@@ -214,18 +248,18 @@
 				var obj = JSON.parse(this.responseText);
 					// 이미 클릭한 메뉴를 또 누를 경우 숫자만 증가 
 					if (obj.overLap) {
-						$("#orderList").find("#"+obj.menu).find("#count").text(parseInt($("#orderList").find("#"+obj.menu).find("#count").text())+1);
-						//$("#orderList").find("#count").text(parseInt($("#orderList").find("#count").text())+1);
+						//$("#orderList").find("#"+obj.menu).find("#count").text(parseInt($("#orderList").find("#"+obj.menu).find("#count").text())+1);
+						$("#orderList").find("#"+no).find("#count").text(obj.menu.cnt);
 					// 새로운 메뉴 클릭시 메뉴 추가.
 					} else {
 						$("#orderList").append("<li id="+obj.menu.no+"> <div class='w3-row'>"
 															+ obj.menu.name
 															+ "</div>"
 															+ "<div class='w3-left-align w3-small'><span class='w3-button w3-small orderRemove' onclick='orderListRemove(this)' >X</span> "
-															+ obj.menu.price
-															+ " <span class='w3-button w3-small'>-</span> <span id='count'>"
+															+ " <span id ='price'>" + obj.menu.price +"</span>"
+															+ " <span class='w3-button w3-small' onclick='orderListMinus(this)'>-</span> <span id='count'>"
 															+ obj.menu.cnt
-															+ "</span> <span class='w3-button w3-small'>+</span> </div></li>");
+															+ "</span> <span class='w3-button w3-small' onclick='orderListPlus(this)'>+</span> </div></li>");
 								}
 							} 
 						}
