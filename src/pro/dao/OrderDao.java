@@ -20,6 +20,7 @@ public class OrderDao {
 	MongoTemplate mongoTemplate;
 	
 	public List<LogVo> findLog(String id) {
+		System.out.println("[orderDao:mongo]");
 		Calendar cal = new GregorianCalendar();
 	    cal.add(Calendar.DATE, -2);
 		Query query = new BasicQuery(new Document().append("_id", id).append("date", new Document().append("$gte", cal.getTime())));

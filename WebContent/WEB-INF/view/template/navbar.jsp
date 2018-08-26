@@ -6,7 +6,7 @@
 <div class="w3-bar w3-border w3-round w3-light-grey">
   <div class="w3-dropdown-hover w3-xxlarge"><i class="fa fa-search"></i>
     <div class="w3-dropdown-content" style="width:250px">
-      <input type="text" id="search" /> 
+      <input type="text" id="search" onkeypress="if(event.keyCode==13) {submit(this); return false;}" /> 
     </div>
   </div>
   <a href="/main?type=all" class="w3-bar-item w3-button cate">전체보기</a>
@@ -34,12 +34,10 @@ $(".cate").on("click", function() {
 	location.href = "order/order?no=" + $(this).attr("id");
 });
 
-$(document).ready(function(){
-    $("#search").keypress(function (e) {
-     if (e.which == 13){
-    	 console.log($(this).val());
-         location.href="/main?search="+$(this).val();
-     }
- });
-});
+function submit(target) {
+	var search = target.value;
+	console.log(search + "/" + typeof search);
+	location.href="/order/search?search="+search;
+}
+
 </script>
