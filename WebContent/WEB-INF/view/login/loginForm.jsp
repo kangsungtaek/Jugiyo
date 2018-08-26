@@ -15,7 +15,7 @@
 		<form action="loginForm" name="loginForm" method="post">
 			<!-- 아이디 입력창/ 비밀번호 입력창 : placeholder로 아이디, 비밀번호 -->
 			<ul style="padding-left: 30">
-			 <li>개인<input type="radio" name="section" value="person">사업자<input type="radio" name="section" value="owner"></li>
+			 <li>개인<input type="radio" name="section" value="person" checked="checked">사업자<input type="radio" name="section" value="owner"></li>
 			</ul>
 			<ul class="mem_login">
 					<li><input type="text" name="id" placeholder=" 아이디입력" maxlength="20" style="height:30px;"></li> 

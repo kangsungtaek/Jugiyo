@@ -4,11 +4,17 @@ public class MenuVo {
 	int no;
 	String name;
 	int price;
-	String store;
+	int store;
 	String fileUrl;
 	String fileName;
 	
 	
+	public int getStore() {
+		return store;
+	}
+	public void setStore(int store) {
+		this.store = store;
+	}
 	public String getFileUrl() {
 		return fileUrl;
 	}
@@ -39,14 +45,10 @@ public class MenuVo {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getStore() {
-		return store;
-	}
-	public void setStore(String store) {
-		this.store = store;
-	}
+	
 	@Override
 	public String toString() {
-		return "OwnerMenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + "]";
+		return "MenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + ", fileUrl=" + fileUrl
+				+ ", fileName=" + fileName + "]";
 	}
 }

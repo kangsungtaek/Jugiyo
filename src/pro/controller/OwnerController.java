@@ -28,7 +28,8 @@ public class OwnerController {
 	
 	//사장님 페이지
 	@GetMapping("/index")
-	public String indexHandle01() {
+	public String indexHandle01(WebRequest webRequest) {
+		webRequest.getAttribute("login",WebRequest.SCOPE_SESSION);
 		return "owner/index";
 	}
 	
