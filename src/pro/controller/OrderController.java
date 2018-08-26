@@ -35,8 +35,8 @@ public class OrderController {
 	StoreDao storeDao;
 	
 	@GetMapping("/order")
-	public ModelAndView OrderHandle01(@RequestParam String storeNo) {
-		StoreVo vo = storeDao.getStore(Integer.parseInt(storeNo));
+	public ModelAndView OrderHandle01(@RequestParam int storeNo) {
+		StoreVo vo = storeDao.getStore(storeNo);
 		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("order/order");

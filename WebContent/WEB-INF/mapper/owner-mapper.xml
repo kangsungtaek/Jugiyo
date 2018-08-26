@@ -8,12 +8,12 @@
 		values(menu_seq.nextval,#{name},#{price},#{store})
 	</insert>
 	
-	<select id="getMenuList" parameterType="java.lang.String"
+	<select id="getMenuList" parameterType="java.lang.Integer"
 		resultType="pro.vo.MenuVo">
 		select * from menu where store = #{no}
 	</select>
 
-	<select id="getMenu" parameterType="java.lang.String"
+	<select id="getMenu" parameterType="java.lang.Integer"
 		resultType="pro.vo.MenuVo">
 		select * from menu where no = #{no}
 	</select>
