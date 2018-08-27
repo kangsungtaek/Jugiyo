@@ -50,14 +50,14 @@ a {
 .reg {margin:0 auto; width:650px; height:100%; position:relative;}
 .reg td {border:1px solid #ccc; border-spacing:0;}
 .reg td input {margin:5px 10px;}
-.reg tr {width:auto; height:40px;}
+.reg tr {width:auto; }
 .reg tr td.mInfo {width:120px; color:#000000; font-weight:bold; text-align:center;}
 .reg tr td.n {background:#D5D5D5;  text-align:center;}
 .reg tr td span.asterisk {color:#FF0000;}
 .reg tr td span.attention_asterisk {color:#FF0000; padding-left:10px;}
 .reg tr td small.c {color:#FF0000; font-size:10px;}
 
-#wrap {margin:0 auto; width:100%; max-height:250px; margin-top:5%; }
+#wrap {margin:0 auto; width:100%;  margin-top:5%; }
 #wrap form {margin:0 auto; width:700px; margin-top:50px;}
 #wrap h1 {text-align:center;}
 #wrap ul.search_box {width:100%; height:100%;}
