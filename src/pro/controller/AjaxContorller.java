@@ -24,10 +24,10 @@ public class AjaxContorller {
 	MemberDao memberDao;
 	
 	//아이디 중복체크
-	@RequestMapping(value="/login/regForm", produces="application/json;charset=UTF-8")
+	@RequestMapping(value="/regForm", produces="application/json;charset=UTF-8")
 	@ResponseBody	
 	public String regFormAjaxHandle(@RequestParam String id) {
-	//	System.out.println("param : " + id);
+		System.out.println("param : " + id);
 //		List<MemberVo> list=memberDao.findStartWith(id+"%");
 		
 		List<String> list = memberDao.findAll();
@@ -46,7 +46,7 @@ public class AjaxContorller {
 		}
 		
 		String json = gson.toJson(j);
-	//	System.out.println(json);
+		System.out.println(json);
 		return json;
 	}
 }
