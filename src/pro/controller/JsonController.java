@@ -150,11 +150,13 @@ public class JsonController {
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> map = new HashMap<>();
 		boolean overLapCheck = false;
-
+		int price = 0;
 		for (MenuVo mVo : menuList) {
 			if (mVo.getNo() == no) {
 				overLapCheck = true;
 				mVo.setCnt(mVo.getCnt() + 1);
+				price = mVo.getCnt() * mVo.getPrice();
+				map.put("price", price);
 				map.put("menu", mVo);
 			}
 		}
