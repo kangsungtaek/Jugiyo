@@ -130,7 +130,6 @@ textarea {
 	</div>
 	<!-- ------장바구니 끝  -->
 	<input type="hidden" value="${storeVo.no }" name="storeNo" form="form1">
-	<input type="hidden" value="${storeVo.type }" name="storeType" form="form1">  
 </div>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

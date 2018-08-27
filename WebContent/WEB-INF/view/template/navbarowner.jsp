@@ -38,3 +38,58 @@
 				<button class="w3-button w3-light-gray">${sessionScope.login.name}</button>
 			</div>
 	</div>
+	
+	
+	<script>
+					var idx=0;
+					var ws = new WebSocket(
+							"ws://${pageContext.request.localAddr}/ws/conn.do");
+					ws.onmessage = function(ret) {
+						console.log(ret.data);
+						var obj = JSON.parse(ret.data);
+						switch (obj.mode) {
+						case "login":
+							loginhandle(obj);
+							break;
+						case "message":
+							messageHandle(obj);
+							break;
+						case "order":
+							orderHandle(obj);
+							break;
+						}
+					};
+					
+					
+					function messageHandle(obj) {
+						var id = "a_"+idx;
+						idx++;
+						var html = "<span class="w3-tag w3-blue">New!</span>";
+
+						document.getElementById("alertLogin").innerHTML += html;
+						window
+								.setInterval(
+										function() {
+											document
+													.getElementById(id).innerHTML = "";
+										}, 5000);
+					}
+					
+					function loginhandle(obj) {
+						var html = "<span id=\""+ obj.user.id + "\">"
+								+ obj.user.id + " <small>" + obj.user.name
+								+ "/" + obj.user.dname + " " + obj.user.pname;
+						html += "로그인함.</small></span>";
+						document.getElementById("alertLogin").innerHTML += html;
+						window
+								.setInterval(
+										function() {
+											document
+													.getElementById(obj.user.id).innerHTML = "";
+										}, 3000);
+					}
+					
+					function orderHandle(obj){
+						
+					}
+				</script>

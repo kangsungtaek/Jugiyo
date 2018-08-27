@@ -2,6 +2,7 @@ package pro.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pro.dao.MenuDao;
 import pro.dao.OrderDao;
 import pro.dao.StoreDao;
+import pro.service.OrderService;
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
 import pro.vo.MenuVo;
@@ -33,6 +35,9 @@ public class OrderController {
 	MenuDao menuDao;
 	@Autowired
 	StoreDao storeDao;
+	
+	@Autowired
+	OrderService orderService;
 
 	@GetMapping("/order")
 	public ModelAndView OrderHandle01(@RequestParam int storeNo) {
@@ -72,7 +77,7 @@ public class OrderController {
 		num = set[1 + (int) Math.random() * set.length];
 		return "/main?type=" + num;
 	}
-	
+	// 주문 확인 페이지
 	@GetMapping("/ordered")
 	public ModelAndView orderedHandle(WebRequest req, int storeNo) {
 		StoreVo vo = storeDao.getStore(storeNo);
@@ -90,17 +95,22 @@ public class OrderController {
 		return mav;
 	}
 	
+	// 주문완료 처리 
 	@PostMapping("/ordered")
 	public ModelAndView orderedHandle2(@RequestParam Map<String,Object> map, WebRequest req) {
-		System.out.println(map);
+		
 		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
-		MemberVo vo = (MemberVo)req.getAttribute("login", WebRequest.SCOPE_SESSION);
-		String id = vo.getId();
+		MemberVo mVo = (MemberVo)req.getAttribute("login", WebRequest.SCOPE_SESSION);
+		String id = mVo.getId();
+		
+		// map = 배달주소, 휴대폰번호,  주문시요청사항, 결제수단(현금or카드), +@ 할인 
+		System.out.println(map);
+		StoreVo svo = storeDao.getStore((int) map.get("storeNo"));
 		
 		Map<String, Object> data = new LinkedHashMap();
 	      data.put("userId", id);
 	      data.put("storeNo", map.get("storeNo"));
-	      data.put("storeType", map.get("storeType"));
+	      data.put("storeType", svo.getType());
 	      data.put("order List", orderList);
 	      data.put("orderdate", new Date());
 		
@@ -108,6 +118,12 @@ public class OrderController {
 	      
 	      ModelAndView mav = new ModelAndView();
 	      mav.setViewName("mian");
+	      
+	      Map map2 = new HashMap();
+	      	map2.put("user", mVo);
+			map2.put("menu", orderList);
+			
+			orderService.sendToOne(map2, svo.getName());
 	      
 		return mav;
 	}
