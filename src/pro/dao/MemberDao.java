@@ -1,6 +1,7 @@
 package pro.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.bson.Document;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -40,6 +41,11 @@ public class MemberDao {
 	public List<LogVo> readAllById(String id) {
 		Query query = new BasicQuery(new Document().append("_id", id));
 		return mongoTemplate.find(query, LogVo.class, "log");
+	}
+	
+	//내집주소 등록
+	public void addAddr(Map map) {
+		template.update("member.addAddr", map);
 	}
 
 }

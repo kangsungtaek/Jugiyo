@@ -1,10 +1,13 @@
 package pro.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,5 +44,14 @@ public class MemberController {
 	@RequestMapping("/writeReview")
 	public String writeReviewHandle() {
 		return "member/writeReview";
+	}
+	
+	@RequestMapping("/addAddr")
+	public void addAddrHandle(@RequestParam("addr") String addr, WebRequest req) {
+		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
+		Map<String, String> map = new HashMap<>();
+			map.put("id", member.getId());
+			map.put("addr", addr);
+		memberDao.addAddr(map);
 	}
 }
