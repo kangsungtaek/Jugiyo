@@ -1,5 +1,7 @@
 package pro.vo;
 
+import java.util.Arrays;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class MenuVo {
@@ -10,16 +12,17 @@ public class MenuVo {
 	String fileUrl;
 	String fileName;
 	
-	MultipartFile attach;
+	MultipartFile[] attach;
 
 	// 강성택 메뉴 카운트 추가
 	int cnt;
 
-	public MultipartFile getAttach() {
+	
+	public MultipartFile[] getAttach() {
 		return attach;
 	}
 
-	public void setAttach(MultipartFile attach) {
+	public void setAttach(MultipartFile[] attach) {
 		this.attach = attach;
 	}
 
@@ -82,7 +85,9 @@ public class MenuVo {
 	@Override
 	public String toString() {
 		return "MenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + ", fileUrl=" + fileUrl
-				+ ", fileName=" + fileName + ", attach=" + attach + ", cnt=" + cnt + "]";
+				+ ", fileName=" + fileName + ", attach=" + Arrays.toString(attach) + ", cnt=" + cnt + "]";
 	}
+
+	
 
 }

@@ -42,6 +42,7 @@ public class LoginController {
 		if (section.equals("owner")) {
 			StoreVo vo = storeDao.login(m);
 			if(vo!=null) {
+				System.out.println("[controller:login] store : " + vo.toString());
 				req.setAttribute("login", vo, WebRequest.SCOPE_SESSION);
 				mav.setViewName("owner/index");
 				mav.addObject("owner");

@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.MenuDao;
 import pro.service.UploadService;
+import pro.vo.MenuAttachVo;
 import pro.vo.MenuVo;
 import pro.vo.MultiMenuVo;
 import pro.vo.StoreVo;
@@ -46,31 +48,32 @@ public class OwnerController {
 	@PostMapping("/addmenu")
 	public ModelAndView indexHandle02(@ModelAttribute MultiMenuVo menus, WebRequest webRequest) throws Exception {
 		StoreVo store = (StoreVo)webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
-		int menuNo=menuDao.getSequence();
 		ModelAndView mav = new ModelAndView();
 		for(MenuVo vo : menus.getMenus()) {
-			System.out.println(vo);
+			int menuNo=menuDao.getSequence();
+			vo.setNo(menuNo);
+			vo.setStore(store.getNo());
+			System.out.println(menuNo);
+			System.out.println(vo.toString());
+			menuDao.addMenu(vo);
+			
+			if(!vo.getAttach()[0].isEmpty()) {
+				for(MultipartFile file : vo.getAttach()) {
+					MenuAttachVo avo= uploadService.execute(file,store.getNo());
+					avo.setParent(menuNo);
+					System.out.println(avo.toString());
+					menuDao.addMenuAttach(avo);
+				}
+			}
 		}
 		
-		/*
-		vo.setNo(menuNo);
-		vo.setStore(store.getNo());
-		menuDao.addMenu(vo);
-		System.out.println(vo.toString());
+		
+		
 
 		
 		
-		int cnt=0;
-		if(!files[0].isEmpty()) {
-			for(MultipartFile file : files) {
-				MenuAttachVo avo= uploadService.execute(file,store.getNo());
-				avo.setParent(menuNo);
-				menuDao.addMenuAttach(avo);
-				cnt++;
-			}
-		}
 		mav.setViewName("owner/addedmenu");
-		*/
+		
 		
 
 		return mav;
