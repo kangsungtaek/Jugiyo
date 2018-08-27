@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 	
-<div id="wrap" class="w3-panel w3-padding-64 w3-orange">
+<div id="wrap" class="w3-panel w3-padding-64 w3-orange w3-container">
  	<!-- <form action="loginForm" name="loginForm" method="post"  onsubmit="return inputCheck();">
 			<h2 class="hide">아이디 / 이메일 로그인</h2>
 			<div class="id_login_wrap">	
@@ -26,13 +26,37 @@
 			</div><!--//id_login_wrap
         </form>	-->
 
- 	<form action="/login/loginForm" method="post" id="loginForm">
+ 	<form action="/login/loginForm" method="post" id="loginForm" >
+	<div class="w3-row" style="width:210px; padding:10px;">
  		<h2 class="hide"> 로그인</h2>
-				<input name="id" type="text" id="id" width="200px;" placeholder=" 아이디" >
-				<input name="password" type="password" id="password" width="200px;" placeholder=" 비밀번호" >
+	    <div class="w3-bar w3-black">
+    		<button class="w3-bar-item w3-button tablink w3-red" name="section" value="member" onclick="openCity(event,'London')">개인회원</button>
+    		<button class="w3-bar-item w3-button tablink" name="section" value="owner" onclick="openCity(event,'Paris')">사업자</button>
+  		</div>
+	 </div>
+			<input name="id" type="text" id="id" width="200px;" placeholder=" 아이디" >
+			<input name="password" type="password" id="password" width="200px;" placeholder=" 비밀번호" >
 			<button type="submit" >로그인</button>
 	</form>
-</div> 
+
+</div>
+
+<script>
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " w3-red";
+}
+</script>
+	
 <!--
    <div id="wrap" class="w3-panel w3-padding-64 w3-orange">
 		<h1>로그인</h1>
