@@ -6,7 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestMapping;
+=======
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+>>>>>>> branch 'master' of https://github.com/kangsungtaek/jugiyo.git
 import org.springframework.web.context.request.WebRequest;
 
 import pro.dao.OrderDao;
@@ -14,6 +19,7 @@ import pro.vo.LogVo;
 import pro.vo.MemberVo;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import pro.dao.MenuDao;
 import pro.dao.StoreDao;
@@ -32,9 +38,9 @@ public class OrderController {
 	StoreDao storeDao;
 
 	@GetMapping("/order")
-	public ModelAndView OrderHandle01(@RequestParam String storeNo) {
-		StoreVo vo = storeDao.getStore(Integer.parseInt(storeNo));
-		List<MenuVo> menuList = menuDao.getMenu(vo.getName());
+	public ModelAndView OrderHandle01(@RequestParam int storeNo) {
+		StoreVo vo = storeDao.getStore(storeNo);
+		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("order/order");
 		mav.addObject("storeVo", vo);
@@ -70,4 +76,18 @@ public class OrderController {
 		return "/main?type=" + num;
 	}
 	
-}
+	@GetMapping("/ordered")
+	public ModelAndView orderedHandle(WebRequest req) {
+		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
+		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
+		String addr = (String)req.getAttribute("addr", WebRequest.SCOPE_SESSION);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("order/ordered");
+		mav.addObject("addr", addr);
+		mav.addObject("member", member);
+		mav.addObject("orderList", orderList);
+		
+		return mav;
+	}
+}	

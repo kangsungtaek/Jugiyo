@@ -74,7 +74,6 @@ body, html {
 	</span>
   </form>
 </div>
-
 <script>
 /*	function getAddr() {
 		window.open("/addr", "new browser", "width=500, height=250");

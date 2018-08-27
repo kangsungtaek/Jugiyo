@@ -34,4 +34,9 @@
     			where (s.name like  '%' || #{search} || '%')
 		)
 	</select>
+
+	<!-- 사장님 로그인 -->
+	<select id="login" parameterType="java.util.HashMap" resultType="pro.vo.StoreVo">
+	select * from store where id=#{id} and password=#{password}
+</select>
 </mapper>

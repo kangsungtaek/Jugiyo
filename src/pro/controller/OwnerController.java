@@ -13,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.MenuDao;
 import pro.service.UploadService;
+import pro.vo.MenuAttachVo;
 import pro.vo.MenuVo;
+import pro.vo.StoreVo;
 
 
 
@@ -28,10 +30,10 @@ public class OwnerController {
 	
 	//사장님 페이지
 	@GetMapping("/index")
-	public String indexHandle01() {
+	public String indexHandle01(WebRequest webRequest) {
+		webRequest.getAttribute("login",WebRequest.SCOPE_SESSION);
 		return "owner/index";
 	}
-	
 	
 	//메뉴추가 컨트롤러 만드는중
 	@GetMapping("/addmenu")
@@ -40,17 +42,25 @@ public class OwnerController {
 	}
 	
 //	@RequestParam("file")MultipartFile[] files
+	
 	@PostMapping("/addmenu")
-	public ModelAndView indexHandle02(@ModelAttribute MenuVo [] vo, WebRequest webRequest, @RequestParam("attach") MultipartFile[] files) {
+	public ModelAndView indexHandle02(@ModelAttribute MenuVo vo, WebRequest webRequest, @RequestParam("attach") MultipartFile[] files) throws Exception {
+		StoreVo store = (StoreVo)webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
+		int menuNo=menuDao.getSequence();
+		vo.setNo(menuNo);
+		vo.setStore(store.getNo());
+		menuDao.addMenu(vo);
 		System.out.println(vo.toString());
+
+		
 		
 		ModelAndView mav = new ModelAndView();
-		
 		int cnt=0;
 		if(!files[0].isEmpty()) {
 			for(MultipartFile file : files) {
-			//	MenuVo avo= uploadService.execute(file, store);
-				//menuDao.addMenu(avo);
+				MenuAttachVo avo= uploadService.execute(file,store.getNo());
+				avo.setParent(menuNo);
+				menuDao.addMenuAttach(avo);
 				cnt++;
 			}
 		}
@@ -60,8 +70,36 @@ public class OwnerController {
 
 		return mav;
 	}
+	//오늘 주문 내역 전부 보여주는거
+	@GetMapping("/today")
+	public ModelAndView todayHandle01() {
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+	//현재 등록 되어 있는 메뉴들 전부다 보여주는거
 	@GetMapping("/addedmenu")
-	public ModelAndView addedMenuHandle() {
+	public ModelAndView addedMenuHandle01() {
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+
+	@PostMapping("/addedmenu")
+	public ModelAndView addedMenuHandle02() {
+		ModelAndView mav = new ModelAndView();
+		
+		
+		return mav;
+	}
+	
+	//메뉴통계
+	@GetMapping("/menustats")
+	public ModelAndView menuStatsHandle01() {
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+	//매출관련 통계
+	@GetMapping("/salesstats")
+	public ModelAndView salesStatsHandle01() {
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}

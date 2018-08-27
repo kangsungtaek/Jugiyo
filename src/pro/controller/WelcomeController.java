@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+
 @Controller
 public class WelcomeController {
 	 
@@ -22,5 +23,6 @@ public class WelcomeController {
 		req.setAttribute("addr", addr, WebRequest.SCOPE_SESSION);
 		String url = "redirect:/main?type=all";
 		return new ModelAndView(url); //음식점 전체메뉴로 이동하도록
+
 	}
 }

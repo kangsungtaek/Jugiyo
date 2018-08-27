@@ -8,7 +8,7 @@
 	<div class="w3-border">
 		<ul class="w3-ul w3-card-4">
 			<c:forEach items="${storeList}" var="store">
-				<li class="w3-bar" id="${store.no}"><span class="w3-bar-item w3-xlarge w3-right">${store.star }</span>			
+				<li class="w3-bar cate" id="${store.no}"><span class="w3-bar-item w3-xlarge w3-right">${store.star }</span>			
 				 	<img src="${store.img}" class="w3-bar-item w3-circle w3-hide-small w3-padding-small" style="width: 85px">
 				<div class="w3-bar-item">
 					<span class="w3-large">${store.name }</span><br> <span>${store.addr }</span>
@@ -20,4 +20,9 @@
 		</ul>
 	</div>
 </div>
+<script>
 
+$(".w3-bar").on("click", function() {
+	location.href = "order/order?storeNo=" + $(this).attr("id");
+});
+</script>

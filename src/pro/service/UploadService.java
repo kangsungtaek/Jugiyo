@@ -9,15 +9,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import pro.vo.MenuVo;
+import pro.vo.MenuAttachVo;
 
 @Service
 public class UploadService {
 	@Autowired
 	ServletContext ctx;
 
-	public MenuVo execute(MultipartFile file, String store) throws Exception {
+	public MenuAttachVo execute(MultipartFile file, int storeNo) throws Exception {
 		
-		File dir = new File(ctx.getRealPath("/image"),store);
+		File dir = new File(ctx.getRealPath("/image"),String.valueOf(storeNo));
 		
 		System.out.println(ctx.getRealPath("/image"));
 		
@@ -28,9 +29,9 @@ public class UploadService {
 
 		file.transferTo(dest);
 
-		MenuVo vo = new MenuVo();
-		vo.setFileName(file.getOriginalFilename());
-		vo.setFileUrl("/image/"+store+"/"+file.getOriginalFilename());
+		MenuAttachVo vo = new MenuAttachVo();
+		vo.setName(file.getOriginalFilename());
+		vo.setUri("/image/"+storeNo+"/"+file.getOriginalFilename());
 		
 		
 		return vo;

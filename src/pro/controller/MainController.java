@@ -18,9 +18,10 @@ public class MainController {
 	StoreDao storeDao;
 
 	@RequestMapping("/main")
-	public ModelAndView MainHandle01(@RequestParam(value="type", required=true, defaultValue="all") String type) {
+	public ModelAndView MainHandle01(@RequestParam(value="type", defaultValue="all", required=true) String type) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("[controller:main] type : " + type);
+
 		List<StoreVo> list = storeDao.storeLIst(type);
 		
 		mav.setViewName("main");

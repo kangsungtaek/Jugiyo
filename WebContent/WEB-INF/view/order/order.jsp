@@ -22,7 +22,7 @@
 <!-- 전체 영역 - -->
 <div class="w3-row">
 	<!-- 왼쪽 공백  -->
-	<div class="w3-col" style="width: 100px">&nbsp;</div>
+	<div class="w3-col" style="width: 10%">&nbsp;</div>
 	<div class="w3-col" style="width: 70%">
 
 		<!--  가게정보  -->
@@ -48,8 +48,8 @@
 					class="w3-half tablink w3-bottombar w3-hover-light-grey w3-padding">리뷰</div>
 			</a>
 		</div>
-		<!--  메뉴 / 리뷰]] 탭 끝 -->
-		
+		<!--  메뉴 / 리뷰 탭 끝 -->
+
 		<!--  추천 메뉴 -->
 		<div id="menu" class="w3-container tabs" style="display: block">
 
@@ -70,7 +70,7 @@
 					</ul>
 				</div>
 			</div>
-			
+
 			<!--  인기메뉴  -->
 			<button onclick="menubarSelect('Demo2')"
 				class="w3-button w3-block w3-black w3-left-align">인기 메뉴</button>
@@ -84,7 +84,7 @@
 								<div class="w3-bar-item">
 									<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
 								</div></li>
-						</c:forEach> 
+						</c:forEach>
 					</ul>
 				</div>
 			</div>
@@ -128,18 +128,32 @@
 
 	</div>
 	<!-- 장바구니 -->
-	<div class="w3-col" style="width: 100px">
+	<div class="w3-col"
+		style="width: 20%; padding-left: 10px; padding-right: 30px">
 		<div class="scroll-menu  w3-border w3-container">
 			<div class="w3-container w3-border-bottom">주문표</div>
 			<div class="w3-container">
+			
 				<ul id="orderList">
 					<c:forEach items="${sessionScope.orderList}" var="orderList">
-						<li>${orderList.name }</li>
+
+						<li id="${orderList.no}">
+							<div class='w3-row'>${orderList.name }</div>
+							<div class='w3-left-align'>
+								<span class='w3-button w3-small orderRemove' onclick='orderListRemove(this)'>X</span>
+								<span id="price" >${orderList.price * orderList.cnt } </span> 
+								<span class='w3-button w3-small' onclick='orderListMinus(this)'>-</span> 
+								<span id="count">${orderList.cnt }</span> 
+								<span class='w3-button w3-small' onclick='orderListPlus(this)'>+</span>
+							</div>
+						</li>
 					</c:forEach>
 				</ul>
+				
+				
 			</div>
-
 		</div>
+		<div class='w3-row'  > <button class="w3-button w3-red" style="width:100%;">주문하기</button> </div>
 	</div>
 	<!-- ------장바구니 끝  -->
 </div>
@@ -170,25 +184,90 @@
 			x.className = x.className.replace(" w3-show", "");
 		}
 	}
+	// 장바구니 x 버튼
+	//$(".orderRemove").on("click", function() {
+	function orderListRemove(target){
+		var no = $(target).closest('li').attr('id');
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "/sendJson?no=" + no+"&mode=remove", true);
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4) {
+					var obj = JSON.parse(this.responseText);
+					console.log(obj);
+					if(obj.result){
+						$("#orderList").find("#"+no).remove();	
+					}
+				}
+			}
+		xhr.send();
+	};
+	//});
+	
+	// 장바구니 + 버튼
+	function orderListPlus(target){
+		var no = $(target).closest('li').attr('id');
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "/sendJson?no=" + no+"&mode=plus", true);
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4) {
+					var obj = JSON.parse(this.responseText);
+					if(obj.result){
+						//$("#orderList").find("#"+no).find("#count").text(parseInt($("#orderList").find("#"+no).find("#count").text())+1);
+						$("#orderList").find("#"+no).find("#count").text(obj.menu.cnt);
+						$("#orderList").find("#"+no).find("#price").text(obj.price);
+					}
+				}
+			}
+		xhr.send();
+	};
+	// 장바구니 - 버튼
+	function orderListMinus(target){
+		var no = $(target).closest('li').attr('id');
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "/sendJson?no=" + no+"&mode=minus", true);
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4) {
+					var obj = JSON.parse(this.responseText);
+					if(obj.result){
+						//$("#orderList").find("#"+no).find("#count").text(parseInt($("#orderList").find("#"+no).find("#count").text())-1);
+						$("#orderList").find("#"+no).find("#count").text(obj.menu.cnt);
+						$("#orderList").find("#"+no).find("#price").text(obj.price);
+					}
+				}
+			}
+		xhr.send();
+	};
+	
 	// 음식 클릭 이벤트 .
 	$(".menu").on("click", function() {
-
 		var xhr = new XMLHttpRequest();
 		var no = this.id;
-		xhr.open("get", "/sendJson?no=" + no, true);
-
+		xhr.open("get", "/sendJson?no=" + no+"&mode=add", true);
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				var obj = JSON.parse(this.responseText);
-				console.log(obj);
-				$("#orderList").append("<li>"+obj.name+"</li>");
-			}
-		}
-		xhr.send();
+					// 이미 클릭한 메뉴를 또 누를 경우 숫자만 증가 
+					if (obj.overLap) {
+						//$("#orderList").find("#"+obj.menu).find("#count").text(parseInt($("#orderList").find("#"+obj.menu).find("#count").text())+1);
+						$("#orderList").find("#"+no).find("#count").text(obj.menu.cnt);
+					// 새로운 메뉴 클릭시 메뉴 추가.
+					} else {
+						$("#orderList").append("<li id="+obj.menu.no+"> <div class='w3-row'>"
+															+ obj.menu.name
+															+ "</div>"
+															+ "<div class='w3-left-align w3-small'><span class='w3-button w3-small orderRemove' onclick='orderListRemove(this)' >X</span> "
+															+ " <span id ='price'>" + obj.menu.price +"</span>"
+															+ " <span class='w3-button w3-small' onclick='orderListMinus(this)'>-</span> <span id='count'>"
+															+ obj.menu.cnt
+															+ "</span> <span class='w3-button w3-small' onclick='orderListPlus(this)'>+</span> </div></li>");
+								}
+							} 
+						}
+						xhr.send();
 
-	});
+					});
 
-	// 장바구니
+	// 장바구니 스크롤
 	$(function() {
 		$(document).ready(function() {
 

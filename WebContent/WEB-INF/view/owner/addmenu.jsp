@@ -37,9 +37,9 @@
 			</div>
 			<div class="w3-row">
 				<div class="w3-half" style="padding-right: 10px">
-					<label>메뉴 이미지</label> <input class="w3-input w3-border" name="gg"
-						type="file" id="ori" style="display: none;" onchange="preview(this);"><input
-						class="w3-input w3-border fake" name="gg" type="text" readOnly onclick="choose(this);"/>
+					<label>메뉴 이미지</label> 
+					<input class="w3-input w3-border" name="attach" type="file" id="ori" style="display: none;" onchange="preview(this);">
+						<input class="w3-input w3-border fake" name="gg" type="text" readOnly onclick="choose(this);"/>
 				</div>
 				<div class="w3-half">
 					<div class="img_wrap">
