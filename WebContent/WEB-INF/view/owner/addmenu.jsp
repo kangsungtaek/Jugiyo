@@ -2,54 +2,132 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<!DOCTYPE html>
-<html>
-<title>메뉴등록</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<body>
-	<div class="w3-row">
-		<div class="w3-quarter">&nbsp;</div>
-		<div class="w3-half">
-			<form class="w3-container w3-card-4 w3-white"
-				action="/owner/addmenu" method="post" name="menuInfo">
-				
+<style>
+.img_wrap {
+	width: 100px;
+	margin-top: 10px;
+}
+
+.img_wrap img {
+	max-width: 100%;
+}
+</style>
+<div style="height: 200px"></div>
+
+<!--메뉴 추가 css + 파일업로드 시 필요한 css-->
+<div class="w3-container"
+	style="padding-left: 100px; padding-right: 100px">
+	<form class="w3-container w3-card-4 w3-white" action="/owner/addmenu"
+		method="post" name="menuInfo" enctype="multipart/form-data"
+		id="addform" onsubmit="return checkValue();">
+		<!-- 여기서부터 클론 -->
+		<div id="each">
+			<div class="w3-half" style="padding-right: 10px">
+				<label>메뉴명</label> <input class="w3-input w3-border idx" name="name"
+					type="text" id="name" placeholder="ex)후라이드치킨" /><span
+					id="menuidx" class="idx2" style="font-size: 11px"> </span>
+			</div>
+			<div class="w3-half">
+				<label>가격(숫자만 입력해주세요)</label> <input class="w3-input w3-border idx"
+					name="price" type="text" id="price" placeholder="ex)10000" /><span
+					id="priceidx" class="idx2" style="font-size: 11px"> </span>
+			</div>
+			<div class="w3-row">
 				<div class="w3-half" style="padding-right: 10px">
-					<label>메뉴명</label>
-					<input class="w3-input w3-border" name="name" type="text" id="name" placeholder="ex)후라이드치킨"/>
-					<span id = "menuidx" style="font-size: 11px"></span>
+					<label>메뉴 이미지</label> 
+					<input class="w3-input w3-border" name="attach" type="file" id="ori" style="display: none;" onchange="preview(this);">
+						<input class="w3-input w3-border fake" name="gg" type="text" readOnly onclick="choose(this);"/>
 				</div>
 				<div class="w3-half">
-					<label>가격(숫자만 입력해주세요)</label>
-					<input class="w3-input w3-border" name="price" type="text" id="price" placeholder="ex)10000"/>
-					<span id = "priceidx" style="font-size: 11px"></span>
+					<div class="img_wrap">
+						<img id="img" class="w3-round" />
+					</div>
 				</div>
-				
-				<p>
-					<input type="submit" value="확인" onclick="return checkValue()"/>
-				</p>
-			</form>
+			</div>
 		</div>
-		<div class="w3-quarter">&nbsp;</div>
-	</div>
-</body>
-
+		<!-- 여기까지 클론 -->
+		<div id="plus"></div>
+		<p>
+			<button type="submit">확인</button>
+		</p>
+		<p>
+			<button type="button" id="bt">추가</button>
+		</p>
+	</form>
+</div>
+<!--입력안하면 못넘어가게 하는 스크립트처리 + 파일업로드 css처리할때 스크립트 처리 jquary-->
 <script>
-		function checkValue(){
-			var form = document.menuInfo;
-			var check = true;
-			
-			if(!form.name.value){
-				document.getElementById("menuidx").innerHTML="메뉴를 입력하세요";
-				check = false;
+	function checkValue() {
+		var cnt = 0;
+		for (var i = 0; i<$(".idx").length; i++) {
+			if ($(".idx").eq(i).val() == "") {
+				$(".idx").eq(i).next().html("REQUIRED");
+				cnt++;
+			} else {
+				$(".idx").eq(i).next().html("OKAY");
 			}
-			if(!form.price.value){
-				document.getElementById("priceidx").innerHTML="가격을 입력하세요";
-				check = false;
-			}
-			return check;
-			
 		}
+		return cnt==0;	
+	}
+	
+	
+
+
+	/*
+	$("#fake").on("click", function() {
+		$("#ori").trigger("click");
+	});
+	$("#ori").on("change", function() {
+		$("#fake").val(this.files[0].name);
+	});
+	$(document).ready(function() {
+		$("#ori").on("change", handleImgFileSelect);
+	});
+	var sel_file;
+	*/
+	function choose(target) {
+		$(target).prev().trigger("click");
+	};
+	function preview(target) {
+		$(target).next().val(target.files[0].name);
+		
+		var reader = new FileReader();
+		reader.readAsDataURL(target.files[0]);
+		
+		reader.onload = function() {
+			$(target).parent().next().find("img").attr("src", this.result);
+		}
+	}
+
+	function handleImgFileSelect(e) {
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+
+		filesArr.forEach(function(f) {
+			if (!f.type.match("image.*")) {
+				alert("확장자는 이미지 확장자만 가능합니다.");
+				return;
+			}
+			sel_file = f;
+
+			
+		});
+		
+	}
+	
+	var e = $("#each").clone();
+	$("#bt").click(function() {
+		
+		e.removeAttr("id");	
+		$("#plus").append(e.html());
+		$("#plus").append("<button id='del' type ='button' >삭제</button>");
+		$("#del").click(function(){
+			$(this).remove();
+		});
+	});
 </script>
-</html>
+
+

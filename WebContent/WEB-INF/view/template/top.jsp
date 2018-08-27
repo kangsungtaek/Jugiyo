@@ -5,10 +5,14 @@
 <html>
 <head>
 <title>JUGIYO</title>
+<!--  JQuery 쓸려면 선언해야하는것. -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
 input, button, select {
 	padding: 5px;
@@ -16,6 +20,7 @@ input, button, select {
 	font-family: 맑은 고딕;
 }
 
+/*
 td, th {
 	text-align: center;
 }
@@ -41,7 +46,26 @@ a {
 .td-cnt {
 	width: 50px;
 }
+*/
+.reg {margin:0 auto; width:650px; height:100%; position:relative;}
+.reg td {border:1px solid #ccc; border-spacing:0;}
+.reg td input {margin:5px 10px;}
+.reg tr {width:auto; height:40px;}
+.reg tr td.mInfo {width:120px; color:#000000; font-weight:bold; text-align:center;}
+.reg tr td.n {background:#D5D5D5;  text-align:center;}
+.reg tr td span.asterisk {color:#FF0000;}
+.reg tr td span.attention_asterisk {color:#FF0000; padding-left:10px;}
+.reg tr td small.c {color:#FF0000; font-size:10px;}
 
+#wrap {margin:0 auto; width:100%; max-height:250px; margin-top:5%; padding:10px; background-color:#FF9436;}
+#wrap form {margin:0 auto; width:700px; margin-top:50px;}
+#wrap h1 {text-align:center;}
+#wrap ul.search_box {width:100%; height:100%;}
+#wrap ul.search_box li {width:100%; height:100%;}
+#wrap ul.mem_login {width:100%; height:100%;}
+#wrap ul.mem_login li {margin:0 20px; display:inline;}
+#wrap ul.mem_login li button.btn {height:35px;}
+	
 a {
 	text-decoration: none;
 }
@@ -110,3 +134,18 @@ body, html {
     <a href="/login/regForm" class="w3-bar-item w3-button w3-right w3-hover-red"><i class="fa fa-th"></i> 회원가입</a>
   </div>
 </div>
+
+<div style="height: 50px;"></div>
+
+<script>
+//Change style of navbar on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
+    } else {
+        navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
+    }
+}
+</script>
