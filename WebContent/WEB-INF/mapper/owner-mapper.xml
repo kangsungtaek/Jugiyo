@@ -11,6 +11,7 @@
 	<insert id="addAttach" parameterType="pro.vo.MenuAttachVo">
 		insert into menuattach values(menuattach_seq.nextval, #{uri}, #{name}, #{parent})
 	</insert>
+	<!-- 메뉴삭제 -->
 
 	<select id="getSeq" resultType="java.lang.Integer">
 		select menu_seq.nextval from dual

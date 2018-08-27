@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.MenuDao;
+import pro.dao.StoreDao;
 import pro.service.UploadService;
 import pro.vo.MenuAttachVo;
 import pro.vo.MenuVo;
@@ -28,6 +30,8 @@ public class OwnerController {
 	MenuDao menuDao;
 	@Autowired
 	UploadService uploadService;
+	@Autowired
+	StoreDao storeDao;
 	
 	
 	//사장님 페이지
@@ -85,18 +89,16 @@ public class OwnerController {
 		return mav;
 	}
 	//현재 등록 되어 있는 메뉴들 전부다 보여주는거
-	@GetMapping("/addedmenu")
-	public ModelAndView addedMenuHandle01(WebRequest webRequest) {
-		StoreVo store = (StoreVo)webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
-		List<MenuVo> menuList = menuDao.getMenuList(store.getNo());
-		ModelAndView mav = new ModelAndView();
-		return mav;
-	}
+	
 
-	@PostMapping("/addedmenu")
-	public ModelAndView addedMenuHandle02() {
+	@GetMapping("/addedmenu")
+	public ModelAndView addedMenuHandle02(WebRequest webRequest) {
+		StoreVo vo = (StoreVo)webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
+		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 		ModelAndView mav = new ModelAndView();
-		
+		mav.setViewName("owner/addedmenu");
+		mav.addObject("storeVo", vo);
+		mav.addObject("menuList", menuList);
 		
 		return mav;
 	}
