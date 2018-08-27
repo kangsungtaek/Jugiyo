@@ -1,6 +1,8 @@
 package pro.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,7 +74,8 @@ public class OrderController {
 	}
 	
 	@GetMapping("/ordered")
-	public ModelAndView orderedHandle(WebRequest req) {
+	public ModelAndView orderedHandle(WebRequest req, int storeNo) {
+		StoreVo vo = storeDao.getStore(storeNo);
 		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
 		String addr = (String)req.getAttribute("addr", WebRequest.SCOPE_SESSION);
@@ -82,15 +85,31 @@ public class OrderController {
 		mav.addObject("addr", addr);
 		mav.addObject("member", member);
 		mav.addObject("orderList", orderList);
+		mav.addObject("storeVo", vo);
 		
 		return mav;
 	}
 	
 	@PostMapping("/ordered")
-	public ModelAndView orderedHandle2(@RequestParam Map map) {
+	public ModelAndView orderedHandle2(@RequestParam Map<String,Object> map, WebRequest req) {
 		System.out.println(map);
+		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
+		MemberVo vo = (MemberVo)req.getAttribute("login", WebRequest.SCOPE_SESSION);
+		String id = vo.getId();
 		
-		return null;
+		Map<String, Object> data = new LinkedHashMap();
+	      data.put("userId", id);
+	      data.put("storeNo", map.get("storeNo"));
+	      data.put("storeType", map.get("storeType"));
+	      data.put("order List", orderList);
+	      data.put("orderdate", new Date());
+		
+	      orderDao.insertLog(data);
+	      
+	      ModelAndView mav = new ModelAndView();
+	      mav.setViewName("mian");
+	      
+		return mav;
 	}
 }	
 

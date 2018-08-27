@@ -61,7 +61,7 @@
 					<ul class="w3-ul w3-card-4">
 						<c:forEach items="${menuList}" var="menu">
 							<li class="w3-bar menu" id="${menu.no }"><img
-								src="${menu.fileUrl }" class="w3-round w3-right "
+								src="${menu.fileUrl}" class="w3-round w3-right "
 								style="width: 100px">
 								<div class="w3-bar-item">
 									<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
@@ -153,7 +153,10 @@
 				
 			</div>
 		</div>
-		<div class='w3-row'  > <button class="w3-button w3-red" style="width:100%;">주문하기</button> </div>
+		<div class='w3-row'  > 
+		<a href="/order/ordered?storeNo=${storeVo.no}" ><button class="w3-button w3-red" style="width:100%;">주문하기</button> </a>
+		
+		</div>
 	</div>
 	<!-- ------장바구니 끝  -->
 </div>

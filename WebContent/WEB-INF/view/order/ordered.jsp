@@ -33,6 +33,18 @@ textarea {
 	<!-- 왼쪽 공백  -->
 	<div class="w3-col" style="width: 10%">&nbsp;</div>
 	<div class="w3-col" style="width: 70%">
+	<!--  가게정보  -->
+		<div class="w3-bar" id="${storeVo.no}" style="padding-bottom: 10px">
+			<span class="w3-bar-item w3-xlarge w3-right">${storeVo.star }</span>
+			<img src="${storeVo.img}"
+				class="w3-bar-item w3-circle w3-hide-small w3-padding-small"
+				style="width: 85px">
+			<div class="w3-bar-item">
+				<span class="w3-large">${storeVo.name }</span><br> <span>${storeVo.addr }</span>
+				<br /> <span class="w3-right-align w3-small">리뷰 : xxxx개</span>
+
+			</div>
+		</div>
 		<div class="w3-container">
 			<button onclick="myFunction('Demo1')"
 				class="w3-button w3-block w3-black w3-left-align">배달정보</button>
@@ -91,10 +103,12 @@ textarea {
 	</div>
 	<div class="w3-col"
 		style="width: 20%; padding-left: 10px; padding-right: 30px">
+		<form action="/order/ordered" method="post" id="form1">
 		<div class="scroll-menu  w3-border w3-container">
+			
 			<div class="w3-container w3-border-bottom"> <span class="fa fa-shopping-cart"></span> 주문표</div>
 			<div class="w3-container">
-			<form action="/order/ordered" method="post" id="form1">
+		
 				<ul id="orderList">
 					<c:forEach items="${sessionScope.orderList}" var="orderList">
 						<li id="${orderList.no}">
@@ -105,16 +119,18 @@ textarea {
 						</li>
 					</c:forEach>
 				</ul>
-			</form>
+			
 
 			</div>
 		</div>
 		<div class='w3-row'>
 			<button class="w3-button w3-red" type="submit" style="width: 100%;">완료</button>
 		</div>
+		</form>
 	</div>
 	<!-- ------장바구니 끝  -->
-	
+	<input type="hidden" value="${storeVo.no }" name="storeNo" form="form1">
+	<input type="hidden" value="${storeVo.type }" name="storeType" form="form1">  
 </div>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
