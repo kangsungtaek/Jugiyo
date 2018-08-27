@@ -57,24 +57,26 @@ table tr td small.c {color:#FF0000; font-size:10px;}
 */	
 
 	/*-------- //ID 중복체크 -----------*/ 
-	document.getElementById("#id").onkeyup = function() {
-		if (this.value.length > 2) {
-			if (!this.value.match("^[a-zA-Z0-9]*$")) {
-				window.alert("아이디형식에 맞지 않습니다.");
-				this.value = "";
+	function idCheck(target) {
+		var id = target.value;
+	//	console.log(id);
+		
+		if (id.length > 2) {
+			if (!id.match("^[a-zA-Z0-9]*$")) {
+				document.getElementById("ajax").innerHTML="아이디형식에 맞지 않습니다.";
+				document.getElementById("id").value = "";
 			}else {	
 				var xhr = new XMLHttpRequest();
-				xhr.open("get", "/ajax/regFrom.jsp?id="+this.value, true);
+				xhr.open("get", "/ajax/regForm?id="+id, true);
 				xhr.onreadystatechange =function() {
 					if(xhr.readyState==4) {
 						var ar = JSON.parse(xhr.responseText);
-						var op = "";
-	/*					if() {
-							
+						if(ar=="1") {
+							document.getElementById("ajax").innerHTML="사용할 수 없는 아이디입니다.";
+							document.getElementById("id").value="";
 						}else {
-							
-						}*/
-						document.getElementById("regFrom").innerHTML = op;
+							document.getElementById("ajax").innerHTML="사용할 수 있는 아이디입니다.";
+						}
 					}
 			  }	
 				xhr.send();
@@ -82,10 +84,18 @@ table tr td small.c {color:#FF0000; font-size:10px;}
 		}
 	}
 	
+	
+	$("#password").off("focus").on("focus", function() {
+		password(this);
+	});
+
+	
 	// 비밀번호 체크 : 숫자랑 영문조합으로 -> document.getElementById("pwajax").innerHTML="사용가능합니다.";
-	document.getElementById("password").onkeyup = function password(){
-		var password = this.value;
-		if(!/^[a-zA-Z0-9]{8,20}$/.test(password)) {
+	function password(target){
+		var password = target.value;
+	//	console.log("password:" + password)
+		var pwRule = /^[a-zA-Z0-9]{8,20}$/;
+		if(!pwRule.test(password)) {
 	 		//alert("비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다.");
 	 		document.getElementById("pwajax").innerHTML="사용가능합니다.";
 		}
@@ -184,12 +194,12 @@ table tr td small.c {color:#FF0000; font-size:10px;}
 				</tr>
 				<tr>
 					<td class="n"> 아이디</td>
-					<td><input type="text" name="id" id="id" class="size"  placeholder=" 아이디입력" maxlength="10" required />
+					<td><input type="text" name="id" id="id" class="size" onkeyup="idCheck(this);" placeholder=" 아이디입력" maxlength="10" required />
 					<small class="c" id="ajax">10자 이내 입력</samll></td> 
 				</tr>	
 				<tr>
 					<td class="n"> 비밀번호</td>
-					<td><input type="password" name="password" class="size" placeholder=" 비밀번호입력" maxlength="20" required /> <small class="c" id="pwajax">20자 이내 입력</samll></td> 
+					<td><input type="password" name="password" class="size" placeholder=" 비밀번호입력" maxlength="20" required /> <small class="c" id="pwajax">8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</samll></td> 
 				</tr>
 				<tr>
 					<td class="n"> 비밀번호확인</td>

@@ -58,7 +58,6 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		
 		//member를 db에 넣어줘야겠죠: insert 작업
-		
 		mav.setViewName("login/reg");	//회원가입되셨습니다.
 		//login/reg.jsp를 만들어서 "${ nickname } 님 회원가입되셨습니다. 감사합니다." 이렇게 나타나도록. 
 		
