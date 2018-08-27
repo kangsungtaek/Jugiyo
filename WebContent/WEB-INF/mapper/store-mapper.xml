@@ -28,9 +28,10 @@
 	<!-- 검색어를 통한 상점검색 -->
 	<select id="searchStoreMenu" resultType="pro.vo.StoreVo">
 		select * from(
-    		select * from STORE s join MENU m
-   			on s.no = m.store
-    		where (s.name like '%' || #{search} || '%' or m.name like '%' || #{search} || '%')
+    			select s.*, m.c from STORE s left join
+    			(select store, count(*) c from menu where name like  '%' || #{search} || '%' group by store) m
+   				on s.no = m.store
+    			where (s.name like  '%' || #{search} || '%')
 		)
 	</select>
 </mapper>
