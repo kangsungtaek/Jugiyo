@@ -3,7 +3,6 @@ package pro.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators.Add;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -73,17 +72,30 @@ public class LoginController {
 	}
 
 	@PostMapping("/regForm")
-	public ModelAndView RegFormPostHandle(@ModelAttribute MemberVo member, @RequestParam String addr,@RequestParam String addr1) {
-		member.setAddress(addr+" "+addr1 );
-		int result = memberDao.addMember(member); 
+	public ModelAndView RegFormPostHandle(@ModelAttribute MemberVo member, @RequestParam("addr") String addr,@RequestParam("addr1") String addr1) {
+		
+		if(addr != null || addr1 != null) {			
+			member.setAddress(addr+" "+addr1 );
+		}
+		System.out.println("[controller:reg] member : " + member);
 		ModelAndView mav = new ModelAndView();
-
+		
+		//member를 db에 넣어줘야겠죠: insert 작업
+		mav.setViewName("login/reg");	//회원가입되셨습니다.
+		//login/reg.jsp를 만들어서 "${ nickname } 님 회원가입되셨습니다. 감사합니다." 이렇게 나타나도록. 
+		
+		//addObject(변수명, object); -> member를 member 에다가 넣어서
+		mav.addObject("member", member);
+	
 		// member를 db에 넣어줘야겠죠: insert 작업
-
-		mav.setViewName("login/reg");// 회원가입되셨습니다.
-		// login/reg.jsp를 만들어서 "${ nickname } 님 회원가입되셨습니다. 감사합니다." 이렇게 나타나도록.
-		// addObject(변수명, object); -> member를 member 에다가 넣어서
-
+		int i = memberDao.addMember(member);
+		if(i == 1) {
+			mav.setViewName("login/reg");// 회원가입되셨습니다.
+			// login/reg.jsp를 만들어서 "${ nickname } 님 회원가입되셨습니다. 감사합니다." 이렇게 나타나도록.
+			// addObject(변수명, object); -> member를 member 에다가 넣어서			
+		} else {
+			mav.setViewName("error");
+		}
 		return mav;
 	}
 }
