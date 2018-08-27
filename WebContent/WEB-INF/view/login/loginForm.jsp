@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 	
-<div id="wrap" class="w3-panel w3-padding-64 w3-orange">
+<div id="wrap" class="w3-panel w3-padding-64 w3-orange ">
  	<!-- <form action="loginForm" name="loginForm" method="post"  onsubmit="return inputCheck();">
 			<h2 class="hide">아이디 / 이메일 로그인</h2>
 			<div class="id_login_wrap">	
@@ -32,6 +32,8 @@
 				<input name="password" type="password" id="password" width="200px;" placeholder=" 비밀번호" >
 			<button type="submit" >로그인</button>
 	</form>
+	
+	
 </div> 
 <!--
    <div id="wrap" class="w3-panel w3-padding-64 w3-orange">
