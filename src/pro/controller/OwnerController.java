@@ -8,15 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.MenuDao;
 import pro.service.UploadService;
-import pro.vo.MenuAttachVo;
 import pro.vo.MenuVo;
+import pro.vo.MultiMenuVo;
 import pro.vo.StoreVo;
 
 
@@ -46,9 +44,15 @@ public class OwnerController {
 //	@RequestParam("file")MultipartFile[] files
 	
 	@PostMapping("/addmenu")
-	public ModelAndView indexHandle02(@ModelAttribute MenuVo vo, WebRequest webRequest, @RequestParam("attach") MultipartFile[] files) throws Exception {
+	public ModelAndView indexHandle02(@ModelAttribute MultiMenuVo menus, WebRequest webRequest) throws Exception {
 		StoreVo store = (StoreVo)webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
 		int menuNo=menuDao.getSequence();
+		ModelAndView mav = new ModelAndView();
+		for(MenuVo vo : menus.getMenus()) {
+			System.out.println(vo);
+		}
+		
+		/*
 		vo.setNo(menuNo);
 		vo.setStore(store.getNo());
 		menuDao.addMenu(vo);
@@ -56,7 +60,6 @@ public class OwnerController {
 
 		
 		
-		ModelAndView mav = new ModelAndView();
 		int cnt=0;
 		if(!files[0].isEmpty()) {
 			for(MultipartFile file : files) {
@@ -67,7 +70,7 @@ public class OwnerController {
 			}
 		}
 		mav.setViewName("owner/addedmenu");
-
+		*/
 		
 
 		return mav;
@@ -82,7 +85,7 @@ public class OwnerController {
 	@GetMapping("/addedmenu")
 	public ModelAndView addedMenuHandle01(WebRequest webRequest) {
 		StoreVo store = (StoreVo)webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
-		List<MenuVo> menuList = menuDao.getMenu(store.getNo());
+		List<MenuVo> menuList = menuDao.getMenuList(store.getNo());
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
