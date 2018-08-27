@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.bson.Document;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
@@ -13,14 +14,18 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import pro.vo.LogVo;
+import pro.vo.StoreVo;
 
 @Repository
 public class OrderDao {
 
 	@Autowired
+	SqlSessionTemplate template;
+	@Autowired
 	MongoTemplate mongoTemplate;
 	
 	public List<LogVo> findLog(String id) {
+		System.out.println("[orderDao:mongo]");
 		Calendar cal = new GregorianCalendar();
 	    cal.add(Calendar.DATE, -2);
 		Query query = new BasicQuery(new Document().append("_id", id).append("date", new Document().append("$gte", cal.getTime())));
@@ -32,6 +37,4 @@ public class OrderDao {
 	public void insertLog(Map data) {
 		mongoTemplate.insert(data, "log");
 	}
-	
-	
 }

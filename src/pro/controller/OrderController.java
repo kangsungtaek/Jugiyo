@@ -21,18 +21,17 @@ import pro.vo.MemberVo;
 import pro.vo.MenuVo;
 import pro.vo.StoreVo;
 
-
 @Controller
 @RequestMapping("/order")
 public class OrderController {
-	
+
 	@Autowired
 	OrderDao orderDao;
 	@Autowired
 	MenuDao menuDao;
 	@Autowired
 	StoreDao storeDao;
-	
+
 	@GetMapping("/order")
 	public ModelAndView OrderHandle01(@RequestParam int storeNo) {
 		StoreVo vo = storeDao.getStore(storeNo);
@@ -40,27 +39,36 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("order/order");
 		mav.addObject("storeVo", vo);
-		mav.addObject("menuList", menuList );
+		mav.addObject("menuList", menuList);
 		return mav;
 	}
 
 	@RequestMapping("/random")
 	public String randomHandle(WebRequest req) {
 		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
-		List<LogVo> list = orderDao.findLog(member.getId());
+		List<LogVo> list = new ArrayList();
+		list = orderDao.findLog(member.getId());
+		System.out.println("[controller:order]" + list);
 		int num = 0;
 		int[] set = new int[10];
 		
-		for(int i=1; i<11; i++) {
-			for(LogVo l : list) {
-				if(i == l.getType())
-					continue;
-				else
-					set[i] = i;
+		if (list == null || list.size() == 0) {
+			for (int i = 1; i < 11; i++) {
+				set[i] = i;
+			}
+		} else {
+
+			for (int i = 1; i < 11; i++) {
+				for (LogVo l : list) {
+					if (i == l.getType())
+						continue;
+					else
+						set[i] = i;
+				}
 			}
 		}
-		num = set[1 + (int)Math.random()*set.length];
-		return "/main?type="+num;
+		num = set[1 + (int) Math.random() * set.length];
+		return "/main?type=" + num;
 	}
 	
 	@GetMapping("/ordered")
@@ -85,3 +93,4 @@ public class OrderController {
 		return null;
 	}
 }	
+
