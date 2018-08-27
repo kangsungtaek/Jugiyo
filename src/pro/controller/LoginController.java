@@ -59,7 +59,7 @@ public class LoginController {
 
 			if (vo.getPassword().equals(password)) { // session에다가 vo를 올려주세요.
 				mav.setViewName("index");
-				req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
+				req.setAttribute("login", vo, WebRequest.SCOPE_SESSION);
 			} else {
 				mav.setViewName("login/loginForm");
 			}

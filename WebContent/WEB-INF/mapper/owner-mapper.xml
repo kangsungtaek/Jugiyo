@@ -18,7 +18,7 @@
 	
 	<select id="getMenuList" parameterType="java.lang.Integer"
 		resultType="pro.vo.MenuVo">
-		select * from menu where store = #{no}
+		select a.*, b.uri fileUri, b.name fileName from (( select * from menu where store = #{no}) a left join menuattach b on a.no = b.parent)
 	</select>
 
 	<select id="getMenu" parameterType="java.lang.Integer"
