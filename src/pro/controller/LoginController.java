@@ -3,7 +3,6 @@ package pro.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators.Add;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -58,7 +57,7 @@ public class LoginController {
 
 			if (vo.getPassword().equals(password)) { // session에다가 vo를 올려주세요.
 				mav.setViewName("index");
-				req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
+				req.setAttribute("login", vo, WebRequest.SCOPE_SESSION);
 			} else {
 				mav.setViewName("login/loginForm");
 			}

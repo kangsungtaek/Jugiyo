@@ -18,15 +18,28 @@ public class MainController {
 	StoreDao storeDao;
 
 	@RequestMapping("/main")
-	public ModelAndView MainHandle01(@RequestParam(name="type", defaultValue="all", required=true) String type) {
-		
+	public ModelAndView MainHandle01(@RequestParam(value="type", defaultValue="all", required=true) String type) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("[controller:main] type : " + type);
+
 		List<StoreVo> list = storeDao.storeLIst(type);
 		
-		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");
-		mav.addObject("storeList",list);
+		mav.addObject("storeList", list);
 		
 		return mav;
 	}
 
+	@RequestMapping("/main/search")
+	public ModelAndView searchHandle(@RequestParam("search") String search) {
+		System.out.println("[controller:main] search : " + search);
+		
+		ModelAndView mav = new ModelAndView();
+		List<StoreVo> list = storeDao.searchStoreMenu(search);
+		System.out.println("[controller:main] list : " + list);
+		mav.setViewName("main");
+		mav.addObject("storeList", list);
+		
+		return mav;
+	}
 }

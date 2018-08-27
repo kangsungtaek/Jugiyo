@@ -38,6 +38,10 @@ public class StoreDao {
 		return template.selectOne("store.getStore", storeNo);
 	}
 	
+	public List<StoreVo> searchStoreMenu(String search) {
+		return template.selectList("store.searchStoreMenu", search);
+	}
+
 	public StoreVo login(Map m) {
 		return template.selectOne("store.login",m);
 	}

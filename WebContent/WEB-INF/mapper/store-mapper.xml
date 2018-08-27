@@ -24,6 +24,17 @@
 	<select id="getStore" resultType="pro.vo.StoreVo" parameterType="java.lang.Integer">
 		select * from store where no = #{storeNo} 
 	</select>
+	
+	<!-- 검색어를 통한 상점검색 -->
+	<select id="searchStoreMenu" resultType="pro.vo.StoreVo">
+		select * from(
+    			select s.*, m.c from STORE s left join
+    			(select store, count(*) c from menu where name like  '%' || #{search} || '%' group by store) m
+   				on s.no = m.store
+    			where (s.name like  '%' || #{search} || '%')
+		)
+	</select>
+
 	<!-- 사장님 로그인 -->
 	<select id="login" parameterType="java.util.HashMap" resultType="pro.vo.StoreVo">
 	select * from store where id=#{id} and password=#{password}
