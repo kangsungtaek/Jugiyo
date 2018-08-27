@@ -2,23 +2,22 @@ package pro.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.WebRequest;
-
-import pro.dao.OrderDao;
-import pro.vo.LogVo;
-import pro.vo.MemberVo;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import pro.dao.MenuDao;
+import pro.dao.OrderDao;
 import pro.dao.StoreDao;
+import pro.vo.LogVo;
+import pro.vo.MemberVo;
 import pro.vo.MenuVo;
 import pro.vo.StoreVo;
 
@@ -77,5 +76,12 @@ public class OrderController {
 		mav.addObject("orderList", orderList);
 		
 		return mav;
+	}
+	
+	@PostMapping("/ordered")
+	public ModelAndView orderedHandle2(@RequestParam Map map) {
+		System.out.println(map);
+		
+		return null;
 	}
 }	

@@ -29,10 +29,10 @@ textarea {
 
 <!-- 전체 영역 - -->
 <div class="w3-row">
+	
 	<!-- 왼쪽 공백  -->
 	<div class="w3-col" style="width: 10%">&nbsp;</div>
 	<div class="w3-col" style="width: 70%">
-	<form action="order/ordered" method="post">
 		<div class="w3-container">
 			<button onclick="myFunction('Demo1')"
 				class="w3-button w3-block w3-black w3-left-align">배달정보</button>
@@ -43,23 +43,23 @@ textarea {
 						<label class="fa fa-map-marker"></label> 
 							<input class="w3-input w3-border" value="${addr }"  name="addr" 
 							id="addr" type="text" placeholder="배달받을 주소를 입력해주세요."
-							 onclick="sample4_execDaumPostcode()" />
+							 onclick="sample4_execDaumPostcode()" form="form1" />
 					</p>
 
 					<p>
 						<label>휴대폰번호</label>
 						<label class="fa fa-phone"></label> 
 						 <input class="w3-input w3-border"
-							name="contact" type="text" value="${member.contact }">
+							name="contact" type="text" value="${member.contact }" form="form1" >
 					</p>
 				
 			</div>
 
 			<button onclick="myFunction('Demo2')"
 				class="w3-button w3-block w3-black w3-left-align">주문시 요청사항</button>
-			<div id="Demo2" class="w3-hide w3-container">
+			<div id="Demo2" class="w3-show w3-container">
 			<p></p>
-			<textarea name="requested" placeholder="주문시 요청사항이 있으시면 남겨주세요" ></textarea>
+			<textarea name="requested" placeholder="주문시 요청사항이 있으시면 남겨주세요" form="form1" ></textarea>
 			<p></p>
 			</div>
 			
@@ -70,10 +70,10 @@ textarea {
 			<div class="w3-bar">
 			<p></p>
   				<button class="w3-bar-item w3-button w3-black" id="cacheBtn" style="width:50%" onclick="paymenSelect(this)"><i class="fa fa-cache"></i>현금
-  				 <input class="w3-radio" type="radio" name="payment" id="cacheRadio" value="cache" checked>
+  				 <input class="w3-radio" type="radio" name="payment" id="cacheRadio" value="cache" form="form1" checked>
   				</button>
   				<button class="w3-bar-item w3-button w3-black" id="cardBtn" style="width:50%" onclick="paymenSelect(this)"><i class="fa fa-credit-card"></i>카드
-  				 <input class="w3-radio" type="radio" name="payment" id="cardRadio" value="card" >
+  				 <input class="w3-radio" type="radio" name="payment" id="cardRadio" value="card" form="form1"  >
   				</button>
 			<p>&nbsp;</p>
 			</div>
@@ -87,13 +87,14 @@ textarea {
 			
 			</div>
 		</div>
-	</form>
+	
 	</div>
 	<div class="w3-col"
 		style="width: 20%; padding-left: 10px; padding-right: 30px">
 		<div class="scroll-menu  w3-border w3-container">
 			<div class="w3-container w3-border-bottom"> <span class="fa fa-shopping-cart"></span> 주문표</div>
 			<div class="w3-container">
+			<form action="/order/ordered" method="post" id="form1">
 				<ul id="orderList">
 					<c:forEach items="${sessionScope.orderList}" var="orderList">
 						<li id="${orderList.no}">
@@ -104,15 +105,16 @@ textarea {
 						</li>
 					</c:forEach>
 				</ul>
-
+			</form>
 
 			</div>
 		</div>
 		<div class='w3-row'>
-			<button class="w3-button w3-red" style="width: 100%;">완료</button>
+			<button class="w3-button w3-red" type="submit" style="width: 100%;">완료</button>
 		</div>
 	</div>
 	<!-- ------장바구니 끝  -->
+	
 </div>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

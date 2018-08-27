@@ -250,6 +250,7 @@
 					if (obj.overLap) {
 						//$("#orderList").find("#"+obj.menu).find("#count").text(parseInt($("#orderList").find("#"+obj.menu).find("#count").text())+1);
 						$("#orderList").find("#"+no).find("#count").text(obj.menu.cnt);
+						$("#orderList").find("#"+no).find("#price").text(obj.price);
 					// 새로운 메뉴 클릭시 메뉴 추가.
 					} else {
 						$("#orderList").append("<li id="+obj.menu.no+"> <div class='w3-row'>"

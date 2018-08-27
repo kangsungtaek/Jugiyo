@@ -3,6 +3,7 @@ package pro.dao;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,10 @@ public class OrderDao {
 		
 		return mongoTemplate.find(query, LogVo.class, "log");
 	}
+
+	public void insertLog(Map data) {
+		mongoTemplate.insert(data, "log");
+	}
+	
+	
 }
