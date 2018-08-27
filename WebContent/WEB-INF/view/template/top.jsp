@@ -57,7 +57,7 @@ a {
 .reg tr td span.attention_asterisk {color:#FF0000; padding-left:10px;}
 .reg tr td small.c {color:#FF0000; font-size:10px;}
 
-#wrap {margin:0 auto; width:100%; max-height:250px; margin-top:5%; padding:10px; background-color:#FF9436;}
+#wrap {margin:0 auto; width:100%; max-height:250px; margin-top:5%; }
 #wrap form {margin:0 auto; width:700px; margin-top:50px;}
 #wrap h1 {text-align:center;}
 #wrap ul.search_box {width:100%; height:100%;}
