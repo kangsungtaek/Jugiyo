@@ -17,7 +17,7 @@
 						<div class="w3-bar-item">
 							<span class="w3-large" style="padding-left: 10px">${menu.name }</span><br> <span style="padding-left: 10px">${menu.price }</span>
 									<p class="w3-small">
-										<button type="button" id="del" onclick="menuRemove(this)">삭제</button>
+										<button type="button" id="del" onclick="menuDelete(this)">삭제</button>
 											<button type="button">수정</button>
 									</p>
 									
@@ -28,7 +28,7 @@
 	</div>
 </div>
 <script>
-	<!--등록된 메뉴 탭 스크립트 처리-->
+	//
 	function openTabs(evt, tabsName) {
 		var i, x, tablinks;
 		x = document.getElementsByClassName("tabs");
@@ -45,16 +45,15 @@
 	}
 	
 	
-	<!--삭제버튼 스크립트 처리-->
-	
-	function menuRemove(target){
+	//삭제버튼 스크립트 처리
+	function menuDelete(target){
 		 var no = $(target).closest('li').attr('id');
 		 xhr.open("get", "/sendJson?no=" + no+"&mode=menuDelete", true);
          xhr.onreadystatechange = function() {
             if (this.readyState == 4) {
                var obj = JSON.parse(this.responseText);
                console.log(obj);
-               if(obj.result){
+               if(obj.rst){
 	                  $("#menuList").find("#"+no).remove();   
 	               }
 	            }

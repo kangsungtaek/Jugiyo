@@ -70,12 +70,7 @@ public class OwnerController {
 				}
 			}
 		}
-		
-		
-		
 
-		
-		
 		mav.setViewName("owner/addedmenu");
 		
 		

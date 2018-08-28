@@ -72,8 +72,12 @@ public class JsonController {
 	
 	private ModelAndView menuDelete(int no, WebRequest webRequest) {
 		ModelAndView mav = new ModelAndView();
+		boolean result = menuDao.deleteMenu(no);
+		Map m = new HashMap();
+		m.put("rst", result);
 		
-		
+		String del=gson.toJson(m);
+		mav.addObject("json", del);
 		return mav;
 	}
 

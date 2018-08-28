@@ -13,7 +13,7 @@
 	</insert>
 	<!-- 메뉴삭제 -->
 	<delete id="menuDelete">
-		delete from menu where no=${no} and parent = ${parent} 
+		delete from menu where no=${no}
 	</delete>
 
 	<select id="getSeq" resultType="java.lang.Integer">
