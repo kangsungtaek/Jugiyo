@@ -14,7 +14,6 @@ input, button, select {
 </style>
 </head>
 <body>
-
 <h3>【상점등록】</h3>
 <div style="marge-left:70px;">
 	<form action="${ pageContext.servletContext.contextPath }/admin/addStore" method="post">
