@@ -30,7 +30,7 @@
   <h3>내집등록</h3><br>
   <i class="fa fa-css3 w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
   <p>매번 입력할 필요없이 주소를 등록해주세요.</p>
-  <p>[ 등록된 주소 ]<br/><span id="addr">${ sessionScope.vo.address }</span></p>
+  <p>[ 등록된 주소 ]<br/><span id="addr">${ sessionScope.vo.address}</span></p>
   </div>
 </div>
 
