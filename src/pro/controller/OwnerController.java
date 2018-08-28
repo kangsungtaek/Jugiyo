@@ -8,11 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.MenuDao;
+import pro.dao.StoreDao;
 import pro.service.UploadService;
+import pro.vo.MenuAttachVo;
 import pro.vo.MenuVo;
 import pro.vo.MultiMenuVo;
 import pro.vo.StoreVo;
@@ -26,6 +30,8 @@ public class OwnerController {
 	MenuDao menuDao;
 	@Autowired
 	UploadService uploadService;
+	@Autowired
+	StoreDao storeDao;
 	
 	
 	//사장님 페이지
@@ -46,31 +52,27 @@ public class OwnerController {
 	@PostMapping("/addmenu")
 	public ModelAndView indexHandle02(@ModelAttribute MultiMenuVo menus, WebRequest webRequest) throws Exception {
 		StoreVo store = (StoreVo)webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
-		int menuNo=menuDao.getSequence();
 		ModelAndView mav = new ModelAndView();
 		for(MenuVo vo : menus.getMenus()) {
-			System.out.println(vo);
-		}
-		
-		/*
-		vo.setNo(menuNo);
-		vo.setStore(store.getNo());
-		menuDao.addMenu(vo);
-		System.out.println(vo.toString());
-
-		
-		
-		int cnt=0;
-		if(!files[0].isEmpty()) {
-			for(MultipartFile file : files) {
-				MenuAttachVo avo= uploadService.execute(file,store.getNo());
-				avo.setParent(menuNo);
-				menuDao.addMenuAttach(avo);
-				cnt++;
+			int menuNo=menuDao.getSequence();
+			vo.setNo(menuNo);
+			vo.setStore(store.getNo());
+			System.out.println(menuNo);
+			System.out.println(vo.toString());
+			menuDao.addMenu(vo);
+			
+			if(!vo.getAttach()[0].isEmpty()) {
+				for(MultipartFile file : vo.getAttach()) {
+					MenuAttachVo avo= uploadService.execute(file,store.getNo());
+					avo.setParent(menuNo);
+					System.out.println(avo.toString());
+					menuDao.addMenuAttach(avo);
+				}
 			}
 		}
+
 		mav.setViewName("owner/addedmenu");
-		*/
+		
 		
 
 		return mav;
@@ -82,18 +84,16 @@ public class OwnerController {
 		return mav;
 	}
 	//현재 등록 되어 있는 메뉴들 전부다 보여주는거
-	@GetMapping("/addedmenu")
-	public ModelAndView addedMenuHandle01(WebRequest webRequest) {
-		StoreVo store = (StoreVo)webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
-		List<MenuVo> menuList = menuDao.getMenuList(store.getNo());
-		ModelAndView mav = new ModelAndView();
-		return mav;
-	}
+	
 
-	@PostMapping("/addedmenu")
-	public ModelAndView addedMenuHandle02() {
+	@GetMapping("/addedmenu")
+	public ModelAndView addedMenuHandle02(WebRequest webRequest) {
+		StoreVo vo = (StoreVo)webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
+		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 		ModelAndView mav = new ModelAndView();
-		
+		mav.setViewName("owner/addedmenu");
+		mav.addObject("storeVo", vo);
+		mav.addObject("menuList", menuList);
 		
 		return mav;
 	}

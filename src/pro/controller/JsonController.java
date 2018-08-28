@@ -60,6 +60,9 @@ public class JsonController {
 			mav = menuMinus(menuList,no,webRequest);
 			System.out.println("menu minus");
 			break;
+		case "menuDelete":
+			mav = menuDelete(no , webRequest);
+			System.out.println("menu delete");
 		}
 		
 		mav.setViewName("sendJson");
@@ -67,6 +70,17 @@ public class JsonController {
 		return mav;
 	}
 	
+	private ModelAndView menuDelete(int no, WebRequest webRequest) {
+		ModelAndView mav = new ModelAndView();
+		boolean result = menuDao.deleteMenu(no);
+		Map m = new HashMap();
+		m.put("rst", result);
+		
+		String del=gson.toJson(m);
+		mav.addObject("json", del);
+		return mav;
+	}
+
 	private ModelAndView menuMinus(ArrayList<MenuVo> menuList, int no, WebRequest webRequest) {
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> map = new HashMap<>();

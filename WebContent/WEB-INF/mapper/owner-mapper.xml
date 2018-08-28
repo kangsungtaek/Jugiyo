@@ -7,6 +7,15 @@
 		insert into menu (no,name,price,store)
 		values(#{no},#{name},#{price},#{store})
 	</insert>
+	<!-- 파일추가 -->
+	<insert id="addAttach" parameterType="pro.vo.MenuAttachVo">
+		insert into menuattach values(menuattach_seq.nextval, #{uri}, #{name}, #{parent})
+	</insert>
+	<!-- 메뉴삭제 -->
+	<delete id="menuDelete">
+		delete from menu where no=${no}
+	</delete>
+
 	<select id="getSeq" resultType="java.lang.Integer">
 		select menu_seq.nextval from dual
 	</select>
@@ -20,7 +29,4 @@
 		resultType="pro.vo.MenuVo">
 		select * from menu where no = #{no}
 	</select>
-	<insert id="addAttach" parameterType="pro.vo.MenuAttachVo">
-		insert into menuattach values(menuattach_seq.nextval, #{uri}, #{name}, #{parent})
-	</insert>
 </mapper>

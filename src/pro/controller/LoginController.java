@@ -32,15 +32,16 @@ public class LoginController {
 	}
 
 	@PostMapping("/loginForm")
-		public ModelAndView LoginFormPostHandle(@RequestParam("id") String id, @RequestParam("password") String password,
+	public ModelAndView LoginFormPostHandle(@RequestParam("id") String id, @RequestParam("password") String password,
 			@RequestParam("section") String section, @RequestParam Map m, WebRequest req) { // id랑 password를 입력해서 넘겨줌
 	
-
+		System.out.println("[controller:login] parameters : " + id + "/" + password + "/" + section + "/" + m); 
 		ModelAndView mav = new ModelAndView();
 		//사장님 로그인 처리
 		if (section.equals("owner")) {
 			StoreVo vo = storeDao.login(m);
 			if(vo!=null) {
+				System.out.println("[controller:login] store : " + vo.toString());
 				req.setAttribute("login", vo, WebRequest.SCOPE_SESSION);
 				mav.setViewName("owner/index");
 				mav.addObject("owner");
@@ -56,8 +57,9 @@ public class LoginController {
 			// .equals(password) 맞으면(if-else) 어디로 보내야겠죠(index) 틀리면 다시하라고 보내야함
 
 			if (vo.getPassword().equals(password)) { // session에다가 vo를 올려주세요.
-				mav.setViewName("index");
+				mav.setViewName("/index");
 				req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
+				System.out.println("[controller:login] 로그온");
 			} else {
 				mav.setViewName("login/loginForm");
 			}
@@ -71,10 +73,11 @@ public class LoginController {
 	}
 
 	@PostMapping("/regForm")
-	public ModelAndView RegFormPostHandle(@ModelAttribute MemberVo member, @RequestParam("addr") String addr,@RequestParam("addr1") String addr1) {
+	public ModelAndView RegFormPostHandle(@ModelAttribute MemberVo member, @RequestParam("zonecode") int zonecode,
+			@RequestParam("addr") String addr,@RequestParam("addr1") String addr1) {
 		
 		if(addr != null || addr1 != null) {			
-			member.setAddress(addr+" "+addr1 );
+			member.setAddress(zonecode + "/" + addr+" "+addr1 );
 		}
 		System.out.println("[controller:reg] member : " + member);
 		ModelAndView mav = new ModelAndView();
