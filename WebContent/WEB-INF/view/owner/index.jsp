@@ -4,9 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-
-
-
 <!-- 주문 관리 드롭다운 + 주문 테이블 -->
 <div style="padding-top:50px;">
 
