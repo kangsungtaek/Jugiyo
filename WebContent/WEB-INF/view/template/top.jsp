@@ -57,7 +57,7 @@ a {
 .reg tr td span.attention_asterisk {color:#FF0000; padding-left:10px;}
 .reg tr td small.c {color:#FF0000; font-size:10px;}
 
-#wrap {margin:0 auto; width:100%;  margin-top:5%; }
+#wrap {margin:0 auto; width:100%;  margin-top:5%; text-align:center; }
 #wrap form {margin:0 auto; width:700px; margin-top:50px;}
 #wrap h1 {text-align:center;}
 #wrap ul.search_box {width:100%; height:100%;}
@@ -127,12 +127,7 @@ body, html {
     </c:choose>
   </div>
 
-  <!-- Navbar on small screens -->
-  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
-    <a href="/index" class="w3-bar-item w3-button" onclick="toggleFunction()">HOME</a>
-     <a href="/login/loginForm" class="w3-bar-item w3-button "><i class="fa fa-user"></i> 로그인</a>
-    <a href="/login/regForm" class="w3-bar-item w3-button w3-right w3-hover-red"><i class="fa fa-th"></i> 회원가입</a>
-  </div>
+
 </div>
 
 <div style="height: 50px;"></div>

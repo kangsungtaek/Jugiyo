@@ -26,23 +26,31 @@
 			</div><!--//id_login_wrap
         </form>	-->
 
- 	<form action="/login/loginForm" method="post" id="loginForm" >
 	<div class="w3-row" style="width:210px; padding:10px;">
- 		<h2 class="hide"> 로그인</h2>
-	    <div class="w3-bar w3-black">
-    		<button class="w3-bar-item w3-button tablink w3-red" name="section"value="member"  onclick="openCity(event,'London')">개인회원</button>
-    		<button class="w3-bar-item w3-button tablink" name="section" value="owner" onclick="openCity(event,'Paris')">사업자</button>
+ 		<h2 class="hide" style="text-align: center;"> 로그인</h2>
+	    <div class="w3-bar w3-black" style="text-align: center;">
+    		<button type="button" class="w3-bar-item w3-button tablink w3-red mode"  value="member">개인회원</button>
+    		<button type="button" class="w3-bar-item w3-button tablink mode" value="owner">사업자</button>
+
   		</div>
 	 </div>
+ 	<form action="/login/loginForm" method="post" id="loginForm" >
+			<input type="hidden" name="section" id="hs" value="member"/>
 			<input name="id" type="text" id="id" width="200px;" placeholder=" 아이디" >
 			<input name="password" type="password" id="password" width="200px;" placeholder=" 비밀번호" >
-			<button type="submit" >로그인</button>
+			<button type="submit" >로그인</button>    
 	</form>
-
 </div>
 
 <script>
-function openCity(evt, cityName) {
+$(".mode").on("click", function(){
+	console.log($(this).val());
+	$("#hs").val($(this).val());
+	$(".mode").removeClass("w3-red");
+	$(this).addClass("w3-red");
+});
+/*
+function openCity(evt) {
   var i, x, tablinks;
   x = document.getElementsByClassName("city");
   for (i = 0; i < x.length; i++) {
@@ -52,10 +60,11 @@ function openCity(evt, cityName) {
   for (i = 0; i < x.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
   }
-  document.getElementById(cityName).style.display = "block";
   evt.currentTarget.className += " w3-red";
 }
+*/
 </script>
+
 	
 <!--
    <div id="wrap" class="w3-panel w3-padding-64 w3-orange">
