@@ -34,5 +34,9 @@ public class MenuDao {
 	public int addMenuAttach(MenuAttachVo vo) {
 		return template.insert("owner.addAttach",vo);
 	}
-	
+	//메뉴삭제
+	public boolean deleteMenu(int no) {
+		int r = template.insert("owner.deleteMenu",no);
+		return r==1;
+	}
 }
