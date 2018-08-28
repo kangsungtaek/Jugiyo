@@ -135,7 +135,7 @@ textarea {
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <script>
-
+	// 결제수단 선택
 	function paymenSelect(target){
 		console.log();
 		if(target.id == "cardBtn"){
