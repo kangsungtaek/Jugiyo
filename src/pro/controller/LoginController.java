@@ -106,21 +106,6 @@ public class LoginController {
 		return mav;
 	}
 	/*================================*/
-
-	/*-------------------------------*/
-	
-	// 로그인 처리
-	/*------------
-	// 로그인 화면
-	@RequestMapping("/loginForm")
-	public String loginFormHandle(@RequestParam  Map map, WebRequest webRequest) {
-		MemberVo memberlog = loginDao.findById(map);
-		if (memberlog == null) {
-			
-		}
-	}
-	
-	//======================*/
 	
 	// 로그아웃
 	@RequestMapping("/logout")

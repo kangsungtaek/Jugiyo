@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
-<title>JUGIYO</title>
+<title>JUGIYO관리자</title>
 <style>
 input, button, select {
 	padding: 5px;
