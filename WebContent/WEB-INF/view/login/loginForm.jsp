@@ -27,16 +27,16 @@
         </form>	-->
 
  	<form action="/login/loginForm" method="post" id="loginForm" >
-	<div class="w3-row" style="width:210px; padding:10px;">
- 		<h2 class="hide"> 로그인</h2>
-	    <div class="w3-bar w3-black">
-    		<button class="w3-bar-item w3-button tablink w3-red" name="section" value="member" onclick="openCity(event,'London')">개인회원</button>
-    		<button class="w3-bar-item w3-button tablink" name="section" value="owner" onclick="openCity(event,'Paris')">사업자</button>
-  		</div>
-	 </div>
-			<input name="id" type="text" id="id" width="200px;" placeholder=" 아이디" >
-			<input name="password" type="password" id="password" width="200px;" placeholder=" 비밀번호" >
-			<button type="submit" >로그인</button>
+		<div class="w3-row" style="width:210px; padding:10px;">
+	 		<h2 class="hide"> 로그인</h2>
+		    <div class="w3-bar w3-black">
+	    		<button type="button" class="w3-bar-item w3-button tablink w3-red" name="section" value="member" onclick="openCity(event,'London')">개인회원</button>
+	    		<button type="button" class="w3-bar-item w3-button tablink" name="section" value="owner" onclick="openCity(event,'Paris')">사업자</button>
+	  		</div>
+		 </div>
+		 <input name="id" type="text" id="id" width="200px;" placeholder=" 아이디" >
+		 <input name="password" type="password" id="password" width="200px;" placeholder=" 비밀번호" >
+		 <button type="submit" value="로그인">로그인</button>
 	</form>
 
 </div>

@@ -4,15 +4,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
 	<div id="wrap">
 		<hr />
-		<h3>회원가입페이지</h3>
+		<h3 style="text-align:center; padding:20px 0 5px 0;">회원가입페이지</h3>
 		<form action="/login/regForm" name="regForm" method="post">
 			<table class="reg">
 				<tr>
 					<td class="n mInfo">회원정보</td> 
-					<td><small> ※ 아래의 빈 칸에 정확히 입력해 주세요 </small></td>  
+					<td><small style="color:#ff0000;">&nbsp;&nbsp; ※ 아래의 빈 칸에 정확히 입력해 주세요 </small></td>  
 				</tr>
 				<tr>
 					<td class="n"> 아이디</td>
@@ -39,9 +38,11 @@
 				</tr>
 				<tr>
 					<td class="n"> 주소</td>
-					<td><input type="text" placeholder="우편번호" id="zonecode" size="8" onclick="sample4_execDaumPostcode()" readonly />
-					<input type="text" name="addr" id="addr" class="size" placeholder=" 주소입력" size="50" readonly maxlength="100자 이내" onclick="sample4_execDaumPostcode()" /><br />
-					<input type="text" name="addr1" class="size" placeholder=" 상세주소입력" size="50" maxlength="100자 이내" /></td>
+					<td>
+						<input type="text" placeholder="우편번호" id="zonecode" size="8" onclick="sample4_execDaumPostcode()" readonly /><br />
+						<input type="text" name="addr" id="addr" class="size" placeholder=" 주소입력" size="50" readonly maxlength="100자 이내" onclick="sample4_execDaumPostcode()" /><br />
+						<input type="text" name="addr1" class="size" placeholder=" 상세주소입력" size="50" maxlength="100자 이내" />
+					</td>
 				</tr>
 				<tr>
 					<td class="n"> 핸드폰</td>

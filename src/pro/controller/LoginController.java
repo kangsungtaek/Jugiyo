@@ -47,7 +47,7 @@ public class LoginController {
 			}
 		}
 		
-		//else{}안으로 큰형님꺼 로그인 처리
+		//else{}안으로 로그인 처리
 		else {
 			// 로그인 처리 : 아이디가 있는지 보고, 비밀번호가 맞는지 보고
 			// db : sql문 : select * from member where id=#{id} -> 반환타입: vo
