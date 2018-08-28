@@ -6,7 +6,7 @@
 <!-- 메뉴bar에 있는 dropdown -->
 	<div class="w3-bar w3-light-gray w3-bottombar">
 		<div class="w3-dropdown-hover">
-			<button class="w3-button w3-light-gray">주문관리</button>
+			<button class="w3-button w3-light-gray" id="orederAdmin">주문관리</button>
 			<div class="w3-dropdown-content w3-bar-block w3-border">
 				<a href="/owner/index" class="w3-bar-item w3-button">지금 도착한 주문</a> <a
 					href="/owner/today" class="w3-bar-item w3-button">주문현황</a>
@@ -48,12 +48,6 @@
 						console.log(ret.data);
 						var obj = JSON.parse(ret.data);
 						switch (obj.mode) {
-						case "login":
-							loginhandle(obj);
-							break;
-						case "message":
-							messageHandle(obj);
-							break;
 						case "order":
 							orderHandle(obj);
 							break;
@@ -90,6 +84,8 @@
 					}
 					
 					function orderHandle(obj){
-						
+						var html = "<span class=\"w3-tag w3-blue\">New!</span>";
+						$("#orederAdmin").append(html);
+							
 					}
 				</script>
