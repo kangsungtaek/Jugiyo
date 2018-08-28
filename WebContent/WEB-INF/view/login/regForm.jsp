@@ -3,16 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
 	<div id="wrap">
 		<hr />
-		<h3>회원가입페이지</h3>
+		<h3 style="text-align:center; padding-top:15px;">회원가입페이지</h3>
 		<form action="/login/regForm" name="regForm" method="post">
 			<table class="reg">
 				<tr>
 					<td class="n mInfo">회원정보</td> 
-					<td><small> ※ 아래의 빈 칸에 정확히 입력해 주세요 </small></td>  
+					<td><small style="margin-left:10px;"> ※ 아래의 빈 칸에 정확히 입력해 주세요 </small></td>  
 				</tr>
 				<tr>
 					<td class="n"> 아이디</td>

@@ -2,12 +2,16 @@ package pro.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,16 +30,16 @@ public class LoginController {
 	@Autowired
 	StoreDao storeDao;
 
+
 	@GetMapping({ "/loginForm" })
 	public String LoginFormGetHandle() {
 		return "login/loginForm";
 	}
 
 	@PostMapping("/loginForm")
-		public ModelAndView LoginFormPostHandle(@RequestParam("id") String id, @RequestParam("password") String password,
-			@RequestParam("section") String section, @RequestParam Map m, WebRequest req) { // id랑 password를 입력해서 넘겨줌
+		public ModelAndView LoginFormPostHandle(@RequestParam("section") String section, @RequestParam Map m, WebRequest req) { // id랑 password를 입력해서 넘겨줌
 	
-
+		System.out.println("[controller:login] map : " + m);
 		ModelAndView mav = new ModelAndView();
 		//사장님 로그인 처리
 		if (section.equals("owner")) {
@@ -51,11 +55,12 @@ public class LoginController {
 		else {
 			// 로그인 처리 : 아이디가 있는지 보고, 비밀번호가 맞는지 보고
 			// db : sql문 : select * from member where id=#{id} -> 반환타입: vo
-			MemberVo vo = memberDao.findById(id);
+			
+			MemberVo vo = memberDao.findById(m);
 			System.out.println("[controller:login] vo : " + vo.toString());
 			// .equals(password) 맞으면(if-else) 어디로 보내야겠죠(index) 틀리면 다시하라고 보내야함
 
-			if (vo.getPassword().equals(password)) { // session에다가 vo를 올려주세요.
+			if (vo.getPassword().equals(m.get("password"))) { // session에다가 vo를 올려주세요.
 				mav.setViewName("index");
 				req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
 			} else {
@@ -69,7 +74,7 @@ public class LoginController {
 	public String RegFormGetHandle() {
 		return "login/regForm";
 	}
-
+	
 	@PostMapping("/regForm")
 	public ModelAndView RegFormPostHandle(@ModelAttribute MemberVo member, @RequestParam("addr") String addr,@RequestParam("addr1") String addr1) {
 		
@@ -97,4 +102,30 @@ public class LoginController {
 		}
 		return mav;
 	}
+	/*================================*/
+
+	/*-------------------------------*/
+	
+	// 로그인 처리
+	/*------------
+	// 로그인 화면
+	@RequestMapping("/loginForm")
+	public String loginFormHandle(@RequestParam  Map map, WebRequest webRequest) {
+		MemberVo memberlog = loginDao.findById(map);
+		if (memberlog == null) {
+			
+		}
+	}
+	
+	//======================*/
+	
+	// 로그아웃
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		//session.setAttribute("userLoginInfo", null);
+		session.setAttribute("vo", null);
+		return "/index";
+	}
+
+	
 }

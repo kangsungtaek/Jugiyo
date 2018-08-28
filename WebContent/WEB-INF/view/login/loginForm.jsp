@@ -30,7 +30,7 @@
 	<div class="w3-row" style="width:210px; padding:10px;">
  		<h2 class="hide"> 로그인</h2>
 	    <div class="w3-bar w3-black">
-    		<button class="w3-bar-item w3-button tablink w3-red" name="section" value="member" onclick="openCity(event,'London')">개인회원</button>
+    		<button class="w3-bar-item w3-button tablink w3-red" name="section" value="member" onclick="openCity(event,'London')" href="location">개인회원</button>
     		<button class="w3-bar-item w3-button tablink" name="section" value="owner" onclick="openCity(event,'Paris')">사업자</button>
   		</div>
 	 </div>
@@ -40,7 +40,6 @@
 	</form>
 
 </div>
-
 <script>
 function openCity(evt, cityName) {
   var i, x, tablinks;
