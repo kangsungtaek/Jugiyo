@@ -12,9 +12,13 @@
 		insert into menuattach values(menuattach_seq.nextval, #{uri}, #{name}, #{parent})
 	</insert>
 	<!-- 메뉴삭제 -->
-	<delete id="menuDelete">
-		delete from menu where no=${no}
+	<delete id="menuDelete" parameterType="java.lang.Integer">
+		delete from menu where no=#{no}
 	</delete>
+	<!-- 메뉴수정 -->
+	<update id="menuUpdate" parameterType="java.lang.Integer">
+		update menu set name=#{name}, price=#{price} where no=#{no}
+	</update>
 
 	<select id="getSeq" resultType="java.lang.Integer">
 		select menu_seq.nextval from dual

@@ -10,7 +10,7 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-          ['후라이드 치킨',     4],
+          ['후라이드 치킨',     ],
           ['양념치킨',      3],
           ['파닭',  2],
         ]);

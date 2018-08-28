@@ -2,6 +2,7 @@ package pro.controller;
 
 import java.util.List;
 
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,10 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mongodb.client.FindIterable;
+
 import pro.dao.MenuDao;
+import pro.dao.OrderDao;
 import pro.dao.StoreDao;
 import pro.service.UploadService;
 import pro.vo.MenuAttachVo;
@@ -32,6 +36,8 @@ public class OwnerController {
 	UploadService uploadService;
 	@Autowired
 	StoreDao storeDao;
+	@Autowired
+	OrderDao orderDao;
 	
 	
 	//사장님 페이지
@@ -84,8 +90,6 @@ public class OwnerController {
 		return mav;
 	}
 	//현재 등록 되어 있는 메뉴들 전부다 보여주는거
-	
-
 	@GetMapping("/addedmenu")
 	public ModelAndView addedMenuHandle02(WebRequest webRequest) {
 		StoreVo vo = (StoreVo)webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
@@ -97,10 +101,28 @@ public class OwnerController {
 		
 		return mav;
 	}
+	//메뉴수정페이지
+		@GetMapping("/updatemenu")
+		public ModelAndView updateMenu(@RequestParam("no") int no, WebRequest webRequest) {
+			StoreVo vo = (StoreVo)webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
+			List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
+			
+			ModelAndView mav = new ModelAndView();
+			
+			
+			return mav;
+		}
 	
 	//메뉴통계
 	@GetMapping("/menustats")
-	public ModelAndView menuStatsHandle01() {
+	public ModelAndView menuStatsHandle01(WebRequest webRequest) {
+		StoreVo vo = (StoreVo)webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
+		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
+		System.out.println(menuDao.getMenuList(vo.getNo()));
+		
+		System.out.println();
+		 
+		
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}

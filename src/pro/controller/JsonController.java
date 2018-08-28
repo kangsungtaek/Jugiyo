@@ -5,12 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -69,7 +67,7 @@ public class JsonController {
 
 		return mav;
 	}
-	
+	//메뉴삭제
 	private ModelAndView menuDelete(int no, WebRequest webRequest) {
 		ModelAndView mav = new ModelAndView();
 		boolean result = menuDao.deleteMenu(no);

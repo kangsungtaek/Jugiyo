@@ -36,7 +36,11 @@ public class MenuDao {
 	}
 	//메뉴삭제
 	public boolean deleteMenu(int no) {
-		int r = template.insert("owner.deleteMenu",no);
+		int r = template.insert("owner.menuDelete",no);
 		return r==1;
+	}
+	//메뉴수정
+	public int updateMenu(MenuVo vo) {
+		return template.update("owner.menuUpdate",vo);
 	}
 }

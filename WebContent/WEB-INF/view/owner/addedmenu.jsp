@@ -18,7 +18,7 @@
 							<span class="w3-large" style="padding-left: 10px">${menu.name }</span><br> <span style="padding-left: 10px">${menu.price }</span>
 									<p class="w3-small">
 										<button type="button" id="del" onclick="menuDelete(this)">삭제</button>
-											<button type="button">수정</button>
+											<button type="button" onclick="menuUpdate(this)">수정</button>
 									</p>
 									
 						</div></li>
@@ -48,6 +48,7 @@
 	//삭제버튼 스크립트 처리
 	function menuDelete(target){
 		 var no = $(target).closest('li').attr('id');
+		 var xhr = new XMLHttpRequest();
 		 xhr.open("get", "/sendJson?no=" + no+"&mode=menuDelete", true);
          xhr.onreadystatechange = function() {
             if (this.readyState == 4) {
@@ -60,6 +61,10 @@
 	         }
 	      xhr.send();
 	   };
-	  
+	  //수정버튼 스크립트처리
+	  function menuUpdate(target){
+		  var no = $(target).closest('li').attr('id');
+		  location.href="/owner/updatemenu?no="+no;
+	  }
 	
 </script>
