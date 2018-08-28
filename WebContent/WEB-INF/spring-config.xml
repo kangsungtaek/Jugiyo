@@ -18,18 +18,6 @@
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
 	
-	<!-- intercepor설정 -->
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/member/*"/>
-			<bean class="pro.filter.LoginInterceptor"/>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/owner/*"/>
-			<bean class="pro.filter.LoginInterceptor"/>
-		</mvc:interceptor>
-	</mvc:interceptors>
-	
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">

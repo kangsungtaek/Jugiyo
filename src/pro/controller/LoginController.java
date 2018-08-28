@@ -41,7 +41,10 @@ public class LoginController {
 		if (section.equals("owner")) {
 			StoreVo vo = storeDao.login(m);
 			if(vo!=null) {
+
+				System.out.println("[controller:login] store : " + vo.toString());
 				req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
+
 				mav.setViewName("owner/index");
 				mav.addObject("owner");
 			}
@@ -72,10 +75,11 @@ public class LoginController {
 	}
 
 	@PostMapping("/regForm")
-	public ModelAndView RegFormPostHandle(@ModelAttribute MemberVo member, @RequestParam("addr") String addr,@RequestParam("addr1") String addr1) {
+	public ModelAndView RegFormPostHandle(@ModelAttribute MemberVo member, @RequestParam("zonecode") int zonecode,
+			@RequestParam("addr") String addr,@RequestParam("addr1") String addr1) {
 		
 		if(addr != null || addr1 != null) {			
-			member.setAddress(addr+" "+addr1 );
+			member.setAddress(zonecode + "/" + addr+" "+addr1 );
 		}
 		System.out.println("[controller:reg] member : " + member);
 		ModelAndView mav = new ModelAndView();
