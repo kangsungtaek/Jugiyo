@@ -23,6 +23,7 @@ public class OrderService {
 	HashMap<String, WebSocketSession> webSessions;
 	
 	public void sendToOne(Map data, String target) {
+		System.out.println("sendToOne.."+ webSessions.containsKey(target));
 		TextMessage msg = new TextMessage(gson.toJson(data));
 		if (webSessions.containsKey(target)) {
 			try {

@@ -97,15 +97,15 @@ public class OrderController {
 	
 	// 주문완료 처리 
 	@PostMapping("/ordered")
-	public ModelAndView orderedHandle2(@RequestParam Map<String,Object> map, WebRequest req) {
+	public ModelAndView orderedHandle2(@RequestParam Map map, WebRequest req) {
 		
 		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
-		MemberVo mVo = (MemberVo)req.getAttribute("login", WebRequest.SCOPE_SESSION);
+		MemberVo mVo = (MemberVo)req.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		String id = mVo.getId();
 		
 		// map = 배달주소, 휴대폰번호,  주문시요청사항, 결제수단(현금or카드), +@ 할인 
 		System.out.println(map);
-		StoreVo svo = storeDao.getStore((int) map.get("storeNo"));
+		StoreVo svo = storeDao.getStore( Integer.parseInt((String) map.get("storeNo")));
 		
 		Map<String, Object> data = new LinkedHashMap();
 	      data.put("userId", id);
@@ -117,7 +117,7 @@ public class OrderController {
 	      orderDao.insertLog(data);
 	      
 	      ModelAndView mav = new ModelAndView();
-	      mav.setViewName("mian");
+	      mav.setViewName("main");
 	      
 	      Map map2 = new HashMap();
 	      	map2.put("user", mVo);
