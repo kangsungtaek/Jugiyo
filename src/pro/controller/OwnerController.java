@@ -25,6 +25,7 @@ import pro.vo.LogVo;
 import pro.vo.MenuAttachVo;
 import pro.vo.MenuVo;
 import pro.vo.MultiMenuVo;
+import pro.vo.ReviewVo;
 import pro.vo.StoreVo;
 
 @Controller
@@ -151,6 +152,19 @@ public class OwnerController {
 	@GetMapping("/salesstats")
 	public ModelAndView salesStatsHandle01() {
 		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+	
+	//리뷰등록
+	@RequestMapping("/review")
+	public ModelAndView reviewHandle(WebRequest req) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("owner/review");
+		
+		StoreVo store = (StoreVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
+		List<ReviewVo> reviews = storeDao.findReview(store.getNo());
+		
+		mav.addObject("reviews", reviews);
 		return mav;
 	}
 }

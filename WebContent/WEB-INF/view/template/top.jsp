@@ -116,13 +116,21 @@ body, html {
     </a>
     <a href="/index" class="w3-bar-item w3-button">HOME</a>
     <c:choose>
-    	<c:when test="${ empty sessionScope.vo }">
+    	<c:when test="${ empty sessionScope.vo && empty sessionScope.login }">
     		<a href="/login/loginForm" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> 로그인</a>
     		<a href="/login/regForm" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"><i class="fa fa-th"></i> 회원가입</a>
     	</c:when>
     	<c:otherwise>
-    		<a href="/member/memInfo" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> 내정보</a>
-    		<a href="/login/logout" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"><i class="fa fa-th"></i> 로그아웃</a>
+    		<c:choose>
+    			<c:when test="${ empty sessionScope.login }">
+	    			<a href="/member/memInfo" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> 내정보</a>
+    				<a href="/login/logout" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"><i class="fa fa-th"></i> 로그아웃</a>
+    			</c:when>
+    			<c:otherwise>
+	    			<a href="/owner/index" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> 내가게</a>
+    				<a href="/owner/logout" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"><i class="fa fa-th"></i> 로그아웃</a>	
+    			</c:otherwise>
+    		</c:choose>
     	</c:otherwise>
     </c:choose>  
   </div>
