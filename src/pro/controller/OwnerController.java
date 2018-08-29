@@ -1,6 +1,7 @@
 package pro.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -118,17 +119,28 @@ public class OwnerController {
 		return mav;
 	}
 	
-	//리뷰등록
+	//리뷰관리창
 	@RequestMapping("/review")
 	public ModelAndView reviewHandle(WebRequest req) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("owner/review");
 		
-		StoreVo store = (StoreVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
+		StoreVo store = (StoreVo) req.getAttribute("login", WebRequest.SCOPE_SESSION);
+		System.out.println("[controller:owner] storeNO : " + store.getNo());
+		
 		List<ReviewVo> reviews = storeDao.findReview(store.getNo());
+		System.out.println("[controller:owner] review : " + reviews);
 		
 		mav.addObject("reviews", reviews);
 		return mav;
+	}
+	
+	//리뷰의 댓글등록
+	@RequestMapping("/replied")
+	public String repliedHandle(@RequestParam Map<String, String> map) {
+		System.out.println("[controller:owner] replied : " + map);
+		storeDao.updateReply(map);
+		return "redirect:/owner/review";
 	}
 }
 

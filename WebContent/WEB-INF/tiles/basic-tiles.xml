@@ -115,7 +115,7 @@
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
 	</definition>
 	<!-- 사장님 리뷰확인페이지 -->
-	<definition name="owner/index" template="/WEB-INF/view/layout/layoutowner.jsp">
+	<definition name="owner/review" template="/WEB-INF/view/layout/layoutowner.jsp">
 		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
 		<put-attribute name="top2" value="/WEB-INF/view/template/navbarowner.jsp" />
 		<put-attribute name="content" value="/WEB-INF/view/owner/review.jsp" />
