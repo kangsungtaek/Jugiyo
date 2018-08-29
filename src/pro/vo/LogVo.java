@@ -4,46 +4,53 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class LogVo {	
-	String id;
-	String store; //음식점 no
-	int type; //음식점의 타입
-	String[] menu;
-	Date date;
-	
-	public String getId() {
-		return id;
+	String userId;
+	String storeNo; //음식점 no
+	String storeName;
+	int storeType; //음식점의 타입
+	String[] orderList;
+	Date orderdate;
+	public String getUserId() {
+		return userId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getStore() {
-		return store;
+	public String getStoreNo() {
+		return storeNo;
 	}
-	public void setStore(String store) {
-		this.store = store;
+	public void setStoreNo(String storeNo) {
+		this.storeNo = storeNo;
 	}
-	public int getType() {
-		return type;
+	public String getStoreName() {
+		return storeName;
 	}
-	public void setType(int type) {
-		this.type = type;
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
 	}
-	public String[] getMenu() {
-		return menu;
+	public int getStoreType() {
+		return storeType;
 	}
-	public void setMenu(String[] menu) {
-		this.menu = menu;
+	public void setStoreType(int storeType) {
+		this.storeType = storeType;
 	}
-	public Date getDate() {
-		return date;
+	public String[] getOrderList() {
+		return orderList;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setOrderList(String[] orderList) {
+		this.orderList = orderList;
+	}
+	public Date getOrderdate() {
+		return orderdate;
+	}
+	public void setOrderdate(Date orderdate) {
+		this.orderdate = orderdate;
 	}
 	
 	@Override
 	public String toString() {
-		return "LogVo [id=" + id + ", store=" + store + ", type=" + type + ", menu=" + Arrays.toString(menu) + ", date=" + date + "]";
+		return "LogVo [userId=" + userId + ", storeNo=" + storeNo + ", storeName=" + storeName + ", storeType="
+				+ storeType + ", orderList=" + Arrays.toString(orderList) + ", orderdate=" + orderdate + "]";
 	}
-	
+
 }

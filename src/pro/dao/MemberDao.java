@@ -39,13 +39,18 @@ public class MemberDao {
 	}
 	//주문내역불러오기
 	public List<LogVo> readAllById(String id) {
-		Query query = new BasicQuery(new Document().append("_id", id));
+		Query query = new BasicQuery(new Document().append("userId", id));
 		return mongoTemplate.find(query, LogVo.class, "log");
 	}
 	
 	//내집주소 등록
 	public void addAddr(Map map) {
 		template.update("member.addAddr", map);
+	}
+	
+	//리뷰등록
+	public void addReview(Map map) {
+		mongoTemplate.insert(map, "review");
 	}
 
 }
