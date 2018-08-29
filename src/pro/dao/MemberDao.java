@@ -23,8 +23,8 @@ public class MemberDao {
 	SqlSessionTemplate template;
 	
 	//로그인에 필요한 함수, 아이디를 통해서 vo를 불러오는 작업
-	public MemberVo findById(String id) {
-		return template.selectOne("member.findById", id);
+	public MemberVo findById(Map map) {
+		return template.selectOne("member.findById", map);
 		//member가 mapper이름 findById는 sql문 이름
 	}
 	
