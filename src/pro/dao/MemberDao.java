@@ -47,5 +47,9 @@ public class MemberDao {
 	public void addAddr(Map map) {
 		template.update("member.addAddr", map);
 	}
+	
+	public void updatePoint(Map map) {
+		template.update("member.updatePoint", map);
+	}
 
 }

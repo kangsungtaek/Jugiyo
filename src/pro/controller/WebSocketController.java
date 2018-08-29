@@ -33,13 +33,14 @@ public class WebSocketController extends TextWebSocketHandler {
 	
 	@Autowired
 	OrderService orderService;
-
+ 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		Map<String, Object> attrs = session.getAttributes();
 		System.out.println(attrs);
-		StoreVo svo = (StoreVo)session.getAttributes().get("login");
+		StoreVo svo = (StoreVo)session.getAttributes().get("vo");
 		webSessions.put(svo.getId(), session);
+		System.out.println(webSessions);
 	}
 
 	@Override

@@ -52,32 +52,8 @@
 			break;
 		}
 	};
-
-	function messageHandle(obj) {
-		var id = "a_" + idx;
-		idx++;
-		var html = "<span class="w3-tag w3-blue">New!</span>";
-
-		document.getElementById("alertLogin").innerHTML += html;
-		window.setInterval(function() {
-			document.getElementById(id).innerHTML = "";
-		}, 5000);
-	}
-
-	function loginhandle(obj) {
-		var html = "<span id=\""+ obj.user.id + "\">" + obj.user.id
-				+ " <small>" + obj.user.name + "/" + obj.user.dname + " "
-				+ obj.user.pname;
-		html += "로그인함.</small></span>";
-		document.getElementById("alertLogin").innerHTML += html;
-		window.setInterval(function() {
-			document.getElementById(obj.user.id).innerHTML = "";
-		}, 3000);
-	}
-
 	function orderHandle(obj) {
 		var html = "<span class=\"w3-tag w3-blue\">New!</span>";
 		$("#orederAdmin").append(html);
-
 	}
 </script>

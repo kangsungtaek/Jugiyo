@@ -114,12 +114,12 @@ textarea {
 						<li id="${orderList.no}">
 							<div class='w3-row'>${orderList.name }</div>
 							<div class='w3-left-align'>
-								<span id="price">${orderList.price} </span> <span id="count">${orderList.cnt }</span>
+								<span id="price">${orderList.price * orderList.cnt } </span> <span id="count">${orderList.cnt }</span>
 							</div>
 						</li>
 					</c:forEach>
 				</ul>
-			
+			총 가격 : <span id="totalPrice"> ${sessionScope.totalPrice}</span>
 
 			</div>
 		</div>
@@ -175,7 +175,7 @@ textarea {
 					.replace("w3-red", "w3-black");
 		}
 	}
-	/*
+	
 	function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -204,19 +204,10 @@ textarea {
                     fullRoadAddr += extraRoadAddr;
                 }
 
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                //document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
-                //document.getElementById('sample4_roadAddress').value = fullRoadAddr;
-                //document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
-
-                
                 var addr = data.zonecode + "/" + fullRoadAddr;
                 document.getElementById("addr").value = addr;
-                console.log(addr);
-              // location.href="/getAddr?addr=" + addr;
-                document.getElementById("f").submit();
             }
         }).open();
     }
-	*/
+	
 </script>

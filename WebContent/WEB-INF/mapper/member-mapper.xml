@@ -19,4 +19,8 @@
 		update member set address=#{addr} where id=#{id}
 	</update>
 	
+	<update id="updatePoint" parameterType="java.util.Map">
+		update member set point = point + #{point} where id = #{id}
+	</update>
+	
 </mapper>
