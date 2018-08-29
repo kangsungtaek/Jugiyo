@@ -42,6 +42,12 @@ public class OwnerController {
 		return "owner/index";
 	}
 	
+	@RequestMapping("/logout")
+	public String logoutHandle(WebRequest req) {
+		req.setAttribute("login", null, WebRequest.SCOPE_SESSION);
+		return "/index";
+	}
+	
 	//메뉴추가 컨트롤러 만드는중
 	@GetMapping("/addmenu")
 	public String addMenuHandle01() {
