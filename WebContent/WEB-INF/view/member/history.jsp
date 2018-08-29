@@ -14,28 +14,33 @@
 </div>
 
 
-<table class="w3-table-all">
-	<thead>
+<table class="w3-table-all w3-centered" >
+	<thead style="height: 40px;">
 		<tr class="w3-red">
-			<td></td>
-			<td>음식점</td>
-			<td>주문한 메뉴</td>
-			<td>주문날짜</td>
-			<td colspan="2">비고</td>
+			<td style="width:25px;"></td>
+			<td style="width:100px;">음식점</td>
+			<td style="width:200px;">주문한 메뉴</td>
+			<td style="width:80px; ">주문날짜</td>
+			<td style="width:50px;">비고</td>
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach var="log" items="${ list }">
+		<c:forEach var="log" items="${ list }" varStatus="vs">
 			<tr>
-				<td></td>
-				<td><a href="${pageContext.request.localAddr}/order/order">${ log.store }</a></td>
-				<td>
-				${ log.menu[0] }
-				<c:if test="${ fn:length(log.menu) > 1 }">외 ${ fn:length(log.menu) - 1 }건</c:if>
+				<td style="vertical-align: middle;">${ vs.count }</td>
+				<td style="vertical-align: middle;"><a href="${pageContext.request.localAddr}/order/order?storeNo=${log.storeNo}">${ log.storeName }</a></td>
+				<td style="vertical-align: middle;">		
+					${ log.orderList[0] }  			
+					<c:if test="${ fn:length(log.orderList) > 1 }">
+						외  ${ fn:length(log.orderList) - 1 } 
+					</c:if>
+						
 				</td>
-				<td>${ log.date }</td>
-				<td><button onclick="location.href='writeReview'">리뷰작성하기</button></td>
-				<td><button onclick="location.href=''">다시주문하기</button></td>
+				<td style="vertical-align: middle;">${ log.orderdate }</td>
+				<td>
+				<button class="w3-btn w3-white w3-border w3-border-grey w3-round-large" onclick="location.href='writeReview?no='+${log.storeNo}">리뷰작성하기</button><br/>
+				<button class="w3-btn w3-white w3-border w3-border-grey w3-round-large" onclick="location.href=''">다시주문하기</button>
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-
+	
 	<!-- 주문페이지 -->
 	<definition name="order/order" template="/WEB-INF/view/layout/layout.jsp">
 		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
@@ -44,6 +44,13 @@
 		<put-attribute name="content" value="/WEB-INF/view/login/regForm.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
 	</definition>
+	
+	<!-- 회원가입 완료페이지 -->
+	<definition name="login/reg" template="/WEB-INF/view/layout/layout.jsp">
+		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
+		<put-attribute name="content" value="/WEB-INF/view/login/reg.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
+	</definition>
 
 	<!-- 회원정보페이지 -->
 	<definition name="member/memInfo" template="/WEB-INF/view/layout/layout.jsp">
@@ -62,6 +69,7 @@
 	<!-- 리뷰작성 페이지 -->
 	<definition name="member/writeReview" template="/WEB-INF/view/layout/layout.jsp">
 		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
+		<put-attribute name="content" value="/WEB-INF/view/member/writeReview.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
 	</definition>
 	<!-- 사장님 메뉴추가 페이지 -->
@@ -70,15 +78,15 @@
 		<put-attribute name="top2" value="/WEB-INF/view/template/navbarowner.jsp" />
 		<put-attribute name="content" value="/WEB-INF/view/owner/addmenu.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
-</definition>
-<!-- 사장님 등록되어있는 메뉴 페이지 -->
+	</definition>
+	<!-- 사장님 등록되어있는 메뉴 페이지 -->
 	<definition name="owner/addedmenu" template="/WEB-INF/view/layout/layoutowner.jsp">
 		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
 		<put-attribute name="top2" value="/WEB-INF/view/template/navbarowner.jsp" />
 		<put-attribute name="content" value="/WEB-INF/view/owner/addedmenu.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
-</definition>
-<!-- 사장님 index페이지 -->
+	</definition>
+	<!-- 사장님 index페이지 -->
 	<definition name="owner/index" template="/WEB-INF/view/layout/layoutowner.jsp">
 		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
 		<put-attribute name="top2" value="/WEB-INF/view/template/navbarowner.jsp" />
@@ -100,19 +108,26 @@
 		<put-attribute name="top2" value="/WEB-INF/view/template/navbarowner.jsp" />
 		<put-attribute name="content" value="/WEB-INF/view/owner/salesstats.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
-</definition>
-<!-- 사장님 통계페이지2 -->
+	</definition>
+	<!-- 사장님 통계페이지2 -->
 	<definition name="owner/menustats" template="/WEB-INF/view/layout/layoutowner.jsp">
 		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
 		<put-attribute name="top2" value="/WEB-INF/view/template/navbarowner.jsp" />
 		<put-attribute name="content" value="/WEB-INF/view/owner/menustats.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
-</definition>
-<!-- 사장님 오늘 주문 내역 전부 보여주는 페이지 -->
+	</definition>
+	<!-- 사장님 오늘 주문 내역 전부 보여주는 페이지 -->
 	<definition name="owner/today" template="/WEB-INF/view/layout/layoutowner.jsp">
 		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
 		<put-attribute name="top2" value="/WEB-INF/view/template/navbarowner.jsp" />
 		<put-attribute name="content" value="/WEB-INF/view/owner/today.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
-</definition>
+	</definition>
+	<!-- 사장님 리뷰확인페이지 -->
+	<definition name="owner/index" template="/WEB-INF/view/layout/layoutowner.jsp">
+		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
+		<put-attribute name="top2" value="/WEB-INF/view/template/navbarowner.jsp" />
+		<put-attribute name="content" value="/WEB-INF/view/owner/review.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
+	</definition>
 </tiles-definitions>
