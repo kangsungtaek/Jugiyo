@@ -36,47 +36,47 @@ public class JsonController {
 	@ResponseBody
 	public ModelAndView JsonController(@RequestParam int no, String mode, WebRequest webRequest) {
 		ModelAndView mav = null;
-		
+
 		ArrayList<MenuVo> menuList = (ArrayList<MenuVo>) webRequest.getAttribute("orderList", WebRequest.SCOPE_SESSION);
 
 		if (menuList == null) {
 			menuList = new ArrayList<MenuVo>();
 		}
-		
-		switch(mode) {
+
+		switch (mode) {
 		case "add":
-			mav = menuAdd(menuList,no,webRequest);
+			mav = menuAdd(menuList, no, webRequest);
 			System.out.println("menu add");
 			break;
 		case "remove":
-			mav = menuRemove(menuList,no,webRequest);
+			mav = menuRemove(menuList, no, webRequest);
 			System.out.println("menu remove");
 			break;
 		case "plus":
-			mav = menuPlus(menuList,no,webRequest);
+			mav = menuPlus(menuList, no, webRequest);
 			System.out.println("menu plus");
 			break;
 		case "minus":
-			mav = menuMinus(menuList,no,webRequest);
+			mav = menuMinus(menuList, no, webRequest);
 			System.out.println("menu minus");
 			break;
 		case "menuDelete":
-			mav = menuDelete(no , webRequest);
+			mav = menuDelete(no, webRequest);
 			System.out.println("menu delete");
 		}
-		
+
 		mav.setViewName("sendJson");
 
 		return mav;
 	}
-	
+
 	private ModelAndView menuDelete(int no, WebRequest webRequest) {
 		ModelAndView mav = new ModelAndView();
 		boolean result = menuDao.deleteMenu(no);
 		Map m = new HashMap();
 		m.put("rst", result);
-		
-		String del=gson.toJson(m);
+
+		String del = gson.toJson(m);
 		mav.addObject("json", del);
 		return mav;
 	}
@@ -86,27 +86,28 @@ public class JsonController {
 		Map<String, Object> map = new HashMap<>();
 		boolean result = false;
 		int price = 0;
+		int totalPrice = 0;
 		for (MenuVo mVo : menuList) {
 			if (mVo.getNo() == no) {
-				if(mVo.getCnt() >= 2) {
+				if (mVo.getCnt() >= 2) {
 					mVo.setCnt(mVo.getCnt() - 1);
 					price = mVo.getCnt() * mVo.getPrice();
 					map.put("menu", mVo);
-					result =true;
-					break;
+					result = true;
 				}
 			}
+			totalPrice += (mVo.getPrice() * mVo.getCnt());
 		}
-		
+
 		webRequest.setAttribute("orderList", menuList, WebRequest.SCOPE_SESSION);
-		
-		
+		webRequest.setAttribute("totalPrice", totalPrice, WebRequest.SCOPE_SESSION);
+
 		map.put("result", result);
 		map.put("price", price);
+		map.put("totalPrice", totalPrice);
 		String aa = gson.toJson(map);
 		mav.addObject("json", aa);
-		
-		
+
 		return mav;
 	}
 
@@ -115,24 +116,26 @@ public class JsonController {
 		Map<String, Object> map = new HashMap<>();
 		boolean result = false;
 		int price = 0;
+		int totalPrice = 0;
 		for (MenuVo mVo : menuList) {
 			if (mVo.getNo() == no) {
 				mVo.setCnt(mVo.getCnt() + 1);
 				price = mVo.getCnt() * mVo.getPrice();
 				map.put("menu", mVo);
-				result =true;
-				break;
+				result = true;
 			}
+			totalPrice += (mVo.getPrice() * mVo.getCnt());
 		}
-		
+
 		webRequest.setAttribute("orderList", menuList, WebRequest.SCOPE_SESSION);
-		
-	
+		webRequest.setAttribute("totalPrice", totalPrice, WebRequest.SCOPE_SESSION);
+
 		map.put("result", result);
 		map.put("price", price);
+		map.put("totalPrice", totalPrice);
 		String aa = gson.toJson(map);
 		mav.addObject("json", aa);
-		
+
 		return mav;
 	}
 
@@ -140,31 +143,38 @@ public class JsonController {
 		Map<String, Object> map = new HashMap<>();
 		ModelAndView mav = new ModelAndView();
 		boolean result = false;
-		for(MenuVo mVo : menuList) {
-			if( mVo.getNo() == no) {
+		int totalPrice = 0;
+
+		for (MenuVo mVo : menuList) {
+			if (mVo.getNo() == no) {
 				menuList.remove(mVo);
-				result =true;
+				result = true;
 				break;
 			}
 		}
-		
+
+		for (MenuVo mVo : menuList) {
+			totalPrice += (mVo.getPrice() * mVo.getCnt());
+		}
 		webRequest.setAttribute("orderList", menuList, WebRequest.SCOPE_SESSION);
-		
-		
+		webRequest.setAttribute("totalPrice", totalPrice, WebRequest.SCOPE_SESSION);
+
+		map.put("totalPrice", totalPrice);
 		map.put("result", result);
 		String aa = gson.toJson(map);
 		mav.addObject("json", aa);
-		
-		
+
 		return mav;
-		
+
 	}
 
 	private ModelAndView menuAdd(ArrayList<MenuVo> menuList, int no, WebRequest webRequest) {
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> map = new HashMap<>();
+
 		boolean overLapCheck = false;
 		int price = 0;
+		int totalPrice = 0;
 		for (MenuVo mVo : menuList) {
 			if (mVo.getNo() == no) {
 				overLapCheck = true;
@@ -173,27 +183,29 @@ public class JsonController {
 				map.put("price", price);
 				map.put("menu", mVo);
 			}
+			totalPrice += (mVo.getPrice() * mVo.getCnt());
 		}
-	
+
 		if (overLapCheck) {
 			map.put("overLap", true);
-			
-			
+
 		} else {
 			map.put("overLap", false);
 			MenuVo vo = menuDao.getMenu(no);
 			vo.setCnt(1);
+			totalPrice += (vo.getPrice() * vo.getCnt());
 			menuList.add(vo);
 			map.put("menu", vo);
-			
+
 		}
+		map.put("totalPrice", totalPrice);
 		webRequest.setAttribute("orderList", menuList, WebRequest.SCOPE_SESSION);
+		webRequest.setAttribute("totalPrice", totalPrice, WebRequest.SCOPE_SESSION);
 		String aa = gson.toJson(map);
 		mav.addObject("json", aa);
-		
+
 		return mav;
-		
-		
+
 	}
 
 }
