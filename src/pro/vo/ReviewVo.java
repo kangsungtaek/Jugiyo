@@ -1,13 +1,20 @@
 package pro.vo;
 
 public class ReviewVo {
-	
+	String id;
 	int no;
 	String nickname;
 	double star;
 	String content;
 	String[] img; //이미지주소
 	String reply;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -47,7 +54,7 @@ public class ReviewVo {
 	
 	@Override
 	public String toString() {
-		return "ReviewVo [no=" + no + ", nickname=" + nickname + ", star=" + star + ", content=" + content + ", img="
+		return "ReviewVo [id=" + id + ",no=" + no + ", nickname=" + nickname + ", star=" + star + ", content=" + content + ", img="
 				+ img + ", reply=" + reply + "]";
 	}
 }

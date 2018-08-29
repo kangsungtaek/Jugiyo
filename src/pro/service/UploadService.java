@@ -46,6 +46,6 @@ public class UploadService {
 		File dest = new File(dir, file.getOriginalFilename());
 		file.transferTo(dest);
 		
-		return dest.getPath();
+		return ctx.getContextPath() + "/image/" + no + "/" + dest.getName();
 	}
 }

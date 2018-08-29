@@ -73,13 +73,17 @@ public class MemberController {
 				int i = 0;
 				for (MultipartFile f : imgs) {
 					img[i] = us.makeUrl(f, (String) map.get("no"));
+					System.out.println("[controller:member]img url :" + img[i]);
 				}
 				map.put("img", img);
+			} else {
+				map.put("img", "");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
+		map.put("reply", "");
 		memberDao.addReview(map);
 		return mav;
 	}
