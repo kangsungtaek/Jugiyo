@@ -9,7 +9,8 @@
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
+          ['메뉴', '판매갯수'],
+          
           ['후라이드 치킨',     ],
           ['양념치킨',      3],
           ['파닭',  2],

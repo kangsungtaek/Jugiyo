@@ -1,7 +1,5 @@
 package pro.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +41,7 @@ public class OwnerController {
 	// 사장님 페이지
 	@GetMapping("/index")
 	public String indexHandle01(WebRequest webRequest) {
-		webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
+		webRequest.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		return "owner/index";
 	}
 
@@ -57,7 +55,7 @@ public class OwnerController {
 
 	@PostMapping("/addmenu")
 	public ModelAndView indexHandle02(@ModelAttribute MultiMenuVo menus, WebRequest webRequest) throws Exception {
-		StoreVo store = (StoreVo) webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
+		StoreVo store = (StoreVo) webRequest.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		ModelAndView mav = new ModelAndView();
 		for (MenuVo vo : menus.getMenus()) {
 			int menuNo = menuDao.getSequence();
@@ -92,7 +90,7 @@ public class OwnerController {
 	// 현재 등록 되어 있는 메뉴들 전부다 보여주는거
 	@GetMapping("/addedmenu")
 	public ModelAndView addedMenuHandle02(WebRequest webRequest) {
-		StoreVo vo = (StoreVo) webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
+		StoreVo vo = (StoreVo) webRequest.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("owner/addedmenu");
@@ -105,7 +103,7 @@ public class OwnerController {
 	// 메뉴수정페이지
 	@GetMapping("/updatemenu")
 	public ModelAndView updateMenu(@RequestParam("no") int no, WebRequest webRequest) {
-		StoreVo vo = (StoreVo) webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
+		StoreVo vo = (StoreVo) webRequest.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 
 		ModelAndView mav = new ModelAndView();
@@ -116,7 +114,7 @@ public class OwnerController {
 	// 메뉴통계
 	@GetMapping("/menustats")
 	public ModelAndView menuStatsHandle01(WebRequest webRequest) {
-		StoreVo vo = (StoreVo) webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
+		StoreVo vo = (StoreVo) webRequest.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		// List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 		List<LogVo> lVo = orderDao.findStore(vo.getNo());
 		System.out.println(lVo);
@@ -125,26 +123,27 @@ public class OwnerController {
 
 		for (int i = 0; i < lVo.size(); i++) {
 			// salesMenu.put(lVo.get(i).getOrderDate(),lVo.get(i).getOrderList());
-			System.out.println( lVo.get(i).getOrderList());
-			if( lVo.get(i).getOrderList() == null) {
+			System.out.println("lvo:" + lVo.get(i).getOrderList());
+			if (lVo.get(i).getOrderList() == null) {
 				continue;
 			}
 			for (int j = 0; j < lVo.get(i).getOrderList().size(); j++) {
-				
-				bestSales.put(lVo.get(i).getOrderList().get(j).getNo(), lVo.get(i).getOrderList().get(j).getCnt());
-
-				 if (bestSales.containsKey(lVo.get(i).getOrderList().get(j).getNo())) {
-					 int sum = bestSales.get(lVo.get(i).getOrderList().get(j).getNo())+ lVo.get(i).getOrderList().get(j).getCnt();
-					 bestSales.put(lVo.get(i).getOrderList().get(j).getNo(), sum);
-				 }
+				if (bestSales.containsKey(lVo.get(i).getOrderList().get(j).getNo())) {
+					System.out.println("cnt : " + bestSales.get(lVo.get(i).getOrderList().get(j).getNo()));
+					int cnt = bestSales.get(lVo.get(i).getOrderList().get(j).getNo());
+					cnt += lVo.get(i).getOrderList().get(j).getCnt();
+					
+					bestSales.put(lVo.get(i).getOrderList().get(j).getNo(), cnt);
+				} else {
+					bestSales.put(lVo.get(i).getOrderList().get(j).getNo(), lVo.get(i).getOrderList().get(j).getCnt());					
+				}
 			}
 		}
 
-		for (Integer i1 : bestSales.keySet()) {
-			System.out.println("key:" + i1 + ", value" + bestSales.get(i1));
-		}
+		System.out.println(bestSales);
 
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("best",bestSales);
 		return mav;
 	}
 
@@ -154,16 +153,16 @@ public class OwnerController {
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
-	
-	//리뷰등록
+
+	// 리뷰등록
 	@RequestMapping("/review")
 	public ModelAndView reviewHandle(WebRequest req) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("owner/review");
-		
+
 		StoreVo store = (StoreVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		List<ReviewVo> reviews = storeDao.findReview(store.getNo());
-		
+
 		mav.addObject("reviews", reviews);
 		return mav;
 	}
