@@ -62,7 +62,7 @@ public class OrderController {
 
 			for (int i = 1; i < 11; i++) {
 				for (LogVo l : list) {
-					if (i == l.getType())
+					if (i == l.getStoreType())
 						continue;
 					else
 						set[i] = i;
@@ -92,22 +92,31 @@ public class OrderController {
 	
 	@PostMapping("/ordered")
 	public ModelAndView orderedHandle2(@RequestParam Map<String,Object> map, WebRequest req) {
-		System.out.println(map);
+		System.out.println("[controller:order] 주문서 : " +map);
+		
 		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
-		MemberVo vo = (MemberVo)req.getAttribute("login", WebRequest.SCOPE_SESSION);
+		String[] menu = new String[orderList.size()];
+		int i = 0;
+		for(MenuVo mv : orderList) {
+			menu[i] = mv.getName();
+			++i;
+		}
+		MemberVo vo = (MemberVo)req.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		String id = vo.getId();
 		
 		Map<String, Object> data = new LinkedHashMap();
 	      data.put("userId", id);
 	      data.put("storeNo", map.get("storeNo"));
+	      String storeNo = (String) map.get("storeNo");
+	      data.put("storeName", storeDao.getStore(Integer.parseInt(storeNo)).getName());
 	      data.put("storeType", map.get("storeType"));
-	      data.put("order List", orderList);
+	      data.put("orderList", menu);
 	      data.put("orderdate", new Date());
 		
 	      orderDao.insertLog(data);
 	      
 	      ModelAndView mav = new ModelAndView();
-	      mav.setViewName("mian");
+	      mav.setViewName("member/memInfo");
 	      
 		return mav;
 	}

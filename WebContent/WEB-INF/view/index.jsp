@@ -75,8 +75,8 @@ body, html {
     		<a href="/login/regForm" class="w3-bar-item w3-button w3-right w3-hover-red"><i class="fa fa-th"></i> 회원가입</a>
     	</c:when>
     	<c:otherwise>
-    		<a href="/member/memInfo" class="w3-bar-item w3-button"><i class="fa fa-user"></i> 내정보</a>
-    		<a href="/login/logout" class="w3-bar-item w3-button w3-right w3-hover-red"><i class="fa fa-th"></i> 로그아웃</a>
+    		<a href="/owner/index" class="w3-bar-item w3-button"><i class="fa fa-user"></i> 내정보</a>
+    		<a href="/owner/logout" class="w3-bar-item w3-button w3-right w3-hover-red"><i class="fa fa-th"></i> 로그아웃</a>
     	</c:otherwise>
     </c:choose>  
   </div>
