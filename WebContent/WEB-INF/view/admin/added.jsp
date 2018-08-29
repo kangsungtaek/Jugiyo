@@ -19,6 +19,5 @@
 	</c:choose>
 	<button onclick="location.href='/admin/addStore'">업체 등록하기</button>
 </div>
-
 </body>
 </html>
