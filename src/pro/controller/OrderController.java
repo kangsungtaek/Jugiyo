@@ -56,29 +56,38 @@ public class OrderController {
 	@RequestMapping("/random")
 	public String randomHandle(WebRequest req) {
 		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
-		List<LogVo> list = new ArrayList();
-		list = orderDao.findLog(member.getId());
-		System.out.println("[controller:order]" + list);
+		System.out.println("[controller:order] random");
 		int num = 0;
 		int[] set = new int[10];
-
-		if (list == null || list.size() == 0) {
-			for (int i = 1; i < 11; i++) {
+		
+		if(member == null) {
+			for (int i = 1; i < 10; i++) {
 				set[i] = i;
 			}
-		} else {
-
-			for (int i = 1; i < 11; i++) {
-				for (LogVo l : list) {
-					if (i == l.getStoreType())
-						continue;
-					else
-						set[i] = i;
+		} else {			
+			List<LogVo> list = new ArrayList();
+			list = orderDao.findLog(member.getId());
+			System.out.println("[controller:order]random : " + list);
+			
+			if (list == null || list.size() == 0) {
+				for (int i = 1; i < 10; i++) {
+					set[i] = i;
+				}
+			} else {
+				
+				for (int i = 1; i < 10; i++) {
+					for (LogVo l : list) {
+						if (i == l.getStoreType())
+							continue;
+						else
+							set[i] = i;
+					}
 				}
 			}
 		}
-		num = set[1 + (int) Math.random() * set.length];
-		return "/main?type=" + num;
+		num = set[1 + (int)(Math.random()*set.length)];
+		System.out.println("[controller:order]random type : " + num);
+		return "redirect:/main?type=" + num;
 	}
 
 	// 주문 확인 페이지

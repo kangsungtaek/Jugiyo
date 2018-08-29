@@ -22,7 +22,7 @@
 </div>
 <script>
 
-$(".w3-bar").on("click", function() {
+$("cate").on("click", function() {
 	location.href = "order/order?storeNo=" + $(this).attr("id");
 });
 </script>
