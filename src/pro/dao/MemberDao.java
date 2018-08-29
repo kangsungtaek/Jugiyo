@@ -23,8 +23,8 @@ public class MemberDao {
 	SqlSessionTemplate template;
 	
 	//로그인에 필요한 함수, 아이디를 통해서 vo를 불러오는 작업
-	public MemberVo findById(String id) {
-		return template.selectOne("member.findById", id);
+	public MemberVo findById(Map map) {
+		return template.selectOne("member.findById", map);
 		//member가 mapper이름 findById는 sql문 이름
 	}
 	
@@ -51,6 +51,10 @@ public class MemberDao {
 	//리뷰등록
 	public void addReview(Map map) {
 		mongoTemplate.insert(map, "review");
+	}
+	//주문후 포인트 적립
+	public void updatePoint(Map map) {
+		template.update("member.updatePoint", map);
 	}
 
 }

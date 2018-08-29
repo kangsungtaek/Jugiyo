@@ -36,7 +36,8 @@ public class AdminController {
 		
 		//업종불러와서 select태그에 사용할 수 있도록
 		List<TypeVo> types = typeDao.getAll();
-		mav.addObject("types", types);
+		//type이라는 테이블이 있어요-상점의 타입을 등록해놓은 테이블-> 전체를 불러와서
+		mav.addObject("types", types); //types라는 이름으로 저장을 해놓음
 		
 		return mav;
 	}
