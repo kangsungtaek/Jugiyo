@@ -36,4 +36,16 @@ public class UploadService {
 		
 		return vo;
 	}
+	
+	public String makeUrl(MultipartFile file, String no) throws Exception {
+		File dir = new File(ctx.getRealPath("/image"), no);
+		System.out.println("[service:url]" + ctx.getRealPath("/image"));
+		if(!dir.exists())
+			dir.mkdirs();
+		
+		File dest = new File(dir, file.getOriginalFilename());
+		file.transferTo(dest);
+		
+		return ctx.getContextPath() + "/image/" + no + "/" + dest.getName();
+	}
 }

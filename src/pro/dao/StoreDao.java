@@ -1,16 +1,21 @@
 package pro.dao;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
+import org.springframework.data.mongodb.core.query.BasicUpdate;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import pro.vo.LogVo;
@@ -59,10 +64,18 @@ public class StoreDao {
 	public List<ReviewVo> findReview(int no) {
 		System.out.println("[storeDao:mongo]");
 		
-		Query query = new BasicQuery(new Document().append("no", no));
+		Query query = new BasicQuery(new Document().append("no", String.valueOf(no)));
 		System.out.println("[storeDao:mongo] " + query);
 		
 		return mongoTemplate.find(query, ReviewVo.class, "review");
+	}
+	
+	public void updateReply(Map m) {
+		System.out.println("[storeDao:mongo]");
+		Query query = Query.query(Criteria.where("_id").is(m.get("id")));
+		Update update = new BasicUpdate(new Document().append("$set", new Document().append("reply", m.get("reply"))));
+		
+		mongoTemplate.updateMulti(query, update, "review");
 	}
 	
 }
