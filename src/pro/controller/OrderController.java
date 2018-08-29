@@ -91,7 +91,11 @@ public class OrderController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("order/ordered");
-		mav.addObject("addr", addr);
+		if(addr != null) {
+			mav.addObject("addr", addr);			
+		} else {
+			mav.addObject("addr", member.getAddress());
+		}
 		mav.addObject("member", member);
 		mav.addObject("orderList", orderList);
 		mav.addObject("storeVo", vo);
@@ -101,7 +105,7 @@ public class OrderController {
 
 	// 주문완료 처리
 	@PostMapping("/ordered")
-	public ModelAndView orderedHandle2(@RequestParam Map<String, String> map, WebRequest req) {
+	public String orderedHandle2(@RequestParam Map<String, String> map, WebRequest req) {
 
 		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
 		MemberVo mVo = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
@@ -141,25 +145,23 @@ public class OrderController {
 
 		orderService.sendToOne(map2, svo.getId());
 
-		ModelAndView mav = new ModelAndView();
-
 		if (!mVo.getId().equals("nonMember")) {
 			for (MenuVo mVo2 : orderList) {
 				totalPrice += (mVo2.getPrice() * mVo2.getCnt());
 			}
 			double point = totalPrice * 0.05;
+			System.out.println("[controller:order] point : " + point);
 			Map memberPoint = new HashMap<>();
 			memberPoint.put("id", mVo.getId());
-			memberPoint.put("point", point);
+			memberPoint.put("point", (int)point);
 
 			memberDao.updatePoint(memberPoint);
-			mav.setViewName("/member/memInfo");
-		} else {
-			mav.setViewName("main");
-		}
+			req.removeAttribute("orderList", WebRequest.SCOPE_SESSION);
+			req.removeAttribute("totalPrice", WebRequest.SCOPE_SESSION);
 
-		req.removeAttribute("orderList", WebRequest.SCOPE_SESSION);
-		req.removeAttribute("totalPrice", WebRequest.SCOPE_SESSION);
-		return mav;
+			return "redirect:/member/memInfo";
+		} else {
+			return "redirect:/main";
+		}
 	}
 }
