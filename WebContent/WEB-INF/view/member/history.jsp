@@ -29,8 +29,8 @@
 			<tr>
 				<td style="vertical-align: middle;">${ vs.count }</td>
 				<td style="vertical-align: middle;"><a href="${pageContext.request.localAddr}/order/order?storeNo=${log.storeNo}">${ log.storeName }</a></td>
-				<td style="vertical-align: middle;">		
-					${ log.orderList[0] }  			
+				<td style="vertical-align: middle;">
+						${ log.orderList[0].name }
 					<c:if test="${ fn:length(log.orderList) > 1 }">
 						외  ${ fn:length(log.orderList) - 1 } 
 					</c:if>

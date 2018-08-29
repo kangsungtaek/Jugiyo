@@ -38,7 +38,9 @@
   <div class="w3-card w3-container" style="min-height:460px">
   <h3>멤버쉽등급</h3><br>
   <i class="fa fa-diamond w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-  <p>맛있는 주문만큼 쌓이는 포인트</p>
+  <p>맛있는 주문만큼 쌓이는 포인트 </p>
+  <p>${ sessionScope.vo.nickname }님의 현재 포인트 : <b>${ sessionScope.vo.point }</b>
+  <br/><small>(1000포인트부터 사용가능합니다.)</small></p>
   <p>당신의 멤버쉽등급은 --입니다.</p>
   </div>
 </div>
