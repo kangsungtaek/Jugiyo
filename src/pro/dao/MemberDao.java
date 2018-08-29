@@ -52,5 +52,9 @@ public class MemberDao {
 	public void addReview(Map map) {
 		mongoTemplate.insert(map, "review");
 	}
+	//주문후 포인트 적립
+	public void updatePoint(Map map) {
+		template.update("member.updatePoint", map);
+	}
 
 }

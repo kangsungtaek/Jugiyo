@@ -11,12 +11,17 @@
 	/*	.hide {display:none;}	*/
 </style>
 	
+
 <div id="wrap" class="w3-panel w3-padding-64 w3-orange w3-container">
-	<div class="w3-row" style="width:169px;">
+	<div class="w3-row" style="width:210px; padding:10px;">
+
  		<h2 class="hide" style="text-align: center;"> 로그인</h2>
 	    <div class="w3-bar w3-black" style="text-align: center;">
-    		<button type="button" class="w3-bar-item w3-button tablink w3-red mode" value="member">개인회원</button>
-    		<button type="button" class="w3-button w3-button" value="owner">사업자</button>
+
+    		<button type="button" class="w3-bar-item w3-button tablink w3-red mode"  value="member">개인회원</button>
+    		<button type="button" class="w3-bar-item w3-button tablink mode" value="owner">사업자</button>
+
+
   		</div>
 	 </div>
  	<form action="/login/loginForm" method="post" class="form_input" id="loginForm" >

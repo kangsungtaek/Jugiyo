@@ -132,11 +132,10 @@
 		style="width: 20%; padding-left: 10px; padding-right: 30px">
 		<div class="scroll-menu  w3-border w3-container">
 			<div class="w3-container w3-border-bottom">주문표</div>
-			<div class="w3-container">
+			<div class="w3-container" id="orderDiv">
 			
 				<ul id="orderList">
 					<c:forEach items="${sessionScope.orderList}" var="orderList">
-
 						<li id="${orderList.no}">
 							<div class='w3-row'>${orderList.name }</div>
 							<div class='w3-left-align'>
@@ -149,7 +148,7 @@
 						</li>
 					</c:forEach>
 				</ul>
-				
+				총 가격 : <span id="totalPrice"> ${sessionScope.totalPrice}</span>
 				
 			</div>
 		</div>
@@ -199,6 +198,9 @@
 					console.log(obj);
 					if(obj.result){
 						$("#orderList").find("#"+no).remove();	
+						$("#orderDiv").find("#totalPrice").text(obj.totalPrice);
+						
+						
 					}
 				}
 			}
@@ -218,6 +220,8 @@
 						//$("#orderList").find("#"+no).find("#count").text(parseInt($("#orderList").find("#"+no).find("#count").text())+1);
 						$("#orderList").find("#"+no).find("#count").text(obj.menu.cnt);
 						$("#orderList").find("#"+no).find("#price").text(obj.price);
+						$("#orderDiv").find("#totalPrice").text(obj.totalPrice);
+						
 					}
 				}
 			}
@@ -235,6 +239,8 @@
 						//$("#orderList").find("#"+no).find("#count").text(parseInt($("#orderList").find("#"+no).find("#count").text())-1);
 						$("#orderList").find("#"+no).find("#count").text(obj.menu.cnt);
 						$("#orderList").find("#"+no).find("#price").text(obj.price);
+						$("#orderDiv").find("#totalPrice").text(obj.totalPrice);
+						
 					}
 				}
 			}
@@ -254,6 +260,8 @@
 						//$("#orderList").find("#"+obj.menu).find("#count").text(parseInt($("#orderList").find("#"+obj.menu).find("#count").text())+1);
 						$("#orderList").find("#"+no).find("#count").text(obj.menu.cnt);
 						$("#orderList").find("#"+no).find("#price").text(obj.price);
+						$("#orderDiv").find("#totalPrice").text(obj.totalPrice);
+						
 					// 새로운 메뉴 클릭시 메뉴 추가.
 					} else {
 						$("#orderList").append("<li id="+obj.menu.no+"> <div class='w3-row'>"
@@ -264,6 +272,8 @@
 															+ " <span class='w3-button w3-small' onclick='orderListMinus(this)'>-</span> <span id='count'>"
 															+ obj.menu.cnt
 															+ "</span> <span class='w3-button w3-small' onclick='orderListPlus(this)'>+</span> </div></li>");
+						$("#orderDiv").find("#totalPrice").text(obj.totalPrice);
+						
 								}
 							} 
 						}

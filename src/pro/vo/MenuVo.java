@@ -1,10 +1,11 @@
 package pro.vo;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class MenuVo {
+public class MenuVo implements Serializable {
 	int no;
 	String name;
 	int price;
@@ -87,7 +88,4 @@ public class MenuVo {
 		return "MenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + ", fileUrl=" + fileUrl
 				+ ", fileName=" + fileName + ", attach=" + Arrays.toString(attach) + ", cnt=" + cnt + "]";
 	}
-
-	
-
 }
