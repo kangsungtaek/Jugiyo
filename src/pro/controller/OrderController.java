@@ -62,7 +62,7 @@ public class OrderController {
 
 			for (int i = 1; i < 11; i++) {
 				for (LogVo l : list) {
-					if (i == l.getType())
+					if (i == l.getStoretype())
 						continue;
 					else
 						set[i] = i;

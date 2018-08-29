@@ -2,48 +2,55 @@ package pro.vo;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class LogVo {	
 	String id;
-	String store; //음식점 no
-	int type; //음식점의 타입
-	String[] menu;
-	Date date;
-	
+	int storeNo;
+	String storeName; //음식점 no
+	int storetype; //음식점의 타입
+	List<MenuVo> orderList;
+	Date orderDate;
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getStore() {
-		return store;
+	public int getStoreNo() {
+		return storeNo;
 	}
-	public void setStore(String store) {
-		this.store = store;
+	public void setStoreNo(int storeNo) {
+		this.storeNo = storeNo;
 	}
-	public int getType() {
-		return type;
+	public String getStoreName() {
+		return storeName;
 	}
-	public void setType(int type) {
-		this.type = type;
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
 	}
-	public String[] getMenu() {
-		return menu;
+	public int getStoretype() {
+		return storetype;
 	}
-	public void setMenu(String[] menu) {
-		this.menu = menu;
+	public void setStoretype(int storetype) {
+		this.storetype = storetype;
 	}
-	public Date getDate() {
-		return date;
+	public List<MenuVo> getOrderList() {
+		return orderList;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setOrderList(List<MenuVo> orderList) {
+		this.orderList = orderList;
 	}
-	
+	public Date getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
 	@Override
 	public String toString() {
-		return "LogVo [id=" + id + ", store=" + store + ", type=" + type + ", menu=" + Arrays.toString(menu) + ", date=" + date + "]";
+		return "LogVo [id=" + id + ", storeNo=" + storeNo + ", storeName=" + storeName + ", storetype=" + storetype
+				+ ", orderList=" + orderList + ", orderDate=" + orderDate + "]";
 	}
 	
 }
