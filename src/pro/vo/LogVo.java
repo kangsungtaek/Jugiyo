@@ -16,6 +16,7 @@ public class LogVo {
 	String reviewd;
 	
 	ReviewVo review;
+	int totalPrice;
 	
 	public String getId() {
 		return id;
@@ -23,6 +24,15 @@ public class LogVo {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public String getUserId() {
@@ -109,7 +119,8 @@ public class LogVo {
 	public String toString() {
 		return "LogVo [id=" + id + ", userId=" + userId + ", storeNo=" + storeNo + ", storeName=" + storeName
 				+ ", storeType=" + storeType + ", orderList=" + orderList + ", orderdate=" + orderdate + ", delivery="
-				+ delivery + ", requested=" + requested + ", reviewd=" + reviewd + "]";
+				+ delivery + ", requested=" + requested + ", reviewd=" + reviewd + ", review=" + review
+				+ ", totalPrice=" + totalPrice + "]";
 	}
 
 }
