@@ -14,6 +14,14 @@ public class MenuVo implements Serializable {
 
 	int fileNo;
 	String fileUri;
+	public String getFileUri() {
+		return fileUri;
+	}
+
+	public void setFileUri(String fileUri) {
+		this.fileUri = fileUri;
+	}
+
 	String fileName;
 
 	int type;
@@ -24,6 +32,15 @@ public class MenuVo implements Serializable {
 	// 강성택 메뉴 카운트 추가
 	int cnt;
 	
+	
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
 	public int getFileNo() {
 		return fileNo;
 	}
@@ -40,9 +57,6 @@ public class MenuVo implements Serializable {
 		this.type = type;
 	}
 
-
-
-	
 	public MultipartFile[] getAttach() {
 		return attach;
 	}
@@ -90,7 +104,6 @@ public class MenuVo implements Serializable {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
 
 	@Override
 	public String toString() {
