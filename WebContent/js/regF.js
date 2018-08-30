@@ -101,8 +101,8 @@
   //핸드폰번호 체크 : 01[06789]\\d{3,4}\\d{4}가 맞는지
   
  
-   var emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-   var passRule = /^[A-Za-z0-9/_-!~#@$%^&*?]{6,12}$/;
+   var emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+   var passRule = /^[a-zA-Z0-9!@#$%^&*()?_~]{8,20}$/;
    var phoneRule =/^\d{3}-\d{3,4}-\d{4}$/;
    
    $("#email").on("change", function() {   // id 가져올때는 #을 붙여

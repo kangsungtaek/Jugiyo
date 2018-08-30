@@ -46,7 +46,7 @@ $(document).ready(function(){
     $("#search").keypress(function (e) {
      if (e.which == 13){
     	 console.log($(this).val());
-         location.href="/main?search="+$(this).val();
+         location.href="/main/search?search="+$(this).val();
      }
  });
 });

@@ -1,6 +1,7 @@
 package pro.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -98,7 +99,7 @@ public class OrderController {
 			}
 		}
 		num = set[1 + (int)(Math.random()*set.length)];
-		System.out.println("[controller:order]random type : " + num);
+		System.out.println("[controller:order]random " + Arrays.toString(set) + "/ type : " + num);
 		return "redirect:/main?type=" + num;
 	}
 
