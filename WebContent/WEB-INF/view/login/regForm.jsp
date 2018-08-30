@@ -38,7 +38,7 @@
 				<tr>
 					<td class="n"> 주소</td>
 					<td>
-						<input type="text" placeholder="우편번호" id="zonecode" size="8" onclick="sample4_execDaumPostcode()" readonly /><br />
+						<input type="text" placeholder="우편번호" name="zonecode" id="zonecode" size="8" onclick="sample4_execDaumPostcode()" readonly /><br />
 						<input type="text" name="addr" id="addr" class="size" placeholder=" 주소입력" size="50" readonly maxlength="100자 이내" onclick="sample4_execDaumPostcode()" /><br />
 						<input type="text" name="addr1" class="size" placeholder=" 상세주소입력" size="50" maxlength="100자 이내" />
 					</td>

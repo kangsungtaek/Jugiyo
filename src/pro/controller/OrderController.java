@@ -24,6 +24,7 @@ import pro.service.OrderService;
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
 import pro.vo.MenuVo;
+import pro.vo.ReviewVo;
 import pro.vo.StoreVo;
 
 @Controller
@@ -50,6 +51,16 @@ public class OrderController {
 		mav.setViewName("order/order");
 		mav.addObject("storeVo", vo);
 		mav.addObject("menuList", menuList);
+		
+		List<LogVo> list = storeDao.findLogByStoreNo(storeNo);
+		for(LogVo v : list) {
+			if(v.getReviewd().equals("Y")) {
+				ReviewVo review = memberDao.findByLogId(v.getId());
+				v.setReview(review);
+			} 
+		}
+		System.out.println("[controller:order] logs : " + list);
+		mav.addObject("reviews", list);
 		return mav;
 	}
 

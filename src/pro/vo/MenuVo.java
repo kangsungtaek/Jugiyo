@@ -12,6 +12,10 @@ public class MenuVo implements Serializable {
 	int price;
 	int store;
 	int type;
+	
+	int fileNo;
+	String fileName;
+	String fileUri;
 	MultipartFile[] attach;
 
 	// 강성택 메뉴 카운트 추가
@@ -74,11 +78,35 @@ public class MenuVo implements Serializable {
 		this.type = type;
 	}
 
+	public int getFileNo() {
+		return fileNo;
+	}
+
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getFileUri() {
+		return fileUri;
+	}
+
+	public void setFileUri(String fileUri) {
+		this.fileUri = fileUri;
+	}
+
 	@Override
 	public String toString() {
 		return "MenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + ", type=" + type
-				+ ", attach=" + Arrays.toString(attach) + ", cnt=" + cnt + "]";
+				+ ", fileNo=" + fileNo + ", fileName=" + fileName + ", fileUri=" + fileUri + ", attach="
+				+ Arrays.toString(attach) + ", cnt=" + cnt + "]";
 	}
 
-	
 }

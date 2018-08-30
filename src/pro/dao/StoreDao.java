@@ -64,10 +64,15 @@ public class StoreDao {
 	public List<ReviewVo> findReview(int no) {
 		System.out.println("[storeDao:mongo]");
 		
-		Query query = new BasicQuery(new Document().append("no", String.valueOf(no)));
+		Query query = new BasicQuery(new Document().append("no", no));
 		System.out.println("[storeDao:mongo] " + query);
 		
 		return mongoTemplate.find(query, ReviewVo.class, "review");
+	}
+	
+	public List<LogVo> findLogByStoreNo(int storeNo) {
+		Query query = new BasicQuery(new Document().append("storeNo", storeNo));
+		return mongoTemplate.find(query, LogVo.class, "log");
 	}
 	
 	public void updateReply(Map m) {

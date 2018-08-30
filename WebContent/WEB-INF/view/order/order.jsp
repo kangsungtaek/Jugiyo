@@ -137,9 +137,9 @@
 		<!--  리뷰  -->
 		<div id="review" class="w3-container tabs" style="display: none">
 			<div class="w3-container w3-border w3-large w3-center">
-				<p>
-					<span>4.2</span><br /> <span>ㅁㅁㅁㅁ</span>
-				</p>
+					<p>
+
+					</p>
 			</div>
 
 			<div class="w3-container w3-border">
@@ -159,13 +159,30 @@
 			</div>
 
 			<div class="w3-container w3-border" style="min-height: 150px">
-				<span class="w3-large">강성택님</span> <span class="w3-small">2018-08-24</span>
-				<br /> <span class="w3-small">별점</span><br /> <span
-					class="w3-small"> 시킨거 </span>
-				<div class="w3-left-align w3-large">
-					<p>리뷰</p>
-				</div>
-
+				<c:forEach var="r" items="${ reviews }">
+					<c:if test="${ r.reviewd == 'Y'}">
+						<span class="w3-large">${ r.review.nickname }님</span>
+						<br /> <span class="w3-small">별점 : ${ r.review.star }</span><br />
+							
+						<span class="w3-small"> 
+						<c:forEach var="menu" items="${ r.orderList }" varStatus="vs">
+							${ menu.name }
+							<c:if test="${ !vs.last }">
+								, 
+							</c:if>
+						</c:forEach>
+						<br/>
+						<c:if test="${ fn:length(r.review.img) > 0 }">
+							<c:forEach var="i" items="${ r.review.img }">
+								<img src="${ i }" style="width:10%; height: 10%;" />
+							</c:forEach>
+						</c:if>
+						</span>
+						<div class="w3-left-align w3-large">
+							<p>${ r.review.content }</p>
+						</div>
+					</c:if>
+				</c:forEach>
 			</div>
 		</div>
 

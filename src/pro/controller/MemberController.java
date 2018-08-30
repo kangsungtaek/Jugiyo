@@ -78,7 +78,7 @@ public class MemberController {
 		String logId = (String) map.get("_id");
 		
 		data.put("logId", logId);
-		data.put("no", map.get("storeNo"));
+		data.put("no", Integer.parseInt((String)map.get("storeNo")));
 		data.put("star", Double.parseDouble((String) map.get("star")));
 		data.put("content", map.get("content"));
 		data.put("nickname", vo.getNickname());
@@ -89,7 +89,7 @@ public class MemberController {
 				img = new String[imgs.size()];
 				int i = 0;
 				for (MultipartFile f : imgs) {
-					img[i] = us.makeUrl(f, (String) map.get("no"));
+					img[i] = us.makeUrl(f, (String) map.get("storeNo"));
 					System.out.println("[controller:member]img url :" + img[i]);
 					++i;
 				}
