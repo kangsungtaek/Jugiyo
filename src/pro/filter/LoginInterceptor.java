@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import pro.vo.MemberVo;
+import pro.vo.StoreVo;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
@@ -17,8 +18,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		MemberVo member = (MemberVo) session.getAttribute("vo");
+		StoreVo store = (StoreVo) session.getAttribute("storeVo");
 		
-		if(member == null) {
+		if(member == null && store == null) {
 			response.sendRedirect("/login/loginForm");
 			return false;
 		} else {

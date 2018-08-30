@@ -47,7 +47,7 @@ public class LoginController {
 			if(vo!=null) {
 
 				System.out.println("[controller:login] store : " + vo.toString());
-				req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
+				req.setAttribute("storeVo", vo, WebRequest.SCOPE_SESSION);
 
 				mav.setViewName("owner/index");
 				mav.addObject("owner");
