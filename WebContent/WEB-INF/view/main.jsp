@@ -4,10 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-
-
-
-
 <div class="w3-container"
 	style="padding-left: 100px; padding-right: 100px;">
 	<div class="w3-border">

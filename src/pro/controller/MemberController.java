@@ -1,7 +1,7 @@
 package pro.controller;
 
-import java.nio.channels.WritableByteChannel;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +19,7 @@ import pro.dao.MemberDao;
 import pro.service.UploadService;
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
+import pro.vo.ReviewVo;
 
 @Controller
 @RequestMapping("/member")
@@ -28,7 +29,7 @@ public class MemberController {
 	MemberDao memberDao;
 	@Autowired
 	UploadService us;
-
+	
 	@RequestMapping("/memInfo")
 	public String memInfoHandle() {
 		return "member/memInfo";
@@ -44,47 +45,66 @@ public class MemberController {
 
 		List<LogVo> list = memberDao.readAllById(member.getId());
 		System.out.println("[controller:member] history : " + list);
-		mav.addObject("list", list);
+		for(LogVo v : list) {
+			if(v.getReviewd().equals("Y")) {
+				ReviewVo review = memberDao.findByLogId(v.getId());
+				v.setReview(review);
+			} 
+		}
 
+		mav.addObject("list", list);
 		return mav;
 	}
 
 	@GetMapping("/writeReview")
-	public ModelAndView writeGetReviewHandle(@RequestParam("no") int no) {
+	public ModelAndView writeGetReviewHandle(@RequestParam("_id") String id, @RequestParam("storeNo") int storeNo) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("no", no);
+		mav.addObject("_id", id);
+		mav.addObject("storeNo", storeNo);
 		mav.setViewName("member/writeReview");
 		return mav;
 	}
 
+	//review등록
 	@PostMapping("/writeReview")
 	public ModelAndView writeReviewPostHandle(@RequestParam Map<String, Object> map,
-			@RequestParam(value = "img", required = false) MultipartFile[] imgs, WebRequest req) {
+			@RequestParam(value = "img", required = false) List<MultipartFile> imgs, WebRequest req) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("[controller:member] review : " + map);
-		mav.setViewName("member/memInfo");
+			mav.setViewName("member/memInfo");
 		MemberVo vo = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
-		map.put("nickname", vo.getNickname());
+		
+		Map<String, Object> data = new LinkedHashMap<>();
+		String logId = (String) map.get("_id");
+		
+		data.put("logId", logId);
+		data.put("no", map.get("storeNo"));
+		data.put("star", Double.parseDouble((String) map.get("star")));
+		data.put("content", map.get("content"));
+		data.put("nickname", vo.getNickname());
 
 		String[] img = null;
 		try {
-			if (!imgs[0].isEmpty()) {
-				img = new String[imgs.length];
+			if (!imgs.isEmpty()) {
+				img = new String[imgs.size()];
 				int i = 0;
 				for (MultipartFile f : imgs) {
 					img[i] = us.makeUrl(f, (String) map.get("no"));
 					System.out.println("[controller:member]img url :" + img[i]);
+					++i;
 				}
-				map.put("img", img);
+				data.put("img", img);
 			} else {
-				map.put("img", "");
+				data.put("img", "");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		map.put("reply", "");
-		memberDao.addReview(map);
+		data.put("reply", "");
+		System.out.println("[controller:member] writeReview : " + data);
+		memberDao.addReview(data);
+		memberDao.updateLogReviewd(logId);
 		return mav;
 	}
 

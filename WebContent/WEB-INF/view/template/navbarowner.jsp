@@ -22,8 +22,8 @@
 	<div class="w3-dropdown-hover">
 		<button class="w3-button w3-light-gray">리뷰관리</button>
 		<div class="w3-dropdown-content w3-bar-block w3-border">
-			<a href="#" class="w3-bar-item w3-button">공지등록</a> <a href="#"
-				class="w3-bar-item w3-button">리뷰관리</a>
+			<a href="#" class="w3-bar-item w3-button">공지등록</a>
+			<a href="/owner/review" class="w3-bar-item w3-button">리뷰관리</a>
 		</div>
 	</div>
 	<div class="w3-dropdown-hover">

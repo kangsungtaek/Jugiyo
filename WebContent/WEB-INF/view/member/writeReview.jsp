@@ -30,7 +30,8 @@
 		<br/><br/>
 		당신의 솔직한 리뷰가 다른 사람의 선택에 영향을 줍니다.</p>
 		<form action="writeReview" method="post" enctype="multipart/form-data" name="form">
-			<input type="hidden" name="no" value="${ no }" />
+			<input type="hidden" name="_id" value="${ _id }" />
+			<input type="hidden" name="storeNo" value="${ storeNo }" />
 			<ul class="w3-ul w3-center">
 				<li>총점<small>(한번 결정하면 바꿀 수 없습니다.)</small>
 				<span>
@@ -43,7 +44,7 @@
 				<input type="hidden" name="star" />
 				</li>
 				<li><textarea cols="50" rows="10" name="content"></textarea></li>
-				<li>사진 <input type="file" class="w3-button" name="img"></li>
+				<li>사진 <input type="file" class="w3-button" name="img" multiple></li>
 				<li>
 				<button class="w3-button w3-amber" type="submit">리뷰작성</button> 
 				<button class="w3-button w3-amber" type="reset">재작성</button>
