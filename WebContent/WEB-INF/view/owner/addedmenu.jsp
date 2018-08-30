@@ -12,8 +12,7 @@
 			<ul class="w3-ul w3-card-4">
 				<c:forEach items="${menuList}" var="menu">
 					<li class="w3-bar menu" id="${menu.no }"><img
-						src="${menu.fileUrl }" class="w3-round w3-right "
-						style="width: 100px">
+						src="${pageContext.request.contextPath}${menu.fileUri }" class="w3-round w3-right " style="width: 100px">
 						<div class="w3-bar-item">
 							<span class="w3-large" style="padding-left: 10px">${menu.name }</span><br> <span style="padding-left: 10px">${menu.price }</span>
 									<p class="w3-small">
@@ -29,6 +28,8 @@
 </div>
 <script>
 	//
+	
+	
 	function openTabs(evt, tabsName) {
 		var i, x, tablinks;
 		x = document.getElementsByClassName("tabs");

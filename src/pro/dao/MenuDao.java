@@ -1,6 +1,7 @@
 package pro.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,8 @@ public class MenuDao {
 	//메뉴수정
 	public int updateMenu(MenuVo vo) {
 		return template.update("owner.menuUpdate",vo);
+}
+	public List<Map> findAll() {
+		return template.selectList("owner.TypeFindAll", null);
 	}
 }

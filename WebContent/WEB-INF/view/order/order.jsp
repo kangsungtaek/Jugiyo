@@ -22,13 +22,14 @@
 <!-- 전체 영역 - -->
 <div class="w3-row">
 	<!-- 왼쪽 공백  -->
-	<div class="w3-col" style="width: 10%">&nbsp;</div>
+	<div class="w3-col" style="width: 10%">
+	</div>
 	<div class="w3-col" style="width: 70%">
 
 		<!--  가게정보  -->
 		<div class="w3-bar" id="${storeVo.no}">
 			<span class="w3-bar-item w3-xlarge w3-right">${storeVo.star }</span>
-			<img src="${storeVo.img}"
+			<img src="${pageContext.request.contextPath}${storeVo.img}"
 				class="w3-bar-item w3-circle w3-hide-small w3-padding-small"
 				style="width: 85px">
 			<div class="w3-bar-item">
@@ -52,7 +53,6 @@
 
 		<!--  추천 메뉴 -->
 		<div id="menu" class="w3-container tabs" style="display: block">
-
 			<button onclick="menubarSelect('Demo1')"
 				class="w3-button w3-block w3-left-align w3-light-grey">추천
 				메뉴</button>
@@ -60,35 +60,80 @@
 				<div id="Demo1">
 					<ul class="w3-ul w3-card-4">
 						<c:forEach items="${menuList}" var="menu">
-							<li class="w3-bar menu" id="${menu.no }"><img
-								src="${menu.fileUrl}" class="w3-round w3-right "
-								style="width: 100px">
-								<div class="w3-bar-item">
-									<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
-								</div></li>
+							<c:if test="${menu.type eq 10 }">
+								<li class="w3-bar menu" id="${menu.no }"><img
+									src="${pageContext.request.contextPath}${menu.fileUri}" class="w3-round w3-right "
+									style="width: 100px">
+									<div class="w3-bar-item">
+										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
+									</div></li>
+							</c:if>
 						</c:forEach>
 					</ul>
 				</div>
 			</div>
 
-			<!--  인기메뉴  -->
+			<!--  메인메뉴  -->
 			<button onclick="menubarSelect('Demo2')"
-				class="w3-button w3-block w3-black w3-left-align">인기 메뉴</button>
+				class="w3-button w3-block w3-black w3-left-align">메인 메뉴</button>
 			<div class="w3-container">
 				<div id="Demo2" class="w3-hide">
 					<ul class="w3-ul w3-card-4">
 						<c:forEach items="${menuList}" var="menu">
-							<li class="w3-bar menu" id="${menu.no }"><img
-								src="${menu.fileUrl }" class="w3-round w3-right "
-								style="width: 100px">
-								<div class="w3-bar-item">
-									<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
-								</div></li>
+							<c:if test="${menu.type eq 20 }">
+								<li class="w3-bar menu" id="${menu.no }"><img
+									src="${pageContext.request.contextPath}${menu.fileUri }" class="w3-round w3-right "
+									style="width: 100px">
+									<div class="w3-bar-item">
+										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
+									</div></li>
+							</c:if>
 						</c:forEach>
 					</ul>
 				</div>
 			</div>
+			<!--  사이드메뉴  -->
+			<button onclick="menubarSelect('Demo3')"
+				class="w3-button w3-block w3-black w3-left-align">사이드 메뉴</button>
+			<div class="w3-container">
+				<div id="Demo3" class="w3-hide">
+					<ul class="w3-ul w3-card-4">
+						<c:forEach items="${menuList}" var="menu">
+							<c:if test="${menu.type eq 30 }">
+								<li class="w3-bar menu" id="${menu.no }"><img
+									src="${pageContext.request.contextPath}${menu.fileUri }" class="w3-round w3-right "
+									style="width: 100px">
+									<div class="w3-bar-item">
+										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
+									</div></li>
+							</c:if>
+						</c:forEach>
+
+					</ul>
+				</div>
+			</div>
+			<!--  음료  -->
+			<button onclick="menubarSelect('Demo4')"
+				class="w3-button w3-block w3-black w3-left-align">음료</button>
+			<div class="w3-container">
+				<div id="Demo4" class="w3-hide">
+					<ul class="w3-ul w3-card-4">
+						<c:forEach items="${menuList}" var="menu">
+							<c:if test="${menu.type eq 40 }">
+								<li class="w3-bar menu" id="${menu.no }"><img
+									src="${pageContext.request.contextPath}${menu.fileUri }" class="w3-round w3-right "
+									style="width: 100px">
+									<div class="w3-bar-item">
+										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
+									</div></li>
+							</c:if>
+						</c:forEach>
+
+					</ul>
+				</div>
+			</div>
 		</div>
+
 		<!--  리뷰  -->
 		<div id="review" class="w3-container tabs" style="display: none">
 			<div class="w3-container w3-border w3-large w3-center">
@@ -133,28 +178,29 @@
 		<div class="scroll-menu  w3-border w3-container">
 			<div class="w3-container w3-border-bottom">주문표</div>
 			<div class="w3-container" id="orderDiv">
-			
+
 				<ul id="orderList">
 					<c:forEach items="${sessionScope.orderList}" var="orderList">
 						<li id="${orderList.no}">
 							<div class='w3-row'>${orderList.name }</div>
 							<div class='w3-left-align'>
-								<span class='w3-button w3-small orderRemove' onclick='orderListRemove(this)'>X</span>
-								<span id="price" >${orderList.price * orderList.cnt } </span> 
-								<span class='w3-button w3-small' onclick='orderListMinus(this)'>-</span> 
-								<span id="count">${orderList.cnt }</span> 
-								<span class='w3-button w3-small' onclick='orderListPlus(this)'>+</span>
+								<span class='w3-button w3-small orderRemove'
+									onclick='orderListRemove(this)'>X</span> <span id="price">${orderList.price * orderList.cnt }
+								</span> <span class='w3-button w3-small' onclick='orderListMinus(this)'>-</span>
+								<span id="count">${orderList.cnt }</span> <span
+									class='w3-button w3-small' onclick='orderListPlus(this)'>+</span>
 							</div>
 						</li>
 					</c:forEach>
 				</ul>
 				총 가격 : <span id="totalPrice"> ${sessionScope.totalPrice}</span>
-				
+
 			</div>
 		</div>
-		<div class='w3-row'  > 
-		<a href="/order/ordered?storeNo=${storeVo.no}" ><button class="w3-button w3-red" style="width:100%;">주문하기</button> </a>
-		
+		<div class='w3-row'>
+			<a href="/order/ordered?storeNo=${storeVo.no}"><button
+					class="w3-button w3-red" style="width: 100%;">주문하기</button> </a>
+
 		</div>
 	</div>
 	<!-- ------장바구니 끝  -->
@@ -188,94 +234,108 @@
 	}
 	// 장바구니 x 버튼
 	//$(".orderRemove").on("click", function() {
-	function orderListRemove(target){
+	function orderListRemove(target) {
 		var no = $(target).closest('li').attr('id');
 		var xhr = new XMLHttpRequest();
-		xhr.open("get", "/sendJson?no=" + no+"&mode=remove", true);
-			xhr.onreadystatechange = function() {
-				if (this.readyState == 4) {
-					var obj = JSON.parse(this.responseText);
-					console.log(obj);
-					if(obj.result){
-						$("#orderList").find("#"+no).remove();	
-						$("#orderDiv").find("#totalPrice").text(obj.totalPrice);
-						
-						
-					}
-				}
-			}
-		xhr.send();
-	};
-	//});
-	
-	// 장바구니 + 버튼
-	function orderListPlus(target){
-		var no = $(target).closest('li').attr('id');
-		var xhr = new XMLHttpRequest();
-		xhr.open("get", "/sendJson?no=" + no+"&mode=plus", true);
-			xhr.onreadystatechange = function() {
-				if (this.readyState == 4) {
-					var obj = JSON.parse(this.responseText);
-					if(obj.result){
-						//$("#orderList").find("#"+no).find("#count").text(parseInt($("#orderList").find("#"+no).find("#count").text())+1);
-						$("#orderList").find("#"+no).find("#count").text(obj.menu.cnt);
-						$("#orderList").find("#"+no).find("#price").text(obj.price);
-						$("#orderDiv").find("#totalPrice").text(obj.totalPrice);
-						
-					}
-				}
-			}
-		xhr.send();
-	};
-	// 장바구니 - 버튼
-	function orderListMinus(target){
-		var no = $(target).closest('li').attr('id');
-		var xhr = new XMLHttpRequest();
-		xhr.open("get", "/sendJson?no=" + no+"&mode=minus", true);
-			xhr.onreadystatechange = function() {
-				if (this.readyState == 4) {
-					var obj = JSON.parse(this.responseText);
-					if(obj.result){
-						//$("#orderList").find("#"+no).find("#count").text(parseInt($("#orderList").find("#"+no).find("#count").text())-1);
-						$("#orderList").find("#"+no).find("#count").text(obj.menu.cnt);
-						$("#orderList").find("#"+no).find("#price").text(obj.price);
-						$("#orderDiv").find("#totalPrice").text(obj.totalPrice);
-						
-					}
-				}
-			}
-		xhr.send();
-	};
-	
-	// 음식 클릭 이벤트 .
-	$(".menu").on("click", function() {
-		var xhr = new XMLHttpRequest();
-		var no = this.id;
-		xhr.open("get", "/sendJson?no=" + no+"&mode=add", true);
+		xhr.open("get", "/sendJson?no=" + no + "&mode=remove", true);
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				var obj = JSON.parse(this.responseText);
-					// 이미 클릭한 메뉴를 또 누를 경우 숫자만 증가 
-					if (obj.overLap) {
-						//$("#orderList").find("#"+obj.menu).find("#count").text(parseInt($("#orderList").find("#"+obj.menu).find("#count").text())+1);
-						$("#orderList").find("#"+no).find("#count").text(obj.menu.cnt);
-						$("#orderList").find("#"+no).find("#price").text(obj.price);
-						$("#orderDiv").find("#totalPrice").text(obj.totalPrice);
-						
-					// 새로운 메뉴 클릭시 메뉴 추가.
-					} else {
-						$("#orderList").append("<li id="+obj.menu.no+"> <div class='w3-row'>"
+				console.log(obj);
+				if (obj.result) {
+					$("#orderList").find("#" + no).remove();
+					$("#orderDiv").find("#totalPrice").text(obj.totalPrice);
+
+				}
+			}
+		}
+		xhr.send();
+	};
+	//});
+
+	// 장바구니 + 버튼
+	function orderListPlus(target) {
+		var no = $(target).closest('li').attr('id');
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "/sendJson?no=" + no + "&mode=plus", true);
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4) {
+				var obj = JSON.parse(this.responseText);
+				if (obj.result) {
+					//$("#orderList").find("#"+no).find("#count").text(parseInt($("#orderList").find("#"+no).find("#count").text())+1);
+					$("#orderList").find("#" + no).find("#count").text(
+							obj.menu.cnt);
+					$("#orderList").find("#" + no).find("#price").text(
+							obj.price);
+					$("#orderDiv").find("#totalPrice").text(obj.totalPrice);
+				}
+			}
+		}
+		xhr.send();
+	};
+	// 장바구니 - 버튼
+	function orderListMinus(target) {
+		var no = $(target).closest('li').attr('id');
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "/sendJson?no=" + no + "&mode=minus", true);
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4) {
+				var obj = JSON.parse(this.responseText);
+				if (obj.result) {
+					//$("#orderList").find("#"+no).find("#count").text(parseInt($("#orderList").find("#"+no).find("#count").text())-1);
+					$("#orderList").find("#" + no).find("#count").text(
+							obj.menu.cnt);
+					$("#orderList").find("#" + no).find("#price").text(
+							obj.price);
+					$("#orderDiv").find("#totalPrice").text(obj.totalPrice);
+
+				}
+			}
+		}
+		xhr.send();
+	};
+
+	// 음식 클릭 이벤트 .
+	$(".menu")
+			.on(
+					"click",
+					function() {
+						var xhr = new XMLHttpRequest();
+						var no = this.id;
+						xhr.open("get", "/sendJson?no=" + no + "&mode=add",
+								true);
+						xhr.onreadystatechange = function() {
+							if (this.readyState == 4) {
+								var obj = JSON.parse(this.responseText);
+								// 이미 클릭한 메뉴를 또 누를 경우 숫자만 증가 
+								if (obj.overLap) {
+									//$("#orderList").find("#"+obj.menu).find("#count").text(parseInt($("#orderList").find("#"+obj.menu).find("#count").text())+1);
+									$("#orderList").find("#" + no).find(
+											"#count").text(obj.menu.cnt);
+									$("#orderList").find("#" + no).find(
+											"#price").text(obj.price);
+									$("#orderDiv").find("#totalPrice").text(
+											obj.totalPrice);
+
+									// 새로운 메뉴 클릭시 메뉴 추가.
+								} else {
+									$("#orderList")
+											.append(
+													"<li id="+obj.menu.no+"> <div class='w3-row'>"
 															+ obj.menu.name
 															+ "</div>"
 															+ "<div class='w3-left-align w3-small'><span class='w3-button w3-small orderRemove' onclick='orderListRemove(this)' >X</span> "
-															+ " <span id ='price'>" + obj.menu.price +"</span>"
+															+ " <span id ='price'>"
+															+ obj.menu.price
+															+ "</span>"
 															+ " <span class='w3-button w3-small' onclick='orderListMinus(this)'>-</span> <span id='count'>"
 															+ obj.menu.cnt
 															+ "</span> <span class='w3-button w3-small' onclick='orderListPlus(this)'>+</span> </div></li>");
-						$("#orderDiv").find("#totalPrice").text(obj.totalPrice);
-						
+									$("#orderDiv").find("#totalPrice").text(
+											obj.totalPrice);
+
 								}
-							} 
+							}
 						}
 						xhr.send();
 

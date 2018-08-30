@@ -59,22 +59,30 @@ public class OwnerController {
 
 	// 메뉴추가 컨트롤러
 	@GetMapping("/addmenu")
-	public String addMenuHandle01() {
-		return "owner/addmenu";
+	public ModelAndView addMenuHandle01() {
+		
+		ModelAndView mav = new ModelAndView();
+		List<Map> menuType = menuDao.findAll();
+		System.out.println("menuType" + menuType);
+		mav.setViewName("owner/addmenu");
+		mav.addObject("menuTypeList", menuType);
+		
+		return mav;
 	}
 
 	// @RequestParam("file")MultipartFile[] files
 
 	@PostMapping("/addmenu")
 	public ModelAndView indexHandle02(@ModelAttribute MultiMenuVo menus, WebRequest webRequest) throws Exception {
-		StoreVo store = (StoreVo) webRequest.getAttribute("vo", WebRequest.SCOPE_SESSION);
+
+		StoreVo store = (StoreVo)webRequest.getAttribute("vo", WebRequest.SCOPE_SESSION);
+		
 		ModelAndView mav = new ModelAndView();
 		for (MenuVo vo : menus.getMenus()) {
 			int menuNo = menuDao.getSequence();
 			vo.setNo(menuNo);
 			vo.setStore(store.getNo());
-			System.out.println(menuNo);
-			System.out.println(vo.toString());
+			
 			menuDao.addMenu(vo);
 
 			if (!vo.getAttach()[0].isEmpty()) {
@@ -99,11 +107,17 @@ public class OwnerController {
 		return mav;
 	}
 
-	// 현재 등록 되어 있는 메뉴들 전부다 보여주는거
+	//현재 등록 되어 있는 메뉴들 전부다 보여주는거
 	@GetMapping("/addedmenu")
 	public ModelAndView addedMenuHandle02(WebRequest webRequest) {
 		StoreVo vo = (StoreVo) webRequest.getAttribute("vo", WebRequest.SCOPE_SESSION);
+
 		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
+		
+		for(MenuVo vo22 : menuList) {
+			System.out.println(vo22);
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("owner/addedmenu");
 		mav.addObject("storeVo", vo);
