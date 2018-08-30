@@ -94,8 +94,8 @@ public class OwnerController {
 				}
 			}
 		}
-
-		mav.setViewName("owner/addedmenu");
+		System.out.println("3333");
+		mav.setViewName("redirect:/owner/addedmenu");
 
 		return mav;
 	}
@@ -127,11 +127,14 @@ public class OwnerController {
 		StoreVo svo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
 		List<MenuVo> menuList = menuDao.getMenuList(svo.getNo());
 		
+		List<Map> menuType = menuDao.findAll();
+		
 		MenuVo vo = menuDao.getMenu(no);
 		System.out.println("menu vo : " +vo);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("owner/updatemenu");
 		mav.addObject("menu", vo);
+		mav.addObject("menuTypeList", menuType);
 		return mav;
 	}
 	// 메뉴수정페이지
@@ -151,7 +154,7 @@ public class OwnerController {
 			}
 		}
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("owner/addedmenu");
+		mav.setViewName("redirect:/owner/addedmenu");
 		return mav;
 	}
 

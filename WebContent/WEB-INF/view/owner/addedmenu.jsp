@@ -5,10 +5,9 @@
 <div class="w3-container"
 	style="padding-top: 50px; padding-left: 100px; padding-right: 100px">
 
-	<button onclick="menubarSelect('menuList')"
-		class="w3-button w3-block w3-black w3-left-align">등록된 메뉴</button>
+	<button class="w3-button w3-block w3-black w3-left-align">등록된 메뉴</button>
 	<div class="w3-container">
-		<div id="menuList" class="w3-show">
+		<div id="menuList" >
 			<ul class="w3-ul w3-card-4">
 				<c:forEach items="${menuList}" var="menu">
 					<li class="w3-bar menu" id="${menu.no }"><img
@@ -29,21 +28,6 @@
 <script>
 	//
 	
-	
-	function openTabs(evt, tabsName) {
-		var i, x, tablinks;
-		x = document.getElementsByClassName("tabs");
-		for (i = 0; i < x.length; i++) {
-			x[i].style.display = "none";
-		}
-		tablinks = document.getElementsByClassName("tablink");
-		for (i = 0; i < x.length; i++) {
-			tablinks[i].className = tablinks[i].className.replace(
-					" w3-border-red", "");
-		}
-		document.getElementById(tabsName).style.display = "block";
-		evt.currentTarget.firstElementChild.className += " w3-border-red";
-	}
 	
 	
 	//삭제버튼 스크립트 처리
