@@ -23,7 +23,7 @@
 	</update>
 	<!-- 메뉴파일 업데이트 -->
 	<update id="updateAttach" parameterType="pro.vo.MenuAttachVo">
-		update menu set uri=#{uri}, name=#{name} where parent=#{parent}
+		update menuattach set uri=#{uri}, name=#{name} where no=#{no} 
 	</update>
 	
 	<!-- 메뉴 시퀀스  -->
@@ -33,12 +33,12 @@
 	<!--  메뉴 리스트 -->
 	<select id="getMenuList" parameterType="java.lang.Integer"
 		resultType="pro.vo.MenuVo">
-		select a.*, b.uri fileUri, b.name fileName from (( select * from menu where store = #{no}) a left join menuattach b on a.no = b.parent)
+		select a.*, b.no fileNo, b.uri fileUri, b.name fileName from (( select * from menu where store = #{no}) a left join menuattach b on a.no = b.parent)
 	</select>
 	<!--  메뉴 가져오기 -->
 	<select id="getMenu" parameterType="java.lang.Integer"
 		resultType="pro.vo.MenuVo">
-		select a.*, b.uri fileUri, b.name fileName from (( select * from menu where no = #{no}) a left join menuattach b on a.no = b.parent)
+		select a.*, b.no fileNo, b.uri fileUri, b.name fileName from (( select * from menu where no = #{no}) a left join menuattach b on a.no = b.parent)
 	</select>
 	<!--  메뉴 타입s 가져오기 -->
 	<select id="TypeFindAll" resultType="java.util.HashMap">

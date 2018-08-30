@@ -16,6 +16,8 @@
 		method="post" name="menuInfo" enctype="multipart/form-data"
 		id="addform" onsubmit="return checkValue();">
 		<input type="hidden" name="no" value="${menu.no }"/>
+		<input type="hidden" name="store" value="${menu.store }"/>
+		<input type="hidden" name="fileNo" value="${menu.fileNo }" />
 		<div id="default" class="each">
 			<div class="w3-half" style="padding-right: 10px; padding-top: 10px">
 				<label>메뉴명</label> <input class="w3-input w3-border idx data"

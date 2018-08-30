@@ -152,6 +152,7 @@ public class OwnerController {
 				MenuAttachVo avo = uploadService.execute(file,vo.getStore());
 				
 				avo.setParent(vo.getNo());
+				avo.setNo(vo.getFileNo());
 				System.out.println("222");
 				System.out.println(avo.toString());
 				menuDao.updateMenuAttach(avo);
