@@ -23,12 +23,8 @@
 		
 	</c:choose>	
 --%>
-			<h2>로그인 성공</h2>
-			<p class="userInfo">
-				<img src="../../../images/privatePic.png" class="privatePic" /> ${sessionScope.member.nickname } 님
-				<a href="logout">로그아웃</a>
-				<a href="login/reg" class="mInfo"> 내정보 </a><a href="#"><img class="Info_lock" src="../../../images/lock.png" alt="잠금장치 이미지" /></a>
-			</p>
+	<h2>회원가입성공 성공</h2>
+			
 <%--		<h2>로그인</h2>
 			<form name="loginForm" method="post" action="loginProc">
 				<table>
@@ -40,7 +36,7 @@
 			</form>--%>
 	<p class="userInfo">
 		<img src="../../../images/privatePic.png" class="privatePic" /> ${ member.nickname } 님
-		<a href="login/reg" class="mInfo"> 내정보 </a><a href="#"><img class="Info_lock" src="../../../images/lock.png" alt="잠금장치 이미지" /></a>
+		<a href="/member/memInfo" class="mInfo"> 내정보 </a><a href="#"><img class="Info_lock" src="../../../images/lock.png" alt="잠금장치 이미지" /></a>
 	</p>
 	
 	<!-- 주문하러가기 버튼 -->
