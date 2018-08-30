@@ -144,6 +144,7 @@ public class OrderController {
 		data.put("delivery", "N");
 		// 주문시 요청사항
 		data.put("requested", map.get("requested"));
+		data.put("reviewd", "N");
 
 		orderDao.insertLog(data);
 

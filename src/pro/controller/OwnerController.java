@@ -76,7 +76,7 @@ public class OwnerController {
 	public ModelAndView indexHandle02(@ModelAttribute MultiMenuVo menus, WebRequest webRequest) throws Exception {
 
 		StoreVo store = (StoreVo)webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
-		
+
 		ModelAndView mav = new ModelAndView();
 		for (MenuVo vo : menus.getMenus()) {
 			int menuNo = menuDao.getSequence();
@@ -111,7 +111,6 @@ public class OwnerController {
 	@GetMapping("/addedmenu")
 	public ModelAndView addedMenuHandle02(WebRequest webRequest) {
 		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
-
 		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 		
 		for(MenuVo vo22 : menuList) {
@@ -209,6 +208,7 @@ public class OwnerController {
 		mav.setViewName("owner/review");
 
 		StoreVo store = (StoreVo) req.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
+
 		List<ReviewVo> reviews = storeDao.findReview(store.getNo());
 		System.out.println("[controller:owner] review : " + reviews);
 

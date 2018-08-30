@@ -2,6 +2,7 @@ package pro.vo;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,18 +11,7 @@ public class MenuVo implements Serializable {
 	String name;
 	int price;
 	int store;
-	String fileUri;
-	String fileName;
 	int type;
-	
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
-
 	MultipartFile[] attach;
 
 	// 강성택 메뉴 카운트 추가
@@ -52,22 +42,6 @@ public class MenuVo implements Serializable {
 		this.store = store;
 	}
 
-	public String getFileUri() {
-		return fileUri;
-	}
-
-	public void setFileUri(String fileUri) {
-		this.fileUri = fileUri;
-	}
-
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
 	public int getNo() {
 		return no;
 	}
@@ -91,12 +65,20 @@ public class MenuVo implements Serializable {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+	
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
 
 	@Override
 	public String toString() {
-		return "MenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + ", fileUri=" + fileUri
-				+ ", fileName=" + fileName + ", type=" + type + ", attach=" + Arrays.toString(attach) + ", cnt=" + cnt
-				+ "]";
+		return "MenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + ", type=" + type
+				+ ", attach=" + Arrays.toString(attach) + ", cnt=" + cnt + "]";
 	}
+
 	
 }
