@@ -29,16 +29,17 @@ div ul.reg_category li input {width:190px; height:25px;}
 /*div.reg_company {width:360px; height:300px; border:1px solid red;}*/
 hr {margin-top:20px; border:1px solid #EAEAEA;}
 .size::-webkit-input-placeholder {margin:0 0 0 10px; padding-left:10px;}
-.logo_addStore {width:auto; height:100px; line-height:50px;}
-footer {margin-top:380px;}
+.bg {width:100%; height:100px; background:#f44336;}
+.logo_s {width:auto; height:100px; line-height:50px; margin-bottom:10px;}
+footer {margin-top:405px;}
 p.shopReg {text-align:center;}
 p.shopReg b.shopReg_inquiry {text-align:center;}
 .hr_form {width:100%; height:auto; position:relative; top:50px;}
 </style>
 </head>
 <body>
-<a href="../../../index"><img src="../images/logo_s.png" class="logo_addStore"></a>
-<hr />
+<div class="bg">
+	<a href="../../../index"><img src="../images/logo_s.png" class="logo_s"></a>
 	<div class="hr_form">
 		<form action="${ pageContext.servletContext.contextPath }/admin/addStore" method="post">
 			<div class="reg_company">

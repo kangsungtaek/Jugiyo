@@ -26,7 +26,20 @@
 			<button type="submit" class="input_txtBox">로그인</button>    
 	</form>
 </div>
-<script src="../../../js/w3-mode.js"></script>
+<footer class="w3-row-padding w3-padding-16 "><!-- footer -->
+    <div class="w3-col l10 s6 w3-red">
+      <p>
+		<b>"저기요(JUGIYO)"</b><br />
+		사장님을 흔히 부를 때 쓰는 표현과 장소를 가리키는 표현의 이중적인 의미를 가지고 있습니다.
+	  </p>
+    </div>
+    <div class="w3-col l2 s6 w3-dark-grey">
+      <p class="shopReg">
+      	<b class="shopReg_inquiry">상점 등록 문의</b><br/>
+      	<b class="shopReg_inquiry">02-1588-1588</b>
+      </p>
+    </div>
+</footer><!--//footer -->
 
 
 	
