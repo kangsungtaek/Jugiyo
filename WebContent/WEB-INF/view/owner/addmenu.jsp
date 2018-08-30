@@ -155,10 +155,14 @@
 
 	var e = $("#default").clone();
 	//e.append("<button id='del' type ='button' onclick='Remove(this)'>삭제</button>");
-	$("#bt").click(function() {
+	$("#bt")
+			.click(
+					function() {
 						e.removeAttr("id");
 						$("#plus").append(e.html());
-						$("#plus").append("<button id='del' type ='button' onclick='Remove(this)'>삭제</button>");
+						$("#plus")
+								.append(
+										"<button id='del' type ='button' onclick='Remove(this)'>삭제</button>");
 						//$("#del").click(function() {
 						//	$(this).remove();
 						//});
