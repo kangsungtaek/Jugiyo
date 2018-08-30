@@ -31,7 +31,14 @@ public class MemberController {
 	UploadService us;
 	
 	@RequestMapping("/memInfo")
-	public String memInfoHandle() {
+	public String memInfoHandle(WebRequest req) {
+		MemberVo vo = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
+		Map<String, String> map = new HashMap<>();
+			map.put("id", vo.getId());
+			map.put("password", vo.getPassword());
+		vo = memberDao.findById(map);
+		
+		req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
 		return "member/memInfo";
 	}
 

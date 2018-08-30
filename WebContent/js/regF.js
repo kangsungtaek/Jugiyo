@@ -109,14 +109,8 @@
 	   console.log($(this).val());
          $("#emailajax").val("");   // #emailCheck는 span id
       if (emailRule.test($("#email").val())) {
-            var rCheck = r.rst;
-            if(rCheck == "YYYY") {
-               $("#emailajax").css("color", "green");
-               $("#emailajax").html("사용가능한 Email 입니다.");
-            }else {
-               $("#emailajax").css("color", "red");
-               $("#emailajax").html("이미 사용중인 Email 입니다.");
-            }
+         $("#emailajax").css("color", "green");
+         $("#emailajax").html("사용가능한 Email 입니다.");
       } else {
          $("#emailajax").css("color", "red");
          $("#emailajax").html("Email 형식에 맞지 않습니다.");
