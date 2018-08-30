@@ -35,7 +35,7 @@ public class OrderDao {
 	}
 	//스토어 메뉴뽑기
 	public List<LogVo> findStore (String name){
-		Query query = new BasicQuery(new Document().append("storeNo", name));
+		Query query = new BasicQuery(new Document().append("menuName", name));
 		return mongoTemplate.find(query, LogVo.class, "log");
 	}
 	
