@@ -16,7 +16,7 @@
     
     <div class="w3-bar-item">
       <span class="w3-large">콜라+사이다+치킨</span><br>
-      <span>~님의 주문</span>
+      <span>님의 주문</span>
     </div>
   </li>
 

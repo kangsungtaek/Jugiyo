@@ -1,8 +1,14 @@
 package pro.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -48,7 +54,22 @@ public class OwnerController {
 	// 사장님 페이지
 	@GetMapping("/index")
 	public String indexHandle01(WebRequest webRequest) {
-		webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
+		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
+		List<LogVo> lVo = orderDao.findStore(vo.getNo());
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date= new Date();
+		String today = sdf.format(date);
+		int price=0;
+		for(int i = 0; i < lVo.size(); i++) {
+			Date d = lVo.get(i).getOrderdate();
+			sdf.format(d);
+			if(today.equals(d)) {
+				price+=lVo.get(i).getTotalPrice();
+			}
+		}
+		
+		
 		return "owner/index";
 	}
 
@@ -131,9 +152,8 @@ public class OwnerController {
 	public ModelAndView updateMenu(@RequestParam("no") int no, WebRequest webRequest) {
 		StoreVo svo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
 		List<MenuVo> menuList = menuDao.getMenuList(svo.getNo());
-		
+
 		List<Map> menuType = menuDao.findAll();
-		
 
 		MenuVo vo = menuDao.getMenu(no);
 		System.out.println("menu vo : " + vo);
@@ -218,7 +238,7 @@ public class OwnerController {
 		String json = gson.toJson(data);
 		mav.setViewName("owner/menustats");
 		mav.addObject("data", json);
-		
+
 		System.out.println(data);
 
 		return mav;
@@ -230,36 +250,79 @@ public class OwnerController {
 		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
 		List<LogVo> lVo = orderDao.findStore(vo.getNo());
 		System.out.println(lVo);
-		
-		int mounthPrice = 0;
-		Map<String, Integer> timeStates = new HashMap<>();
-		for (int i = 0; i < lVo.size(); i++) {
-			System.out.println("lvo date:" + lVo.get(i).getOrderdate() + "lvo total:" + lVo.get(i).getTotalPrice());
-			mounthPrice += lVo.get(i).getTotalPrice();
-			
-			
-			
-			
-			timeStates.put(lVo.get(i).getOrderdate().getMonth()+1+"월", mounthPrice);
+		Map<String, Integer> timeStates = new LinkedHashMap();
+
+		int year = 2018;
+
+		for (int i = 1; i <= 12; i++) {
+			timeStates.put(i + "월", 0);
 		}
-		System.out.println(timeStates);
+
+		for (int i = 0; i < lVo.size(); i++) {
+
+			Date date = lVo.get(i).getOrderdate();
+			LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			int month = localDate.getMonthValue();
+
+			if (localDate.getYear() == year) {
+				switch (month) {
+				case 1:
+					timeStates.put("1월", timeStates.get("1월") + lVo.get(i).getTotalPrice());
+					break;
+				case 2:
+					timeStates.put("2월", timeStates.get("2월") + lVo.get(i).getTotalPrice());
+					break;
+				case 3:
+					timeStates.put("3월", timeStates.get("3월") + lVo.get(i).getTotalPrice());
+					break;
+				case 4:
+					timeStates.put("4월", timeStates.get("4월") + lVo.get(i).getTotalPrice());
+					break;
+				case 5:
+					timeStates.put("5월", timeStates.get("5월") + lVo.get(i).getTotalPrice());
+					break;
+				case 6:
+					timeStates.put("6월", timeStates.get("6월") + lVo.get(i).getTotalPrice());
+					break;
+				case 7:
+					timeStates.put("7월", timeStates.get("7월") + lVo.get(i).getTotalPrice());
+					break;
+				case 8:
+					timeStates.put("8월", timeStates.get("8월") + lVo.get(i).getTotalPrice());
+					break;
+				case 9:
+					timeStates.put("9월", timeStates.get("9월") + lVo.get(i).getTotalPrice());
+					break;
+				case 10:
+					timeStates.put("10월", timeStates.get("10월") + lVo.get(i).getTotalPrice());
+					break;
+				case 11:
+					timeStates.put("11월", timeStates.get("11월") + lVo.get(i).getTotalPrice());
+					break;
+				case 12:
+					timeStates.put("12월", timeStates.get("12월") + lVo.get(i).getTotalPrice());
+					break;
+				}
+			}
+		}
+		System.out.println("------" + timeStates);
 		
-		List list = new ArrayList<>();
-		list.add(timeStates.values());
-		
-		List list2 = new ArrayList<>();
+		List list = new LinkedList();
+		list.addAll(timeStates.values());
+
+		List list2 = new LinkedList();
 		list2.addAll(timeStates.keySet());
-		
+
 		String json = gson.toJson(list);
 		String json2 = gson.toJson(list2);
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("owner/salesstats");
 		mav.addObject("price", json);
-		mav.addObject("mounth",json2);
+		mav.addObject("mounth", json2);
 		System.out.println(json);
 		System.out.println(json2);
-		
+
 		return mav;
 	}
 	// 리뷰관리창
