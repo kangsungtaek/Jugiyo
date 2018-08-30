@@ -53,7 +53,7 @@ public class OwnerController {
 
 	@RequestMapping("/logout")
 	public String logoutHandle(WebRequest req) {
-		req.setAttribute("login", null, WebRequest.SCOPE_SESSION);
+		req.setAttribute("storeVo", null, WebRequest.SCOPE_SESSION);
 		return "/index";
 	}
 
