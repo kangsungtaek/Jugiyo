@@ -129,11 +129,35 @@ public class OwnerController {
 	// 메뉴수정페이지
 	@GetMapping("/updatemenu")
 	public ModelAndView updateMenu(@RequestParam("no") int no, WebRequest webRequest) {
-		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
-		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
-
+		
+		MenuVo vo = menuDao.getMenu(no);
+		System.out.println("menu vo : " +vo);
 		ModelAndView mav = new ModelAndView();
-
+		mav.setViewName("owner/updatemenu");
+		mav.addObject("menu", vo);
+		return mav;
+	}
+	// 메뉴수정페이지
+	@PostMapping("/updatemenu")
+	public ModelAndView updateMenu(@ModelAttribute MenuVo vo,@RequestParam("attach") MultipartFile[] files) throws Exception {
+		
+		System.out.println("menu vo : " +vo);
+		menuDao.updateMenu(vo);
+		System.out.println("111");
+		
+		if(!files[0].isEmpty()) {
+			for (MultipartFile file : files) {
+				MenuAttachVo avo = uploadService.execute(file,vo.getStore());
+				
+				avo.setParent(vo.getNo());
+				System.out.println("222");
+				System.out.println(avo.toString());
+				menuDao.updateMenuAttach(avo);
+				System.out.println("333");
+			}
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("owner/addedmenu");
 		return mav;
 	}
 

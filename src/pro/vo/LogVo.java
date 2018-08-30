@@ -11,6 +11,16 @@ public class LogVo {
 	int storeType; // 음식점의 타입
 	List<MenuVo> orderList;
 	Date orderdate;
+	int totalPrice;
+
+	
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -63,7 +73,9 @@ public class LogVo {
 	@Override
 	public String toString() {
 		return "LogVo [userId=" + userId + ", storeNo=" + storeNo + ", storeName=" + storeName + ", storeType="
-				+ storeType + ", orderList=" + orderList + ", orderdate=" + orderdate + "]";
+				+ storeType + ", orderList=" + orderList + ", orderdate=" + orderdate + ", totalPrice=" + totalPrice
+				+ "]";
 	}
+
 
 }

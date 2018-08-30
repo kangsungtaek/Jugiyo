@@ -35,6 +35,12 @@ public class MenuDao {
 	public int addMenuAttach(MenuAttachVo vo) {
 		return template.insert("owner.addAttach",vo);
 	}
+	
+	// menu attach  update 
+	public int updateMenuAttach(MenuAttachVo vo) {
+		return template.update("owner.updateAttach",vo);
+	}
+	
 	//메뉴삭제
 	public boolean deleteMenu(int no) {
 		int r = template.insert("owner.menuDelete",no);
@@ -47,4 +53,5 @@ public class MenuDao {
 	public List<Map> findAll() {
 		return template.selectList("owner.TypeFindAll", null);
 	}
+	
 }

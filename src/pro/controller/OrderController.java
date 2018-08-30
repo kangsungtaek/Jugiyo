@@ -117,12 +117,12 @@ public class OrderController {
 	public String orderedHandle2(@RequestParam Map<String, String> map, WebRequest req) {
 
 		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
+		int totalPrice =  (int) req.getAttribute("totalPrice", WebRequest.SCOPE_SESSION);
 		MemberVo mVo = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
 
 		// map = 배달주소, 휴대폰번호, 주문시요청사항, 결제수단(현금or카드), +@ 할인
 		System.out.println(map);
 
-		int totalPrice = 0;
 
 		if (mVo == null) {
 			mVo = new MemberVo();
@@ -144,6 +144,8 @@ public class OrderController {
 		data.put("delivery", "N");
 		// 주문시 요청사항
 		data.put("requested", map.get("requested"));
+		// 토탈 프라이스
+		data.put("totalPrice", totalPrice);
 
 		orderDao.insertLog(data);
 

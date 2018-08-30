@@ -4,10 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-
-
-
-
 <div class="w3-container"
 	style="padding-left: 100px; padding-right: 100px;">
 	<div class="w3-border">
@@ -29,7 +25,7 @@
 </div>
 <script>
 
-$("cate").on("click", function() {
+$(".cate").on("click", function() {
 	location.href = "order/order?storeNo=" + $(this).attr("id");
 });
 </script>
