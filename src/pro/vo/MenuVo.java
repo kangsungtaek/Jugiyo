@@ -92,11 +92,26 @@ public class MenuVo implements Serializable {
 	}
 
 
-	@Override
-	public String toString() {
-		return "MenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + ", type=" + type
-				+ ", attach=" + Arrays.toString(attach) + ", cnt=" + cnt + "]";
+	public String getFileUri() {
+		return fileUri;
 	}
 
-	
+	public void setFileUri(String fileUri) {
+		this.fileUri = fileUri;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	@Override
+	public String toString() {
+		return "MenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + ", fileNo=" + fileNo
+				+ ", fileUri=" + fileUri + ", fileName=" + fileName + ", type=" + type + ", attach="
+				+ Arrays.toString(attach) + ", cnt=" + cnt + "]";
+	}
 }
