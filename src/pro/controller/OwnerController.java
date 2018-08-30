@@ -1,6 +1,7 @@
 package pro.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,13 +61,13 @@ public class OwnerController {
 	// 메뉴추가 컨트롤러
 	@GetMapping("/addmenu")
 	public ModelAndView addMenuHandle01() {
-		
+
 		ModelAndView mav = new ModelAndView();
 		List<Map> menuType = menuDao.findAll();
 		System.out.println("menuType" + menuType);
 		mav.setViewName("owner/addmenu");
 		mav.addObject("menuTypeList", menuType);
-		
+
 		return mav;
 	}
 
@@ -75,14 +76,14 @@ public class OwnerController {
 	@PostMapping("/addmenu")
 	public ModelAndView indexHandle02(@ModelAttribute MultiMenuVo menus, WebRequest webRequest) throws Exception {
 
-		StoreVo store = (StoreVo)webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
+		StoreVo store = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
 
 		ModelAndView mav = new ModelAndView();
 		for (MenuVo vo : menus.getMenus()) {
 			int menuNo = menuDao.getSequence();
 			vo.setNo(menuNo);
 			vo.setStore(store.getNo());
-			
+
 			menuDao.addMenu(vo);
 
 			if (!vo.getAttach()[0].isEmpty()) {
@@ -107,12 +108,16 @@ public class OwnerController {
 		return mav;
 	}
 
-	//현재 등록 되어 있는 메뉴들 전부다 보여주는거
+	// 현재 등록 되어 있는 메뉴들 전부다 보여주는거
 	@GetMapping("/addedmenu")
 	public ModelAndView addedMenuHandle02(WebRequest webRequest) {
 		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
 		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
-		
+
+		for (MenuVo vo22 : menuList) {
+			System.out.println(vo22);
+		}
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("owner/addedmenu");
 		mav.addObject("storeVo", vo);
@@ -129,24 +134,28 @@ public class OwnerController {
 		
 		List<Map> menuType = menuDao.findAll();
 		
+
 		MenuVo vo = menuDao.getMenu(no);
-		System.out.println("menu vo : " +vo);
+		System.out.println("menu vo : " + vo);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("owner/updatemenu");
 		mav.addObject("menu", vo);
 		mav.addObject("menuTypeList", menuType);
 		return mav;
 	}
+
 	// 메뉴수정페이지
 	@PostMapping("/updatemenu")
-	public ModelAndView updateMenu(@ModelAttribute MenuVo vo,@RequestParam("attach") MultipartFile[] files) throws Exception {
-		
-		System.out.println("menu vo : " +vo);
+	public ModelAndView updateMenu(@ModelAttribute MenuVo vo, @RequestParam("attach") MultipartFile[] files)
+			throws Exception {
+
+		System.out.println("menu vo : " + vo);
 		menuDao.updateMenu(vo);
-		
-		if(!files[0].isEmpty()) {
+
+		if (!files[0].isEmpty()) {
 			for (MultipartFile file : files) {
-				MenuAttachVo avo = uploadService.execute(file,vo.getStore());
+				MenuAttachVo avo = uploadService.execute(file, vo.getStore());
+
 				avo.setParent(vo.getNo());
 				avo.setNo(vo.getFileNo());
 				System.out.println(avo.toString());
@@ -163,7 +172,7 @@ public class OwnerController {
 	public ModelAndView menuStatsHandle01(WebRequest webRequest) {
 		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
 		// List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
-		List<LogVo> lVo = orderDao.findStore(vo.getName());
+		List<LogVo> lVo = orderDao.findStore(vo.getNo());
 		System.out.println(lVo);
 		// Map<Date, List<MenuVo>> salesMenu = new HashMap<>();
 		Map<String, Integer> bestSales = new HashMap<>();
@@ -177,6 +186,7 @@ public class OwnerController {
 			for (int j = 0; j < lVo.get(i).getOrderList().size(); j++) {
 				if (bestSales.containsKey(lVo.get(i).getOrderList().get(j).getName())) {
 					System.out.println("cnt : " + bestSales.get(lVo.get(i).getOrderList().get(j).getName()));
+
 					int cnt = bestSales.get(lVo.get(i).getOrderList().get(j).getName());
 					cnt += lVo.get(i).getOrderList().get(j).getCnt();
 
@@ -209,7 +219,6 @@ public class OwnerController {
 		mav.setViewName("owner/menustats");
 		mav.addObject("data", json);
 		
-		
 		System.out.println(data);
 
 		return mav;
@@ -217,8 +226,40 @@ public class OwnerController {
 
 	// 매출관련 통계
 	@GetMapping("/salesstats")
-	public ModelAndView salesStatsHandle01() {
+	public ModelAndView salesStatsHandle01(WebRequest webRequest) {
+		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
+		List<LogVo> lVo = orderDao.findStore(vo.getNo());
+		System.out.println(lVo);
+		
+		int mounthPrice = 0;
+		Map<String, Integer> timeStates = new HashMap<>();
+		for (int i = 0; i < lVo.size(); i++) {
+			System.out.println("lvo date:" + lVo.get(i).getOrderdate() + "lvo total:" + lVo.get(i).getTotalPrice());
+			mounthPrice += lVo.get(i).getTotalPrice();
+			
+			
+			
+			
+			timeStates.put(lVo.get(i).getOrderdate().getMonth()+1+"월", mounthPrice);
+		}
+		System.out.println(timeStates);
+		
+		List list = new ArrayList<>();
+		list.add(timeStates.values());
+		
+		List list2 = new ArrayList<>();
+		list2.addAll(timeStates.keySet());
+		
+		String json = gson.toJson(list);
+		String json2 = gson.toJson(list2);
+		
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("owner/salesstats");
+		mav.addObject("price", json);
+		mav.addObject("mounth",json2);
+		System.out.println(json);
+		System.out.println(json2);
+		
 		return mav;
 	}
 	// 리뷰관리창

@@ -9,14 +9,20 @@
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable(
-        		${"data"}
-        		        };
+			
+		${data}    	
+        		
+        		
+      );
+        var options = {
+                title: '메뉴통계',
+                pieHole: 0.4,
+              };
 
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
         
-      
+      };
      
     </script>
 <div id="donutchart" style="width: 900px; height: 500px;"></div>
-
