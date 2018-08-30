@@ -50,6 +50,7 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("order/order");
 		mav.addObject("storeVo", vo);
+		System.out.println("menuList =" +menuList);
 		mav.addObject("menuList", menuList);
 		
 		List<LogVo> list = storeDao.findLogByStoreNo(storeNo);
@@ -111,7 +112,7 @@ public class OrderController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("order/ordered");
-		if(addr != null) {
+		if(member == null) {
 			mav.addObject("addr", addr);			
 		} else {
 			mav.addObject("addr", member.getAddress());
@@ -172,7 +173,7 @@ public class OrderController {
 			for (MenuVo mVo2 : orderList) {
 				totalPrice += (mVo2.getPrice() * mVo2.getCnt());
 			}
-			double point = totalPrice * 0.05;
+			int point = (int) (totalPrice * 0.05);
 			System.out.println("[controller:order] point : " + point);
 			Map memberPoint = new HashMap<>();
 			memberPoint.put("id", mVo.getId());

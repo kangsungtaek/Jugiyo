@@ -14,6 +14,8 @@ public class MenuVo implements Serializable {
 
 	int fileNo;
 	String fileUri;
+	
+
 	String fileName;
 
 	int type;
@@ -23,6 +25,7 @@ public class MenuVo implements Serializable {
 	// 강성택 메뉴 카운트 추가
 	int cnt;
 	
+
 
 
 	public int getType() {
@@ -82,6 +85,7 @@ public class MenuVo implements Serializable {
 	}
 
 
+
 	public int getFileNo() {
 		return fileNo;
 	}
@@ -108,8 +112,8 @@ public class MenuVo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "MenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + ", type=" + type
-				+ ", fileNo=" + fileNo + ", fileName=" + fileName + ", fileUri=" + fileUri + ", attach="
+		return "MenuVo [no=" + no + ", name=" + name + ", price=" + price + ", store=" + store + ", fileNo=" + fileNo
+				+ ", fileUri=" + fileUri + ", fileName=" + fileName + ", type=" + type + ", attach="
 				+ Arrays.toString(attach) + ", cnt=" + cnt + "]";
 	}
 

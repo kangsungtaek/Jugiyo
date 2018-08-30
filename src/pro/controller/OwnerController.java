@@ -113,10 +113,6 @@ public class OwnerController {
 		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
 		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 		
-		for(MenuVo vo22 : menuList) {
-			System.out.println(vo22);
-		}
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("owner/addedmenu");
 		mav.addObject("storeVo", vo);
@@ -144,18 +140,14 @@ public class OwnerController {
 		
 		System.out.println("menu vo : " +vo);
 		menuDao.updateMenu(vo);
-		System.out.println("111");
 		
 		if(!files[0].isEmpty()) {
 			for (MultipartFile file : files) {
 				MenuAttachVo avo = uploadService.execute(file,vo.getStore());
-				
 				avo.setParent(vo.getNo());
 				avo.setNo(vo.getFileNo());
-				System.out.println("222");
 				System.out.println(avo.toString());
 				menuDao.updateMenuAttach(avo);
-				System.out.println("333");
 			}
 		}
 		ModelAndView mav = new ModelAndView();
