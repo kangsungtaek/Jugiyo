@@ -231,26 +231,26 @@ public class OwnerController {
 		
 		Map<Date, Integer> timeStates = new HashMap<>();
 		for (int i = 0; i < lVo.size(); i++) {
-
-			System.out.println("lvo:" + lVo.get(i).getOrderList());
-			
-			if (lVo.get(i).getOrderList() == null) {
-				continue;
+			System.out.println("lvo date:" + lVo.get(i).getOrderdate());
+			System.out.println("lvo total:" + lVo.get(i).getTotalPrice());
+			int mounthPrice = lVo.get(i).getTotalPrice();
+			mounthPrice += lVo.get(i).getTotalPrice();
+			timeStates.put(lVo.get(i).getOrderdate(), mounthPrice);
 			}
-			for (int j = 0; j < lVo.get(i).getOrderList().size(); j++) {
-				if (timeStates.containsKey(lVo.get(i).getOrderdate())) {
-					System.out.println("cnt : " + timeStates.get(lVo.get(i).getOrderList().get(j).getName()));
-					
-					int cnt = timeStates.get(lVo.get(i).getOrderList().get(j).getName());
-					cnt += lVo.get(i).getOrderList().get(j).getCnt();
-
-					timeStates.put(lVo.get(i).getOrderdate(), cnt);
-				} else {
-					timeStates.put(lVo.get(i).getOrderdate(),
-							lVo.get(i).getOrderList().get(j).getCnt());
-				}
-			}
-		}
+//			for (int j = 0; j < lVo.get(i).getOrderList().size(); j++) {
+//				if (timeStates.containsKey(lVo.get(i).getOrderdate())) {
+//					System.out.println("cnt : " + timeStates.get(lVo.get(i).getOrderList().get(j).getName()));
+//					
+//					int cnt = timeStates.get(lVo.get(i).getOrderList().get(j).getName());
+//					cnt += lVo.get(i).getOrderList().get(j).getCnt();
+//
+//					timeStates.put(lVo.get(i).getOrderdate(), cnt);
+//				} else {
+//					timeStates.put(lVo.get(i).getOrderdate(),
+//							lVo.get(i).getOrderList().get(j).getCnt());
+//				}
+//			}
+		
 
 		System.out.println(timeStates);
 
