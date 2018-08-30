@@ -1,6 +1,7 @@
 package pro.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -197,7 +198,42 @@ public class OwnerController {
 
 	// 매출관련 통계
 	@GetMapping("/salesstats")
-	public ModelAndView salesStatsHandle01() {
+	public ModelAndView salesStatsHandle01(WebRequest webRequest) {
+		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
+		List<LogVo> lVo = orderDao.findStore(vo.getNo());
+		System.out.println(lVo);
+		
+		
+		Map<Date, Integer> timeStates = new HashMap<>();
+		for (int i = 0; i < lVo.size(); i++) {
+
+			System.out.println("lvo:" + lVo.get(i).getOrderList());
+			
+			if (lVo.get(i).getOrderList() == null) {
+				continue;
+			}
+			for (int j = 0; j < lVo.get(i).getOrderList().size(); j++) {
+				if (timeStates.containsKey(lVo.get(i).getOrderdate())) {
+					System.out.println("cnt : " + timeStates.get(lVo.get(i).getOrderList().get(j).getName()));
+					
+					int cnt = timeStates.get(lVo.get(i).getOrderList().get(j).getName());
+					cnt += lVo.get(i).getOrderList().get(j).getCnt();
+
+					timeStates.put(lVo.get(i).getOrderdate(), cnt);
+				} else {
+					timeStates.put(lVo.get(i).getOrderdate(),
+							lVo.get(i).getOrderList().get(j).getCnt());
+				}
+			}
+		}
+
+		System.out.println(timeStates);
+
+		
+		
+		
+		
+		
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
