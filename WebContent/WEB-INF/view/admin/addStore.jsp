@@ -51,6 +51,17 @@ p.shopReg b.shopReg_inquiry {text-align:center;}
 					<li>
 						 ▶ <span>주  &nbsp;&nbsp;소 </span> &nbsp;| 
 						<input type="text" class="input_size size" placeholder="주소 입력" name="addr" required />
+						<div id="map" style="width:500px;height:400px;"></div>
+						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=09a2ead5f706292b477133ded73cc2fe"></script>
+						<script>
+							var container = document.getElementById('map');
+							var options = {
+								center: new daum.maps.LatLng(33.450701, 126.570667),
+								level: 3
+							};
+					
+							var map = new daum.maps.Map(container, options);
+						</script>			
 					</li>
 					<li>
 						▶ <span>업  &nbsp;&nbsp;종 </span> &nbsp;| 
