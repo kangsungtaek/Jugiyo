@@ -142,7 +142,7 @@ public class OwnerController {
 	public ModelAndView menuStatsHandle01(WebRequest webRequest) {
 		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
 		// List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
-		List<LogVo> lVo = orderDao.findStore(vo.getName());
+		List<LogVo> lVo = orderDao.findStore(vo.getNo());
 		System.out.println(lVo);
 		// Map<Date, List<MenuVo>> salesMenu = new HashMap<>();
 		Map<String, Integer> bestSales = new HashMap<>();
@@ -156,6 +156,7 @@ public class OwnerController {
 			for (int j = 0; j < lVo.get(i).getOrderList().size(); j++) {
 				if (bestSales.containsKey(lVo.get(i).getOrderList().get(j).getName())) {
 					System.out.println("cnt : " + bestSales.get(lVo.get(i).getOrderList().get(j).getName()));
+					
 					int cnt = bestSales.get(lVo.get(i).getOrderList().get(j).getName());
 					cnt += lVo.get(i).getOrderList().get(j).getCnt();
 
