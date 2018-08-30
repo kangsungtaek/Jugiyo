@@ -36,7 +36,7 @@ textarea {
 	<!--  가게정보  -->
 		<div class="w3-bar" id="${storeVo.no}" style="padding-bottom: 10px">
 			<span class="w3-bar-item w3-xlarge w3-right">${storeVo.star }</span>
-			<img src="${storeVo.img}"
+			<img src="${pageContext.request.contextPath}${storeVo.img}"
 				class="w3-bar-item w3-circle w3-hide-small w3-padding-small"
 				style="width: 85px">
 			<div class="w3-bar-item">

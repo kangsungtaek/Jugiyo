@@ -1,6 +1,7 @@
 package pro.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,8 @@ public class MenuDao {
 	public boolean deleteMenu(int no) {
 		int r = template.insert("owner.deleteMenu",no);
 		return r==1;
+	}
+	public List<Map> findAll() {
+		return template.selectList("owner.TypeFindAll", null);
 	}
 }

@@ -4,15 +4,15 @@
 	
 	<!-- 메뉴추가 -->
 	<insert id="addMenu" parameterType="pro.vo.MenuVo">
-		insert into menu (no,name,price,store)
-		values(#{no},#{name},#{price},#{store})
+		insert into menu (no,name,price,store,type)
+		values(#{no},#{name},#{price},#{store},#{type})
 	</insert>
 	<!-- 파일추가 -->
 	<insert id="addAttach" parameterType="pro.vo.MenuAttachVo">
 		insert into menuattach values(menuattach_seq.nextval, #{uri}, #{name}, #{parent})
 	</insert>
 	<!-- 메뉴삭제 -->
-	<delete id="menuDelete">
+	<delete id="deleteMenu">
 		delete from menu where no=${no}
 	</delete>
 
@@ -28,5 +28,9 @@
 	<select id="getMenu" parameterType="java.lang.Integer"
 		resultType="pro.vo.MenuVo">
 		select * from menu where no = #{no}
+	</select>
+	
+	<select id="TypeFindAll" resultType="java.util.HashMap">
+		select * from menutype
 	</select>
 </mapper>
