@@ -10,10 +10,20 @@ public class MenuVo implements Serializable {
 	String name;
 	int price;
 	int store;
+	int fileNo;
 	String fileUri;
 	String fileName;
 	int type;
 	
+	
+	public int getFileNo() {
+		return fileNo;
+	}
+
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
+	}
+
 	public int getType() {
 		return type;
 	}
