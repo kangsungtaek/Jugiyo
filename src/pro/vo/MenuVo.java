@@ -2,6 +2,7 @@ package pro.vo;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,6 +14,8 @@ public class MenuVo implements Serializable {
 	String fileUrl;
 	String fileName;
 	
+	
+
 	MultipartFile[] attach;
 
 	// 강성택 메뉴 카운트 추가

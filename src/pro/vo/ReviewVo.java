@@ -1,7 +1,7 @@
 package pro.vo;
 
 public class ReviewVo {
-	String id;
+	String logId; //log의 objectId
 	int no;
 	String nickname;
 	double star;
@@ -9,11 +9,12 @@ public class ReviewVo {
 	String[] img; //이미지주소
 	String reply;
 	
-	public String getId() {
-		return id;
+
+	public String getLogId() {
+		return logId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setLogId(String logId) {
+		this.logId = logId;
 	}
 	public int getNo() {
 		return no;
@@ -54,7 +55,7 @@ public class ReviewVo {
 	
 	@Override
 	public String toString() {
-		return "ReviewVo [id=" + id + ",no=" + no + ", nickname=" + nickname + ", star=" + star + ", content=" + content + ", img="
+		return "ReviewVo [logId=" + logId + ",no=" + no + ", nickname=" + nickname + ", star=" + star + ", content=" + content + ", img="
 				+ img + ", reply=" + reply + "]";
 	}
 }

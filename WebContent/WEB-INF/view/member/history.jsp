@@ -28,20 +28,37 @@
 		<c:forEach var="log" items="${ list }" varStatus="vs">
 			<tr>
 				<td style="vertical-align: middle;">${ vs.count }</td>
-				<td style="vertical-align: middle;"><a href="${pageContext.request.localAddr}/order/order?storeNo=${log.storeNo}">${ log.storeName }</a></td>
+				<td style="vertical-align: middle;"><a href="/order/order?storeNo=${log.storeNo}">${ log.storeName }</a></td>
 				<td style="vertical-align: middle;">
 						${ log.orderList[0].name }
 					<c:if test="${ fn:length(log.orderList) > 1 }">
 						외  ${ fn:length(log.orderList) - 1 } 
-					</c:if>
-						
+					</c:if>													
 				</td>
 				<td style="vertical-align: middle;">${ log.orderdate }</td>
 				<td>
-				<button class="w3-btn w3-white w3-border w3-border-grey w3-round-large" onclick="location.href='writeReview?no='+${log.storeNo}">리뷰작성하기</button><br/>
-				<button class="w3-btn w3-white w3-border w3-border-grey w3-round-large" onclick="location.href=''">다시주문하기</button>
+					<c:choose>
+						<c:when test="${ log.reviewd == 'Y' }">
+							<button class="w3-btn w3-white w3-border w3-border-grey w3-round-large show">나의리뷰보기</button><br/>
+						</c:when>
+						<c:otherwise>
+							<button class="w3-btn w3-white w3-border w3-border-grey w3-round-large" onclick="location.href='writeReview?_id=${log.id}&storeNo=${log.storeNo}'">리뷰작성하기</button><br/>			
+						</c:otherwise>
+					</c:choose>
+					<button class="w3-btn w3-white w3-border w3-border-grey w3-round-large" onclick="location.href=''">다시주문하기</button>
+				</td>
+			</tr>		
+			<tr class="${ vs.count }" style="display: none"> 
+				<td colspan="5">
+				<span >▷ ${ log.review.star}<br/> ${ log.review.content } </span>
 				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
+			<script>
+		    	$(".show").on("click",function(){
+		    		$(this).parent().parent().next().toggle();
+		    		//$(".${ vs.count }").toggle();
+		    	});
+		    </script>

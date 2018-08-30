@@ -4,15 +4,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
+import org.springframework.data.mongodb.core.query.BasicUpdate;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
+import pro.vo.ReviewVo;
 
 @Repository
 public class MemberDao {
@@ -52,6 +56,21 @@ public class MemberDao {
 	public void addReview(Map map) {
 		mongoTemplate.insert(map, "review");
 	}
+	
+	//리뷰등록시 log에 update해둘 함수
+	public void updateLogReviewd(String logId) {
+		Query query = new BasicQuery(new Document().append("_id", new ObjectId(logId)));
+		Update update = new BasicUpdate(new Document().append("$set", new Document().append("reviewd", "Y")));
+		
+		mongoTemplate.updateMulti(query, update, "log");
+	}
+	
+	//사용자가 작성한 리뷰불러오기
+	public ReviewVo findByLogId(String logId) {
+		Query query = new BasicQuery(new Document().append("logId", logId));
+		return mongoTemplate.findOne(query, ReviewVo.class, "review");
+	}
+	
 	//주문후 포인트 적립
 	public void updatePoint(Map map) {
 		template.update("member.updatePoint", map);

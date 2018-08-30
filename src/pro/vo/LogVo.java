@@ -1,16 +1,29 @@
 package pro.vo;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 public class LogVo {
+	String id; //objectId
 	String userId;
 	String storeNo; // 음식점 no
 	String storeName;
 	int storeType; // 음식점의 타입
 	List<MenuVo> orderList;
 	Date orderdate;
+	String delivery;
+	String requested;
+	String reviewd;
+	
+	ReviewVo review;
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -60,10 +73,43 @@ public class LogVo {
 		this.orderList = orderList;
 	}
 
+	public String getDelivery() {
+		return delivery;
+	}
+
+	public void setDelivery(String delivery) {
+		this.delivery = delivery;
+	}
+
+	public String getRequested() {
+		return requested;
+	}
+
+	public void setRequested(String requested) {
+		this.requested = requested;
+	}
+
+	public String getReviewd() {
+		return reviewd;
+	}
+
+	public void setReviewd(String reviewd) {
+		this.reviewd = reviewd;
+	}
+	
+	public ReviewVo getReview() {
+		return review;
+	}
+
+	public void setReview(ReviewVo review) {
+		this.review = review;
+	}
+
 	@Override
 	public String toString() {
-		return "LogVo [userId=" + userId + ", storeNo=" + storeNo + ", storeName=" + storeName + ", storeType="
-				+ storeType + ", orderList=" + orderList + ", orderdate=" + orderdate + "]";
+		return "LogVo [id=" + id + ", userId=" + userId + ", storeNo=" + storeNo + ", storeName=" + storeName
+				+ ", storeType=" + storeType + ", orderList=" + orderList + ", orderdate=" + orderdate + ", delivery="
+				+ delivery + ", requested=" + requested + ", reviewd=" + reviewd + "]";
 	}
 
 }
