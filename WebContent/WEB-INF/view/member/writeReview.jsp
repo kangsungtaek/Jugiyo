@@ -43,7 +43,7 @@
 				<input type="hidden" name="star" />
 				</li>
 				<li><textarea cols="50" rows="10" name="content"></textarea></li>
-				<li>사진 <input type="file" class="w3-button" name="img"></li>
+				<li>사진 <input type="file" class="w3-button" name="img" multiple></li>
 				<li>
 				<button class="w3-button w3-amber" type="submit">리뷰작성</button> 
 				<button class="w3-button w3-amber" type="reset">재작성</button>

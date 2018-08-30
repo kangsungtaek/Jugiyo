@@ -59,7 +59,7 @@ public class MemberController {
 
 	@PostMapping("/writeReview")
 	public ModelAndView writeReviewPostHandle(@RequestParam Map<String, Object> map,
-			@RequestParam(value = "img", required = false) MultipartFile[] imgs, WebRequest req) {
+			@RequestParam(value = "img", required = false) List<MultipartFile> imgs, WebRequest req) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("[controller:member] review : " + map);
 		mav.setViewName("member/memInfo");
@@ -68,12 +68,13 @@ public class MemberController {
 
 		String[] img = null;
 		try {
-			if (!imgs[0].isEmpty()) {
-				img = new String[imgs.length];
+			if (!imgs.isEmpty()) {
+				img = new String[imgs.size()];
 				int i = 0;
 				for (MultipartFile f : imgs) {
 					img[i] = us.makeUrl(f, (String) map.get("no"));
 					System.out.println("[controller:member]img url :" + img[i]);
+					++i;
 				}
 				map.put("img", img);
 			} else {

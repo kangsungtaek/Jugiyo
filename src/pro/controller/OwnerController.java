@@ -62,7 +62,7 @@ public class OwnerController {
 
 	@PostMapping("/addmenu")
 	public ModelAndView indexHandle02(@ModelAttribute MultiMenuVo menus, WebRequest webRequest) throws Exception {
-		StoreVo store = (StoreVo) webRequest.getAttribute("vo", WebRequest.SCOPE_SESSION);
+		StoreVo store = (StoreVo) webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
 		ModelAndView mav = new ModelAndView();
 		for (MenuVo vo : menus.getMenus()) {
 			int menuNo = menuDao.getSequence();
@@ -97,7 +97,7 @@ public class OwnerController {
 	// 현재 등록 되어 있는 메뉴들 전부다 보여주는거
 	@GetMapping("/addedmenu")
 	public ModelAndView addedMenuHandle02(WebRequest webRequest) {
-		StoreVo vo = (StoreVo) webRequest.getAttribute("vo", WebRequest.SCOPE_SESSION);
+		StoreVo vo = (StoreVo) webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
 		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("owner/addedmenu");
@@ -110,7 +110,7 @@ public class OwnerController {
 	// 메뉴수정페이지
 	@GetMapping("/updatemenu")
 	public ModelAndView updateMenu(@RequestParam("no") int no, WebRequest webRequest) {
-		StoreVo vo = (StoreVo) webRequest.getAttribute("vo", WebRequest.SCOPE_SESSION);
+		StoreVo vo = (StoreVo) webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
 		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 
 		ModelAndView mav = new ModelAndView();
@@ -121,7 +121,7 @@ public class OwnerController {
 	// 메뉴통계
 	@GetMapping("/menustats")
 	public ModelAndView menuStatsHandle01(WebRequest webRequest) {
-		StoreVo vo = (StoreVo) webRequest.getAttribute("vo", WebRequest.SCOPE_SESSION);
+		StoreVo vo = (StoreVo) webRequest.getAttribute("login", WebRequest.SCOPE_SESSION);
 		// List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 		List<LogVo> lVo = orderDao.findStore(vo.getNo());
 		System.out.println(lVo);
@@ -169,7 +169,7 @@ public class OwnerController {
 		mav.setViewName("owner/review");
 		
 
-		StoreVo store = (StoreVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
+		StoreVo store = (StoreVo) req.getAttribute("login", WebRequest.SCOPE_SESSION);
 		List<ReviewVo> reviews = storeDao.findReview(store.getNo());
 		System.out.println("[controller:owner] review : " + reviews);
 		
