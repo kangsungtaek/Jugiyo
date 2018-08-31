@@ -11,7 +11,6 @@ public class MenuVo implements Serializable {
 	String name;
 	int price;
 	int store;
-
 	int fileNo;
 	String fileUri;
 	
@@ -116,5 +115,7 @@ public class MenuVo implements Serializable {
 				+ ", fileUri=" + fileUri + ", fileName=" + fileName + ", type=" + type + ", attach="
 				+ Arrays.toString(attach) + ", cnt=" + cnt + "]";
 	}
+
+	
 
 }
