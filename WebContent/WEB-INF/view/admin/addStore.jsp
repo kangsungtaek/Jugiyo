@@ -19,8 +19,8 @@ div.reg_company {width:100%; height:300px;  border:1px solid #ccc;}
 div ul li {width:310px; height:30px; line-height:30px; list-style:none;  position:relative; top:10px; border:1px solid #ccc;}
 div ul li .addr_cotegory_type {width:250px; padding:0 5px;}
 div ul li span {background:#c0c0c0; }
-div p.btn_reg {text-align:center; margin:20px 10px;}
-div p.btn_reg button {margin:0 20px; padding:2px;}
+p.btn_reg {text-align:center;}
+p.btn_reg button {padding:3px 5px; margin:0 10px;}
 /*div ul.reg_category {width:100%; height:auto; margin-top:-30px;}*/
 div ul.reg_category  {width:400px; height:178px;}
 div ul.reg_category li {width:315px; height:40px; line-height:40px; margin-top:4px; padding:2px 10px;}
@@ -29,17 +29,16 @@ div ul.reg_category li input {width:190px; height:25px;}
 /*div.reg_company {width:360px; height:300px; border:1px solid red;}*/
 hr {margin-top:20px; border:1px solid #EAEAEA;}
 .size::-webkit-input-placeholder {margin:0 0 0 10px; padding-left:10px;}
-.bg {width:100%; height:100px; background:#f44336;}
-.logo_s {width:auto; height:100px; line-height:50px; margin-bottom:10px;}
-footer {margin-top:405px;}
-p.shopReg {text-align:center;}
-p.shopReg b.shopReg_inquiry {text-align:center;}
-.hr_form {width:100%; height:auto; position:relative; top:50px;}
+/*-- top.jsp--*/
+.bg {width:100%; height:100px; background:#F15F5F;}	/*#f44336;*/
+.hr_form {width:100%; height:auto; position:relative; top:70px;}
+.logo_s {width:300px; height:100px; line-height:50px; text-align:center;}
+
 </style>
 </head>
 <body>
 <div class="bg">
-	<a href="../../../index"><img src="../images/logo_s.png" class="logo_s"></a>
+	<a href="../../../index"><img src="../images/logo_s2.png" class="logo_s"></a>
 	<div class="hr_form">
 		<form action="${ pageContext.servletContext.contextPath }/admin/addStore" method="post">
 			<div class="reg_company">
@@ -68,23 +67,29 @@ p.shopReg b.shopReg_inquiry {text-align:center;}
 				</ul>
 			</div>
 			<p class="btn_reg">
-				<button type="submit">등 &nbsp; 록</button> <button type="reset">재작성</button>
+				<button type="submit">등 록</button> <button type="reset">취 소</button>
 			</p>
 		</form>
 	</div>
-	<footer class="w3-row-padding w3-padding-16 "><!-- footer -->
-	    <div class="w3-col l10 s6 w3-red">
-	      <p>
-			<b>"저기요(JUGIYO)"</b><br />
-			사장님을 흔히 부를 때 쓰는 표현과 장소를 가리키는 표현의 이중적인 의미를 가지고 있습니다.
-		  </p>
-	    </div>
-	    <div class="w3-col l2 s6 w3-dark-grey">
-	      <p class="shopReg">
-	      	<b class="shopReg_inquiry">상점 등록 문의</b><br/>
-	      	<b class="shopReg_inquiry">02-1588-1588</b>
-	      </p>
-	    </div>
-	</footer><!--//footer -->
+	<style>
+/*-- bottom.jsp--*/
+footer {margin-top:408px;}
+p.shopReg {text-align:center;}
+p.shopReg b.shopReg_inquiry {text-align:center;}
+</style>
+ <footer class="w3-row-padding w3-padding-16 "><!-- footer -->
+    <div class="w3-col l10 s6 w3-red">
+      <p>
+		<b>"저기요(JUGIYO)"</b><br />
+		사장님을 흔히 부를 때 쓰는 표현과 장소를 가리키는 표현의 이중적인 의미를 가지고 있습니다.
+	  </p>
+    </div>
+    <div class="w3-col l2 s6 w3-dark-grey">
+      <p class="shopReg">
+      	<b class="shopReg_inquiry">상점 등록 문의</b><br/>
+      	<b class="shopReg_inquiry">02-1588-1588</b>
+      </p>
+    </div>
+</footer><!--//footer -->
 </body>
 </html>

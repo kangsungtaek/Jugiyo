@@ -3,8 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<style>
+	.bg {width:100%; height:130px; background:#ededed;}
+</style>
+	<div class="bg"></div>
 	<div id="wrap">
-		<hr />
 		<h3 style="text-align:center; padding-top:15px;">회원가입페이지</h3>
 		<form action="/login/regForm" name="regForm" method="post">
 			<table class="reg">

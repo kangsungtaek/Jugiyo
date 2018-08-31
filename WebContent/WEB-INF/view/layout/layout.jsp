@@ -5,7 +5,6 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <body>
-
 	<div class="container">
 		<div class="row">
 			<tiles:insertAttribute name="top" />

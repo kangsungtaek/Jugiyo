@@ -108,7 +108,6 @@ public class LoginController {
 		return mav;
 	}
 	/*================================*/
-	
 	// 로그아웃
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
@@ -116,6 +115,4 @@ public class LoginController {
 		session.setAttribute("vo", null);
 		return "/index";
 	}
-
-	
 }
