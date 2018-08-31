@@ -87,12 +87,8 @@ body, html {
 	</span>
   </form>
 </div>
-<script>
-/*	function getAddr() {
-		window.open("/addr", "new browser", "width=500, height=250");
-	}
-*/
-</script>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=09a2ead5f706292b477133ded73cc2fe"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -131,12 +127,28 @@ body, html {
 
                 var addr = data.zonecode + "/" + fullRoadAddr;
                 document.getElementById("addr").value = addr;
-                console.log(addr);
-              // location.href="/getAddr?addr=" + addr;
+                console.log(addr);                
+                
+                /*
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                	console.log(data.address + "/" + results + "/" + status);
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+ 
+                        var result = results[0]; //첫번째 결과의 값을 활용
+ 
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+						console.log(coords);
+                    }
+                });
+                */
                 document.getElementById("f").submit();
             }
         }).open();
     }
+
 </script>
 
 </body>
