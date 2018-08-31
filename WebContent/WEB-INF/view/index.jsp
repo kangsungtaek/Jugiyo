@@ -130,7 +130,6 @@ body, html {
                 //document.getElementById('sample4_roadAddress').value = fullRoadAddr;
                 //document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
 
-                
                 var addr = data.zonecode + "/" + fullRoadAddr;
                 document.getElementById("addr").value = addr;
                 console.log(addr);

@@ -161,6 +161,7 @@ public class OrderController {
 		// 토탈 프라이스
 		data.put("totalPrice", totalPrice);
 
+
 		orderDao.insertLog(data);
 
 		Map map2 = new HashMap();
