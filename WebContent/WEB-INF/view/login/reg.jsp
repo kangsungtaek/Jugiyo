@@ -40,6 +40,7 @@
 	</p>
 	
 	<!-- 주문하러가기 버튼 -->
+	<a href="" alt=""><input type="button" />버튼</a>
 </body>	
 <script type="text/javascript" src="../../../include/common/js/1.12.4.min.js"></script>
 <script type="text/javascript" src="../../../include/common/js/jquery-ui.min.js"></script>
