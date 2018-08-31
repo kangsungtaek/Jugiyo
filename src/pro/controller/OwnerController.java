@@ -1,10 +1,8 @@
 package pro.controller;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -53,24 +51,24 @@ public class OwnerController {
 
 	// 사장님 페이지
 	@GetMapping("/index")
-	public String indexHandle01(WebRequest webRequest) {
+	public ModelAndView indexHandle01(WebRequest webRequest) {
+		
 		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
-		List<LogVo> lVo = orderDao.findStore(vo.getNo());
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date= new Date();
-		String today = sdf.format(date);
-		int price=0;
-		for(int i = 0; i < lVo.size(); i++) {
-			Date d = lVo.get(i).getOrderdate();
-			sdf.format(d);
-			if(today.equals(d)) {
-				price+=lVo.get(i).getTotalPrice();
-			}
+		List<LogVo> lVo = orderDao.today(vo.getNo());
+		
+		//하루 total price
+		int sum = 0;
+		for (int i = 0; i < lVo.size(); i++) {
+			System.out.println(lVo.get(i).getTotalPrice());
+			sum += lVo.get(i).getTotalPrice();
 		}
 		
 		
-		return "owner/index";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("owner/index");
+		mav.addObject("todayPrice", sum);
+		mav.addObject("logVo",lVo);
+		return mav;
 	}
 
 	@RequestMapping("/logout")
@@ -91,8 +89,6 @@ public class OwnerController {
 
 		return mav;
 	}
-
-	// @RequestParam("file")MultipartFile[] files
 
 	@PostMapping("/addmenu")
 	public ModelAndView indexHandle02(@ModelAttribute MultiMenuVo menus, WebRequest webRequest) throws Exception {
@@ -124,8 +120,27 @@ public class OwnerController {
 
 	// 오늘 주문 내역 전부 보여주는거
 	@GetMapping("/today")
-	public ModelAndView todayHandle01() {
+	public ModelAndView todayHandle01(WebRequest webRequest) {
+		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
+		List<LogVo> lVo = orderDao.today(vo.getNo());
+		int sum = 0;
+		for (int i = 0; i < lVo.size(); i++) {
+			System.out.println(lVo.get(i).getTotalPrice());
+			sum += lVo.get(i).getTotalPrice();
+		}
+		List<LogVo> list = new ArrayList<>();
+
+		for (int i = 0; i < lVo.size(); i++) {
+
+			System.out.println("orderList [Test]" + lVo.get(i));
+			list.add(lVo.get(i));
+			System.out.println(list.get(i));
+		}
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("owner/today");
+		mav.addObject("todayPrice", sum);
+		mav.addObject("todayList", list);
+
 		return mav;
 	}
 
@@ -306,7 +321,7 @@ public class OwnerController {
 			}
 		}
 		System.out.println("------" + timeStates);
-		
+
 		List list = new LinkedList();
 		list.addAll(timeStates.values());
 

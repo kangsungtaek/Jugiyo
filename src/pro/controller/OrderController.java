@@ -152,8 +152,8 @@ public class OrderController {
 		data.put("storeName", svo.getName());
 		data.put("storeType", svo.getType());
 		data.put("orderList", orderList);
-//		data.put("orderdate", new Date());
-		data.put("orderdate", new Date("07/11/2018"));
+		data.put("orderdate", new Date());
+//		data.put("orderdate", new Date("07/11/2018"));
 		
 		// 주문 완료/미완료 = delivery
 		data.put("delivery", "N");

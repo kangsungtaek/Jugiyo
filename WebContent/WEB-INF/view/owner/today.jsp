@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div style="padding-top:50px;">
-
+<button onclick="myFunction('Demo1')" class="w3-button w3-block w3-black w3-left-align">오늘의 총 매출액 : ${todayPrice}원</button>
 <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-black w3-left-align">총 주문 내역</button>
 
 <div id="Demo1" class="w3-show w3-container">
@@ -14,7 +14,7 @@
     
     <div class="w3-bar-item">
       <span class="w3-large">콜라+사이다+치킨</span><br>
-      <span>~님의 주문</span>
+      <span>${userId}님의 주문</span>
     </div>
   </li>
 
@@ -23,7 +23,7 @@
     
     <div class="w3-bar-item">
       <span class="w3-large">123457</span><br>
-      <span>~님의 주문</span>
+      <span>${userId}님의 주문</span>
     </div>
   </li>
 	
