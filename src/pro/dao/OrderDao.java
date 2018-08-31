@@ -1,6 +1,7 @@
 package pro.dao;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,7 @@ public class OrderDao {
 		Calendar cal = new GregorianCalendar();
 	    cal.add(Calendar.DATE, -2);
 		Query query = new BasicQuery(new Document().append("userId", id).append("date", new Document().append("$gte", cal.getTime())));
+		
 		System.out.println("[orderDao:mongo] " + query);
 		
 		return mongoTemplate.find(query, LogVo.class, "log");

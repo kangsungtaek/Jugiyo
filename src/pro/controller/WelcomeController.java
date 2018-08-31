@@ -16,6 +16,11 @@ public class WelcomeController {
 		System.out.println("[controller:welcome]");
 		return "index";
 	}
+	
+	@RequestMapping("/test")
+	public String Test() {
+		return "test";
+	}
 
 	@RequestMapping("/getAddr")
 	public ModelAndView getAddrHandle(@RequestParam("addr") String addr, WebRequest req) {

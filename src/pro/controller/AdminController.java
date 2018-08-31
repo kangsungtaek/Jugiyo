@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.StoreDao;
 import pro.dao.TypeDao;
+import pro.service.UploadService;
+import pro.vo.MenuAttachVo;
 import pro.vo.StoreVo;
 import pro.vo.TypeVo;
 
@@ -25,6 +28,9 @@ public class AdminController {
 	
 	@Autowired
 	TypeDao typeDao;
+	
+	@Autowired
+	UploadService uploadService;
 	
 	//상점등록 페이지
 	@GetMapping("/addStore")
@@ -44,22 +50,30 @@ public class AdminController {
 	
 	//상점등록 처리페이지
 	@PostMapping("/addStore")
-	public ModelAndView storePostHandle(@ModelAttribute StoreVo vo, WebRequest req) {
+	public ModelAndView storePostHandle(@ModelAttribute StoreVo vo, WebRequest req , MultipartFile[] files) throws Exception {
+		ModelAndView mav = new ModelAndView();
 		System.out.println("[controller:addStore]" + vo.toString());
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/added");
 		
 		int seq = storeDao.getSeq();
 		vo.setNo(seq);
 		String id = "st" + seq;
 		vo.setId(id);
 		vo.setPassword("1111");
+		
+		if (!files[0].isEmpty()) {
+			for (MultipartFile file : files) {
+				String imgUrl = uploadService.execute2(file, vo.getNo());
+				vo.setImg(imgUrl);
+			}
+		}
+		
 		System.out.println("[controller:addStore] db insert : " + vo.toString());
 		
 		//상점insert작업
 		boolean b = storeDao.insertStore(vo);
 		
+		mav.setViewName("admin/added");
 		mav.addObject("vo", vo);
 		req.setAttribute("cer", b, WebRequest.SCOPE_REQUEST);
 		return mav;

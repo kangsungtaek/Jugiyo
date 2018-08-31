@@ -15,6 +15,19 @@ import pro.vo.MenuAttachVo;
 public class UploadService {
 	@Autowired
 	ServletContext ctx;
+	
+	
+	public String execute2(MultipartFile file, int storeNo) throws Exception{
+		
+		File dir = new File(ctx.getRealPath("/storeImage"),String.valueOf(storeNo));
+		if (!dir.exists())
+			dir.mkdirs();
+		
+		File dest = new File(dir, file.getOriginalFilename());
+		file.transferTo(dest);
+		
+		return "/storeimage/"+storeNo+"/"+file.getOriginalFilename();
+	}
 
 	public MenuAttachVo execute(MultipartFile file, int storeNo) throws Exception {
 		
