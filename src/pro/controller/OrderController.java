@@ -128,7 +128,7 @@ public class OrderController {
 	// 주문완료 처리
 	@PostMapping("/ordered")
 	public String orderedHandle2(@RequestParam Map<String, String> map, WebRequest req) {
-
+		
 		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
 		int totalPrice =  (int) req.getAttribute("totalPrice", WebRequest.SCOPE_SESSION);
 		MemberVo mVo = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
@@ -153,6 +153,8 @@ public class OrderController {
 		data.put("storeType", svo.getType());
 		data.put("orderList", orderList);
 		data.put("orderdate", new Date());
+//		data.put("orderdate", new Date("07/11/2018"));
+		
 		// 주문 완료/미완료 = delivery
 		data.put("delivery", "N");
 		// 주문시 요청사항
@@ -189,5 +191,7 @@ public class OrderController {
 		} else {
 			return "redirect:/main";
 		}
+		
 	}
+	
 }

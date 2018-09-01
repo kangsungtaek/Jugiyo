@@ -49,7 +49,7 @@ public class LoginController {
 				System.out.println("[controller:login] store : " + vo.toString());
 				req.setAttribute("storeVo", vo, WebRequest.SCOPE_SESSION);
 
-				mav.setViewName("owner/index");
+				mav.setViewName("redirect:/owner/index");
 				mav.addObject("owner");
 			}
 		}

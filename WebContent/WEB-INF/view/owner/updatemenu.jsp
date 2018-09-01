@@ -63,7 +63,7 @@
 		</div>
 	</div>
 	<div class="w3-row" style="padding-bottom: 10px"></div>
-	<div class="w3-center">
+	<div class="w3-center" style="padding-bottom: 10px">
 		<button type="submit">확인</button>
 		<a href="/owner/addedmenu"><button type="button">뒤로가기</button></a>
 	</div>
