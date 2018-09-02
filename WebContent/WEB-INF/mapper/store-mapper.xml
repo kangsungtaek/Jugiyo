@@ -66,5 +66,15 @@
 	<!-- 사장님 로그인 -->
 	<select id="login" parameterType="java.util.HashMap" resultType="pro.vo.StoreVo">
 		select * from store where id=#{id} and password=#{password}
-</select>
+	</select>
+	
+	<!-- 전체 스토어 조회 -->
+	<select id="getStoreList" resultType="pro.vo.StoreVo">
+		select * from store
+	</select>
+	
+	<update id="storeUpdate" parameterType="pro.vo.StoreVo">
+		update store set name=#{name}, addr=#{addr}, type=#{type}, xcor=#{xcor}, ycor=#{ycor},img=#{img}, contact =#{contact} where no= #{no}
+		
+	</update>
 </mapper>
