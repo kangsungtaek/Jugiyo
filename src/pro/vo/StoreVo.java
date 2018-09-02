@@ -9,8 +9,8 @@ public class StoreVo {
 	String addr;
 	int type;
 	String typeName; //type table과 join해서 사용할 것
-	int xcor; //x좌표
-	int ycor; //y좌표
+	double xcor; //x좌표
+	double ycor; //y좌표
 	String img;
 	String contact;
 	int star;
@@ -57,16 +57,16 @@ public class StoreVo {
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
 	}
-	public int getXcor() {
+	public double getXcor() {
 		return xcor;
 	}
-	public void setXcor(int xcor) {
+	public void setXcor(double xcor) {
 		this.xcor = xcor;
 	}
-	public int getYcor() {
+	public double getYcor() {
 		return ycor;
 	}
-	public void setYcor(int ycor) {
+	public void setYcor(double ycor) {
 		this.ycor = ycor;
 	}
 	public String getImg() {

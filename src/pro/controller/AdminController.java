@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import pro.dao.StoreDao;
 import pro.dao.TypeDao;
 import pro.service.UploadService;
-import pro.vo.MenuAttachVo;
 import pro.vo.StoreVo;
 import pro.vo.TypeVo;
 
@@ -50,12 +50,12 @@ public class AdminController {
 	
 	//상점등록 처리페이지
 	@PostMapping("/addStore")
-	public ModelAndView storePostHandle(@ModelAttribute StoreVo vo, WebRequest req , MultipartFile[] files) throws Exception {
+	public ModelAndView storePostHandle(@ModelAttribute StoreVo vo, WebRequest req ,@RequestParam("attach") MultipartFile[] files) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("[controller:addStore]" + vo.toString());
 		
-		
 		int seq = storeDao.getSeq();
+		System.out.println( "sotreNo (seq) : " + seq);
 		vo.setNo(seq);
 		String id = "st" + seq;
 		vo.setId(id);
@@ -78,4 +78,5 @@ public class AdminController {
 		req.setAttribute("cer", b, WebRequest.SCOPE_REQUEST);
 		return mav;
 	}
+	
 }
