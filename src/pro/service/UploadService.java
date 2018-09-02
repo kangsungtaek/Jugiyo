@@ -26,7 +26,7 @@ public class UploadService {
 		File dest = new File(dir, file.getOriginalFilename());
 		file.transferTo(dest);
 		
-		return "/storeimage/"+storeNo+"/"+file.getOriginalFilename();
+		return ctx.getContextPath() + "/storeimage/"+storeNo+"/"+file.getOriginalFilename();
 	}
 
 	public MenuAttachVo execute(MultipartFile file, int storeNo) throws Exception {

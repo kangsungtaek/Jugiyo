@@ -48,6 +48,15 @@ public class StoreDao {
 			return template.selectList("store.getType",type);
 		}
 	}
+	
+	//반경계산한 음식점조회
+	public List<StoreVo> getStoreByCoords(Map map) {
+		return template.selectList("store.getStoreByCoords", map);
+	}
+	//반경계산한 음식점조회-타입별
+	public List<StoreVo> getStoreByCoordsWithType(Map map) {
+		return template.selectList("store.getStoreByCoordsWithType", map);
+	}
 
 	public StoreVo getStore(int storeNo) {
 		return template.selectOne("store.getStore", storeNo);
@@ -55,6 +64,10 @@ public class StoreDao {
 	
 	public List<StoreVo> searchStoreMenu(String search) {
 		return template.selectList("store.searchStoreMenu", search);
+	}
+	//반경계산 음식점조회-검색
+	public List<StoreVo> searchStoreMenuByCoords(Map map) {
+		return template.selectList("store.searchStoreMenuByCoords", map);
 	}
 
 	public StoreVo login(Map m) {

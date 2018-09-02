@@ -17,8 +17,8 @@
 <body>
 
 <div class="w3-container" style="padding-left: 100px; padding-right: 100px; width: 1000px">
-	<div class="w3-row ">
-		<form action="/admin/addStore" method="post" enctype="multipart/form-data" id="form1">
+	<form action="/admin/addStore" method="post" enctype="multipart/form-data" id="form1">
+		<div class="w3-row ">
 			<h2>가게 등록</h2>
 			<p>
 				▶ <span>상표명 </span> &nbsp;| <input type="text" class="w3-input"
@@ -59,14 +59,13 @@
 
 			<input type="hidden" id="lat" name="xcor" /> 
 			<input type="hidden" id="lng" name="ycor" />
-		</form>
-	</div>
+		</div>
 
-	<div class="w3-center">
-		<button type="submit" form="form1">등록</button>
-		<button type="reset" form="form1">재작성</button>
-	</div>
-
+		<div class="w3-center">
+			<button type="submit">등록</button>
+			<button type="reset">재작성</button>
+		</div>
+	</form>
 </div>
 
 
@@ -74,9 +73,6 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
-
-
-
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
@@ -134,39 +130,40 @@
 						var addr = fullRoadAddr;
 						document.getElementById("addr").value = addr;
 
-						geocoder
-								.addressSearch(
-										addr,
-										function(result, status) {
-											// 정상적으로 검색이 완료됐으면 
-											if (status === daum.maps.services.Status.OK) {
-												var coords = new daum.maps.LatLng(
-														result[0].y,
-														result[0].x);
+						geocoder.addressSearch(addr, function(result, status) {
+							// 정상적으로 검색이 완료됐으면 
+							if (status === daum.maps.services.Status.OK) {
+								var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 
-												// 결과값으로 받은 위치를 마커로 표시합니다
-												var marker = new daum.maps.Marker(
-														{
-															map : map,
-															position : coords
-														});
+								// 결과값으로 받은 위치를 마커로 표시합니다
+								var marker = new daum.maps.Marker(
+												{
+													map : map,
+													position : coords
+												});
 
-												// 인포윈도우로 장소에 대한 설명을 표시합니다
-												var infowindow = new daum.maps.InfoWindow(
-														{
-															content : '<div style="width:150px;text-align:center;padding:6px 0;">검색한 위치</div>'
-														});
-												infowindow.open(map, marker);
+								// 인포윈도우로 장소에 대한 설명을 표시합니다
+								var infowindow = new daum.maps.InfoWindow(
+												{
+														content : '<div style="width:150px;text-align:center;padding:6px 0;">검색한 위치</div>'
+												});
+								infowindow.open(map, marker);
 
-												// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-												map.setCenter(coords);
+								// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+								map.setCenter(coords);
+								console.log(coords.getLat());
+								console.log(coords.getLng());
 
-												$("#lat").val(coords.getLat());
-												$("#lng").val(coords.getLng());
-												console.log($("#lat").val());
-												console.log($("#lng").val());
-											}
-										});
+								// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+								map.setCenter(coords);
+
+								$("#lat").val(coords.getLat());
+								$("#lng").val(coords.getLng());
+								console.log($("#lat").val());
+								console.log($("#lng").val());
+							}
+						});
+
 					}
 				}).open();
 	}
