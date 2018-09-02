@@ -72,4 +72,9 @@
 	<select id="getStoreList" resultType="pro.vo.StoreVo">
 		select * from store
 	</select>
+	
+	<update id="storeUpdate" parameterType="pro.vo.StoreVo">
+		update store set name=#{name}, addr=#{addr}, type=#{type}, xcor=#{xcor}, ycor=#{ycor},img=#{img}, contact =#{contact} where no= #{no}
+		
+	</update>
 </mapper>

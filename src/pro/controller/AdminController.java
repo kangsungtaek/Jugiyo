@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import pro.dao.StoreDao;
 import pro.dao.TypeDao;
 import pro.service.UploadService;
+import pro.vo.MenuAttachVo;
+import pro.vo.MenuVo;
 import pro.vo.StoreVo;
 import pro.vo.TypeVo;
 
@@ -89,6 +91,8 @@ public class AdminController {
 		
 		return mav;
 	}
+	
+	// 스토어 수정 페이지
 	@GetMapping("/updateStore")
 	public ModelAndView updateStoreHandle(@RequestParam int no) {
 		ModelAndView mav = new ModelAndView();
@@ -97,10 +101,37 @@ public class AdminController {
 		System.out.println("[updateStore] : " +vo);
 		List<TypeVo> types = typeDao.getAll();
 		mav.addObject("types", types); //types라는 이름으로 저장을 해놓음
+		if(vo.getImg() != null) {
+			String[] str = vo.getImg().split("/");
+			String fileName = str[3];
+			System.out.println(fileName);
+			mav.addObject("fileName", fileName);
+		}
 		
 		mav.setViewName("admin/updateStore");
+		
 		mav.addObject("storeVo", vo);
 		
 		return mav;
 	}
+	
+	@PostMapping("/updateStore")
+	public ModelAndView updateStroeHandle2(@ModelAttribute StoreVo vo, @RequestParam("attach") MultipartFile[] files) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		
+		if (!files[0].isEmpty()) {
+			for (MultipartFile file : files) {
+				String fileImg = uploadService.execute2(file, vo.getNo());
+				vo.setImg(fileImg);
+			}
+		}
+		System.out.println(vo.toString());
+		boolean result = storeDao.updateStore(vo);
+		System.out.println("111");
+		mav.addObject("result", result);
+		mav.setViewName("redirect:/admin/storeList");
+		return mav;
+	}
+	
 }

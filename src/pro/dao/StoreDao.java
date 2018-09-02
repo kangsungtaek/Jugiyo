@@ -99,5 +99,9 @@ public class StoreDao {
 	public List<StoreVo> getStoreList() {
 		return template.selectList("store.getStoreList" , null);
 	}
+
+	public boolean updateStore(StoreVo vo) {
+		return template.update("store.storeUpdate", vo) == 1?true:false;
+	}
 	
 }

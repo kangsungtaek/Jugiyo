@@ -2,8 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 
 <style>
 .img_wrap {
@@ -22,8 +24,9 @@
 	<div class="w3-container"
 		style="padding-left: 100px; padding-right: 100px; width: 1000px">
 		<div class="w3-row ">
-			<form action="/admin/updatemenu" method="post"
+			<form action="/admin/updateStore" method="post"
 				enctype="multipart/form-data" id="form1">
+				<input type="hidden" name="no" value="${storeVo.no }">
 				<h2>가게 등록</h2>
 				<p>
 					▶ <span>상표명 </span> &nbsp;| <input type="text" class="w3-input"
@@ -52,6 +55,21 @@
 
 					</select>
 				</p>
+				
+			<div class="w3-row" style="height: 200px">
+				<div class="w3-col w3-align-right" style="width: 200px">
+					▶ <span>가게 이미지 | </span>  <input class="w3-input data"
+							name="attach" type="file" id="ori" style="display: none;"
+							required value="${storeVo.img }"
+							onchange="preview(this);"> <input
+							class="w3-input w3-border fake" name="gg" type="text" readOnly
+							onclick="choose(this);" value="${fileName }" />
+				</div>
+				
+				<div class="w3-rest img_wrap" style="padding-left: 10px;">
+					<img id="img" class="w3-round" src="${pageContext.request.contextPath}${storeVo.img}" />
+				</div>
+			</div>
 
 				<p>
 					▶ <span>주 &nbsp;&nbsp;소 </span> &nbsp;| <input class="w3-input"
@@ -67,8 +85,8 @@
 		</div>
 
 		<div class="w3-center">
-			<button type="submit" form="form1">등록</button>
-			<button type="reset" form="form1">재작성</button>
+			<button type="submit" form="form1">수정 완료</button>
+			<a href="/admin/storeList"><button type="button">뒤로가기</button></a>
 		</div>
 
 	</div>
@@ -172,8 +190,6 @@
 
 													$("#lat").val(coords.getLat());
 													$("#lng").val(coords.getLng());
-													console.log("sdf"+$("#lat").val());
-													console.log("sdf"+$("#lng").val());
 												}
 											});
 						}
