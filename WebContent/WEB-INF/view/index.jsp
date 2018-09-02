@@ -84,13 +84,17 @@ body, html {
   <form class="w3-display-middle" style="white-space:nowrap;" action="/getAddr" id="f">
     <span class="w3-display-bottommiddle w3-padding-large w3-large w3-wide w3-animate-opacity">
 		<input name="addr" id="addr" type="text" placeholder="배달받을 주소를 입력해주세요." style="width: 500px;" onclick="sample4_execDaumPostcode()" />
+		<input type="hidden" id="lat" name="xcor" /> 
+		<input type="hidden" id="lng" name="ycor" />
 	</span>
   </form>
 </div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=09a2ead5f706292b477133ded73cc2fe"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
 <script>
+	var geocoder = new daum.maps.services.Geocoder();
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
         new daum.Postcode({
@@ -129,21 +133,18 @@ body, html {
                 document.getElementById("addr").value = addr;
                 console.log(addr);                
                 
-                /*
-                // 주소로 상세 정보를 검색
-                geocoder.addressSearch(data.address, function(results, status) {
-                	console.log(data.address + "/" + results + "/" + status);
-                    // 정상적으로 검색이 완료됐으면
-                    if (status === daum.maps.services.Status.OK) {
- 
-                        var result = results[0]; //첫번째 결과의 값을 활용
- 
-                        // 해당 주소에 대한 좌표를 받아서
-                        var coords = new daum.maps.LatLng(result.y, result.x);
-						console.log(coords);
-                    }
-                });
-                */
+                geocoder.addressSearch(addr, function(result, status) {
+					// 정상적으로 검색이 완료됐으면 
+					if (status === daum.maps.services.Status.OK) {
+						var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+						console.log(coords.getLat());
+						console.log(coords.getLng());
+
+						$("#lat").val(coords.getLat());
+						$("#lng").val(coords.getLng());
+					}
+				});
                 document.getElementById("f").submit();
             }
         }).open();
