@@ -78,5 +78,29 @@ public class AdminController {
 		req.setAttribute("cer", b, WebRequest.SCOPE_REQUEST);
 		return mav;
 	}
-	
+	@GetMapping("/storeList")
+	public ModelAndView storeListHandle() {
+		
+		List<StoreVo> storeList = storeDao.getStoreList();
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("admin/storeList");
+		mav.addObject("storeList", storeList);
+		
+		return mav;
+	}
+	@GetMapping("/updateStore")
+	public ModelAndView updateStoreHandle(@RequestParam int no) {
+		ModelAndView mav = new ModelAndView();
+		
+		StoreVo vo = storeDao.getStore(no);
+		System.out.println("[updateStore] : " +vo);
+		List<TypeVo> types = typeDao.getAll();
+		mav.addObject("types", types); //types라는 이름으로 저장을 해놓음
+		
+		mav.setViewName("admin/updateStore");
+		mav.addObject("storeVo", vo);
+		
+		return mav;
+	}
 }
