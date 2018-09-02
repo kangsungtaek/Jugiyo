@@ -36,8 +36,20 @@ footer {width:100%; height:100%; margin-bottom:408px;}
 p.shopReg {text-align:center;}
 p.shopReg b.shopReg_inquiry {text-align:center;}
 </style>
-
-
-
-
-	
+	<a href="../../../index"><img src="../images/logo_s.png"></a>
+	<div class="bg"></div>
+	<div id="wrap" class="w3-panel w3-padding-64 w3-orange w3-container">
+		<div class="w3-row" style="width:169px;">
+	 		<h2 class="hide" style="text-align: center;"> 로그인</h2>
+		    <div class="w3-bar w3-black" style="text-align: center;">
+	    		<button type="button" class="w3-bar-item w3-button tablink w3-red mode" value="member">개인회원</button>
+	    		<button type="button" class="w3-button w3-button mode" value="owner">사업자</button>
+	  		</div>
+		 </div>
+	 	<form action="/login/loginForm" method="post" class="form_input" id="loginForm" >
+				<input type="hidden" name="section" id="hs" value="member"/>
+				<input name="id" type="text" id="id" class="input_txtBox" width="200px;" placeholder=" 아이디" >
+				<input name="password" type="password" class="input_txtBox" id="password" width="200px;" placeholder=" 비밀번호" >
+				<button type="submit" class="input_txtBox">로그인</button>    
+		</form>
+	</div>
