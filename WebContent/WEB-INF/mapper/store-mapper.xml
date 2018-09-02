@@ -12,6 +12,16 @@
 		)
 	</insert>
 	
+	<!-- 사용자 정보에 따른 반경안의 스토어 검색 -->
+	<select id="getStoreByCoords" resultType="pro.vo.StoreVo">
+		select * from (
+			select s.*,
+    		DISTNACE_WGS84(#{xcor}, #{ycor}, ycor, xcor) as DISTANCE
+			from store s
+			where (ycor between #{ycor}-0.019 and #{ycor}+0.019)
+    			and (xcor between #{xcor}-0.022 and #{xcor}+0.022)
+		order by DISTANCE)
+	</select>	
 	<!--  스토어 전체조회(강성택) -->
 	<select id="getAll" resultType="pro.vo.StoreVo">
 		select * from store
