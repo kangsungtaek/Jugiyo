@@ -36,12 +36,12 @@
 </div>
 <script>
 	function update(target){
-		
-		
-		
-		
-		
-		
-		
+		${target}.prev().trigger("click");
 	}
+	
+	
+	
+	
+	
+	
 </script>
