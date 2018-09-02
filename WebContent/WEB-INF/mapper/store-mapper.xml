@@ -7,8 +7,8 @@
 	</select>
 	<!-- 상점등록 -->
 	<insert id="addStore">
-		insert into store(no, id, password, name, addr, type, contact) values(
-			#{no}, #{id}, #{password}, #{name}, #{addr}, #{type}, #{contact}
+		insert into store(no, id, password, name, addr, type, contact, xcor, ycor, img) values(
+			#{no}, #{id}, #{password}, #{name}, #{addr}, #{type}, #{contact}, #{xcor} , #{ycor} , #{img}
 		)
 	</insert>
 	

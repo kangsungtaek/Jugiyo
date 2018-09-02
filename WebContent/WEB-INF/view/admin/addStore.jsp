@@ -38,6 +38,7 @@
 				</select>
 			</p>
 
+ 
 			<div class="w3-row" style="height: 200px">
 				<div class="w3-col w3-align-right" style="width: 200px">
 					▶ <span>가게 이미지 | </span>  <input class="w3-input data"
@@ -48,7 +49,7 @@
 					<img id="img" class="w3-round" />
 				</div>
 			</div>
-
+ 
 			<p>
 				▶ <span>주 &nbsp;&nbsp;소 </span> &nbsp;| <input class="w3-input"
 					value="${addr }" name="addr" id="addr" type="text" required
@@ -159,11 +160,11 @@
 
 												// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 												map.setCenter(coords);
-												console.log(coords.getLat());
-												console.log(coords.getLng());
 
 												$("#lat").val(coords.getLat());
 												$("#lng").val(coords.getLng());
+												console.log($("#lat").val());
+												console.log($("#lng").val());
 											}
 										});
 					}
