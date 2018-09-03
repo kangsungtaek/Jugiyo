@@ -22,9 +22,9 @@ public class JsonController02 {
 		switch (mode) {
 		case "updateDelivery":
 			mav = updateDelivery(objId, webRequest);
+			
 			System.out.println("delivery Update");
 		}
-		mav.setViewName("sendJson");
 		
 		return mav;
 	}
