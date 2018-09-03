@@ -9,6 +9,8 @@ public class MemberVo {
 	String contact;
 	String nickname;
 	String address;
+	double xcor;
+	double ycor;
 	int point;
 	String email;
 	
@@ -42,6 +44,18 @@ public class MemberVo {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public double getXcor() {
+		return xcor;
+	}
+	public void setXcor(double xcor) {
+		this.xcor = xcor;
+	}
+	public double getYcor() {
+		return ycor;
+	}
+	public void setYcor(double ycor) {
+		this.ycor = ycor;
+	}
 	public int getPoint() {
 		return point;
 	}
@@ -58,7 +72,10 @@ public class MemberVo {
 	@Override
 	public String toString() {
 		return "MemberVo [id=" + id + ", password=" + password + ", contact=" + contact + ", nickname=" + nickname
-				+ ", addr=" + address + ", point=" + point + ", email=" + email + "]";
-	}  
+				+ ", address=" + address + ", xcor=" + xcor + ", ycor=" + ycor + ", point=" + point + ", email=" + email
+				+ "]";
+	}
+	
+	
 
 }

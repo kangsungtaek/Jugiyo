@@ -26,7 +26,7 @@ public class MainController {
 		System.out.println("[controller:main] type : " + type);
 
 		//List<StoreVo> list = storeDao.storeLIst(type);
-		Map<String, Double> map = (Map) req.getAttribute("coords", WebRequest.SCOPE_SESSION);
+		Map map = (Map) req.getAttribute("coords", WebRequest.SCOPE_SESSION);
 		List<StoreVo> list = storeDao.getStoreByCoords(map);
 		
 		mav.setViewName("main");

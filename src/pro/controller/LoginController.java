@@ -83,8 +83,8 @@ public class LoginController {
 	}
 
 	@PostMapping("/regForm")
-	public ModelAndView RegFormPostHandle(@ModelAttribute MemberVo member, @RequestParam("zonecode") int zonecode,
-			@RequestParam("addr") String addr, @RequestParam("addr1") String addr1) {
+	public ModelAndView RegFormPostHandle(@ModelAttribute MemberVo member, @RequestParam("zonecode") String zonecode,
+			@RequestParam("addr") String addr, @RequestParam(name = "addr1", required = false) String addr1) {
 
 		if (addr != null || addr1 != null) {
 			member.setAddress(zonecode + "/" + addr + " " + addr1);
@@ -104,7 +104,6 @@ public class LoginController {
 		if (i == 1) {
 			mav.setViewName("login/reg");// 회원가입되셨습니다.
 			// login/reg.jsp를 만들어서 "${ nickname } 님 회원가입되셨습니다. 감사합니다." 이렇게 나타나도록.
-			// addObject(변수명, object); -> member를 member 에다가 넣어서
 		} else {
 			mav.setViewName("error");
 		}

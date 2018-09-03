@@ -9,7 +9,7 @@
 	<div class="bg"></div>
 	<div id="wrap">
 		<h3 style="text-align:center; padding-top:15px;">회원가입페이지</h3>
-		<form action="/login/regForm" name="regForm" method="post">
+		<form action="/login/regForm" name="regForm" method="post" onsubmit="return validcheck();">
 			<table class="reg">
 				<tr>
 					<td class="n mInfo">회원정보</td> 
@@ -44,6 +44,8 @@
 						<input type="text" placeholder="우편번호" name="zonecode" id="zonecode" size="8" onclick="sample4_execDaumPostcode()" readonly /><br />
 						<input type="text" name="addr" id="addr" class="size" placeholder=" 주소입력" size="50" readonly maxlength="100자 이내" onclick="sample4_execDaumPostcode()" /><br />
 						<input type="text" name="addr1" class="size" placeholder=" 상세주소입력" size="50" maxlength="100자 이내" />
+						<input type="hidden" id="lat" name="xcor" /> 
+						<input type="hidden" id="lng" name="ycor" />
 					</td>
 				</tr>
 				<tr>
@@ -59,5 +61,7 @@
 			</table>
 		</form>
 	</div><!--//wrap -->	
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
 <script type="text/javascript" src="../../../js/regF.js"></script>
-<script type="text/javascript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

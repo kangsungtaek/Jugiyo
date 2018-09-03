@@ -95,5 +95,13 @@ public class StoreDao {
 		
 		mongoTemplate.updateMulti(query, update, "review");
 	}
+
+	public List<StoreVo> getStoreList() {
+		return template.selectList("store.getStoreList" , null);
+	}
+
+	public boolean updateStore(StoreVo vo) {
+		return template.update("store.storeUpdate", vo) == 1?true:false;
+	}
 	
 }
