@@ -129,23 +129,25 @@ body, html {
                 //document.getElementById('sample4_roadAddress').value = fullRoadAddr;
                 //document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
 
-                var addr = data.zonecode + "/" + fullRoadAddr;
+                var addr =fullRoadAddr;
                 document.getElementById("addr").value = addr;
                 console.log(addr);                
                 
                 geocoder.addressSearch(addr, function(result, status) {
 					// 정상적으로 검색이 완료됐으면 
+					console.log("ddd" + status);
 					if (status === daum.maps.services.Status.OK) {
 						var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 
 						console.log(coords.getLat());
 						console.log(coords.getLng());
 
-						$("#lat").val(coords.getLat());
-						$("#lng").val(coords.getLng());
+						document.getElementById("lat").value = coords.getLat();
+						document.getElementById("lng").value = coords.getLng();
+
+                		document.getElementById("f").submit();
 					}
 				});
-                document.getElementById("f").submit();
             }
         }).open();
     }
