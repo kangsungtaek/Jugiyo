@@ -47,6 +47,12 @@ public class MemberDao {
 		return mongoTemplate.find(query, LogVo.class, "log");
 	}
 	
+	//특정 주문내역 불러오기
+	public LogVo readByObjectId(String id) {
+		Query query = new BasicQuery(new Document().append("_id", new ObjectId(id)));
+		return mongoTemplate.findOne(query, LogVo.class, "log");
+	}
+	
 	//내집주소 등록
 	public void addAddr(Map map) {
 		template.update("member.addAddr", map);

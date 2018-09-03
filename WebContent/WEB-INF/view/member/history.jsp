@@ -45,7 +45,7 @@
 							<button class="w3-btn w3-white w3-border w3-border-grey w3-round-large" onclick="location.href='writeReview?_id=${log.id}&storeNo=${log.storeNo}'">리뷰작성하기</button><br/>			
 						</c:otherwise>
 					</c:choose>
-					<button class="w3-btn w3-white w3-border w3-border-grey w3-round-large" onclick="location.href=''">다시주문하기</button>
+					<button class="w3-btn w3-white w3-border w3-border-grey w3-round-large" onclick="location.href='reorder?id=${log.id}'">다시주문하기</button>
 				</td>
 			</tr>		
 			<tr class="${ vs.count }" style="display: none"> 
