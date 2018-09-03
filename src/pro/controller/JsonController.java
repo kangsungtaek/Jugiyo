@@ -2,6 +2,7 @@ package pro.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 
 import pro.dao.MenuDao;
+import pro.dao.OrderDao;
+import pro.vo.LogVo;
 import pro.vo.MenuVo;
 
 @Controller
@@ -22,6 +25,8 @@ public class JsonController {
 
 	@Autowired
 	MenuDao menuDao;
+	@Autowired
+	OrderDao orderDao;
 
 	@Autowired
 	Gson gson;
@@ -77,6 +82,7 @@ public class JsonController {
 		String del = gson.toJson(m);
 		mav.addObject("json", del);
 		return mav;
+
 	}
 
 	private ModelAndView menuMinus(ArrayList<MenuVo> menuList, int no, WebRequest webRequest) {
@@ -205,5 +211,4 @@ public class JsonController {
 		return mav;
 
 	}
-
 }
