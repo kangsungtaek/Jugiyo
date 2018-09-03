@@ -15,6 +15,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import pro.vo.CouponVo;
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
 import pro.vo.ReviewVo;
@@ -89,7 +90,7 @@ public class MemberDao {
 	}
 	
 	//등급에 따른 쿠폰가져오기
-	public List<HashMap> getCoupon(int grade) {
+	public List<CouponVo> getCoupon(int grade) {
 		return template.selectList("member.getCoupon", grade);
 	}
 

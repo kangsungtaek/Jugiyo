@@ -12,18 +12,18 @@
 </div>
 
 <div class="w3-container">
-  <div class="w3-panel w3-red">
-    <h2>사용가능한 쿠폰을 확인하세요.</h2>
+  <div class="w3-panel w3-orange">
+    <h3>사용가능한 쿠폰을 확인하세요.</h3>
   </div>
 	  <ul class="w3-ul w3-center">
 		  <c:choose>
 			<c:when test="${ fn:length(list) > 0 }">
 			    <c:forEach var="c" items="${list}">
-			    	<li>${ c.name } | ${ c.sale } ${ c.unit }</li>
+			    	<li class="w3-padding-small"><h4>${ c.name } | ${ c.sale } ${ c.unit }</h4></li>
 			    </c:forEach>
 			</c:when>
 			<c:otherwise>
-				<li>사용가능한 쿠폰이 없습니다.</li>
+				<li class="w3-padding-small"><h4>사용가능한 쿠폰이 없습니다.</h4></li>
 			</c:otherwise>	  
 		  </c:choose>
 	  </ul>	

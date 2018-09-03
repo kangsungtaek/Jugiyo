@@ -40,19 +40,10 @@ public class MemberController {
 			map.put("password", vo.getPassword());
 		vo = memberDao.findById(map);
 		
-		List<HashMap> coupon = memberDao.getCoupon(vo.getGrade());
-		List<CouponVo> list = new LinkedList<>();
+		List<CouponVo> coupon = memberDao.getCoupon(vo.getGrade());
 		System.out.println("[controller:member] memberInfo : "+ coupon);
-		
-		for(Map m : coupon) {
-			CouponVo coupons = new CouponVo();
-			coupons.setId((double) m.get("id"));
-			coupons.setName((String) m.get("name"));
-			coupons.setSale((int) m.get("slae"));
-			coupons.setUnit((String) m.get("unit"));
-			list.add(coupons);
-		}
-		vo.setCoupons(list);
+
+		vo.setCoupons(coupon);
 		System.out.println("[controller:member] memberInfo : "+ vo.toString());
 		
 		req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);

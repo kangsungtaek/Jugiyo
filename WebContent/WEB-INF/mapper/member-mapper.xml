@@ -25,7 +25,7 @@
 		update member set grade=#{grade} where id = #{id}
 	</update>
 	<!-- 쿠폰가져오기 -->
-	<select id="getCoupon" resultType="java.util.HashMap">
+	<select id="getCoupon" resultType="pro.vo.CouponVo">
 		select * from coupon where id &gt;= #{grade} and id &lt; #{grade}+1
 	</select>
 </mapper>
