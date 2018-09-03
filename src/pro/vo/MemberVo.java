@@ -13,6 +13,7 @@ public class MemberVo {
 	double ycor;
 	int point;
 	String email;
+	int membership;
 	
 	public String getId() {
 		return id;
@@ -67,13 +68,19 @@ public class MemberVo {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}	
+	public int getMembership() {
+		return membership;
+	}
+	public void setMembership(int membership) {
+		this.membership = membership;
 	}
 	
 	@Override
 	public String toString() {
 		return "MemberVo [id=" + id + ", password=" + password + ", contact=" + contact + ", nickname=" + nickname
 				+ ", address=" + address + ", xcor=" + xcor + ", ycor=" + ycor + ", point=" + point + ", email=" + email
-				+ "]";
+				+ ", membership=" + membership + "]";
 	}
 	
 	
