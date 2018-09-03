@@ -8,99 +8,85 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
 input, button, select {
+	height:30px;
 	padding: 0;	
 	font-size: 11pt;
 	font-family: 맑은 고딕;
 }
-form {margin:0 auto; width:400px; height:300px; margin-top:100px; border:1px solid #ccc;}
-h2 {width:396px; height:55px; text-align:center; position:relative; bottom:10px; background:#ededed; border:1px solid #ccc;}
-h2 small {width:100%; height:auto; margin-top:3px; line-height:45px;}
-div.reg_company {width:100%; height:300px;  border:1px solid #ccc;}
-div ul li {width:310px; height:30px; line-height:30px; list-style:none;  position:relative; top:10px; border:1px solid #ccc;}
+#header {width:100%; height:120px; background:#F15F5F; border:1px solid #ccc;}
+#content {width:100%; height:682px; position:relative; top:0; border:1px solid #ccc;}
+form {margin:0 auto; width:400px; height:300px; margin-top:150px;}
+h2 {width:399px; height:60px; line-height:55px; text-align:center; position:relative; bottom:10px; background:#ededed; border:1px solid #ccc;}
+div.reg_company {width:100%; height:300px; border:1px solid #ccc;}
+div.reg_company ul.reg_category {width:100%; height:auto;}
+div ul li {width:310px; height:30px; line-height:30px; margin:5px 0; list-style:none;}
 div ul li .addr_cotegory_type {width:250px; padding:0 5px;}
-div ul li span {background:#c0c0c0; }
-p.btn_reg {text-align:center;}
-p.btn_reg button {padding:3px 5px; margin:0 10px;}
-/*div ul.reg_category {width:100%; height:auto; margin-top:-30px;}*/
+div ul li span {font-weight:bold; color:#5D5D5D; padding:5px 5px; background:#c0c0c0; }
+div.btn_reg {text-align:center; padding:15px 10px;}
+.btn_reg button {padding:2px 10px 5px 10px; margin:10px 10px;}
 div ul.reg_category  {width:400px; height:178px;}
 div ul.reg_category li {width:315px; height:40px; line-height:40px; margin-top:4px; padding:2px 10px;}
-div ul.reg_category li input {width:190px; height:25px;}
-/*div ul.reg_category li span {width:160px; height:40px; border:1px solid red;}*/
-/*div.reg_company {width:360px; height:300px; border:1px solid red;}*/
-hr {margin-top:20px; border:1px solid #EAEAEA;}
-.size::-webkit-input-placeholder {margin:0 0 0 10px; padding-left:10px;}
-/*-- top.jsp--*/
-.bg {width:100%; height:100px; background:#F15F5F;}	/*#f44336;*/
-.hr_form {width:100%; height:auto; position:relative; top:70px;}
-.logo_s {width:300px; height:100px; line-height:50px; text-align:center;}
-
-</style>
-</head>
-<body>
-<div class="bg">
-	<a href="../../../index"><img src="../images/logo_s2.png" class="logo_s"></a>
-	<div class="hr_form">
-		<form action="${ pageContext.servletContext.contextPath }/admin/addStore" method="post">
-			<div class="reg_company">
-				<h2><small>【상점등록】</small></h2>
-				<ul class="reg_category size">
-					<li>
-						 ▶ <span>상표명 </span> &nbsp;|
-						<input type="text" class="input_size size" placeholder="상표명을 입력" name="name" required />
-					</li>
-					<li>
-						 ▶ <span>주  &nbsp;&nbsp;소 </span> &nbsp;| 
-						<input type="text" class="input_size size" placeholder="주소 입력" name="addr" required />
-						<div id="map" style="width:500px;height:400px;"></div>
-						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=09a2ead5f706292b477133ded73cc2fe"></script>
-						<script>
-							var container = document.getElementById('map');
-							var options = {
-								center: new daum.maps.LatLng(33.450701, 126.570667),
-								level: 3
-							};
-					
-							var map = new daum.maps.Map(container, options);
-						</script>			
-					</li>
-					<li>
-						▶ <span>업  &nbsp;&nbsp;종 </span> &nbsp;| 
-						<select name="type">
-							<c:forEach var="t" items="${ types }">
-								<option value="${ t.id }">${ t.name }</option>
-							</c:forEach>
-						</select>
-					</li>
-					<li>
-						 ▶ <span>연락처 </span> &nbsp;| 
-						<input type="text" class="input_size size" placeholder="연락처 입력" name="contact" required />
-					</li>
-				</ul>
-			</div>
-			<p class="btn_reg">
-				<button type="submit">등 록</button> <button type="reset">취 소</button>
-			</p>
-		</form>
-	</div>
-	<style>
-/*-- bottom.jsp--*/
-footer {margin-top:408px;}
+div ul.reg_category li input {width:190px; height:30px;}
+/*hr {margin-top:20px; border:1px solid #EAEAEA;}*/
+.logo_addStore {width:auto; height:100px; line-height:50px;}
+footer {width:100%; height:100px;  position:relative; margin-top:18px;}
 p.shopReg {text-align:center;}
 p.shopReg b.shopReg_inquiry {text-align:center;}
 </style>
- <footer class="w3-row-padding w3-padding-16 "><!-- footer -->
-    <div class="w3-col l10 s6 w3-red">
-      <p>
-		<b>"저기요(JUGIYO)"</b><br />
-		사장님을 흔히 부를 때 쓰는 표현과 장소를 가리키는 표현의 이중적인 의미를 가지고 있습니다.
-	  </p>
-    </div>
-    <div class="w3-col l2 s6 w3-dark-grey">
-      <p class="shopReg">
-      	<b class="shopReg_inquiry">상점 등록 문의</b><br/>
-      	<b class="shopReg_inquiry">02-1588-1588</b>
-      </p>
-    </div>
-</footer><!--//footer -->
+</head>
+<body>
+	<div id="header">
+		<a href="../../../index">
+			<img src="../images/logo_s.png" class="logo_addStore" alt="로고">
+		</a>
+	</div><!--// 헤더 -->
+	<div id="content">
+		<div style="marge-left:70px;">
+			<form action="${ pageContext.servletContext.contextPath }/admin/addStore" method="post">
+				<div class="reg_company">
+					<h2>【상점등록】</h2>
+					<ul class="reg_category size">
+						<li>
+							 ▶ <span>상표명 </span> &nbsp;|
+							<input type="text" class="input_size"  name="name" required />
+						</li>
+						<li>
+							 ▶ <span>주  &nbsp;&nbsp;소 </span> &nbsp;| 
+							<input type="text" class="input_size" name="addr" required />
+						</li>
+						<li>
+							▶ <span>업  &nbsp;&nbsp;종 </span> &nbsp;| 
+							<select name="type">
+								<c:forEach var="t" items="${ types }">
+									<option value="${ t.id }">${ t.name }</option>
+								</c:forEach>
+							</select>
+						</li>
+						<li>
+							 ▶ <span>연락처 </span> &nbsp;| 
+							<input type="text" class="input_size" name="contact" required />
+						</li>
+					</ul>
+				</div>
+				<div class="btn_reg">
+					<button type="submit">등록</button> <button type="reset">취소</button>
+				</div>
+			</form>
+		</div>
+	</div><!--//컨텐츠 -->
+	<footer class="w3-row-padding"><!-- w3-padding-16  -->
+	    <div class="w3-col l10 s6 w3-red">
+	      <p>
+			<b>"저기요(JUGIYO)"</b><br />
+			사장님을 흔히 부를 때 쓰는 표현과 장소를 가리키는 표현의 이중적인 의미를 가지고 있습니다.
+		  </p>
+	    </div>
+	    <div class="w3-col l2 s6 w3-dark-grey">
+	      <p class="shopReg">
+	      	<b class="shopReg_inquiry">상점 등록 문의</b><br/>
+	      	<b class="shopReg_inquiry">02-1588-1588</b>
+	      </p>
+	    </div>
+	</footer><!--//푸터 -->
 </body>
 </html>

@@ -7,11 +7,11 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
 /*-- bottom.jsp--*/
-footer {margin-top:408px;}
+footer {width:100%; height:75px; position:relative; top:660px; border:1px solid #ccc;}
 p.shopReg {text-align:center;}
 p.shopReg b.shopReg_inquiry {text-align:center;}
 </style>
- <footer class="w3-row-padding w3-padding-16 "><!-- footer -->
+ <footer class="w3-row-padding"><!-- footer -->
 	    <div class="w3-col l10 s6 w3-red">
 	      <p>
 			<b>"저기요(JUGIYO)"</b><br />
