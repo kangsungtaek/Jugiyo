@@ -93,5 +93,23 @@ public class MemberDao {
 	public List<CouponVo> getCoupon(int grade) {
 		return template.selectList("member.getCoupon", grade);
 	}
+	
+	//사용자의 쿠폰 넣어두기
+	public void insertCoupon(Map map) {
+		mongoTemplate.insert(map, "coupon");
+	}
+	
+	//사용자의 사용가능한 쿠폰 가져오기
+	public List<CouponVo> findCoupon(String id) {
+		Query query = new BasicQuery(new Document().append("id", id));
+		return mongoTemplate.find(query, CouponVo.class, "coupon");
+	}
+	
+	//사용한 쿠폰 업데이트
+	public void usedCoupon(Map map) {
+		Query query = new BasicQuery(new Document().append("id", map.get("id")));
+		Update update = new BasicUpdate(new Document().append("$set", new Document().append("coupons", map.get("coupons"))));
+		mongoTemplate.updateMulti(query, update, "coupon");
+	}
 
 }

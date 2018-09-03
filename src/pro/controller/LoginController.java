@@ -1,5 +1,8 @@
 package pro.controller;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.MemberDao;
 import pro.dao.StoreDao;
+import pro.vo.CouponVo;
 import pro.vo.MemberVo;
 import pro.vo.StoreVo;
 
@@ -101,6 +105,14 @@ public class LoginController {
 
 		// member를 db에 넣어줘야겠죠: insert 작업
 		int i = memberDao.addMember(member);
+		
+		List<CouponVo> coupon = memberDao.getCoupon(1);
+		System.out.println("[controller:member] memberInfo : "+ coupon);
+		Map map = new HashMap();
+			map.put("userId", member.getId());
+			map.put("coupon", coupon);
+		memberDao.insertCoupon(map);
+
 		if (i == 1) {
 			mav.setViewName("login/reg");// 회원가입되셨습니다.
 			// login/reg.jsp를 만들어서 "${ nickname } 님 회원가입되셨습니다. 감사합니다." 이렇게 나타나도록.

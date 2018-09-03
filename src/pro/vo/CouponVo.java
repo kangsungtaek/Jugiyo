@@ -2,6 +2,7 @@ package pro.vo;
 
 public class CouponVo {
 
+	String userId; //사용자아이디
 	double id;
 	String name; //쿠폰명
 	int sale; //할인정도

@@ -186,21 +186,6 @@ public class OrderController {
 			memberDao.updatePoint(memberPoint);
 			req.removeAttribute("orderList", WebRequest.SCOPE_SESSION);
 			req.removeAttribute("totalPrice", WebRequest.SCOPE_SESSION);
-			
-			//등급조정
-			List<LogVo> list = memberDao.readAllById(mVo.getId());
-			Map grade = new HashMap<>();
-			map.put("id", mVo.getId());
-			if(list.size() < 10) {
-				grade.put("grade", 1);
-			} else if(list.size() < 20) {
-				grade.put("grade", 2);
-			} else if(list.size() < 30) {
-				grade.put("grade", 3);
-			} else {
-				grade.put("grade", 4);
-			}
-			memberDao.updateGrade(map);
 
 			return "redirect:/member/memInfo";
 		} else {
