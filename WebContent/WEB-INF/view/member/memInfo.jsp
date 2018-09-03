@@ -41,7 +41,7 @@
   <p>맛있는 주문만큼 쌓이는 포인트 </p>
   <p>${ sessionScope.vo.nickname }님의 현재 포인트 : <b>${ sessionScope.vo.point }</b>
   <br/><small>(10000포인트부터 사용가능합니다.)</small></p>
-  <p>당신의 멤버쉽등급은 --입니다.</p>
+  <p>당신의 멤버쉽등급은 <b>${sessionScope.vo.membership}</b>입니다.</p>
   </div>
 </div>
 </div>

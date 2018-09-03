@@ -81,5 +81,10 @@ public class MemberDao {
 	public void updatePoint(Map map) {
 		template.update("member.updatePoint", map);
 	}
+	
+	//주문갯수에 따른 등급조정
+	public void updateGrade(Map map) {
+		template.update("member.updateGrade", map);
+	}
 
 }

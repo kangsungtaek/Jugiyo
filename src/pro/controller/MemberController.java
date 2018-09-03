@@ -52,6 +52,7 @@ public class MemberController {
 
 		List<LogVo> list = memberDao.readAllById(member.getId());
 		System.out.println("[controller:member] history : " + list);
+		
 		for(LogVo v : list) {
 			if(v.getReviewd().equals("Y")) {
 				ReviewVo review = memberDao.findByLogId(v.getId());

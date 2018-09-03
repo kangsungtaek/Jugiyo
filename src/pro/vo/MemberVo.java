@@ -13,7 +13,8 @@ public class MemberVo {
 	double ycor;
 	int point;
 	String email;
-	int membership;
+	int grade;
+	String membership;
 	
 	public String getId() {
 		return id;
@@ -69,10 +70,16 @@ public class MemberVo {
 	public void setEmail(String email) {
 		this.email = email;
 	}	
-	public int getMembership() {
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+	public String getMembership() {
 		return membership;
 	}
-	public void setMembership(int membership) {
+	public void setMembership(String membership) {
 		this.membership = membership;
 	}
 	
@@ -80,9 +87,7 @@ public class MemberVo {
 	public String toString() {
 		return "MemberVo [id=" + id + ", password=" + password + ", contact=" + contact + ", nickname=" + nickname
 				+ ", address=" + address + ", xcor=" + xcor + ", ycor=" + ycor + ", point=" + point + ", email=" + email
-				+ ", membership=" + membership + "]";
+				+ ", grade=" + grade + ", membership=" + membership + "]";
 	}
-	
-	
 
 }
