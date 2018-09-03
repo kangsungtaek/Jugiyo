@@ -58,6 +58,13 @@
 		<put-attribute name="content" value="/WEB-INF/view/member/memInfo.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
 	</definition>
+	
+	<!-- 쿠폰확인페이지 -->
+	<definition name="member/coupon" template="/WEB-INF/view/layout/layout.jsp">
+		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
+		<put-attribute name="content" value="/WEB-INF/view/member/coupon.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
+	</definition>
 
 	<!-- 주문내역 페이지 -->
 	<definition name="member/history" template="/WEB-INF/view/layout/layout.jsp">
@@ -97,6 +104,7 @@
 		<put-attribute name="content" value="/WEB-INF/view/owner/index.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
 	</definition>
+	
 	<!-- 사장님 메뉴수정 -->
 	<definition name="owner/updatemenu" template="/WEB-INF/view/layout/layoutowner.jsp">
 		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />

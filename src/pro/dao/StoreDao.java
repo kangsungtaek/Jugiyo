@@ -51,11 +51,11 @@ public class StoreDao {
 	
 	//반경계산한 음식점조회
 	public List<StoreVo> getStoreByCoords(Map map) {
-		return template.selectList("store.getStoreByCoords", map);
-	}
-	//반경계산한 음식점조회-타입별
-	public List<StoreVo> getStoreByCoordsWithType(Map map) {
-		return template.selectList("store.getStoreByCoordsWithType", map);
+		if(map.get("type").equals("all")) {
+			return template.selectList("store.getStoreByCoords", map);			
+		} else {
+			return template.selectList("store.getStoreByCoordsWithType", map);
+		}
 	}
 
 	public StoreVo getStore(int storeNo) {

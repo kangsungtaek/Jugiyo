@@ -36,6 +36,7 @@ public class MainController {
 			map.put("xcor", member.getXcor());
 			map.put("ycor", member.getYcor());
 		}
+		map.put("type", type);
 		List<StoreVo> list = storeDao.getStoreByCoords(map);
 		
 		mav.setViewName("main");

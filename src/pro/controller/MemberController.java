@@ -2,6 +2,7 @@ package pro.controller;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.MemberDao;
 import pro.service.UploadService;
+import pro.vo.CouponVo;
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
 import pro.vo.ReviewVo;
@@ -38,6 +40,12 @@ public class MemberController {
 			map.put("password", vo.getPassword());
 		vo = memberDao.findById(map);
 		
+		List<CouponVo> coupon = memberDao.getCoupon(vo.getGrade());
+		System.out.println("[controller:member] memberInfo : "+ coupon);
+
+		vo.setCoupons(coupon);
+		System.out.println("[controller:member] memberInfo : "+ vo.toString());
+		
 		req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
 		return "member/memInfo";
 	}
@@ -52,6 +60,7 @@ public class MemberController {
 
 		List<LogVo> list = memberDao.readAllById(member.getId());
 		System.out.println("[controller:member] history : " + list);
+		
 		for(LogVo v : list) {
 			if(v.getReviewd().equals("Y")) {
 				ReviewVo review = memberDao.findByLogId(v.getId());
@@ -60,6 +69,19 @@ public class MemberController {
 		}
 
 		mav.addObject("list", list);
+		return mav;
+	}
+	
+	//쿠폰확인하기
+	@RequestMapping("/coupon")
+	public ModelAndView couponHandle(WebRequest req) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/coupon");
+		
+		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
+		System.out.println("[controller:member] coupon : " + member.toString());
+		mav.addObject("list", member.getCoupons());
+		
 		return mav;
 	}
 	

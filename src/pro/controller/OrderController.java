@@ -71,7 +71,7 @@ public class OrderController {
 		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		System.out.println("[controller:order] random");
 		int num = 0;
-		int[] set = new int[10];
+		int[] set = new int[100];
 		
 		if(member == null) {
 			for (int i = 1; i < 10; i++) {
@@ -186,6 +186,21 @@ public class OrderController {
 			memberDao.updatePoint(memberPoint);
 			req.removeAttribute("orderList", WebRequest.SCOPE_SESSION);
 			req.removeAttribute("totalPrice", WebRequest.SCOPE_SESSION);
+			
+			//등급조정
+			List<LogVo> list = memberDao.readAllById(mVo.getId());
+			Map grade = new HashMap<>();
+			map.put("id", mVo.getId());
+			if(list.size() < 10) {
+				grade.put("grade", 1);
+			} else if(list.size() < 20) {
+				grade.put("grade", 2);
+			} else if(list.size() < 30) {
+				grade.put("grade", 3);
+			} else {
+				grade.put("grade", 4);
+			}
+			memberDao.updateGrade(map);
 
 			return "redirect:/member/memInfo";
 		} else {
