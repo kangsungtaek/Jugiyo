@@ -174,7 +174,7 @@
 						<br/>
 						<c:if test="${ fn:length(r.review.img) > 0 }">
 							<c:forEach var="i" items="${ r.review.img }">
-								<img src="${ i }" style="width:10%; height: 10%;" />
+								<img src="${pageContext.request.contextPath}${ i }" style="width:10%; height: 10%;" />
 							</c:forEach>
 						</c:if>
 						</span>

@@ -32,7 +32,6 @@
 			<a href="/owner/salesstats" class="w3-bar-item w3-button">매출통계</a> <a
 				href="/owner/menustats" class="w3-bar-item w3-button">메뉴통계</a>
 		</div>
-
 	</div>
 	<div align="right">
 		<button class="w3-button w3-light-gray">${sessionScope.login.name}</button>
@@ -42,7 +41,7 @@
 
 <script>
 	var idx = 0;
-	var ws = new WebSocket("ws://${pageContext.request.localAddr}/ws/conn.do");
+	var ws = new WebSocket("ws://jugiyo.mockingu.com/ws/conn.do");
 	ws.onmessage = function(ret) {
 		console.log(ret.data);
 		var obj = JSON.parse(ret.data);
