@@ -13,7 +13,6 @@
       <img src="${pageContext.request.contextPath}${list.img }" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
       <div class="w3-bar-item">
         <span class="w3-large">${list.name }</span><br>
-        <span>Web Designer</span>
       </div>
     </li>
     </c:forEach>
