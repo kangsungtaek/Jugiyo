@@ -21,11 +21,11 @@
 		WHERE DATA.distance &lt; 3
 	</select>
 	
-	<select id="getStoreByCoordsWithType">
+	<select id="getStoreByCoordsWithType" resultType="pro.vo.StoreVo">
 		SELECT * FROM (
-			SELECT s.*, ( 6371 * acos( cos( radians( #{xcor} ) ) * cos( radians( xcor) ) * cos( radians( ycor ) 
+			SELECT s.*,t.name tname ( 6371 * acos( cos( radians( #{xcor} ) ) * cos( radians( xcor) ) * cos( radians( ycor ) 
 					- radians(#{ycor}) ) + sin( radians(#{xcor}) ) * sin( radians(xcor) ) ) ) AS distance
-			FROM store s join type t on s.type=t.id where t.id=1) DATA
+			FROM store s join type t on s.type=t.id where type=#{type}) DATA
 		WHERE DATA.distance &lt; 3
 	</select>
 		

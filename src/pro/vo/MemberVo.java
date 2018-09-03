@@ -1,5 +1,7 @@
 package pro.vo;
 
+import java.util.List;
+
 // member 테이블의 모든 항목을 다 쓰면됩니다.
 // + setter, getter, toString 오버라이드해주세요.
 
@@ -11,10 +13,12 @@ public class MemberVo {
 	String address;
 	double xcor;
 	double ycor;
-	int point;
 	String email;
+
+	int point;
 	int grade;
 	String membership;
+	List<CouponVo> coupons;
 	
 	public String getId() {
 		return id;
@@ -82,12 +86,18 @@ public class MemberVo {
 	public void setMembership(String membership) {
 		this.membership = membership;
 	}
+	public List<CouponVo> getCoupons() {
+		return coupons;
+	}
+	public void setCoupons(List<CouponVo> coupons) {
+		this.coupons = coupons;
+	}
 	
 	@Override
 	public String toString() {
 		return "MemberVo [id=" + id + ", password=" + password + ", contact=" + contact + ", nickname=" + nickname
-				+ ", address=" + address + ", xcor=" + xcor + ", ycor=" + ycor + ", point=" + point + ", email=" + email
-				+ ", grade=" + grade + ", membership=" + membership + "]";
+				+ ", address=" + address + ", xcor=" + xcor + ", ycor=" + ycor + ", email=" + email + ", point=" + point
+				+ ", grade=" + grade + ", membership=" + membership + ", coupons=" + coupons + "]";
 	}
 
 }
