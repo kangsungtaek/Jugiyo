@@ -40,8 +40,10 @@ public class MemberController {
 			map.put("password", vo.getPassword());
 		vo = memberDao.findById(map);
 		
-		List<Map> coupon = memberDao.getCoupon(vo.getGrade());
+		List<HashMap> coupon = memberDao.getCoupon(vo.getGrade());
 		List<CouponVo> list = new LinkedList<>();
+		System.out.println("[controller:member] memberInfo : "+ coupon);
+		
 		for(Map m : coupon) {
 			CouponVo coupons = new CouponVo();
 			coupons.setId((double) m.get("id"));

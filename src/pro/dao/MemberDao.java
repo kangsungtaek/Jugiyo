@@ -1,5 +1,6 @@
 package pro.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -88,7 +89,7 @@ public class MemberDao {
 	}
 	
 	//등급에 따른 쿠폰가져오기
-	public List getCoupon(int grade) {
+	public List<HashMap> getCoupon(int grade) {
 		return template.selectList("member.getCoupon", grade);
 	}
 
