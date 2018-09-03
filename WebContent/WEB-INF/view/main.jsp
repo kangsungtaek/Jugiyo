@@ -3,8 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<<<<<<< HEAD
-
 <div class="w3-container"
 	style="padding-left: 100px; padding-right: 100px;">
 	<div class="w3-border">
@@ -23,7 +21,6 @@
 		</ul>
 	</div>
 </div>
-=======
 <c:choose>
 	<c:when test="${empty storeList}">
 		<div class="w3-container w3-center w3-animate-fading">
@@ -53,7 +50,6 @@
 		</div>
 	</c:otherwise>
 </c:choose>
->>>>>>> branch 'master' of https://github.com/kangsungtaek/Jugiyo.git
 <script>
 	$(".cate").on("click", function() {
 		location.href = "order/order?storeNo=" + $(this).attr("id");
