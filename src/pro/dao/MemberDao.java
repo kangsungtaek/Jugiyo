@@ -86,5 +86,10 @@ public class MemberDao {
 	public void updateGrade(Map map) {
 		template.update("member.updateGrade", map);
 	}
+	
+	//등급에 따른 쿠폰가져오기
+	public List getCoupon(int grade) {
+		return template.selectList("member.getCoupon", grade);
+	}
 
 }
