@@ -10,7 +10,7 @@
 		select id from member
 	</select>
 	<insert id="addMember" parameterType="pro.vo.MemberVo">
-		insert into member values (#{id},#{password},#{contact},#{nickname},#{address},0,#{email})
+		insert into member values (#{id},#{password},#{contact},#{nickname},#{address},0,#{email},#{xcor},#{ycor})
 	</insert>
 	<select id="findStartWith" parameterType="java.lang.String" resultType="pro.vo.MemberVo">
 		select * from member where id like #{id} order by id asc
