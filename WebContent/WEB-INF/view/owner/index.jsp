@@ -13,7 +13,7 @@
 	<div id="Demo1" class="w3-show w3-container">
 		<ul class="w3-ul w3-card-4">
 			<c:forEach var="log" items="${logVo }">
-			<c:if test="${log.delivery eq 'n' }">
+			<c:if test="${log.delivery eq 'N' }">
 				<li class="w3-bar" id="${log.id }"><span onclick="updateDelivery(this)"
 					class="w3-bar-item w3-button w3-white w3-xlarge w3-right">배달완료</span>
 					<div class="w3-bar-item">
@@ -34,7 +34,7 @@
 		var objId = $(target).closest('li').attr('id');
 		var xhr = new XMLHttpRequest();
 		xhr.open("get", "/Json?objId=" + objId + "&mode=updateDelivery", true);
-		
 		xhr.send();
+		location.href="index";
 	};
 </script>
