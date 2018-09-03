@@ -62,6 +62,16 @@ public class MemberController {
 		mav.addObject("list", list);
 		return mav;
 	}
+	
+	//다시주문하기
+	@RequestMapping("/reorder")
+	public ModelAndView reorderHandle(@RequestParam("id") String id, WebRequest req) {
+		ModelAndView mav = new ModelAndView();
+		LogVo log = memberDao.readByObjectId(id);
+		req.setAttribute("orderList", log.getOrderList(), WebRequest.SCOPE_SESSION);
+		mav.setViewName("redirect:/order/ordered?storeNo=" + log.getStoreNo());
+		return mav;
+	}
 
 	@GetMapping("/writeReview")
 	public ModelAndView writeGetReviewHandle(@RequestParam("_id") String id, @RequestParam("storeNo") int storeNo) {
