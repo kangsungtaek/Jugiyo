@@ -190,7 +190,7 @@ public class OrderController {
 			//등급조정
 			List<LogVo> list = memberDao.readAllById(mVo.getId());
 			Map grade = new HashMap<>();
-			map.put("id", mVo.getId());
+			grade.put("id", mVo.getId());
 			if(list.size() < 10) {
 				grade.put("grade", 1);
 			} else if(list.size() < 20) {
@@ -200,7 +200,7 @@ public class OrderController {
 			} else {
 				grade.put("grade", 4);
 			}
-			memberDao.updateGrade(map);
+			memberDao.updateGrade(grade);
 
 			return "redirect:/member/memInfo";
 		} else {

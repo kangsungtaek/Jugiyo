@@ -41,7 +41,7 @@
 	
 	<!-- websocket controller등록 -->
 	<websocket:handlers>
-		<websocket:mapping handler="ws" path="/ws/conn.do"/>
+		<websocket:mapping handler="alert" path="/ws/conn.do"/>
 		<websocket:handshake-interceptors>
 			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
 		</websocket:handshake-interceptors>

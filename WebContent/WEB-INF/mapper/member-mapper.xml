@@ -21,7 +21,7 @@
 	<update id="updatePoint" parameterType="java.util.Map">
 		update member set point = point + #{point} where id = #{id}
 	</update>
-	<update id="updateGrade">
+	<update id="updateGrade" parameterType="java.util.HashMap">
 		update member set grade=#{grade} where id = #{id}
 	</update>
 	<!-- 쿠폰가져오기 -->
