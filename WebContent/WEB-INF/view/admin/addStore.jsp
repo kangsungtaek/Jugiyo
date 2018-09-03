@@ -14,7 +14,7 @@ input, button, select {
 	font-family: 맑은 고딕;
 }
 #header {width:100%; height:120px; background:#F15F5F; border:1px solid #ccc;}
-#content {width:100%; height:682px; position:relative; top:0; border:1px solid #ccc;}
+#content {width:100%; height:auto; position:relative; margin-bottom:200px;}
 form {margin:0 auto; width:400px; height:300px; margin-top:150px;}
 h2 {width:399px; height:60px; line-height:55px; text-align:center; position:relative; bottom:10px; background:#ededed; border:1px solid #ccc;}
 div.reg_company {width:100%; height:300px; border:1px solid #ccc;}
@@ -27,9 +27,9 @@ div.btn_reg {text-align:center; padding:15px 10px;}
 div ul.reg_category  {width:400px; height:178px;}
 div ul.reg_category li {width:315px; height:40px; line-height:40px; margin-top:4px; padding:2px 10px;}
 div ul.reg_category li input {width:190px; height:30px;}
-/*hr {margin-top:20px; border:1px solid #EAEAEA;}*/
+hr {width:100%; height:auto; position:relative; margin-top:10px; border:1px solid #ccc;}
 .logo_addStore {width:auto; height:100px; line-height:50px;}
-footer {width:100%; height:100px;  position:relative; margin-top:18px;}
+footer {width:100%; height:auto; position:relative; top:20px; border:1px solid red;}
 p.shopReg {text-align:center;}
 p.shopReg b.shopReg_inquiry {text-align:center;}
 </style>
@@ -74,6 +74,7 @@ p.shopReg b.shopReg_inquiry {text-align:center;}
 			</form>
 		</div>
 	</div><!--//컨텐츠 -->
+	<hr />
 	<footer class="w3-row-padding"><!-- w3-padding-16  -->
 	    <div class="w3-col l10 s6 w3-red">
 	      <p>
