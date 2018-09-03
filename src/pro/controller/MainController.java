@@ -1,5 +1,6 @@
 package pro.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.StoreDao;
+import pro.vo.MemberVo;
 import pro.vo.StoreVo;
 
 @Controller
@@ -26,7 +28,15 @@ public class MainController {
 		System.out.println("[controller:main] type : " + type);
 
 		//List<StoreVo> list = storeDao.storeLIst(type);
-		Map map = (Map) req.getAttribute("coords", WebRequest.SCOPE_SESSION);
+		Map map = new HashMap<>();
+		if(req.getAttribute("vo", WebRequest.SCOPE_SESSION) == null) {
+			map = (Map) req.getAttribute("coords", WebRequest.SCOPE_SESSION);
+		} else {
+			MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
+			map.put("xcor", member.getXcor());
+			map.put("ycor", member.getYcor());
+		}
+		map.put("type", type);
 		List<StoreVo> list = storeDao.getStoreByCoords(map);
 		
 		mav.setViewName("main");

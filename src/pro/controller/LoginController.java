@@ -115,6 +115,7 @@ public class LoginController {
 	public String logout(HttpSession session) {
 		// session.setAttribute("userLoginInfo", null);
 		session.setAttribute("vo", null);
+		session.setAttribute("orderList", null);
 		return "/index";
 	}
 }

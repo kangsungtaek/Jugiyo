@@ -219,7 +219,7 @@ public class OwnerController {
 				}
 			}
 		}
-
+		
 		System.out.println(bestSales);
 
 		ModelAndView mav = new ModelAndView();
@@ -248,14 +248,22 @@ public class OwnerController {
 
 	// 매출관련 통계
 	@GetMapping("/salesstats")
-	public ModelAndView salesStatsHandle01(WebRequest webRequest) {
+	public ModelAndView salesStatsHandle01(@RequestParam(name="year", defaultValue="2018", required=true) int year,WebRequest webRequest) {
 		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
 		List<LogVo> lVo = orderDao.findStore(vo.getNo());
 		System.out.println(lVo);
 		Map<String, Integer> timeStates = new LinkedHashMap();
+		
+		Date d = new Date();
+		int y = d.getYear()+1900;
+		List<Integer> cal = new ArrayList<>();
+		for(int i = y-3; i<=y; i++) {
+			int years = i;
+			cal.add(years);
+			System.out.println(years);
+		}
 
-		int year = 2018;
-
+		
 		for (int i = 1; i <= 12; i++) {
 			timeStates.put(i + "월", 0);
 		}
@@ -265,8 +273,8 @@ public class OwnerController {
 			Date date = lVo.get(i).getOrderdate();
 			LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			int month = localDate.getMonthValue();
-
-			if (localDate.getYear() == year) {
+			
+			if (localDate.getYear()==year) {
 				switch (month) {
 				case 1:
 					timeStates.put("1월", timeStates.get("1월") + lVo.get(i).getTotalPrice());
@@ -317,11 +325,14 @@ public class OwnerController {
 
 		String json = gson.toJson(list);
 		String json2 = gson.toJson(list2);
+		String json3 = gson.toJson(cal);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("owner/salesstats");
 		mav.addObject("price", json);
 		mav.addObject("mounth", json2);
+		mav.addObject("year", cal);
+		
 		System.out.println(json);
 		System.out.println(json2);
 

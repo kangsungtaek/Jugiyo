@@ -1,5 +1,6 @@
 package pro.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import pro.vo.CouponVo;
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
 import pro.vo.ReviewVo;
@@ -47,6 +49,12 @@ public class MemberDao {
 		return mongoTemplate.find(query, LogVo.class, "log");
 	}
 	
+	//특정 주문내역 불러오기
+	public LogVo readByObjectId(String id) {
+		Query query = new BasicQuery(new Document().append("_id", new ObjectId(id)));
+		return mongoTemplate.findOne(query, LogVo.class, "log");
+	}
+	
 	//내집주소 등록
 	public void addAddr(Map map) {
 		template.update("member.addAddr", map);
@@ -74,6 +82,16 @@ public class MemberDao {
 	//주문후 포인트 적립
 	public void updatePoint(Map map) {
 		template.update("member.updatePoint", map);
+	}
+	
+	//주문갯수에 따른 등급조정
+	public void updateGrade(Map map) {
+		template.update("member.updateGrade", map);
+	}
+	
+	//등급에 따른 쿠폰가져오기
+	public List<CouponVo> getCoupon(int grade) {
+		return template.selectList("member.getCoupon", grade);
 	}
 
 }

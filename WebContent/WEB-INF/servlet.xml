@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<interceptor>
-	<interceptor>
-		<mapping path="/**" />
-			<beans:bean id="loginInterceptor" class="hiworld.common.logger.loginInterceptor"></beans:bean>
-	</interceptor>
-</interceptor>

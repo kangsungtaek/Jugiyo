@@ -60,7 +60,7 @@
 				<div class="w3-col w3-align-right" style="width: 200px">
 					▶ <span>가게 이미지 | </span>  <input class="w3-input data"
 							name="attach" type="file" id="ori" style="display: none;"
-							required value="${storeVo.img }"
+							value="${storeVo.img }"
 							onchange="preview(this);"> <input
 							class="w3-input w3-border fake" name="gg" type="text" readOnly
 							onclick="choose(this);" value="${fileName }" />
