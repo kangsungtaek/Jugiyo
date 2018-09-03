@@ -21,7 +21,6 @@
 			</c:forEach>
 		</ul>
 	</div>
-
 </div>
 <script>
 
