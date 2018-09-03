@@ -54,5 +54,8 @@
 	function orderHandle(obj) {
 		var html = "<span class=\"w3-tag w3-blue\">New!</span>";
 		$("#orederAdmin").append(html);
+		
+		
+		
 	}
 </script>
