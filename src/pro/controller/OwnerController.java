@@ -56,17 +56,8 @@ public class OwnerController {
 		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
 		List<LogVo> lVo = orderDao.today(vo.getNo());
 		
-		//하루 total price
-		int sum = 0;
-		for (int i = 0; i < lVo.size(); i++) {
-			System.out.println(lVo.get(i).getTotalPrice());
-			sum += lVo.get(i).getTotalPrice();
-		}
-		
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("owner/index");
-		mav.addObject("todayPrice", sum);
 		mav.addObject("logVo",lVo);
 		return mav;
 	}
@@ -123,24 +114,20 @@ public class OwnerController {
 	public ModelAndView todayHandle01(WebRequest webRequest) {
 		StoreVo vo = (StoreVo) webRequest.getAttribute("storeVo", WebRequest.SCOPE_SESSION);
 		List<LogVo> lVo = orderDao.today(vo.getNo());
+		
+		
+		//하루 total price
 		int sum = 0;
 		for (int i = 0; i < lVo.size(); i++) {
 			System.out.println(lVo.get(i).getTotalPrice());
 			sum += lVo.get(i).getTotalPrice();
 		}
-		List<LogVo> list = new ArrayList<>();
-
-		for (int i = 0; i < lVo.size(); i++) {
-
-			System.out.println("orderList [Test]" + lVo.get(i));
-			list.add(lVo.get(i));
-			System.out.println(list.get(i));
-		}
+		
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("owner/today");
 		mav.addObject("todayPrice", sum);
-		mav.addObject("todayList", list);
-
+		mav.addObject("logVo",lVo);
 		return mav;
 	}
 

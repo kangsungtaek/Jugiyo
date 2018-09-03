@@ -58,10 +58,9 @@ public class OrderDao {
 		mongoTemplate.insert(data, "log");
 	}
 	//딜리버리 업데이트
-	public void updateDelivery(String logId){
-		Query query = new BasicQuery(new Document().append("_id", new ObjectId(logId)));
+	public void updateDelivery(String objId){
+		Query query = new BasicQuery(new Document().append("_id", new ObjectId(objId)));
 		Update update = new BasicUpdate(new Document().append("$set", new Document().append("delivery", "Y")));
 		mongoTemplate.updateMulti(query, update, "log");
 	}
-	
 }
