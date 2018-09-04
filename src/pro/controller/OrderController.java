@@ -172,8 +172,8 @@ public class OrderController {
 				// 쿠폰사용시 여기서 쿠폰 제거 하면될듯
 				// coupon이라는 이름으로 쿠폰의 아이디가 넘어옴
 				Map c = new HashMap<>();
-				c.put("userId", mVo.getId());
-				c.put("c", map.get("coupon"));
+					c.put("userId", mVo.getId());
+					c.put("c", map.get("coupon"));
 				memberDao.usedCoupon(c);
 			}
 		}
