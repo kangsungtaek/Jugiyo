@@ -52,7 +52,7 @@ public class WebSocketController extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		StoreVo svo = (StoreVo)session.getAttributes().get("vo");
+		StoreVo svo = (StoreVo)session.getAttributes().get("storeVo");
 		System.out.println("사장님 로그아웃" + svo.getName());
 		webSessions.remove(svo.getId(), session);
 	}
