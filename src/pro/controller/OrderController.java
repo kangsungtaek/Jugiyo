@@ -147,6 +147,12 @@ public class OrderController {
 		}
 		StoreVo svo = storeDao.getStore(Integer.parseInt((String) map.get("storeNo")));
 
+		//coupon이라는 이름으로 쿠폰의 아이디가 넘어옴
+		Map c = new HashMap<>();
+			c.put("userId", mVo.getId());
+			c.put("c", map.get("coupon"));
+		memberDao.usedCoupon(c);
+		
 		Map<String, Object> data = new LinkedHashMap();
 
 		data.put("userId", mVo.getId());

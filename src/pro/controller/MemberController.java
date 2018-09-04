@@ -35,7 +35,10 @@ public class MemberController {
 	@RequestMapping("/memInfo")
 	public String memInfoHandle(WebRequest req) {
 		MemberVo vo = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
-
+		Map ip = new HashMap<>();
+			ip.put("id", vo.getId());
+			ip.put("password", vo.getPassword());
+		vo = memberDao.findById(ip);
 		// 등급조정 -> 관리자페이지에서 하는게 좋을듯
 		List<LogVo> list = memberDao.readAllById(vo.getId());
 		Map grade = new HashMap<>();
@@ -50,13 +53,19 @@ public class MemberController {
 			grade.put("grade", 4);
 		}
 
+		Map m = new HashMap<>();
+			m.put("id", vo.getId());
+			m.put("password", vo.getPassword());
+		vo = memberDao.findById(m);
+		
 		if (vo.getGrade() != (int) grade.get("grade")) {
 			memberDao.updateGrade(grade);
 			List<CouponVo> c = memberDao.getCoupon((int) grade.get("grade"));
 			Map map = new HashMap<>();
 				map.put("userId", vo.getId());
-				map.put("coupon", c);
-			memberDao.insertCoupon(map);
+				map.put("coupons", c);
+			memberDao.usedCoupon(map);
+			
 			vo.setCoupons(c);
 		} else {
 			MultiCouponVo coupons = memberDao.findCoupon(vo.getId());

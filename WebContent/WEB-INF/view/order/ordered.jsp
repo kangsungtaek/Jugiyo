@@ -105,15 +105,16 @@ textarea {
   					<select name="copun" disabled="disabled" id="copun">
   						<option selected disabled hidden>쿠폰선택</option>
 					<c:choose>
-						<c:when test="${empty copuns}">
+						<c:when test="${empty coupons}">
 							<option value= "null"> 쿠폰 없음 </option>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="c" items="${ copuns }">
-									<option value="${ c.id }">${ t.name } / ${t.sale }</option>
+							<c:forEach var="c" items="${ coupons }">
+								<option value="${ c.id }">${ c.name } | ${c.sale } ${ c.unit }</option>
 							</c:forEach>
 						</c:otherwise>
-						</c:choose>
+					</c:choose>
+
 				</select>
   				<br/>
   				내 포인트  <input  type="radio" name ="discount" id="pointDiscount" value="point" form="form1" onclick="discountSelect(this)" >
@@ -122,7 +123,11 @@ textarea {
   					<button type="button" disabled="disabled" id="pointApp" >적용</button>
   			    포인트 사용 금액 : <input type="text" disabled="disabled" name="point" id="point" > 
   					
+<<<<<<< HEAD
 			<p>&nbsp;</p>
+=======
+			<p>&nbsp;</p>
+>>>>>>> branch 'master' of https://github.com/kangsungtaek/jugiyo.git
 			</div>
 		</div>
 

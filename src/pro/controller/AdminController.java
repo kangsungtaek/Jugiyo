@@ -13,9 +13,11 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import pro.dao.MemberDao;
 import pro.dao.StoreDao;
 import pro.dao.TypeDao;
 import pro.service.UploadService;
+import pro.vo.MemberVo;
 import pro.vo.MenuAttachVo;
 import pro.vo.MenuVo;
 import pro.vo.StoreVo;
@@ -27,10 +29,10 @@ public class AdminController {
 
 	@Autowired
 	StoreDao storeDao;
-	
 	@Autowired
-	TypeDao typeDao;
-	
+	MemberDao memberDao;
+	@Autowired
+	TypeDao typeDao;	
 	@Autowired
 	UploadService uploadService;
 	
@@ -117,8 +119,8 @@ public class AdminController {
 	
 	@PostMapping("/updateStore")
 	public ModelAndView updateStroeHandle2(@ModelAttribute StoreVo vo, @RequestParam("attach") MultipartFile[] files) throws Exception {
-		ModelAndView mav = new ModelAndView();
 		
+		ModelAndView mav = new ModelAndView();
 		
 		if (!files[0].isEmpty()) {
 			for (MultipartFile file : files) {
@@ -134,4 +136,13 @@ public class AdminController {
 		return mav;
 	}
 	
+	@RequestMapping("/members")
+	public ModelAndView membersHandle() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("amin/members");
+		
+		List<MemberVo> member = memberDao.getAll();
+		mav.addObject("members", member);
+		return mav;		
+	}
 }
