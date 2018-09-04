@@ -2,7 +2,6 @@ package pro.controller;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +20,7 @@ import pro.service.UploadService;
 import pro.vo.CouponVo;
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
+import pro.vo.MultiCouponVo;
 import pro.vo.ReviewVo;
 
 @Controller
@@ -36,7 +36,7 @@ public class MemberController {
 	public String memInfoHandle(WebRequest req) {
 		MemberVo vo = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
 
-		// 등급조정
+		// 등급조정 -> 관리자페이지에서 하는게 좋을듯
 		List<LogVo> list = memberDao.readAllById(vo.getId());
 		Map grade = new HashMap<>();
 		grade.put("id", vo.getId());
@@ -59,15 +59,10 @@ public class MemberController {
 			memberDao.insertCoupon(map);
 			vo.setCoupons(c);
 		} else {
-			Map map = new HashMap<>();
-				map.put("id", vo.getId());
-				map.put("password", vo.getPassword());
-			vo = memberDao.findById(map);
+			MultiCouponVo coupons = memberDao.findCoupon(vo.getId());
+			System.out.println("[controller:member] coupons : " + coupons.toString());
 
-			List<CouponVo> coupon = memberDao.findCoupon(vo.getId());
-			System.out.println("[controller:member] coupons : " + coupon);
-
-			vo.setCoupons(coupon);
+			vo.setCoupons(coupons.getCoupons());
 		}
 		req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
 		return "member/memInfo";

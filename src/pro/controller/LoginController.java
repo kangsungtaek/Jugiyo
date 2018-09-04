@@ -117,7 +117,7 @@ public class LoginController {
 			mav.setViewName("login/reg");// 회원가입되셨습니다.
 			// login/reg.jsp를 만들어서 "${ nickname } 님 회원가입되셨습니다. 감사합니다." 이렇게 나타나도록.
 		} else {
-			mav.setViewName("error");
+			mav.setViewName("/error");
 		}
 		return mav;
 	}

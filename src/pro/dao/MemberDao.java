@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import pro.vo.CouponVo;
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
+import pro.vo.MultiCouponVo;
 import pro.vo.ReviewVo;
 
 @Repository
@@ -100,14 +101,14 @@ public class MemberDao {
 	}
 	
 	//사용자의 사용가능한 쿠폰 가져오기
-	public List<CouponVo> findCoupon(String id) {
-		Query query = new BasicQuery(new Document().append("id", id));
-		return mongoTemplate.find(query, CouponVo.class, "coupon");
+	public MultiCouponVo findCoupon(String id) {
+		Query query = new BasicQuery(new Document().append("userId", id));
+		return mongoTemplate.findOne(query, MultiCouponVo.class, "coupon");
 	}
 	
 	//사용한 쿠폰 업데이트
 	public void usedCoupon(Map map) {
-		Query query = new BasicQuery(new Document().append("id", map.get("id")));
+		Query query = new BasicQuery(new Document().append("userId", map.get("id")));
 		Update update = new BasicUpdate(new Document().append("$set", new Document().append("coupons", map.get("coupons"))));
 		mongoTemplate.updateMulti(query, update, "coupon");
 	}

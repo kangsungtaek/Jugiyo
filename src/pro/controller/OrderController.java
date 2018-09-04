@@ -25,6 +25,7 @@ import pro.service.OrderService;
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
 import pro.vo.MenuVo;
+import pro.vo.MultiCouponVo;
 import pro.vo.ReviewVo;
 import pro.vo.StoreVo;
 
@@ -121,7 +122,9 @@ public class OrderController {
 		mav.addObject("member", member);
 		mav.addObject("orderList", orderList);
 		mav.addObject("storeVo", vo);
-
+		
+		mav.addObject("coupons", member.getCoupons());
+		
 		return mav;
 	}
 
@@ -135,7 +138,6 @@ public class OrderController {
 
 		// map = 배달주소, 휴대폰번호, 주문시요청사항, 결제수단(현금or카드), +@ 할인
 		System.out.println(map);
-
 
 		if (mVo == null) {
 			mVo = new MemberVo();

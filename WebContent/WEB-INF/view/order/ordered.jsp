@@ -81,10 +81,12 @@ textarea {
 			
 			<div class="w3-bar">
 			<p></p>
-  				<button class="w3-bar-item w3-button w3-black" id="cacheBtn" style="width:50%" onclick="paymenSelect(this)"><i class="fa fa-cache"></i>현금
+  				<button class="w3-bar-item w3-button w3-black" id="cacheBtn" style="width:50%" onclick="paymenSelect(this)">
+  				 <i class="fa fa-cache"></i>현금
   				 <input class="w3-radio" type="radio" name="payment" id="cacheRadio" value="cache" form="form1" checked>
   				</button>
-  				<button class="w3-bar-item w3-button w3-black" id="cardBtn" style="width:50%" onclick="paymenSelect(this)"><i class="fa fa-credit-card"></i>카드
+  				<button class="w3-bar-item w3-button w3-black" id="cardBtn" style="width:50%" onclick="paymenSelect(this)">
+  				 <i class="fa fa-credit-card"></i>카드
   				 <input class="w3-radio" type="radio" name="payment" id="cardRadio" value="card" form="form1"  >
   				</button>
 			<p>&nbsp;</p>
@@ -95,11 +97,23 @@ textarea {
 			<button onclick="myFunction('Demo4')"
 				class="w3-button w3-block w3-black w3-left-align">할인방법 선택</button>
 			<div id="Demo4" class="w3-hide w3-container">
-			
-			
+				<div class="w3-bar">
+					<p></p>
+					<c:choose>
+						<c:when test="${ !empty coupons }">
+							<c:forEach var="c" items="${ coupons }" varStatus="vs">
+								<button class="w3-bar-item w3-button w3-black c" id="${vs.count }" style="width:100%"
+										name="sale" value="${ c.id }" onclick="saleSelect(this)" >
+								${ c.name } | ${ c.sale } ${ c.unit }
+								</button>
+							</c:forEach>
+						</c:when>
+					</c:choose>
+					<p>&nbsp;</p>
+				</div>
 			</div>
 		</div>
-	
+
 	</div>
 	<div class="w3-col"
 		style="width: 20%; padding-left: 10px; padding-right: 30px">
@@ -145,6 +159,13 @@ textarea {
 			$("#cardRadio").prop("checked", false);
 			$("#cacheRadio").prop("checked", true);
 		}
+	}
+
+	//할인수단 선택
+	function saleSelect(target) {
+		console.log(target.id);
+		$(".c").removeClass("w3-red");
+		$("#target.id").addClass("w3-red");
 	}
 		
 	//장바구니 스크롤
