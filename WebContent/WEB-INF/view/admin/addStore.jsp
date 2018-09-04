@@ -6,6 +6,9 @@
 .img_wrap {
 	height: 200px;
 	margin-top: 10px;
+
+}
+
 input, button, select {
 	height:30px;
 	padding: 0;	
@@ -72,9 +75,6 @@ input, button, select {
 		</div>
 	</form>
 </div>
-
-
-
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
 <script>
@@ -226,19 +226,5 @@ input, button, select {
 		</div>
 	</div><!--//컨텐츠 -->
 	<hr />
-	<footer class="w3-row-padding"><!-- w3-padding-16  -->
-	    <div class="w3-col l10 s6 w3-red">
-	      <p>
-			<b>"저기요(JUGIYO)"</b><br />
-			사장님을 흔히 부를 때 쓰는 표현과 장소를 가리키는 표현의 이중적인 의미를 가지고 있습니다.
-		  </p>
-	    </div>
-	    <div class="w3-col l2 s6 w3-dark-grey">
-	      <p class="shopReg">
-	      	<b class="shopReg_inquiry">상점 등록 문의</b><br/>
-	      	<b class="shopReg_inquiry">02-1588-1588</b>
-	      </p>
-	    </div>
-	</footer><!--//푸터 -->
 </body>
 </html>

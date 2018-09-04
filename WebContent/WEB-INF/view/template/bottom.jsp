@@ -7,13 +7,16 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
 /*-- bottom.jsp--*/
-footer {width:100%; height:75px; position:relative; top:660px; border:1px solid #ccc;}
+footer {width:100%; height:80px; /*position:relative; margin-top:740px;*/}
+footer .f_wrap {width:100%; height:80px; margin-top:385px; border:1px solid #ccc;}
+p.call {width:700px; height:auto;}
 p.shopReg {text-align:center;}
 p.shopReg b.shopReg_inquiry {text-align:center;}
 </style>
- <footer class="w3-row-padding"><!-- footer -->
+<footer><!-- footer -->
+	<div class="f_wrap">
 	    <div class="w3-col l10 s6 w3-red">
-	      <p>
+	      <p class="call">
 			<b>"저기요(JUGIYO)"</b><br />
 			사장님을 흔히 부를 때 쓰는 표현과 장소를 가리키는 표현의 이중적인 의미를 가지고 있습니다.
 		  </p>
@@ -24,6 +27,7 @@ p.shopReg b.shopReg_inquiry {text-align:center;}
 	      	<b class="shopReg_inquiry">02-1588-1588</b>
 	      </p>
 	    </div>
-	</footer><!--//footer -->
+	  </div><!--// f_wrap -->
+</footer><!--//footer -->
 </body>
 </html>

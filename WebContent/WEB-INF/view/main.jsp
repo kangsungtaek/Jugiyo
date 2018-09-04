@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <div class="w3-container"
 	style="padding-left: 100px; padding-right: 100px;">
 	<div class="w3-border">
@@ -54,4 +53,7 @@
 	$(".cate").on("click", function() {
 		location.href = "order/order?storeNo=" + $(this).attr("id");
 	});
+$(".cate").on("click", function() {
+	location.href = "order/order?storeNo=" + $(this).attr("id");
+});
 </script>

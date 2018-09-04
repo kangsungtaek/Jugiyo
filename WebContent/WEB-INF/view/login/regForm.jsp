@@ -4,10 +4,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
-	#wrap {width:100%; height:100%; border:5px solid cyan;}
+	#wrap {width:100%; height:100%; border:5px solid orange;}
 	.bg {width:100%; height:130px; background:#F15F5F;}
 /*--.bg {width:100%; height:auto; border:1px solid #ccc;}--*/
-	.bg p {width:100%; height:auto; text-align:center; position:relative; bottom:40px;}
+/*--.bg p {width:100%; height:130px;} --*/
 </style>
 	<div class="bg"></div>
 	<div id="wrap">
@@ -68,6 +68,5 @@
 		</form>
 	</div><!--//wrap -->	
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
-<script type="text/javascript" src="../../../js/regF.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
+<script type="text/javascript" src="../../../include/common/js/regF.js"></script>
