@@ -123,12 +123,7 @@ textarea {
   					<small>최대 3천원</small>
   					<button type="button" disabled="disabled" id="pointApp" >적용</button>
   			    포인트 사용 금액 : <input type="text" disabled="disabled" name="point" id="point" form ="form1"> 
-  					
-<<<<<<< HEAD
 			<p>&nbsp;</p>
-=======
-			<p>&nbsp;</p>
->>>>>>> branch 'master' of https://github.com/kangsungtaek/jugiyo.git
 			</div>
 		</div>
 
