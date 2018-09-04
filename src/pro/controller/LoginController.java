@@ -79,7 +79,7 @@ public class LoginController {
 					mav.setViewName("login/loginForm");
 				}
 			} catch (Exception e) {
-				mav.setViewName("redirect:/error");
+				mav.setViewName("error");
 			}
 		}
 		return mav;
@@ -114,7 +114,7 @@ public class LoginController {
 		System.out.println("[controller:member] memberInfo : "+ coupon);
 		Map map = new HashMap();
 			map.put("userId", member.getId());
-			map.put("coupon", coupon);
+			map.put("coupons", coupon);
 		memberDao.insertCoupon(map);
 
 		if (i == 1) {

@@ -36,6 +36,10 @@ public class WelcomeController {
 		req.setAttribute("coords", map, WebRequest.SCOPE_SESSION);
 
 		return "redirect:/main?type=all"; //음식점 전체메뉴로 이동하도록
-
+	}
+	
+	@RequestMapping("/error")
+	public String errorHandle() {
+		return "error";
 	}
 }
