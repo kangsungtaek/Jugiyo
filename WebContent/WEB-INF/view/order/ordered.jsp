@@ -102,15 +102,16 @@ textarea {
 			<div id="Demo4" class="w3-show w3-container">
 			<p></p>
   				쿠폰 <input type="radio" name ="discount" id="copunDiscount" value="copun" form="form1" onclick="discountSelect(this)" > 
-  					<select name="copun" disabled="disabled" id="copun">
+  					<select name="copun" disabled="disabled" id="copun" form ="form1" > 
   						<option selected disabled hidden>쿠폰선택</option>
 					<c:choose>
 						<c:when test="${empty coupons}">
 							<option value= "null"> 쿠폰 없음 </option>
 						</c:when>
+
 						<c:otherwise>
 							<c:forEach var="c" items="${ coupons }">
-								<option value="${ c.id }">${ c.name } | ${c.sale } ${ c.unit }</option>
+									<option value="${ c.id }">${ c.name } | ${c.sale } ${c.unit }</option>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -121,7 +122,7 @@ textarea {
   					<input type="text" disabled="disabled"  name="myPoint" id="myPoint" value="${member.point }" > 
   					<small>최대 3천원</small>
   					<button type="button" disabled="disabled" id="pointApp" >적용</button>
-  			    포인트 사용 금액 : <input type="text" disabled="disabled" name="point" id="point" > 
+  			    포인트 사용 금액 : <input type="text" disabled="disabled" name="point" id="point" form ="form1"> 
   					
 <<<<<<< HEAD
 			<p>&nbsp;</p>
@@ -214,7 +215,9 @@ textarea {
 		if(point > 3000){
 			window.alert("포인트는 최대 3000원 까지 가능합니다.");
 		}else{
-			$("#orderList").append("<span> 할인가격 : "+ point + " </span>");
+			$("#orderDiv").append("<br/><span name='salsePrice'> 할인가격 : "+ point + " </span>");
+			$("#orderDiv").append("<br/><span> 최종 가격: "+ ($("#totalPrice").text() - point) +"</span>" );
+			
 		}
 	});
 	
