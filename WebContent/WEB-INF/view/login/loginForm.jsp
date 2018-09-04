@@ -7,19 +7,17 @@
 	.form_input {text-align:center; width:100%; height:38px; position:relative; bottom:20px;}
 	.w3-row {margin:0 auto; width:400px; height:100px; top:0px;}
 	/*-- top.jsp--*/
-	.w3-orange {width:100%; height:auto; position:absolute; top:150px; border:3px solid #ccc;}
-	div p.logo {margin:0 auto; width:400px; height:100px;}
+	.w3-orange {width:100%; height:auto; position:relative; top:0pxt;border:1px solid #ccc;}
+	p.logo {margin:0 auto; width:400px; height:100px;}
 </style>
-<hr />
-<div>
-	<p class="logo">
-		<a href="#"><img src="../../../images/logo_b.png" alt="로고" /></a>
-	</p>
-</div>
+<hr style="position:relative; bottom:33px; background:gray; border:1px solid #ddd;" />
+<p class="logo">
+	<a href="#"><img src="../../../images/logo_b.png" alt="로고" /></a>
+</p>
 <div id="wrap" class="w3-panel w3-padding-32 w3-orange w3-container">
    <div class="w3-row" style="width:169px;">
        <h2 class="hide" style="text-align: center;"> 로그인</h2>
-       <div class="w3-bar w3-black" style="text-align: center;">
+       <div class="w3-bar w3-black"><!-- style="text-align: center;" -->
           <button type="button" class="w3-bar-item w3-button tablink w3-red mode" value="member">개인회원</button>
           <button type="button" class="w3-button w3-button mode" value="owner">사업자</button>
         </div>
