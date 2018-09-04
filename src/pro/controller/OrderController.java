@@ -52,15 +52,15 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("order/order");
 		mav.addObject("storeVo", vo);
-		System.out.println("menuList =" +menuList);
+		System.out.println("menuList =" + menuList);
 		mav.addObject("menuList", menuList);
-		
+
 		List<LogVo> list = storeDao.findLogByStoreNo(storeNo);
-		for(LogVo v : list) {
-			if(v.getReviewd().equals("Y")) {
+		for (LogVo v : list) {
+			if (v.getReviewd().equals("Y")) {
 				ReviewVo review = memberDao.findByLogId(v.getId());
 				v.setReview(review);
-			} 
+			}
 		}
 		System.out.println("[controller:order] logs : " + list);
 		mav.addObject("reviews", list);
@@ -72,23 +72,23 @@ public class OrderController {
 		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		System.out.println("[controller:order] random");
 		int num = 0;
-		int[] set = new int[100];
-		
-		if(member == null) {
+		int[] set = new int[10];
+
+		if (member == null) {
 			for (int i = 1; i < 10; i++) {
 				set[i] = i;
 			}
-		} else {			
+		} else {
 			List<LogVo> list = new ArrayList();
 			list = orderDao.findLog(member.getId());
 			System.out.println("[controller:order]random : " + list);
-			
+
 			if (list == null || list.size() == 0) {
 				for (int i = 1; i < 10; i++) {
 					set[i] = i;
 				}
 			} else {
-				
+
 				for (int i = 1; i < 10; i++) {
 					for (LogVo l : list) {
 						if (i == l.getStoreType())
@@ -99,7 +99,7 @@ public class OrderController {
 				}
 			}
 		}
-		num = set[1 + (int)(Math.random()*set.length)];
+		num = set[1 + (int) (Math.random() * set.length)];
 		System.out.println("[controller:order]random " + Arrays.toString(set) + "/ type : " + num);
 		return "redirect:/main?type=" + num;
 	}
@@ -114,26 +114,26 @@ public class OrderController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("order/ordered");
-		if(member == null) {
-			mav.addObject("addr", addr);			
+		if (member == null) {
+			mav.addObject("addr", addr);
 		} else {
 			mav.addObject("addr", member.getAddress());
 		}
 		mav.addObject("member", member);
 		mav.addObject("orderList", orderList);
 		mav.addObject("storeVo", vo);
-		
+
 		mav.addObject("coupons", member.getCoupons());
-		
+
 		return mav;
 	}
 
 	// 주문완료 처리
 	@PostMapping("/ordered")
 	public String orderedHandle2(@RequestParam Map<String, String> map, WebRequest req) {
-		
+
 		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
-		int totalPrice =  (int) req.getAttribute("totalPrice", WebRequest.SCOPE_SESSION);
+		int totalPrice = (int) req.getAttribute("totalPrice", WebRequest.SCOPE_SESSION);
 		MemberVo mVo = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
 
 		// map = 배달주소, 휴대폰번호, 주문시요청사항, 결제수단(현금or카드), +@ 할인
@@ -156,7 +156,7 @@ public class OrderController {
 		data.put("orderList", orderList);
 		data.put("orderdate", new Date());
 //		data.put("orderdate", new Date("07/11/2018"));
-		
+
 		// 주문 완료/미완료 = delivery
 		data.put("delivery", "N");
 		// 주문시 요청사항
@@ -165,6 +165,18 @@ public class OrderController {
 		// 토탈 프라이스
 		data.put("totalPrice", totalPrice);
 
+		if (map.get("discount") == null || map.get("discount") == "") {
+			if (map.get("discount").equals("point")) {
+				data.put("discount", map.get("point"));
+			} else {
+				// 쿠폰사용시 여기서 쿠폰 제거 하면될듯
+				// coupon이라는 이름으로 쿠폰의 아이디가 넘어옴
+				Map c = new HashMap<>();
+					c.put("userId", mVo.getId());
+					c.put("c", map.get("coupon"));
+				memberDao.usedCoupon(c);
+			}
+		}
 
 		orderDao.insertLog(data);
 
@@ -183,7 +195,12 @@ public class OrderController {
 			System.out.println("[controller:order] point : " + point);
 			Map memberPoint = new HashMap<>();
 			memberPoint.put("id", mVo.getId());
-			memberPoint.put("point", (int)point);
+			System.out.println(map.get("point"));
+			if (map.get("discount").equals("point")) {
+				point = point - Integer.parseInt(map.get("point"));
+			}
+			System.out.println(point);
+			memberPoint.put("point", point);
 
 			memberDao.updatePoint(memberPoint);
 			req.removeAttribute("orderList", WebRequest.SCOPE_SESSION);
@@ -193,7 +210,7 @@ public class OrderController {
 		} else {
 			return "redirect:/main";
 		}
-		
+
 	}
-	
+
 }

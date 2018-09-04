@@ -33,7 +33,7 @@
 				<tr>
 					<td class="n"> 비밀번호확인</td>
 					<td><input type="password" name="pwdConfirm" id="pwck" class="size" placeholder=" 비밀번호확인" maxlength="20" required />
-					 <span id="pwckajax"></span>
+					<small id="pwckajax"></small>
 					</td>
 				</tr>
 				<tr>

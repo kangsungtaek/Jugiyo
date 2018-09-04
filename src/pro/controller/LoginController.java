@@ -23,6 +23,7 @@ import pro.dao.MemberDao;
 import pro.dao.StoreDao;
 import pro.vo.CouponVo;
 import pro.vo.MemberVo;
+import pro.vo.MultiCouponVo;
 import pro.vo.StoreVo;
 
 @Controller
@@ -69,13 +70,16 @@ public class LoginController {
 
 				if (vo.getPassword().equals(m.get("password"))) { // session에다가 vo를 올려주세요.
 					mav.setViewName("index");
+					
+					MultiCouponVo coupons = memberDao.findCoupon(vo.getId());
+					vo.setCoupons(coupons.getCoupons());
+
 					req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
-					System.out.println("[controller:login] 로그온");
 				} else {
 					mav.setViewName("login/loginForm");
 				}
 			} catch (Exception e) {
-				mav.setViewName("redirect:/error");
+				mav.setViewName("error");
 			}
 		}
 		return mav;
@@ -110,7 +114,7 @@ public class LoginController {
 		System.out.println("[controller:member] memberInfo : "+ coupon);
 		Map map = new HashMap();
 			map.put("userId", member.getId());
-			map.put("coupon", coupon);
+			map.put("coupons", coupon);
 		memberDao.insertCoupon(map);
 
 		if (i == 1) {
@@ -128,6 +132,7 @@ public class LoginController {
 		// session.setAttribute("userLoginInfo", null);
 		session.setAttribute("vo", null);
 		session.setAttribute("orderList", null);
+		session.setAttribute("totalPrice", null);
 		return "/index";
 	}
 }

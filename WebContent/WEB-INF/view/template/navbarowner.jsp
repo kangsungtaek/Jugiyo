@@ -61,7 +61,7 @@
 		  console.log('An error occurred. Sorry for that.');
 		}
 	function orderHandle(obj) {
-		var html = "<span class=\"w3-tag w3-blue\">New!</span>";
+		var html = "<span class=\"w3-tag w3-blue\" onclick=\"location.reload();\">New!</span>";
 		$("#orederAdmin").append(html);
 		
 		

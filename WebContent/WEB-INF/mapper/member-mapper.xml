@@ -5,6 +5,9 @@
 	<select id="findById" parameterType="java.util.Map" resultType="pro.vo.MemberVo">
 		select * from member_detail where id=#{id} and password=#{password}
 	</select>
+	<select id="getAll" resultType="pro.vo.MemberVo">
+		select * from member_detail
+	</select>
 	<!-- 아이디 중복체크를 위한 id불러오기 -->
 	<select id="findAll" resultType="java.lang.String">
 		select id from member_detail
