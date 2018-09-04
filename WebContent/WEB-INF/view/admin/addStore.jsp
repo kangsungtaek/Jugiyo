@@ -3,19 +3,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <style>
-<<<<<<< HEAD
 .img_wrap {
 	height: 200px;
 	margin-top: 10px;
-=======
+
+}
+
 input, button, select {
 	height:30px;
 	padding: 0;	
 	font-size: 11pt;
 	font-family: 맑은 고딕;
->>>>>>> refs/heads/login_mem
-}
-<<<<<<< HEAD
+}	
 
 .img_wrap img {
 	max-width: 100%;
@@ -76,12 +75,8 @@ input, button, select {
 		</div>
 	</form>
 </div>
-
-
-
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
@@ -189,27 +184,6 @@ input, button, select {
 	}
 
 </script>
-=======
-#header {width:100%; height:120px; background:#F15F5F; border:1px solid #ccc;}
-#content {width:100%; height:auto; position:relative; margin-bottom:200px;}
-form {margin:0 auto; width:400px; height:300px; margin-top:150px;}
-h2 {width:399px; height:60px; line-height:55px; text-align:center; position:relative; bottom:10px; background:#ededed; border:1px solid #ccc;}
-div.reg_company {width:100%; height:300px; border:1px solid #ccc;}
-div.reg_company ul.reg_category {width:100%; height:auto;}
-div ul li {width:310px; height:30px; line-height:30px; margin:5px 0; list-style:none;}
-div ul li .addr_cotegory_type {width:250px; padding:0 5px;}
-div ul li span {font-weight:bold; color:#5D5D5D; padding:5px 5px; background:#c0c0c0; }
-div.btn_reg {text-align:center; padding:15px 10px;}
-.btn_reg button {padding:2px 10px 5px 10px; margin:10px 10px;}
-div ul.reg_category  {width:400px; height:178px;}
-div ul.reg_category li {width:315px; height:40px; line-height:40px; margin-top:4px; padding:2px 10px;}
-div ul.reg_category li input {width:190px; height:30px;}
-hr {width:100%; height:auto; position:relative; margin-top:10px; border:1px solid #ccc;}
-.logo_addStore {width:auto; height:100px; line-height:50px;}
-footer {width:100%; height:auto; position:relative; top:20px; border:1px solid red;}
-p.shopReg {text-align:center;}
-p.shopReg b.shopReg_inquiry {text-align:center;}
-</style>
 </head>
 <body>
 	<div id="header">
@@ -268,4 +242,3 @@ p.shopReg b.shopReg_inquiry {text-align:center;}
 	</footer><!--//푸터 -->
 </body>
 </html>
->>>>>>> refs/heads/login_mem

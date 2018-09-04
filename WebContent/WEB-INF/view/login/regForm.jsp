@@ -66,6 +66,5 @@
 		</form>
 	</div><!--//wrap -->	
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
-<script type="text/javascript" src="../../../js/regF.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
+<script type="text/javascript" src="../../..include/common/js/regF.js"></script>
