@@ -35,6 +35,11 @@ public class MemberDao {
 		//member가 mapper이름 findById는 sql문 이름
 	}
 	
+	//모든회원 불러오는 작업
+	public List<MemberVo> getAll() {
+		return template.selectList("member.getAll");
+	}
+	
 	//회원가입용 함수
 	public int addMember(MemberVo vo) {
 		return template.insert("member.addMember", vo);
@@ -100,6 +105,13 @@ public class MemberDao {
 		mongoTemplate.insert(map, "coupon");
 	}
 	
+	//사용자의 등급조정시 쿠폰 넣어주기
+	public void updateCoupon(Map map) {
+		Query query = new BasicQuery(new Document().append("userId", map.get("userId")));
+		Update update = new BasicUpdate(new Document().append("$push", new Document().append("coupons", map.get("c"))));
+		mongoTemplate.updateFirst(query, update, "coupon");
+	}
+	
 	//사용자의 사용가능한 쿠폰 가져오기
 	public MultiCouponVo findCoupon(String id) {
 		Query query = new BasicQuery(new Document().append("userId", id));
@@ -108,9 +120,10 @@ public class MemberDao {
 	
 	//사용한 쿠폰 업데이트
 	public void usedCoupon(Map map) {
-		Query query = new BasicQuery(new Document().append("userId", map.get("id")));
-		Update update = new BasicUpdate(new Document().append("$set", new Document().append("coupons", map.get("coupons"))));
-		mongoTemplate.updateMulti(query, update, "coupon");
+		Query query = new BasicQuery(new Document().append("userId", map.get("userId")));
+		Update update = new BasicUpdate(new Document().append("$pull", 
+				new Document().append("coupons", new Document().append("_id", map.get("c")))));
+		mongoTemplate.updateFirst(query, update, "coupon");
 	}
 
 }
