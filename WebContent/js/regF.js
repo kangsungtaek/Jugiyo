@@ -136,6 +136,20 @@
       }
    });
    
+   $("#pwck").on("change", function() {
+	   console.log($(this).val());
+      $("#pwckajax").val("");
+      if($("#pw") == ($(this).val())) {
+    	 check++;
+         $("#pwckajax").css("color", "green");
+         $("#pwckajax").html("비밀번호가 일치합니다.")
+      }else {
+    	 // check--;
+         $("#pwckajax").css("color", "red");
+         $("#pwckajax").html("비밀번호가 일치하지 않습니다.");   
+      }
+   });
+   
    $("#phone").on("change", function() {
 	   console.log($(this).val());
       $("#phoneajax").html("");
@@ -152,7 +166,7 @@
    
    function validcheck() {
 	   console.log(check);
-	   if(check >= 4) {
+	   if(check >= 5) {
 		   return true;
 	   } else {
 		   return false;

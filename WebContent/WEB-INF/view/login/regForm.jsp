@@ -28,7 +28,9 @@
 				</tr>
 				<tr>
 					<td class="n"> 비밀번호확인</td>
-					<td><input type="password" name="pwdConfirm" class="size" placeholder=" 비밀번호확인" maxlength="20" required /></td>
+					<td><input type="password" name="pwdConfirm" id="pwck" class="size" placeholder=" 비밀번호확인" maxlength="20" required />
+					 <span id="pwckajax"></span>
+					</td>
 				</tr>
 				<tr>
 					<td class="n"> 닉네임</td>
