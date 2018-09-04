@@ -102,7 +102,7 @@ textarea {
 			<div id="Demo4" class="w3-show w3-container">
 			<p></p>
   				쿠폰 <input type="radio" name ="discount" id="copunDiscount" value="copun" form="form1" onclick="discountSelect(this)" > 
-  					<select name="copun" disabled="disabled" id="copun" form ="form1" > 
+  					<select name="coupon" disabled="disabled" id="coupon" form ="form1" > 
   						<option selected disabled hidden>쿠폰선택</option>
 					<c:choose>
 						<c:when test="${empty coupons}">
@@ -111,18 +111,18 @@ textarea {
 
 						<c:otherwise>
 							<c:forEach var="c" items="${ coupons }">
-									<option value="${ c.id }">${ c.name } | ${c.sale } ${c.unit }</option>
+									<option value="${ c.id }">${c.name}|${c.sale}|${c.unit}</option>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-
 				</select>
+				<button type="button" disabled="disabled" id="couponApp" >적용</button>
   				<br/>
   				내 포인트  <input  type="radio" name ="discount" id="pointDiscount" value="point" form="form1" onclick="discountSelect(this)" >
   					<input type="text" disabled="disabled"  name="myPoint" id="myPoint" value="${member.point }" > 
   					<small>최대 3천원</small>
   					<button type="button" disabled="disabled" id="pointApp" >적용</button>
-  			    포인트 사용 금액 : <input type="text" disabled="disabled" name="point" id="point" form ="form1"> 
+  			    포인트 사용 금액 : <input type="text" readonly="readonly" name="point" id="point" form ="form1"> 
 			<p>&nbsp;</p>
 			</div>
 		</div>
@@ -145,8 +145,9 @@ textarea {
 						</li>
 					</c:forEach>
 				</ul>
-				
-			총 가격 : <span id="totalPrice"> ${sessionScope.totalPrice}</span>
+			총 가격 : <span id="totalPrice"> ${sessionScope.totalPrice}</span> <br/>
+			할인 가격 : <span id="salsePrice" >0</span> <br/>
+			최종 가격 : <span id ="sumPrice"> ${sessionScope.totalPrice} </span> <br/>
 
 			</div>
 		</div>
@@ -182,13 +183,15 @@ textarea {
 	// 할인방법 선택
 	function discountSelect(target){
 		if(target.id == "copunDiscount"){
-			$("#copun").prop("disabled", false);
+			$("#coupon").prop("disabled", false);
 			$("#myPoint").prop("disabled", true);
 			$("#pointApp").prop("disabled", true);
+			$("#couponApp").prop("disabled", false);
 		}else{
-			$("#copun").prop("disabled", true);
+			$("#coupon").prop("disabled", true);
 			$("#myPoint").prop("disabled", false);
 			$("#pointApp").prop("disabled", false);
+			$("#couponApp").prop("disabled", true);
 		}
 	}
 	
@@ -204,16 +207,40 @@ textarea {
 		$(this).val(aa);
 	});
 	
+	// 포인트 적용 
+	// 1. 포인트 적용시 쿠폰선택못함 
 	$("#pointApp").on("click", function(){
 		var point = $("#myPoint").val();
 		
 		if(point > 3000){
-			window.alert("포인트는 최대 3000원 까지 가능합니다.");
+			window.alert("포인트는 최대 3000 포인트 까지 가능합니다.");
 		}else{
-			$("#orderDiv").append("<br/><span name='salsePrice'> 할인가격 : "+ point + " </span>");
-			$("#orderDiv").append("<br/><span> 최종 가격: "+ ($("#totalPrice").text() - point) +"</span>" );
+			$("#point").val(point);
+			$("#salsePrice").text(point);
+			$("#sumPrice").text($("#totalPrice").text() - point);
+			$("#copunDiscount").prop("disabled", true);
 			
 		}
+	});
+	
+	// 쿠폰 적용
+	$("#couponApp").on("click", function(){
+		
+		var aa = $("#coupon").find(":selected").html().split('|');
+		console.log(aa[1]);
+		
+		if(aa[2] == "%"){
+			var salse = Math.round((aa[1] * 0.01) *  $("#sumPrice").text());
+			$("#salsePrice").text(salse);
+			$("#sumPrice").text($("#totalPrice").text() - salse);
+		}else{
+			$("#salsePrice").text(aa[1]);
+			$("#sumPrice").text($("#totalPrice").text() - aa[1]);
+		}
+		$("#pointDiscount").prop("disabled", true);
+		
+
+		
 	});
 	
 	//장바구니 스크롤
@@ -230,7 +257,7 @@ textarea {
 		});
 	});
 
-	function myFunction(id) {
+	function myFunction2(id) {
 		var x = document.getElementById(id);
 		if (x.className.indexOf("w3-show") == -1) {
 			x.className += " w3-show";
