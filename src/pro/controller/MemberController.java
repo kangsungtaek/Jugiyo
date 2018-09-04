@@ -35,7 +35,10 @@ public class MemberController {
 	@RequestMapping("/memInfo")
 	public String memInfoHandle(WebRequest req) {
 		MemberVo vo = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
-
+		Map ip = new HashMap<>();
+			ip.put("id", vo.getId());
+			ip.put("password", vo.getPassword());
+		vo = memberDao.findById(ip);
 		// 등급조정 -> 관리자페이지에서 하는게 좋을듯
 		List<LogVo> list = memberDao.readAllById(vo.getId());
 		Map grade = new HashMap<>();

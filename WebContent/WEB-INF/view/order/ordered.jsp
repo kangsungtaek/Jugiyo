@@ -98,38 +98,22 @@ textarea {
 			
 			<button onclick="myFunction('Demo4')"
 				class="w3-button w3-block w3-black w3-left-align">할인방법 선택</button>
-<<<<<<< HEAD
-			<div id="Demo4" class="w3-hide w3-container">
-				<div class="w3-bar">
-					<p></p>
-					<c:choose>
-						<c:when test="${ !empty coupons }">
-							<c:forEach var="c" items="${ coupons }" varStatus="vs">
-								<button class="w3-bar-item w3-button w3-black c" id="${vs.count }" style="width:100%"
-										name="sale" value="${ c.id }" onclick="saleSelect(this)" >
-								${ c.name } | ${ c.sale } ${ c.unit }
-								</button>
-							</c:forEach>
-						</c:when>
-					</c:choose>
-					<p>&nbsp;</p>
-				</div>
-=======
+
 			<div id="Demo4" class="w3-show w3-container">
 			<p></p>
   				쿠폰 <input type="radio" name ="discount" id="copunDiscount" value="copun" form="form1" onclick="discountSelect(this)" > 
   					<select name="copun" disabled="disabled" id="copun">
   						<option selected disabled hidden>쿠폰선택</option>
-					<c:forEach var="c" items="${ copuns }">
 					<c:choose>
-						<c:when test="${empty copuns}">
+						<c:when test="${empty coupons}">
 							<option value= "null"> 쿠폰 없음 </option>
 						</c:when>
 						<c:otherwise>
-							<option value="${ c.id }">${ t.name } / ${t.sale }</option>
+							<c:forEach var="c" items="${ coupons }">
+								<option value="${ c.id }">${ c.name } | ${c.sale } ${ c.unit }</option>
+							</c:forEach>
 						</c:otherwise>
-						</c:choose>
-					</c:forEach>
+					</c:choose>
 				</select>
   				<br/>
   				내 포인트  <input  type="radio" name ="discount" id="pointDiscount" value="point" form="form1" onclick="discountSelect(this)" >
@@ -139,7 +123,6 @@ textarea {
   			    포인트 사용 금액 : <input type="text" disabled="disabled" name="point" id="point" > 
   					
 			<p>&nbsp;</p>
->>>>>>> refs/heads/order
 			</div>
 		</div>
 
