@@ -48,7 +48,7 @@ textarea {
 			</div>
 		</div>
 		<div class="w3-container">
-			<button onclick="myFunction('Demo1')"
+			<button onclick="myFunction2('Demo1')"
 				class="w3-button w3-block w3-black w3-left-align">배달정보</button>
 			<div id="Demo1" class="w3-show w3-container">
 				
@@ -69,7 +69,7 @@ textarea {
 				
 			</div>
 
-			<button onclick="myFunction('Demo2')"
+			<button onclick="myFunction2('Demo2')"
 				class="w3-button w3-block w3-black w3-left-align">주문시 요청사항</button>
 			<div id="Demo2" class="w3-show w3-container">
 			<p></p>
@@ -77,7 +77,7 @@ textarea {
 			<p></p>
 			</div>
 			
-			<button onclick="myFunction('Demo3')"
+			<button onclick="myFunction2('Demo3')"
 				class="w3-button w3-block w3-black w3-left-align">결제수단 선택</button>
 			<div id="Demo3" class="w3-hide w3-container">
 			
@@ -96,33 +96,39 @@ textarea {
 		
 			</div>
 			
-			<button onclick="myFunction('Demo4')"
+			<button onclick="myFunction2('Demo4')"
 				class="w3-button w3-block w3-black w3-left-align">할인방법 선택</button>
 
 			<div id="Demo4" class="w3-show w3-container">
 			<p></p>
   				쿠폰 <input type="radio" name ="discount" id="copunDiscount" value="copun" form="form1" onclick="discountSelect(this)" > 
-  					<select name="copun" disabled="disabled" id="copun">
+  					<select name="copun" disabled="disabled" id="copun" form ="form1" > 
   						<option selected disabled hidden>쿠폰선택</option>
 					<c:choose>
 						<c:when test="${empty coupons}">
 							<option value= "null"> 쿠폰 없음 </option>
 						</c:when>
+
 						<c:otherwise>
 							<c:forEach var="c" items="${ coupons }">
-								<option value="${ c.id }">${ c.name } | ${c.sale } ${ c.unit }</option>
+									<option value="${ c.id }">${ c.name } | ${c.sale } ${c.unit }</option>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
+
 				</select>
   				<br/>
   				내 포인트  <input  type="radio" name ="discount" id="pointDiscount" value="point" form="form1" onclick="discountSelect(this)" >
   					<input type="text" disabled="disabled"  name="myPoint" id="myPoint" value="${member.point }" > 
   					<small>최대 3천원</small>
   					<button type="button" disabled="disabled" id="pointApp" >적용</button>
-  			    포인트 사용 금액 : <input type="text" disabled="disabled" name="point" id="point" > 
+  			    포인트 사용 금액 : <input type="text" disabled="disabled" name="point" id="point" form ="form1"> 
   					
+<<<<<<< HEAD
 			<p>&nbsp;</p>
+=======
+			<p>&nbsp;</p>
+>>>>>>> branch 'master' of https://github.com/kangsungtaek/jugiyo.git
 			</div>
 		</div>
 
@@ -209,7 +215,9 @@ textarea {
 		if(point > 3000){
 			window.alert("포인트는 최대 3000원 까지 가능합니다.");
 		}else{
-			$("#orderList").append("<span> 할인가격 : "+ point + " </span>");
+			$("#orderDiv").append("<br/><span name='salsePrice'> 할인가격 : "+ point + " </span>");
+			$("#orderDiv").append("<br/><span> 최종 가격: "+ ($("#totalPrice").text() - point) +"</span>" );
+			
 		}
 	});
 	

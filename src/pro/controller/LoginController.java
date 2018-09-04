@@ -132,6 +132,7 @@ public class LoginController {
 		// session.setAttribute("userLoginInfo", null);
 		session.setAttribute("vo", null);
 		session.setAttribute("orderList", null);
+		session.setAttribute("totalPrice", null);
 		return "/index";
 	}
 }
