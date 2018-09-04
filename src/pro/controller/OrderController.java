@@ -72,7 +72,7 @@ public class OrderController {
 		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		System.out.println("[controller:order] random");
 		int num = 0;
-		int[] set = new int[100];
+		int[] set = new int[10];
 
 		if (member == null) {
 			for (int i = 1; i < 10; i++) {
