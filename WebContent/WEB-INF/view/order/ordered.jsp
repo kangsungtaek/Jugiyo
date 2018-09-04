@@ -15,6 +15,7 @@
 	position: fixed;
 	top: 0px;
 }
+
 textarea {
     width: 100%;
     height: 150px;
