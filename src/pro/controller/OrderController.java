@@ -164,6 +164,12 @@ public class OrderController {
 		data.put("reviewd", "N");
 		// 토탈 프라이스
 		data.put("totalPrice", totalPrice);
+		
+		if( map.get("discount").equals("point") ) {
+			data.put("discount", map.get("point"));
+		}else {
+			// 쿠폰사용시 여기서 쿠폰 제거 하면될듯 
+		}
 
 
 		orderDao.insertLog(data);
@@ -183,7 +189,14 @@ public class OrderController {
 			System.out.println("[controller:order] point : " + point);
 			Map memberPoint = new HashMap<>();
 			memberPoint.put("id", mVo.getId());
-			memberPoint.put("point", (int)point);
+			System.out.println(map.get("point"));
+			if( map.get("discount").equals("point") ) {
+				point = point - Integer.parseInt(map.get("point"));
+			}
+			System.out.println(point);
+			memberPoint.put("point", point);
+			
+			
 
 			memberDao.updatePoint(memberPoint);
 			req.removeAttribute("orderList", WebRequest.SCOPE_SESSION);
