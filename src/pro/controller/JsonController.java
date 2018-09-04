@@ -30,6 +30,7 @@ public class JsonController {
 
 	@Autowired
 	Gson gson;
+	
 
 	/*
 	 * 사용자가 메뉴 클릭시(ajax send) 세션에 menuList 에 사용자가 눌른 메뉴 add ( menuList가 없다면 생성) 눌른
