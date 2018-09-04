@@ -2,7 +2,6 @@ package pro.controller;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +20,7 @@ import pro.service.UploadService;
 import pro.vo.CouponVo;
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
+import pro.vo.MultiCouponVo;
 import pro.vo.ReviewVo;
 
 @Controller
@@ -31,21 +31,42 @@ public class MemberController {
 	MemberDao memberDao;
 	@Autowired
 	UploadService us;
-	
+
 	@RequestMapping("/memInfo")
 	public String memInfoHandle(WebRequest req) {
 		MemberVo vo = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
-		Map<String, String> map = new HashMap<>();
-			map.put("id", vo.getId());
-			map.put("password", vo.getPassword());
-		vo = memberDao.findById(map);
-		
-		List<CouponVo> coupon = memberDao.getCoupon(vo.getGrade());
-		System.out.println("[controller:member] memberInfo : "+ coupon);
+		Map ip = new HashMap<>();
+			ip.put("id", vo.getId());
+			ip.put("password", vo.getPassword());
+		vo = memberDao.findById(ip);
+		// 등급조정 -> 관리자페이지에서 하는게 좋을듯
+		List<LogVo> list = memberDao.readAllById(vo.getId());
+		Map grade = new HashMap<>();
+		grade.put("id", vo.getId());
+		if (list.size() < 10) {
+			grade.put("grade", 1);
+		} else if (list.size() < 20) {
+			grade.put("grade", 2);
+		} else if (list.size() < 30) {
+			grade.put("grade", 3);
+		} else {
+			grade.put("grade", 4);
+		}
 
-		vo.setCoupons(coupon);
-		System.out.println("[controller:member] memberInfo : "+ vo.toString());
-		
+		if (vo.getGrade() != (int) grade.get("grade")) {
+			memberDao.updateGrade(grade);
+			List<CouponVo> c = memberDao.getCoupon((int) grade.get("grade"));
+			Map map = new HashMap<>();
+				map.put("userId", vo.getId());
+				map.put("coupon", c);
+			memberDao.insertCoupon(map);
+			vo.setCoupons(c);
+		} else {
+			MultiCouponVo coupons = memberDao.findCoupon(vo.getId());
+			System.out.println("[controller:member] coupons : " + coupons.toString());
+
+			vo.setCoupons(coupons.getCoupons());
+		}
 		req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
 		return "member/memInfo";
 	}
@@ -60,32 +81,32 @@ public class MemberController {
 
 		List<LogVo> list = memberDao.readAllById(member.getId());
 		System.out.println("[controller:member] history : " + list);
-		
-		for(LogVo v : list) {
-			if(v.getReviewd().equals("Y")) {
+
+		for (LogVo v : list) {
+			if (v.getReviewd().equals("Y")) {
 				ReviewVo review = memberDao.findByLogId(v.getId());
 				v.setReview(review);
-			} 
+			}
 		}
 
 		mav.addObject("list", list);
 		return mav;
 	}
-	
-	//쿠폰확인하기
+
+	// 쿠폰확인하기
 	@RequestMapping("/coupon")
 	public ModelAndView couponHandle(WebRequest req) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/coupon");
-		
+
 		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		System.out.println("[controller:member] coupon : " + member.toString());
 		mav.addObject("list", member.getCoupons());
-		
+
 		return mav;
 	}
-	
-	//다시주문하기
+
+	// 다시주문하기
 	@RequestMapping("/reorder")
 	public ModelAndView reorderHandle(@RequestParam("id") String id, WebRequest req) {
 		ModelAndView mav = new ModelAndView();
@@ -104,20 +125,20 @@ public class MemberController {
 		return mav;
 	}
 
-	//review등록
+	// review등록
 	@PostMapping("/writeReview")
 	public ModelAndView writeReviewPostHandle(@RequestParam Map<String, Object> map,
 			@RequestParam(value = "img", required = false) List<MultipartFile> imgs, WebRequest req) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("[controller:member] review : " + map);
-			mav.setViewName("member/memInfo");
+		mav.setViewName("member/memInfo");
 		MemberVo vo = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
-		
+
 		Map<String, Object> data = new LinkedHashMap<>();
 		String logId = (String) map.get("_id");
-		
+
 		data.put("logId", logId);
-		data.put("no", Integer.parseInt((String)map.get("storeNo")));
+		data.put("no", Integer.parseInt((String) map.get("storeNo")));
 		data.put("star", Double.parseDouble((String) map.get("star")));
 		data.put("content", map.get("content"));
 		data.put("nickname", vo.getNickname());
@@ -139,7 +160,7 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		data.put("reply", "");
 		System.out.println("[controller:member] writeReview : " + data);
 		memberDao.addReview(data);

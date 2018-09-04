@@ -6,6 +6,7 @@
 <br />
 <form action="/owner/salesstats" id="yearf">
 	<select name="year" id="year" title="년도" class="select w80">
+		
 		<c:forEach var="y" items="${year }">
 			<c:choose>
 				<c:when test="${y==param.year }">

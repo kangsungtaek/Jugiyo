@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import pro.vo.CouponVo;
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
+import pro.vo.MultiCouponVo;
 import pro.vo.ReviewVo;
 
 @Repository
@@ -92,6 +93,24 @@ public class MemberDao {
 	//등급에 따른 쿠폰가져오기
 	public List<CouponVo> getCoupon(int grade) {
 		return template.selectList("member.getCoupon", grade);
+	}
+	
+	//사용자의 쿠폰 넣어두기
+	public void insertCoupon(Map map) {
+		mongoTemplate.insert(map, "coupon");
+	}
+	
+	//사용자의 사용가능한 쿠폰 가져오기
+	public MultiCouponVo findCoupon(String id) {
+		Query query = new BasicQuery(new Document().append("userId", id));
+		return mongoTemplate.findOne(query, MultiCouponVo.class, "coupon");
+	}
+	
+	//사용한 쿠폰 업데이트
+	public void usedCoupon(Map map) {
+		Query query = new BasicQuery(new Document().append("userId", map.get("id")));
+		Update update = new BasicUpdate(new Document().append("$set", new Document().append("coupons", map.get("coupons"))));
+		mongoTemplate.updateMulti(query, update, "coupon");
 	}
 
 }

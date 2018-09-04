@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import pro.service.OrderService;
 import pro.vo.StoreVo;
 
-@Component("ws")
+@Component("alert")
 public class WebSocketController extends TextWebSocketHandler {
 
 	@Autowired
@@ -36,9 +36,11 @@ public class WebSocketController extends TextWebSocketHandler {
  
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+		System.out.println("??");
 		Map<String, Object> attrs = session.getAttributes();
 		System.out.println(attrs);
-		StoreVo svo = (StoreVo)session.getAttributes().get("vo");
+		StoreVo svo = (StoreVo)session.getAttributes().get("storeVo");
+		System.out.println("사장님 로그인: " + svo.getName());
 		webSessions.put(svo.getId(), session);
 		System.out.println(webSessions);
 	}
@@ -50,7 +52,8 @@ public class WebSocketController extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		StoreVo svo = (StoreVo)session.getAttributes().get("login");
+		StoreVo svo = (StoreVo)session.getAttributes().get("storeVo");
+		System.out.println("사장님 로그아웃" + svo.getName());
 		webSessions.remove(svo.getId(), session);
 	}
 }

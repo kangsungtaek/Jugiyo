@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
 <style>
 <!--
 장바구니 -->.scroll-menu {
@@ -15,6 +16,7 @@
 	position: fixed;
 	top: 0px;
 }
+
 textarea {
     width: 100%;
     height: 150px;
@@ -81,10 +83,12 @@ textarea {
 			
 			<div class="w3-bar">
 			<p></p>
-  				<button class="w3-bar-item w3-button w3-black" id="cacheBtn" style="width:50%" onclick="paymenSelect(this)"><i class="fa fa-cache"></i>현금
+  				<button class="w3-bar-item w3-button w3-black" id="cacheBtn" style="width:50%" onclick="paymenSelect(this)">
+  				 <i class="fa fa-cache"></i>현금
   				 <input class="w3-radio" type="radio" name="payment" id="cacheRadio" value="cache" form="form1" checked>
   				</button>
-  				<button class="w3-bar-item w3-button w3-black" id="cardBtn" style="width:50%" onclick="paymenSelect(this)"><i class="fa fa-credit-card"></i>카드
+  				<button class="w3-bar-item w3-button w3-black" id="cardBtn" style="width:50%" onclick="paymenSelect(this)">
+  				 <i class="fa fa-credit-card"></i>카드
   				 <input class="w3-radio" type="radio" name="payment" id="cardRadio" value="card" form="form1"  >
   				</button>
 			<p>&nbsp;</p>
@@ -94,20 +98,41 @@ textarea {
 			
 			<button onclick="myFunction('Demo4')"
 				class="w3-button w3-block w3-black w3-left-align">할인방법 선택</button>
-			<div id="Demo4" class="w3-hide w3-container">
-			
-			
+
+			<div id="Demo4" class="w3-show w3-container">
+			<p></p>
+  				쿠폰 <input type="radio" name ="discount" id="copunDiscount" value="copun" form="form1" onclick="discountSelect(this)" > 
+  					<select name="copun" disabled="disabled" id="copun">
+  						<option selected disabled hidden>쿠폰선택</option>
+					<c:choose>
+						<c:when test="${empty coupons}">
+							<option value= "null"> 쿠폰 없음 </option>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="c" items="${ coupons }">
+								<option value="${ c.id }">${ c.name } | ${c.sale } ${ c.unit }</option>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</select>
+  				<br/>
+  				내 포인트  <input  type="radio" name ="discount" id="pointDiscount" value="point" form="form1" onclick="discountSelect(this)" >
+  					<input type="text" disabled="disabled"  name="myPoint" id="myPoint" value="${member.point }" > 
+  					<small>최대 3천원</small>
+  					<button type="button" disabled="disabled" id="pointApp" >적용</button>
+  			    포인트 사용 금액 : <input type="text" disabled="disabled" name="point" id="point" > 
+  					
+			<p>&nbsp;</p>
 			</div>
 		</div>
-	
+
 	</div>
 	<div class="w3-col"
 		style="width: 20%; padding-left: 10px; padding-right: 30px">
 		<form action="/order/ordered" method="post" id="form1">
 		<div class="scroll-menu  w3-border w3-container">
-			
 			<div class="w3-container w3-border-bottom"> <span class="fa fa-shopping-cart"></span> 주문표</div>
-			<div class="w3-container">
+			<div class="w3-container" id="orderDiv">
 		
 				<ul id="orderList">
 					<c:forEach items="${sessionScope.orderList}" var="orderList">
@@ -119,6 +144,7 @@ textarea {
 						</li>
 					</c:forEach>
 				</ul>
+				
 			총 가격 : <span id="totalPrice"> ${sessionScope.totalPrice}</span>
 
 			</div>
@@ -137,7 +163,6 @@ textarea {
 <script>
 	// 결제수단 선택
 	function paymenSelect(target){
-		console.log();
 		if(target.id == "cardBtn"){
 			$("#cardRadio").prop("checked", true);
 			$("#cacheRadio").prop("checked", false);
@@ -146,13 +171,52 @@ textarea {
 			$("#cacheRadio").prop("checked", true);
 		}
 	}
+
+	//할인수단 선택
+	function saleSelect(target) {
+		console.log(target.id);
+		$(".c").removeClass("w3-red");
+		$("#target.id").addClass("w3-red");
+	}
+	// 할인방법 선택
+	function discountSelect(target){
+		if(target.id == "copunDiscount"){
+			$("#copun").prop("disabled", false);
+			$("#myPoint").prop("disabled", true);
+			$("#pointApp").prop("disabled", true);
+		}else{
+			$("#copun").prop("disabled", true);
+			$("#myPoint").prop("disabled", false);
+			$("#pointApp").prop("disabled", false);
+		}
+	}
+	
+	$("#myPoint").on("change", function(){
+		var aa  = $(this).val();
+		if( aa > ${member.point}){
+			aa = ${member.point};
+		}
+		console.log(aa);
+		if( aa > 3000){
+			aa = 3000;
+		}
+		$(this).val(aa);
+	});
+	
+	$("#pointApp").on("click", function(){
+		var point = $("#myPoint").val();
 		
+		if(point > 3000){
+			window.alert("포인트는 최대 3000원 까지 가능합니다.");
+		}else{
+			$("#orderList").append("<span> 할인가격 : "+ point + " </span>");
+		}
+	});
+	
 	//장바구니 스크롤
 	$(function() {
 		$(document).ready(function() {
-
 			var scrollOffset = $('.scroll-menu').offset();
-
 			$(window).scroll(function() {
 				if ($(document).scrollTop() > scrollOffset.top) {
 					$('.scroll-menu').addClass('scroll-fixed');

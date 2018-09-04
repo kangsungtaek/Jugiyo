@@ -3,6 +3,8 @@ package pro.controller;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -262,6 +264,7 @@ public class OwnerController {
 			cal.add(years);
 			System.out.println(years);
 		}
+		Collections.reverse(cal);
 
 		
 		for (int i = 1; i <= 12; i++) {
