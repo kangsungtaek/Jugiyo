@@ -31,7 +31,6 @@ textarea {
 
 <!-- 전체 영역 - -->
 <div class="w3-row">
-	
 	<!-- 왼쪽 공백  -->
 	<div class="w3-col" style="width: 10%">&nbsp;</div>
 	<div class="w3-col" style="width: 70%">
@@ -43,8 +42,7 @@ textarea {
 				style="width: 85px">
 			<div class="w3-bar-item">
 				<span class="w3-large">${storeVo.name }</span><br> <span>${storeVo.addr }</span>
-				<br /> <span class="w3-right-align w3-small">리뷰 : xxxx개</span>
-
+				<br />
 			</div>
 		</div>
 		<div class="w3-container">
@@ -186,7 +184,7 @@ textarea {
 			$("#coupon").prop("disabled", false);
 			$("#myPoint").prop("disabled", true);
 			$("#pointApp").prop("disabled", true);
-			$("#couponApp").prop("disabled", false);
+			$("#couponApp").prop("disabled",false);
 		}else{
 			$("#coupon").prop("disabled", true);
 			$("#myPoint").prop("disabled", false);

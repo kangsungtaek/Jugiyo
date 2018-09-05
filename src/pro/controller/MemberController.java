@@ -90,7 +90,7 @@ public class MemberController {
 
 		for (LogVo v : list) {
 			if (v.getReviewd().equals("Y")) {
-				ReviewVo review = memberDao.findByLogId(v.getId());
+				ReviewVo review = memberDao.findReivewByLogId(v.getId());
 				v.setReview(review);
 			}
 		}

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pro.dao.MemberDao;
 import pro.dao.MenuDao;
@@ -51,6 +52,16 @@ public class OrderController {
 		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("order/order");
+		
+		//평점 star에 setting해둘것
+		List<ReviewVo> r = storeDao.findReview(storeNo);
+		double s = 0;
+		for(int i=0; i<r.size(); i++) {
+			s += r.get(i).getStar();
+		}
+		vo.setStar(s/r.size());	
+		mav.addObject("r", r.size());
+		
 		mav.addObject("storeVo", vo);
 		System.out.println("menuList =" + menuList);
 		mav.addObject("menuList", menuList);
@@ -58,7 +69,7 @@ public class OrderController {
 		List<LogVo> list = storeDao.findLogByStoreNo(storeNo);
 		for (LogVo v : list) {
 			if (v.getReviewd().equals("Y")) {
-				ReviewVo review = memberDao.findByLogId(v.getId());
+				ReviewVo review = memberDao.findReivewByLogId(v.getId());
 				v.setReview(review);
 			}
 		}
@@ -108,6 +119,7 @@ public class OrderController {
 	@GetMapping("/ordered")
 	public ModelAndView orderedHandle(WebRequest req, int storeNo) {
 		StoreVo vo = storeDao.getStore(storeNo);
+		System.out.println(vo);
 		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
 		String addr = (String) req.getAttribute("addr", WebRequest.SCOPE_SESSION);
@@ -131,6 +143,7 @@ public class OrderController {
 	// 주문완료 처리
 	@PostMapping("/ordered")
 	public String orderedHandle2(@RequestParam Map<String, String> map, WebRequest req) {
+		System.out.println("redirect:" + map.get("storeNo"));
 
 		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
 		int totalPrice = (int) req.getAttribute("totalPrice", WebRequest.SCOPE_SESSION);
@@ -145,6 +158,7 @@ public class OrderController {
 			mVo.setAddress(map.get("addr"));
 			mVo.setContact(map.get("contact"));
 		}
+		
 		StoreVo svo = storeDao.getStore(Integer.parseInt((String) map.get("storeNo")));
 
 		Map<String, Object> data = new LinkedHashMap();
