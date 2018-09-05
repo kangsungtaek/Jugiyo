@@ -69,13 +69,13 @@ public class MemberController {
 				map.put("coupons", c);
 			memberDao.updateCoupon(map);
 			vo.setGrade((int) grade.get("grade"));
-			vo.setCoupons(c);
-		} else {
-			MultiCouponVo coupons = memberDao.findCoupon(vo.getId());
-			System.out.println("[controller:member] coupons : " + coupons.toString());
 
-			vo.setCoupons(coupons.getCoupons());
-		}
+		} 
+		MultiCouponVo coupons = memberDao.findCoupon(vo.getId());
+		System.out.println("[controller:member] coupons : " + coupons.toString());
+
+		vo.setCoupons(coupons.getCoupons());
+		
 		req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
 		return "member/memInfo";
 	}

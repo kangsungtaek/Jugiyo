@@ -108,7 +108,7 @@ public class MemberDao {
 	//사용자의 등급조정시 쿠폰 넣어주기
 	public void updateCoupon(Map map) {
 		Query query = new BasicQuery(new Document().append("userId", map.get("userId")));
-		Update update = new BasicUpdate(new Document().append("$push", new Document().append("coupons", map.get("c"))));
+		Update update = new BasicUpdate(new Document().append("$push", new Document().append("coupons", map.get("coupons"))));
 		mongoTemplate.updateFirst(query, update, "coupon");
 	}
 	
