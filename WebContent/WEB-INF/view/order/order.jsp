@@ -22,9 +22,7 @@
 <!-- 전체 영역 - -->
 <div class="w3-row">
 	<!-- 왼쪽 공백  -->
-	<div class="w3-col" style="width: 10%">
-	</div>
-	<div class="w3-col" style="width: 70%">
+	<div class="w3-col" style="width: 75%">
 
 		<!--  가게정보  -->
 		<div class="w3-bar" id="${storeVo.no}">
@@ -62,8 +60,8 @@
 						<c:forEach items="${menuList}" var="menu">
 							<c:if test="${menu.type eq 10 }">
 								<li class="w3-bar menu" id="${menu.no }"><img
-									src="${pageContext.request.contextPath}${menu.fileUri}" class="w3-round w3-right "
-									style="width: 100px">
+									src="${pageContext.request.contextPath}${menu.fileUri}"
+									class="w3-round w3-right " style="width: 100px">
 									<div class="w3-bar-item">
 										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
 									</div></li>
@@ -82,8 +80,8 @@
 						<c:forEach items="${menuList}" var="menu">
 							<c:if test="${menu.type eq 20 }">
 								<li class="w3-bar menu" id="${menu.no }"><img
-									src="${pageContext.request.contextPath}${menu.fileUri }" class="w3-round w3-right "
-									style="width: 100px">
+									src="${pageContext.request.contextPath}${menu.fileUri }"
+									class="w3-round w3-right " style="width: 100px">
 									<div class="w3-bar-item">
 										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
 									</div></li>
@@ -101,8 +99,8 @@
 						<c:forEach items="${menuList}" var="menu">
 							<c:if test="${menu.type eq 30 }">
 								<li class="w3-bar menu" id="${menu.no }"><img
-									src="${pageContext.request.contextPath}${menu.fileUri }" class="w3-round w3-right "
-									style="width: 100px">
+									src="${pageContext.request.contextPath}${menu.fileUri }"
+									class="w3-round w3-right " style="width: 100px">
 									<div class="w3-bar-item">
 										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
 									</div></li>
@@ -121,8 +119,8 @@
 						<c:forEach items="${menuList}" var="menu">
 							<c:if test="${menu.type eq 40 }">
 								<li class="w3-bar menu" id="${menu.no }"><img
-									src="${pageContext.request.contextPath}${menu.fileUri }" class="w3-round w3-right "
-									style="width: 100px">
+									src="${pageContext.request.contextPath}${menu.fileUri }"
+									class="w3-round w3-right " style="width: 100px">
 									<div class="w3-bar-item">
 										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
 									</div></li>
@@ -137,9 +135,7 @@
 		<!--  리뷰  -->
 		<div id="review" class="w3-container tabs" style="display: none">
 			<div class="w3-container w3-border w3-large w3-center">
-					<p>
-
-					</p>
+				<p></p>
 			</div>
 
 			<div class="w3-container w3-border">
@@ -162,21 +158,22 @@
 				<c:forEach var="r" items="${ reviews }">
 					<c:if test="${ r.reviewd == 'Y'}">
 						<span class="w3-large">${ r.review.nickname }님</span>
-						<br /> <span class="w3-small">별점 : ${ r.review.star }</span><br />
-							
-						<span class="w3-small"> 
-						<c:forEach var="menu" items="${ r.orderList }" varStatus="vs">
+						<br />
+						<span class="w3-small">별점 : ${ r.review.star }</span>
+						<br />
+
+						<span class="w3-small"> <c:forEach var="menu"
+								items="${ r.orderList }" varStatus="vs">
 							${ menu.name }
 							<c:if test="${ !vs.last }">
 								, 
 							</c:if>
-						</c:forEach>
-						<br/>
-						<c:if test="${ fn:length(r.review.img) > 0 }">
-							<c:forEach var="i" items="${ r.review.img }">
-								<img src="${pageContext.request.contextPath}${ i }" style="width:10%; height: 10%;" />
-							</c:forEach>
-						</c:if>
+							</c:forEach> <br /> <c:if test="${ fn:length(r.review.img) > 0 }">
+								<c:forEach var="i" items="${ r.review.img }">
+									<img src="${pageContext.request.contextPath}${ i }"
+										style="width: 10%; height: 10%;" />
+								</c:forEach>
+							</c:if>
 						</span>
 						<div class="w3-left-align w3-large">
 							<p>${ r.review.content }</p>
@@ -191,34 +188,43 @@
 	</div>
 	<!-- 장바구니 -->
 	<div class="w3-col"
-		style="width: 20%; padding-left: 10px; padding-right: 30px">
-		<div class="scroll-menu  w3-border w3-container">
-			<div class="w3-container w3-border-bottom">주문표</div>
-			<div class="w3-container" id="orderDiv">
-
-				<ul id="orderList">
-					<c:forEach items="${sessionScope.orderList}" var="orderList">
-						<li id="${orderList.no}">
-							<div class='w3-row'>${orderList.name }</div>
-							<div class='w3-left-align'>
-								<span class='w3-button w3-small orderRemove'
-									onclick='orderListRemove(this)'>X</span> <span id="price">${orderList.price * orderList.cnt }
-								</span> <span class='w3-button w3-small' onclick='orderListMinus(this)'>-</span>
-								<span id="count">${orderList.cnt }</span> <span
-									class='w3-button w3-small' onclick='orderListPlus(this)'>+</span>
-							</div>
-						</li>
-					</c:forEach>
-				</ul>
-				총 가격 : <span id="totalPrice"> ${sessionScope.totalPrice}</span>
-
+		style="width: 25%; padding-left: 10px; padding-right: 30px">
+		<div class="scroll-menu  w3-container">
+			<div class="w3-border">
+				<div class="w3-container w3-border-bottom">주문표</div>
+				<div class="w3-container" id="orderDiv">
+					<ul id="orderList">
+						<c:forEach items="${sessionScope.orderList}" var="orderList">
+							<li id="${orderList.no}">
+								<div class='w3-row'>
+									<div>${orderList.name }</div>
+									<div class='w3-row'>
+										<div class='w3-half w3-left-align'>
+											<button class='w3-button w3-padding-small w3-tiny w3-red orderRemove w3-border'
+												onclick='orderListRemove(this)'>X</button> <span id="price">
+												${orderList.price * orderList.cnt }원</span>
+										</div>
+										<div class="w3-half w3-right-align">
+											<button class="w3-button w3-border w3-padding-small w3-tiny" onclick='orderListMinus(this)'>-</button>
+											<!-- <span class='w3-button w3-small' onclick='orderListMinus(this)'>-</span>  -->
+											<span id="count">${orderList.cnt }</span>
+											<button class="w3-button w3-border w3-padding-small w3-tiny" onclick='orderListPlus(this)'>+</button>
+											<!-- <span class='w3-button w3-small' onclick='orderListPlus(this)'>+</span>  -->
+										</div>
+									</div>
+								</div>
+							</li>
+						</c:forEach>
+					</ul>
+					총 가격 : <span id="totalPrice"> ${sessionScope.totalPrice}</span>
+				</div>
+			</div>
+			<div class='w3-row'>
+				<a href="/order/ordered?storeNo=${storeVo.no}"><button
+						class="w3-button w3-red" style="width: 100%;">주문하기</button> </a>
 			</div>
 		</div>
-		<div class='w3-row'>
-			<a href="/order/ordered?storeNo=${storeVo.no}"><button
-					class="w3-button w3-red" style="width: 100%;">주문하기</button> </a>
 
-		</div>
 	</div>
 	<!-- ------장바구니 끝  -->
 </div>
@@ -339,15 +345,16 @@
 									$("#orderList")
 											.append(
 													"<li id="+obj.menu.no+"> <div class='w3-row'>"
-															+ obj.menu.name
-															+ "</div>"
-															+ "<div class='w3-left-align w3-small'><span class='w3-button w3-small orderRemove' onclick='orderListRemove(this)' >X</span> "
+															+ "<div>" +obj.menu.name + "</div>"
+															+ "<div class='w3-row'>" 
+															+ "<div class='w3-half w3-left-align'><button class='w3-button w3-padding-small w3-tiny w3-red orderRemove w3-border' onclick='orderListRemove(this)' >X</button> "
 															+ " <span id ='price'>"
 															+ obj.menu.price
-															+ "</span>"
-															+ " <span class='w3-button w3-small' onclick='orderListMinus(this)'>-</span> <span id='count'>"
+															+ "원 </span> </div>"
+															+ "<div class='w3-half w3-right-align'>"
+															+ " <button class='w3-button w3-border w3-padding-small w3-tiny' onclick='orderListMinus(this)'>-</button> <span id='count'>"
 															+ obj.menu.cnt
-															+ "</span> <span class='w3-button w3-small' onclick='orderListPlus(this)'>+</span> </div></li>");
+															+ "</span> <button class='w3-button w3-border w3-padding-small w3-tiny' onclick='orderListPlus(this)'>+</button> </div></div></div></li>");
 									$("#orderDiv").find("#totalPrice").text(
 											obj.totalPrice);
 
