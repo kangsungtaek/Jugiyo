@@ -90,7 +90,7 @@ public class MemberController {
 
 		for (LogVo v : list) {
 			if (v.getReviewd().equals("Y")) {
-				ReviewVo review = memberDao.findByLogId(v.getId());
+				ReviewVo review = memberDao.findReivewByLogId(v.getId());
 				v.setReview(review);
 			}
 		}
@@ -118,6 +118,7 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		LogVo log = memberDao.readByObjectId(id);
 		req.setAttribute("orderList", log.getOrderList(), WebRequest.SCOPE_SESSION);
+		req.setAttribute("totalPrice", log.getTotalPrice(), WebRequest.SCOPE_SESSION);
 		mav.setViewName("redirect:/order/ordered?storeNo=" + log.getStoreNo());
 		return mav;
 	}

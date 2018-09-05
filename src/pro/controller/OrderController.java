@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pro.dao.MemberDao;
 import pro.dao.MenuDao;
@@ -51,6 +52,16 @@ public class OrderController {
 		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("order/order");
+		
+		//평점 star에 setting해둘것
+		List<ReviewVo> r = storeDao.findReview(storeNo);
+		double s = 0;
+		for(int i=0; i<r.size(); i++) {
+			s += r.get(i).getStar();
+		}
+		vo.setStar(s/r.size());	
+		vo.setReview(r.size());
+		
 		mav.addObject("storeVo", vo);
 		System.out.println("menuList =" + menuList);
 		mav.addObject("menuList", menuList);
@@ -58,7 +69,7 @@ public class OrderController {
 		List<LogVo> list = storeDao.findLogByStoreNo(storeNo);
 		for (LogVo v : list) {
 			if (v.getReviewd().equals("Y")) {
-				ReviewVo review = memberDao.findByLogId(v.getId());
+				ReviewVo review = memberDao.findReivewByLogId(v.getId());
 				v.setReview(review);
 			}
 		}
@@ -130,7 +141,9 @@ public class OrderController {
 
 	// 주문완료 처리
 	@PostMapping("/ordered")
-	public String orderedHandle2(@RequestParam Map<String, String> map, WebRequest req) {
+
+	public String orderedHandle2(@RequestParam Map<String, String> map,
+			@RequestParam(value="discount", required=true, defaultValue="dis") String discount, WebRequest req) {
 
 		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
 		int totalPrice = (int) req.getAttribute("totalPrice", WebRequest.SCOPE_SESSION);
@@ -145,6 +158,7 @@ public class OrderController {
 			mVo.setAddress(map.get("addr"));
 			mVo.setContact(map.get("contact"));
 		}
+		
 		StoreVo svo = storeDao.getStore(Integer.parseInt((String) map.get("storeNo")));
 
 		Map<String, Object> data = new LinkedHashMap();
@@ -165,10 +179,10 @@ public class OrderController {
 		// 토탈 프라이스
 		data.put("totalPrice", totalPrice);
 
-		if (map.get("discount") == null || map.get("discount") == "") {
-			if (map.get("discount").equals("point")) {
+		if (discount != null) {
+			if (discount.equals("point")) {
 				data.put("discount", map.get("point"));
-			} else {
+			} else if(discount.equals("coupon")) {
 				// 쿠폰사용시 여기서 쿠폰 제거 하면될듯
 				// coupon이라는 이름으로 쿠폰의 아이디가 넘어옴
 				Map c = new HashMap<>();
@@ -195,8 +209,8 @@ public class OrderController {
 			System.out.println("[controller:order] point : " + point);
 			Map memberPoint = new HashMap<>();
 			memberPoint.put("id", mVo.getId());
-			System.out.println(map.get("point"));
-			if (map.get("discount").equals("point")) {
+			if (discount.equals("point")) {
+				System.out.println("asdasdasd");
 				point = point - Integer.parseInt(map.get("point"));
 			}
 			System.out.println(point);
