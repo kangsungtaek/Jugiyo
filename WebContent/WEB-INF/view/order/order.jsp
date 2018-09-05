@@ -8,12 +8,12 @@
 장바구니 -->.scroll-menu {
 	text-align: center;
 	padding: 10px 10px;
-	width: 250px;
 }
 
 .scroll-fixed {
 	position: fixed;
 	top: 0px;
+	width: 310px;
 }
 </style>
 <link rel="stylesheet"
@@ -189,7 +189,7 @@
 	<!-- 장바구니 -->
 	<div class="w3-col"
 		style="width: 25%; padding-left: 10px; padding-right: 30px">
-		<div class="scroll-menu  w3-container">
+		<div class="scroll-menu  w3-container" style="width: 310px;">
 			<div class="w3-border">
 				<div class="w3-container w3-border-bottom">주문표</div>
 				<div class="w3-container" id="orderDiv">

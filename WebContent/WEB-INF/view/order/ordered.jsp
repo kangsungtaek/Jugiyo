@@ -9,12 +9,13 @@
 장바구니 -->.scroll-menu {
 	text-align: center;
 	padding: 10px 10px;
-	width: 250px;
+	
 }
 
 .scroll-fixed {
 	position: fixed;
 	top: 0px;
+	width: 310px;
 }
 
 textarea {
@@ -129,7 +130,7 @@ textarea {
 	<div class="w3-col"
 		style="width: 30%; padding-left: 10px; padding-right: 30px">
 		<form action="/order/ordered" method="post" id="form1">
-		<div class="scroll-menu  w3-container">
+		<div class="scroll-menu  w3-container" style="width: 310px;">
 				<div class="w3-border">
 					<div class="w3-container w3-border-bottom w3-padding-16 w3-light-grey">
 						<span class="fa fa-shopping-cart"></span> 주문표

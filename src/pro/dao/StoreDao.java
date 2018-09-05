@@ -16,6 +16,7 @@ import org.springframework.data.mongodb.core.query.BasicUpdate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.expression.common.TemplateAwareExpressionParser;
 import org.springframework.stereotype.Repository;
 
 import pro.vo.LogVo;
@@ -27,6 +28,7 @@ public class StoreDao {
 	
 	@Autowired
 	SqlSessionTemplate template;
+	
 	@Autowired
 	MongoTemplate mongoTemplate;
 	
@@ -102,6 +104,19 @@ public class StoreDao {
 
 	public boolean updateStore(StoreVo vo) {
 		return template.update("store.storeUpdate", vo) == 1?true:false;
+	}
+
+	public List<StoreVo> getList(Map param) {
+		
+		return template.selectList("store.storeList", param);
+	}
+
+	public int getTotalCount(Map map) {
+		return template.selectOne("store.getTotal", map);
+	}
+
+	public int getTypeTotalCount(Map map) {
+		return template.selectOne("store.getTypeTotal", map);
 	}
 	
 }

@@ -15,6 +15,23 @@
 	<!-- 사용자 정보에 따른 반경안의 스토어 검색(전체) -->
 	<select id="getStoreByCoords" resultType="pro.vo.StoreVo">
 		SELECT * FROM (
+			SELECT rownum r, s.*, ( 6371 * acos( cos( radians( #{xcor} ) ) * cos( radians( xcor) ) * cos( radians( ycor ) 
+					- radians(#{ycor}) ) + sin( radians(#{xcor}) ) * sin( radians(xcor) ) ) ) AS distance
+			FROM store s order by no desc ) DATA
+		WHERE DATA.distance &lt; 3 and r between #{start} and  #{end}
+	</select>
+	
+	<select id="getStoreByCoordsWithType" resultType="pro.vo.StoreVo">
+		SELECT * FROM (
+			SELECT rownum r, s.*,t.name typeName, ( 6371 * acos( cos( radians( #{xcor} ) ) * cos( radians( xcor) ) * cos( radians( ycor ) 
+					- radians(#{ycor}) ) + sin( radians(#{xcor}) ) * sin( radians(xcor) ) ) ) AS distance
+			FROM store s join type t on s.type=t.id where s.type=#{type}  order by no desc ) DATA
+		WHERE DATA.distance &lt; 3 and r between #{start} and  #{end}
+	</select>
+	
+	<!-- 사용자 정보에 따른 반경안의 스토어 검색(전체) 
+	<select id="getStoreByCoords" resultType="pro.vo.StoreVo">
+		SELECT * FROM (
 			SELECT s.*, ( 6371 * acos( cos( radians( #{xcor} ) ) * cos( radians( xcor) ) * cos( radians( ycor ) 
 					- radians(#{ycor}) ) + sin( radians(#{xcor}) ) * sin( radians(xcor) ) ) ) AS distance
 			FROM store s) DATA
@@ -28,7 +45,7 @@
 			FROM store s join type t on s.type=t.id where s.type=#{type}) DATA
 		WHERE DATA.distance &lt; 3
 	</select>
-		
+	-->
 	<!--  스토어 전체조회(강성택) -->
 	<select id="getAll" resultType="pro.vo.StoreVo">
 		select * from store
@@ -77,4 +94,20 @@
 		update store set name=#{name}, addr=#{addr}, type=#{type}, xcor=#{xcor}, ycor=#{ycor},img=#{img}, contact =#{contact} where no= #{no}
 		
 	</update>
+	
+	<select id="getTotal" resultType="java.lang.Integer">
+		SELECT count(*) FROM (
+			SELECT s.*, ( 6371 * acos( cos( radians( #{xcor} ) ) * cos( radians( xcor) ) * cos( radians( ycor ) 
+					- radians(#{ycor}) ) + sin( radians(#{xcor}) ) * sin( radians(xcor) ) ) ) AS distance
+			FROM store s) DATA
+		WHERE DATA.distance &lt; 3
+	</select>
+	
+	<select id="getTypeTotal" resultType="java.lang.Integer">
+		SELECT count(*) FROM (
+			SELECT rownum r, s.*,t.name typeName, ( 6371 * acos( cos( radians( #{xcor} ) ) * cos( radians( xcor) ) * cos( radians( ycor ) 
+					- radians(#{ycor}) ) + sin( radians(#{xcor}) ) * sin( radians(xcor) ) ) ) AS distance
+			FROM store s join type t on s.type=t.id where s.type=#{type}  order by no desc ) DATA
+		WHERE DATA.distance &lt; 3 and r between #{start} and  #{end}
+	</select>
 </mapper>

@@ -30,8 +30,27 @@
 				</ul>
 			</div>
 		</div>
+	<div>
+   <c:if test="${current ne 1}">
+       <a href="/main?p=${current-1}&type=${type}"><span>PREV</span></a>
+   </c:if>
+   <c:forEach var="i" begin="${min}" end="${max}">
+       <c:choose>
+           <c:when test="${i eq current}">
+             <span class="active">${i }</span>
+           </c:when>
+           <c:otherwise>
+               <a href="/main?p=${i}&type=${type}"><span>${i}</span></a>
+           </c:otherwise>
+       </c:choose>
+   </c:forEach>
+   <c:if test="${current lt max}">
+       <a href="/main?p=${current+1}&type=${type}"><span>NEXT</span></a>
+   </c:if>
+   </div>
 	</c:otherwise>
 </c:choose>
+
 <script>
 	$(".cate").on("click", function() {
 		location.href = "order/order?storeNo=" + $(this).attr("id");
