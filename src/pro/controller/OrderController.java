@@ -184,7 +184,8 @@ public class OrderController {
 				// coupon이라는 이름으로 쿠폰의 아이디가 넘어옴
 				Map c = new HashMap<>();
 					c.put("userId", mVo.getId());
-					c.put("c", map.get("coupon"));
+					c.put("c", Double.parseDouble(map.get("coupon")));
+				System.out.println("[controller:order] 쿠폰사용 : " + c);
 				memberDao.usedCoupon(c);
 			}
 		}

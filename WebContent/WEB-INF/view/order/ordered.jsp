@@ -107,7 +107,7 @@ textarea {
 
 			<div id="Demo4" class="w3-show w3-container">
 			<p></p>
-  				쿠폰 <input type="radio" name ="discount" id="copunDiscount" value="coupun" form="form1" onclick="discountSelect(this)" > 
+  				쿠폰 <input type="radio" name ="discount" id="copunDiscount" value="coupon" form="form1" onclick="discountSelect(this)" > 
   					<select name="coupon" disabled="disabled" id="coupon" form ="form1" > 
   						<option selected disabled hidden>쿠폰선택</option>
 					<c:choose>
