@@ -49,7 +49,10 @@
 </div>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
 <script>
+var geocoder = new daum.maps.services.Geocoder();
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
         new daum.Postcode({
@@ -79,12 +82,25 @@
                     fullRoadAddr += extraRoadAddr;
                 }
                 
-                var addr = data.zonecode + "/" + fullRoadAddr;
-                var xhr = new XMLHttpRequest();
-				xhr.open("get", "/member/addAddr?addr="+addr, true);
-				xhr.send();
+                var addr = fullRoadAddr;
+				console.log(addr);
+
+				geocoder.addressSearch(addr, function(result, status) {
+					// 정상적으로 검색이 완료됐으면 
+					console.log("ddd" + status);
+					if (status === daum.maps.services.Status.OK) {
+						var coords = new daum.maps.LatLng(result[0].y,
+								result[0].x);
+
+						console.log(coords.getLat());
+						console.log(coords.getLng());
+						
+		                var xhr = new XMLHttpRequest();
+						xhr.open("get", "/member/addAddr?addr="+addr+"&xcor="+coords.getLat()+"&ycor="+coords.getLng(), true);
+						xhr.send();
+					}
+				});
                 document.getElementById("addr").innerHTML = addr;
-                console.log(addr);
             }
         }).open();
     }

@@ -26,7 +26,7 @@
 		    			<c:when test="${empty r.reply }">	
 				    		<span class="w3-button w3-transparent w3-display-right show">댓글달기</span>
 							<form action="/owner/replied" style="display: none">
-					    		<input type="hidden" name="id" value="${ r.id }" /><br/>
+					    		<input type="hidden" name="id" value="${ r.logId }" /><br/>
 								<input type="text" name="reply" style="width:200px; height: 20px;"/>
 							</form>				    		
 		    			</c:when>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -176,11 +177,18 @@ public class MemberController {
 	}
 
 	@RequestMapping("/addAddr")
-	public void addAddrHandle(@RequestParam("addr") String addr, WebRequest req) {
+	@ResponseBody
+	public String addAddrHandle(@RequestParam("addr") String addr, @RequestParam("xcor") double xcor,
+			@RequestParam("ycor") double ycor, WebRequest req) {
+		System.out.println("[controller:member]Address : " + addr + "/" + xcor + "." + ycor);
 		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("id", member.getId());
 		map.put("addr", addr);
+		map.put("xcor", xcor);
+		map.put("ycor", ycor);
+		System.out.println("[controller:member]Address" + map);
 		memberDao.addAddr(map);
+		return "true";
 	}
 }
