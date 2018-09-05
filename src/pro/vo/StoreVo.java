@@ -14,6 +14,7 @@ public class StoreVo {
 	String img;
 	String contact;
 	double star;
+	int review; //리뷰갯수
 	
 	public int getNo() {
 		return no;
@@ -87,7 +88,12 @@ public class StoreVo {
 	public void setStar(double star) {
 		this.star = star;
 	}
-	
+	public int getReview() {
+		return review;
+	}
+	public void setReview(int review) {
+		this.review = review;
+	}
 	@Override
 	public String toString() {
 		return "StoreVo [no=" + no + ", id=" + id + ", password=" + password + ", name=" + name + ", addr=" + addr

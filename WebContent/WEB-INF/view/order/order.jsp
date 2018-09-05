@@ -34,7 +34,7 @@
 				style="width: 85px">
 			<div class="w3-bar-item">
 				<span class="w3-large">${storeVo.name }</span><br> <span>${storeVo.addr }</span>
-				<br /> <span class="w3-right-align w3-small">리뷰 : ${ r }개</span>
+				<br /> <span class="w3-right-align w3-small">리뷰 : ${ storeVo.review }개</span>
 
 			</div>
 		</div>

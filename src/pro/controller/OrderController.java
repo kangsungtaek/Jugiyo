@@ -60,7 +60,7 @@ public class OrderController {
 			s += r.get(i).getStar();
 		}
 		vo.setStar(s/r.size());	
-		mav.addObject("r", r.size());
+		vo.setReview(r.size());
 		
 		mav.addObject("storeVo", vo);
 		System.out.println("menuList =" + menuList);
@@ -119,7 +119,6 @@ public class OrderController {
 	@GetMapping("/ordered")
 	public ModelAndView orderedHandle(WebRequest req, int storeNo) {
 		StoreVo vo = storeDao.getStore(storeNo);
-		System.out.println(vo);
 		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
 		String addr = (String) req.getAttribute("addr", WebRequest.SCOPE_SESSION);
