@@ -186,7 +186,7 @@ textarea {
 			$("#coupon").prop("disabled", false);
 			$("#myPoint").prop("disabled", true);
 			$("#pointApp").prop("disabled", true);
-			$("#couponApp").prop("disabled", false);
+			$("#couponApp").prop("disabled",false);
 		}else{
 			$("#coupon").prop("disabled", true);
 			$("#myPoint").prop("disabled", false);
