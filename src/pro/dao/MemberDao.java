@@ -80,7 +80,7 @@ public class MemberDao {
 	}
 	
 	//사용자가 작성한 리뷰불러오기
-	public ReviewVo findByLogId(String logId) {
+	public ReviewVo findReivewByLogId(String logId) {
 		Query query = new BasicQuery(new Document().append("logId", logId));
 		return mongoTemplate.findOne(query, ReviewVo.class, "review");
 	}
@@ -108,7 +108,7 @@ public class MemberDao {
 	//사용자의 등급조정시 쿠폰 넣어주기
 	public void updateCoupon(Map map) {
 		Query query = new BasicQuery(new Document().append("userId", map.get("userId")));
-		Update update = new BasicUpdate(new Document().append("$push", new Document().append("coupons", map.get("c"))));
+		Update update = new BasicUpdate(new Document().append("$push", new Document().append("coupons", map.get("coupons"))));
 		mongoTemplate.updateFirst(query, update, "coupon");
 	}
 	

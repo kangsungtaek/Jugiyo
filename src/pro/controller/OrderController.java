@@ -25,7 +25,6 @@ import pro.service.OrderService;
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
 import pro.vo.MenuVo;
-import pro.vo.MultiCouponVo;
 import pro.vo.ReviewVo;
 import pro.vo.StoreVo;
 
@@ -51,6 +50,16 @@ public class OrderController {
 		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("order/order");
+		
+		//평점 star에 setting해둘것
+		List<ReviewVo> r = storeDao.findReview(storeNo);
+		double s = 0;
+		for(int i=0; i<r.size(); i++) {
+			s += r.get(i).getStar();
+		}
+		vo.setStar(s/r.size());	
+		vo.setReview(r.size());
+		
 		mav.addObject("storeVo", vo);
 		System.out.println("menuList =" + menuList);
 		mav.addObject("menuList", menuList);
@@ -58,7 +67,7 @@ public class OrderController {
 		List<LogVo> list = storeDao.findLogByStoreNo(storeNo);
 		for (LogVo v : list) {
 			if (v.getReviewd().equals("Y")) {
-				ReviewVo review = memberDao.findByLogId(v.getId());
+				ReviewVo review = memberDao.findReivewByLogId(v.getId());
 				v.setReview(review);
 			}
 		}
@@ -146,6 +155,7 @@ public class OrderController {
 			mVo.setAddress(map.get("addr"));
 			mVo.setContact(map.get("contact"));
 		}
+		
 		StoreVo svo = storeDao.getStore(Integer.parseInt((String) map.get("storeNo")));
 
 		Map<String, Object> data = new LinkedHashMap();
@@ -174,7 +184,8 @@ public class OrderController {
 				// coupon이라는 이름으로 쿠폰의 아이디가 넘어옴
 				Map c = new HashMap<>();
 					c.put("userId", mVo.getId());
-					c.put("c", map.get("coupon"));
+					c.put("c", Double.parseDouble(map.get("coupon")));
+				System.out.println("[controller:order] 쿠폰사용 : " + c);
 				memberDao.usedCoupon(c);
 			}
 		}

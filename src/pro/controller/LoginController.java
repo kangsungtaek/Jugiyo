@@ -58,29 +58,26 @@ public class LoginController {
 				mav.addObject("owner");
 			}
 		}
-
 		// else{}안으로 로그인 처리
 		else {
 			// 로그인 처리 : 아이디가 있는지 보고, 비밀번호가 맞는지 보고
 			// db : sql문 : select * from member where id=#{id} -> 반환타입: vo
-			try {
-				MemberVo vo = memberDao.findById(m);
+
+			MemberVo vo = memberDao.findById(m);
+			System.out.println("[controller:login] vo : " + vo.toString());
+			// .equals(password) 맞으면(if-else) 어디로 보내야겠죠(index) 틀리면 다시하라고 보내야함
+
+			if (vo.getPassword().equals(m.get("password"))) { // session에다가 vo를 올려주세요.
+				mav.setViewName("index");
 				System.out.println("[controller:login] vo : " + vo.toString());
-				// .equals(password) 맞으면(if-else) 어디로 보내야겠죠(index) 틀리면 다시하라고 보내야함
+				MultiCouponVo coupons = memberDao.findCoupon(vo.getId());
+				vo.setCoupons(coupons.getCoupons());
 
-				if (vo.getPassword().equals(m.get("password"))) { // session에다가 vo를 올려주세요.
-					mav.setViewName("index");
-					
-					MultiCouponVo coupons = memberDao.findCoupon(vo.getId());
-					vo.setCoupons(coupons.getCoupons());
-
-					req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
-				} else {
-					mav.setViewName("login/loginForm");
-				}
-			} catch (Exception e) {
-				mav.setViewName("error");
+				req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
+			} else {
+				mav.setViewName("login/loginForm");
 			}
+
 		}
 		return mav;
 	}
@@ -109,12 +106,12 @@ public class LoginController {
 
 		// member를 db에 넣어줘야겠죠: insert 작업
 		int i = memberDao.addMember(member);
-		
+
 		List<CouponVo> coupon = memberDao.getCoupon(1);
-		System.out.println("[controller:member] memberInfo : "+ coupon);
+		System.out.println("[controller:member] memberInfo : " + coupon);
 		Map map = new HashMap();
-			map.put("userId", member.getId());
-			map.put("coupons", coupon);
+		map.put("userId", member.getId());
+		map.put("coupons", coupon);
 		memberDao.insertCoupon(map);
 
 		if (i == 1) {

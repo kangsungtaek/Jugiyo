@@ -26,13 +26,22 @@
 
 		<!--  가게정보  -->
 		<div class="w3-bar" id="${storeVo.no}">
-			<span class="w3-bar-item w3-xlarge w3-right">${storeVo.star }</span>
+			<span class="w3-bar-item w3-xlarge w3-right">
+				<c:choose>
+					<c:when test="${ store.star == null }">
+						0.0
+					</c:when>
+					<c:otherwise>
+						${store.star }
+					</c:otherwise>
+				</c:choose>
+			</span>
 			<img src="${pageContext.request.contextPath}${storeVo.img}"
 				class="w3-bar-item w3-circle w3-hide-small w3-padding-small"
 				style="width: 85px">
 			<div class="w3-bar-item">
 				<span class="w3-large">${storeVo.name }</span><br> <span>${storeVo.addr }</span>
-				<br /> <span class="w3-right-align w3-small">리뷰 : xxxx개</span>
+				<br /> <span class="w3-right-align w3-small">리뷰 : ${ storeVo.review }개</span>
 
 			</div>
 		</div>
@@ -138,21 +147,6 @@
 				<p></p>
 			</div>
 
-			<div class="w3-container w3-border">
-				<form action="리뷰넘기기" method="post" enctype="multipart/form-data">
-					<textarea rows="3" placeholder="리뷰를 작성해주세요"
-						style="height: 100px; width: 900px; margin-top: 10px"></textarea>
-					<div class="w3-row">
-						<div class="w3-half w3-container w3-right-left">
-							<input type="file" id="file" style="padding-bottom: 5px;">
-						</div>
-						<div class="w3-half w3-container w3-right-align">
-							<input type="submit" value="등록">
-						</div>
-					</div>
-
-				</form>
-			</div>
 
 			<div class="w3-container w3-border" style="min-height: 150px">
 				<c:forEach var="r" items="${ reviews }">

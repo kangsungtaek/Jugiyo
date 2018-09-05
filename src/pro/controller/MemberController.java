@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,7 +40,7 @@ public class MemberController {
 			ip.put("id", vo.getId());
 			ip.put("password", vo.getPassword());
 		vo = memberDao.findById(ip);
-		// 등급조정 -> 관리자페이지에서 하는게 좋을듯
+		// 등급조정 
 		List<LogVo> list = memberDao.readAllById(vo.getId());
 		Map grade = new HashMap<>();
 		grade.put("id", vo.getId());
@@ -52,27 +53,29 @@ public class MemberController {
 		} else {
 			grade.put("grade", 4);
 		}
-
+		System.out.println("변경될 등급 : " + grade.get("grade"));
 		Map m = new HashMap<>();
 			m.put("id", vo.getId());
 			m.put("password", vo.getPassword());
 		vo = memberDao.findById(m);
+		System.out.println("원래 등급 : " + vo.getGrade());
 		
 		if (vo.getGrade() != (int) grade.get("grade")) {
 			memberDao.updateGrade(grade);
 			List<CouponVo> c = memberDao.getCoupon((int) grade.get("grade"));
+			System.out.println("변경될등급의 쿠폰:" + c.toString());
 			Map map = new HashMap<>();
 				map.put("userId", vo.getId());
 				map.put("coupons", c);
 			memberDao.updateCoupon(map);
-			
-			vo.setCoupons(c);
-		} else {
-			MultiCouponVo coupons = memberDao.findCoupon(vo.getId());
-			System.out.println("[controller:member] coupons : " + coupons.toString());
+			vo.setGrade((int) grade.get("grade"));
 
-			vo.setCoupons(coupons.getCoupons());
-		}
+		} 
+		MultiCouponVo coupons = memberDao.findCoupon(vo.getId());
+		System.out.println("[controller:member] coupons : " + coupons.toString());
+
+		vo.setCoupons(coupons.getCoupons());
+		
 		req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
 		return "member/memInfo";
 	}
@@ -90,7 +93,7 @@ public class MemberController {
 
 		for (LogVo v : list) {
 			if (v.getReviewd().equals("Y")) {
-				ReviewVo review = memberDao.findByLogId(v.getId());
+				ReviewVo review = memberDao.findReivewByLogId(v.getId());
 				v.setReview(review);
 			}
 		}
@@ -176,11 +179,18 @@ public class MemberController {
 	}
 
 	@RequestMapping("/addAddr")
-	public void addAddrHandle(@RequestParam("addr") String addr, WebRequest req) {
+	@ResponseBody
+	public String addAddrHandle(@RequestParam("addr") String addr, @RequestParam("xcor") double xcor,
+			@RequestParam("ycor") double ycor, WebRequest req) {
+		System.out.println("[controller:member]Address : " + addr + "/" + xcor + "." + ycor);
 		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("id", member.getId());
 		map.put("addr", addr);
+		map.put("xcor", xcor);
+		map.put("ycor", ycor);
+		System.out.println("[controller:member]Address" + map);
 		memberDao.addAddr(map);
+		return "true";
 	}
 }

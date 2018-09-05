@@ -1,104 +1,126 @@
 package pro.vo;
 
-//store table
-public class StoreVo {
-   int no;
-   String id;
-   String password;
-   String name;
-   String addr;
-   int type;
-   String typeName; //type table과 join해서 사용할 것
-   double xcor; //x좌표
-   double ycor; //y좌표
-   String img;
-   String contact;
-   double star;
-   int review; //리뷰갯수
+import java.util.Date;
+import java.util.List;
+
+public class LogVo {
+   String id; //objectId
+   String userId;
+   String storeNo; // 음식점 no
+   String storeName;
+   int storeType; // 음식점의 타입
+   List<MenuVo> orderList;
+   Date orderdate;
+   String delivery;
+   String requested;
+   String reviewd;
    
-   public int getNo() {
-      return no;
-   }
-   public void setNo(int no) {
-      this.no = no;
-   }
+   ReviewVo review;
+   int totalPrice;
+   
    public String getId() {
       return id;
    }
+
    public void setId(String id) {
       this.id = id;
    }
-   public String getPassword() {
-      return password;
+
+   
+   public int getTotalPrice() {
+      return totalPrice;
    }
-   public void setPassword(String password) {
-      this.password = password;
+
+   public void setTotalPrice(int totalPrice) {
+      this.totalPrice = totalPrice;
    }
-   public String getName() {
-      return name;
+
+   public String getUserId() {
+      return userId;
    }
-   public void setName(String name) {
-      this.name = name;
+
+   public void setUserId(String userId) {
+      this.userId = userId;
    }
-   public String getAddr() {
-      return addr;
+
+   public String getStoreNo() {
+      return storeNo;
    }
-   public void setAddr(String addr) {
-      this.addr = addr;
+
+   public void setStoreNo(String storeNo) {
+      this.storeNo = storeNo;
    }
-   public int getType() {
-      return type;
+
+   public String getStoreName() {
+      return storeName;
    }
-   public void setType(int type) {
-      this.type = type;
+
+   public void setStoreName(String storeName) {
+      this.storeName = storeName;
    }
-   public String getTypeName() {
-      return typeName;
+
+   public int getStoreType() {
+      return storeType;
    }
-   public void setTypeName(String typeName) {
-      this.typeName = typeName;
+
+   public void setStoreType(int storeType) {
+      this.storeType = storeType;
    }
-   public double getXcor() {
-      return xcor;
+
+   public Date getOrderdate() {
+      return orderdate;
    }
-   public void setXcor(double xcor) {
-      this.xcor = xcor;
+
+   public void setOrderdate(Date orderdate) {
+      this.orderdate = orderdate;
    }
-   public double getYcor() {
-      return ycor;
+
+   public List<MenuVo> getOrderList() {
+      return orderList;
    }
-   public void setYcor(double ycor) {
-      this.ycor = ycor;
+
+   public void setOrderList(List<MenuVo> orderList) {
+      this.orderList = orderList;
    }
-   public String getImg() {
-      return img;
+
+   public String getDelivery() {
+      return delivery;
    }
-   public void setImg(String img) {
-      this.img = img;
+
+   public void setDelivery(String delivery) {
+      this.delivery = delivery;
    }
-   public String getContact() {
-      return contact;
+
+   public String getRequested() {
+      return requested;
    }
-   public void setContact(String contact) {
-      this.contact = contact;
+
+   public void setRequested(String requested) {
+      this.requested = requested;
    }
-   public double getStar() {
-      return star;
+
+   public String getReviewd() {
+      return reviewd;
    }
-   public void setStar(double star) {
-      this.star = star;
-   }
-   public int getReview() {
-      return review;
-   }
-   public void setReview(int review) {
-      this.review = review;
-   }
-   @Override
-   public String toString() {
-      return "StoreVo [no=" + no + ", id=" + id + ", password=" + password + ", name=" + name + ", addr=" + addr
-            + ", type=" + type + ", typeName=" + typeName + ", xcor=" + xcor + ", ycor=" + ycor + ", img=" + img
-            + ", contact=" + contact + ", star=" + star + "]";
+
+   public void setReviewd(String reviewd) {
+      this.reviewd = reviewd;
    }
    
+   public ReviewVo getReview() {
+      return review;
+   }
+
+   public void setReview(ReviewVo review) {
+      this.review = review;
+   }
+
+   @Override
+   public String toString() {
+      return "LogVo [id=" + id + ", userId=" + userId + ", storeNo=" + storeNo + ", storeName=" + storeName
+            + ", storeType=" + storeType + ", orderList=" + orderList + ", orderdate=" + orderdate + ", delivery="
+            + delivery + ", requested=" + requested + ", reviewd=" + reviewd + ", review=" + review
+            + ", totalPrice=" + totalPrice + "]";
+   }
+
 }

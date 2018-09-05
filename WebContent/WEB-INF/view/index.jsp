@@ -192,10 +192,8 @@ body, html {
 							console.log(coords.getLat());
 							console.log(coords.getLng());
 
-							document.getElementById("lat").value = coords
-									.getLat();
-							document.getElementById("lng").value = coords
-									.getLng();
+							document.getElementById("lat").value = coords.getLat();
+							document.getElementById("lng").value = coords.getLng();
 
 							document.getElementById("f").submit();
 						}
