@@ -1,5 +1,6 @@
 package pro.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +15,10 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import pro.vo.CouponVo;
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
+import pro.vo.MultiCouponVo;
 import pro.vo.ReviewVo;
 
 @Repository
@@ -32,6 +35,11 @@ public class MemberDao {
 		//member가 mapper이름 findById는 sql문 이름
 	}
 	
+	//모든회원 불러오는 작업
+	public List<MemberVo> getAll() {
+		return template.selectList("member.getAll");
+	}
+	
 	//회원가입용 함수
 	public int addMember(MemberVo vo) {
 		return template.insert("member.addMember", vo);
@@ -45,6 +53,12 @@ public class MemberDao {
 	public List<LogVo> readAllById(String id) {
 		Query query = new BasicQuery(new Document().append("userId", id));
 		return mongoTemplate.find(query, LogVo.class, "log");
+	}
+	
+	//특정 주문내역 불러오기
+	public LogVo readByObjectId(String id) {
+		Query query = new BasicQuery(new Document().append("_id", new ObjectId(id)));
+		return mongoTemplate.findOne(query, LogVo.class, "log");
 	}
 	
 	//내집주소 등록
@@ -66,7 +80,7 @@ public class MemberDao {
 	}
 	
 	//사용자가 작성한 리뷰불러오기
-	public ReviewVo findByLogId(String logId) {
+	public ReviewVo findReivewByLogId(String logId) {
 		Query query = new BasicQuery(new Document().append("logId", logId));
 		return mongoTemplate.findOne(query, ReviewVo.class, "review");
 	}
@@ -74,6 +88,42 @@ public class MemberDao {
 	//주문후 포인트 적립
 	public void updatePoint(Map map) {
 		template.update("member.updatePoint", map);
+	}
+	
+	//주문갯수에 따른 등급조정
+	public void updateGrade(Map map) {
+		template.update("member.updateGrade", map);
+	}
+	
+	//등급에 따른 쿠폰가져오기
+	public List<CouponVo> getCoupon(int grade) {
+		return template.selectList("member.getCoupon", grade);
+	}
+	
+	//사용자의 쿠폰 넣어두기
+	public void insertCoupon(Map map) {
+		mongoTemplate.insert(map, "coupon");
+	}
+	
+	//사용자의 등급조정시 쿠폰 넣어주기
+	public void updateCoupon(Map map) {
+		Query query = new BasicQuery(new Document().append("userId", map.get("userId")));
+		Update update = new BasicUpdate(new Document().append("$push", new Document().append("coupons", map.get("c"))));
+		mongoTemplate.updateFirst(query, update, "coupon");
+	}
+	
+	//사용자의 사용가능한 쿠폰 가져오기
+	public MultiCouponVo findCoupon(String id) {
+		Query query = new BasicQuery(new Document().append("userId", id));
+		return mongoTemplate.findOne(query, MultiCouponVo.class, "coupon");
+	}
+	
+	//사용한 쿠폰 업데이트
+	public void usedCoupon(Map map) {
+		Query query = new BasicQuery(new Document().append("userId", map.get("userId")));
+		Update update = new BasicUpdate(new Document().append("$pull", 
+				new Document().append("coupons", new Document().append("_id", map.get("c")))));
+		mongoTemplate.updateFirst(query, update, "coupon");
 	}
 
 }

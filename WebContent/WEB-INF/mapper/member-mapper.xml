@@ -3,24 +3,32 @@
 <mapper namespace="member"> 
 	<!-- 로그인용 아이디 / 패스워드로 검색 -->
 	<select id="findById" parameterType="java.util.Map" resultType="pro.vo.MemberVo">
-		select * from member where id=#{id} and password=#{password}
+		select * from member_detail where id=#{id} and password=#{password}
+	</select>
+	<select id="getAll" resultType="pro.vo.MemberVo">
+		select * from member_detail
 	</select>
 	<!-- 아이디 중복체크를 위한 id불러오기 -->
 	<select id="findAll" resultType="java.lang.String">
-		select id from member
+		select id from member_detail
 	</select>
 	<insert id="addMember" parameterType="pro.vo.MemberVo">
-		insert into member values (#{id},#{password},#{contact},#{nickname},#{address},0,#{email},#{xcor},#{ycor})
+		insert into member values (#{id},#{password},#{contact},#{nickname},#{address},0,#{email},#{xcor},#{ycor},1)
 	</insert>
 	<select id="findStartWith" parameterType="java.lang.String" resultType="pro.vo.MemberVo">
-		select * from member where id like #{id} order by id asc
+		select * from member_detail where id like #{id} order by id asc
 	</select>
 	<update id="addAddr" parameterType="java.util.Map">
 		update member set address=#{addr} where id=#{id}
 	</update>
-	
 	<update id="updatePoint" parameterType="java.util.Map">
 		update member set point = point + #{point} where id = #{id}
 	</update>
-	
+	<update id="updateGrade" parameterType="java.util.HashMap">
+		update member set grade=#{grade} where id = #{id}
+	</update>
+	<!-- 쿠폰가져오기 -->
+	<select id="getCoupon" resultType="pro.vo.CouponVo">
+		select * from coupon where id &gt;= #{grade} and id &lt; #{grade}+1
+	</select>
 </mapper>

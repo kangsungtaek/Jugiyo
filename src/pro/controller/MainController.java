@@ -1,5 +1,6 @@
 package pro.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.StoreDao;
+import pro.vo.MemberVo;
+import pro.vo.ReviewVo;
 import pro.vo.StoreVo;
 
 @Controller
@@ -26,8 +29,27 @@ public class MainController {
 		System.out.println("[controller:main] type : " + type);
 
 		//List<StoreVo> list = storeDao.storeLIst(type);
-		Map map = (Map) req.getAttribute("coords", WebRequest.SCOPE_SESSION);
+		Map map = new HashMap<>();
+		if(req.getAttribute("vo", WebRequest.SCOPE_SESSION) == null) {
+			map = (Map) req.getAttribute("coords", WebRequest.SCOPE_SESSION);
+		} else {
+			MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
+			map.put("xcor", member.getXcor());
+			map.put("ycor", member.getYcor());
+		}
+		map.put("type", type);
 		List<StoreVo> list = storeDao.getStoreByCoords(map);
+		
+		//평점 : star에 setting해둘것
+		for(StoreVo v : list) {
+			List<ReviewVo> r = storeDao.findReview(v.getNo());
+			double s = 0;
+			for(int i=0; i<r.size(); i++) {
+				s += r.get(i).getStar();
+			}
+			v.setStar(s/r.size());
+			v.setReview(r.size());
+		}
 		
 		mav.setViewName("main");
 		mav.addObject("storeList", list);

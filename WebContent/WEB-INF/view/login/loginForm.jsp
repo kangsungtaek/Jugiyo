@@ -7,6 +7,16 @@
 	.form_input {text-align:center; width:100%; height:38px; position:relative; bottom:20px;}
 	.w3-row {margin:0 auto; width:400px; height:100px; top:0px;}
 	/*-- top.jsp--*/
+	.w3-orange {width:100%; height:auto; position:absolute; top:56px; border:3px solid green;}
+	.bg {width:100%; height:auto; border:1px solid #ccc;}	
+	.bg p {width:100%; height:auto; text-align:center;}
+	.logo_b {width:400px; height:100px; text-align:center; margin-top:4px;}	
+	.w3-orange {width:100%; height:auto; position:absolute; top:86px; border:1px solid #ccc;}
+	/*	.hide {display:none;}	*/
+		/*-- bottom.jsp--
+	footer {width:100%; height:100px; margin-top:0px; border:3px solid red}
+	p.shopReg {text-align:center;}
+	p.shopReg b.shopReg_inquiry {text-align:center;} */
 	.w3-orange {width:100%; height:auto; position:relative; top:0pxt;border:1px solid #ccc;}
 	div p {width:400px; height:100px; border:2px solid cyan;}
 	div p .logo {margin:0 auto; width:400px; height:100px; border:2px solid red;}

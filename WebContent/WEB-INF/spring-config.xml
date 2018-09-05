@@ -39,9 +39,15 @@
 		</property>
 	</bean>
 	
+	<!-- errorpage설정 -->
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    	<property name="defaultErrorView" value="error" />
+    </bean>
+	
+	
 	<!-- websocket controller등록 -->
 	<websocket:handlers>
-		<websocket:mapping handler="ws" path="/ws/conn.do"/>
+		<websocket:mapping handler="alert" path="/ws/conn.do"/>
 		<websocket:handshake-interceptors>
 			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
 		</websocket:handshake-interceptors>

@@ -14,7 +14,7 @@ input, button, select {
 	padding: 0;	
 	font-size: 11pt;
 	font-family: 맑은 고딕;
-}	
+}
 
 .img_wrap img {
 	max-width: 100%;

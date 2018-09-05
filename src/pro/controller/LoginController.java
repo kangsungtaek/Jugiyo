@@ -1,5 +1,8 @@
 package pro.controller;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pro.dao.MemberDao;
 import pro.dao.StoreDao;
+import pro.vo.CouponVo;
 import pro.vo.MemberVo;
+import pro.vo.MultiCouponVo;
 import pro.vo.StoreVo;
 
 @Controller
@@ -65,13 +70,16 @@ public class LoginController {
 
 				if (vo.getPassword().equals(m.get("password"))) { // session에다가 vo를 올려주세요.
 					mav.setViewName("index");
+					
+					MultiCouponVo coupons = memberDao.findCoupon(vo.getId());
+					vo.setCoupons(coupons.getCoupons());
+
 					req.setAttribute("vo", vo, WebRequest.SCOPE_SESSION);
-					System.out.println("[controller:login] 로그온");
 				} else {
 					mav.setViewName("login/loginForm");
 				}
 			} catch (Exception e) {
-				mav.setViewName("redirect:/error");
+				mav.setViewName("error");
 			}
 		}
 		return mav;
@@ -101,11 +109,19 @@ public class LoginController {
 
 		// member를 db에 넣어줘야겠죠: insert 작업
 		int i = memberDao.addMember(member);
+		
+		List<CouponVo> coupon = memberDao.getCoupon(1);
+		System.out.println("[controller:member] memberInfo : "+ coupon);
+		Map map = new HashMap();
+			map.put("userId", member.getId());
+			map.put("coupons", coupon);
+		memberDao.insertCoupon(map);
+
 		if (i == 1) {
 			mav.setViewName("login/reg");// 회원가입되셨습니다.
 			// login/reg.jsp를 만들어서 "${ nickname } 님 회원가입되셨습니다. 감사합니다." 이렇게 나타나도록.
 		} else {
-			mav.setViewName("error");
+			mav.setViewName("/error");
 		}
 		return mav;
 	}
@@ -115,6 +131,8 @@ public class LoginController {
 	public String logout(HttpSession session) {
 		// session.setAttribute("userLoginInfo", null);
 		session.setAttribute("vo", null);
+		session.setAttribute("orderList", null);
+		session.setAttribute("totalPrice", null);
 		return "/index";
 	}
 }

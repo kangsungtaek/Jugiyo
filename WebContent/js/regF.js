@@ -47,6 +47,7 @@
 							document.getElementById("id").value="";
 						}else {
 							check++;
+							document.getElementById("ajax").style.color="green";
 							document.getElementById("ajax").innerHTML="사용할 수 있는 아이디입니다.";
 						}
 					}
@@ -136,6 +137,21 @@
       }
    });
    
+   $("#pwck").on("change", function() {
+	   console.log($(this).val());
+	   console.log("pw : " + $("#pw").val());
+      $("#pwckajax").val("");
+      if($("#pw").val() == ($(this).val())) {
+    	 check++;
+         $("#pwckajax").css("color", "green");
+         $("#pwckajax").html("비밀번호가 일치합니다.")
+      }else {
+    	 // check--;
+         $("#pwckajax").css("color", "red");
+         $("#pwckajax").html("비밀번호가 일치하지 않습니다.");   
+      }
+   });
+   
    $("#phone").on("change", function() {
 	   console.log($(this).val());
       $("#phoneajax").html("");
@@ -152,7 +168,7 @@
    
    function validcheck() {
 	   console.log(check);
-	   if(check >= 4) {
+	   if(check >= 5) {
 		   return true;
 	   } else {
 		   return false;
