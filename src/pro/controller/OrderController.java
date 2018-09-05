@@ -82,7 +82,7 @@ public class OrderController {
 		MemberVo member = (MemberVo) req.getAttribute("vo", WebRequest.SCOPE_SESSION);
 		System.out.println("[controller:order] random");
 		int num = 0;
-		int[] set = new int[100];
+		int[] set = new int[10];
 
 		if (member == null) {
 			for (int i = 1; i < 10; i++) {
@@ -182,8 +182,8 @@ public class OrderController {
 				// 쿠폰사용시 여기서 쿠폰 제거 하면될듯
 				// coupon이라는 이름으로 쿠폰의 아이디가 넘어옴
 				Map c = new HashMap<>();
-				c.put("userId", mVo.getId());
-				c.put("c", map.get("coupon"));
+					c.put("userId", mVo.getId());
+					c.put("c", map.get("coupon"));
 				memberDao.usedCoupon(c);
 			}
 		}

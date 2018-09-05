@@ -64,7 +64,7 @@ public class MemberController {
 			Map map = new HashMap<>();
 				map.put("userId", vo.getId());
 				map.put("coupons", c);
-			memberDao.usedCoupon(map);
+			memberDao.updateCoupon(map);
 			
 			vo.setCoupons(c);
 		} else {
