@@ -1,126 +1,104 @@
 package pro.vo;
 
-import java.util.Date;
-import java.util.List;
-
-public class LogVo {
-   String id; //objectId
-   String userId;
-   String storeNo; // 음식점 no
-   String storeName;
-   int storeType; // 음식점의 타입
-   List<MenuVo> orderList;
-   Date orderdate;
-   String delivery;
-   String requested;
-   String reviewd;
+//store table
+public class StoreVo {
+   int no;
+   String id;
+   String password;
+   String name;
+   String addr;
+   int type;
+   String typeName; //type table과 join해서 사용할 것
+   double xcor; //x좌표
+   double ycor; //y좌표
+   String img;
+   String contact;
+   double star;
+   int review; //리뷰갯수
    
-   ReviewVo review;
-   int totalPrice;
-   
+   public int getNo() {
+      return no;
+   }
+   public void setNo(int no) {
+      this.no = no;
+   }
    public String getId() {
       return id;
    }
-
    public void setId(String id) {
       this.id = id;
    }
-
-   
-   public int getTotalPrice() {
-      return totalPrice;
+   public String getPassword() {
+      return password;
    }
-
-   public void setTotalPrice(int totalPrice) {
-      this.totalPrice = totalPrice;
+   public void setPassword(String password) {
+      this.password = password;
    }
-
-   public String getUserId() {
-      return userId;
+   public String getName() {
+      return name;
    }
-
-   public void setUserId(String userId) {
-      this.userId = userId;
+   public void setName(String name) {
+      this.name = name;
    }
-
-   public String getStoreNo() {
-      return storeNo;
+   public String getAddr() {
+      return addr;
    }
-
-   public void setStoreNo(String storeNo) {
-      this.storeNo = storeNo;
+   public void setAddr(String addr) {
+      this.addr = addr;
    }
-
-   public String getStoreName() {
-      return storeName;
+   public int getType() {
+      return type;
    }
-
-   public void setStoreName(String storeName) {
-      this.storeName = storeName;
+   public void setType(int type) {
+      this.type = type;
    }
-
-   public int getStoreType() {
-      return storeType;
+   public String getTypeName() {
+      return typeName;
    }
-
-   public void setStoreType(int storeType) {
-      this.storeType = storeType;
+   public void setTypeName(String typeName) {
+      this.typeName = typeName;
    }
-
-   public Date getOrderdate() {
-      return orderdate;
+   public double getXcor() {
+      return xcor;
    }
-
-   public void setOrderdate(Date orderdate) {
-      this.orderdate = orderdate;
+   public void setXcor(double xcor) {
+      this.xcor = xcor;
    }
-
-   public List<MenuVo> getOrderList() {
-      return orderList;
+   public double getYcor() {
+      return ycor;
    }
-
-   public void setOrderList(List<MenuVo> orderList) {
-      this.orderList = orderList;
+   public void setYcor(double ycor) {
+      this.ycor = ycor;
    }
-
-   public String getDelivery() {
-      return delivery;
+   public String getImg() {
+      return img;
    }
-
-   public void setDelivery(String delivery) {
-      this.delivery = delivery;
+   public void setImg(String img) {
+      this.img = img;
    }
-
-   public String getRequested() {
-      return requested;
+   public String getContact() {
+      return contact;
    }
-
-   public void setRequested(String requested) {
-      this.requested = requested;
+   public void setContact(String contact) {
+      this.contact = contact;
    }
-
-   public String getReviewd() {
-      return reviewd;
+   public double getStar() {
+      return star;
    }
-
-   public void setReviewd(String reviewd) {
-      this.reviewd = reviewd;
+   public void setStar(double star) {
+      this.star = star;
    }
-   
-   public ReviewVo getReview() {
+   public int getReview() {
       return review;
    }
-
-   public void setReview(ReviewVo review) {
+   public void setReview(int review) {
       this.review = review;
    }
-
    @Override
    public String toString() {
-      return "LogVo [id=" + id + ", userId=" + userId + ", storeNo=" + storeNo + ", storeName=" + storeName
-            + ", storeType=" + storeType + ", orderList=" + orderList + ", orderdate=" + orderdate + ", delivery="
-            + delivery + ", requested=" + requested + ", reviewd=" + reviewd + ", review=" + review
-            + ", totalPrice=" + totalPrice + "]";
+      return "StoreVo [no=" + no + ", id=" + id + ", password=" + password + ", name=" + name + ", addr=" + addr
+            + ", type=" + type + ", typeName=" + typeName + ", xcor=" + xcor + ", ycor=" + ycor + ", img=" + img
+            + ", contact=" + contact + ", star=" + star + "]";
    }
-
+   
 }
