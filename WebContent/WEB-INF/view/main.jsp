@@ -24,7 +24,7 @@
 							style="width: 85px">
 							<div class="w3-bar-item">
 								<span class="w3-large">${store.name }</span><br> <span>${store.addr }</span>
-								<br /> <span class="w3-right-align w3-small">리뷰 : xxxx개</span>
+								<br /> <span class="w3-right-align w3-small">리뷰 : ${ store.review }개</span>
 							</div></li>
 					</c:forEach>
 				</ul>
