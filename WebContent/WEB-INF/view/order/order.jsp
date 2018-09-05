@@ -15,6 +15,9 @@
 	top: 0px;
 	width: 310px;
 }
+.star{
+	color: #FFBB00;
+}
 </style>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -36,11 +39,25 @@
 		<!--  가게정보  -->
 		<div class="w3-bar" id="${storeVo.no}">
 			<span class="w3-bar-item w3-xlarge w3-right"> <c:choose>
-					<c:when test="${ store.star == null }">
-						0.0
+					<c:when test="${ storeVo.star == null }">
+						<i class="fa fa-star-o star"></i><i class="fa fa-star-o star"></i><i class="fa fa-star-o star"></i><i class="fa fa-star-o star"></i><i class="fa fa-star-o star"></i>
 					</c:when>
 					<c:otherwise>
-						${store.star }
+						<c:forEach var="i" begin="1" end="5" step="1">
+							<c:choose>
+								<c:when test="${storeVo.star+0.5 eq i}">
+									<i class="fa fa-star-half-o star"></i>
+								</c:when>
+								<c:when test="${storeVo.star ge i}">
+									<i class="fa fa-star star"></i>
+								</c:when>
+								<c:when test="${storeVo.star lt i}">
+									<i class="fa fa-star-o star"></i>
+								</c:when>
+
+							</c:choose>
+
+						</c:forEach>
 					</c:otherwise>
 				</c:choose>
 			</span> <img src="${pageContext.request.contextPath}${storeVo.img}"
@@ -68,7 +85,7 @@
 		<!--  추천 메뉴 -->
 		<div id="menu" class="w3-container tabs" style="display: block">
 			<button onclick="menubarSelect('Demo1')"
-				class="w3-button w3-block w3-left-align w3-light-grey">추천
+				class="w3-button w3-block w3-left-align w3-deep-orange">추천
 				메뉴</button>
 			<div class="w3-container">
 				<div id="Demo1">
@@ -89,9 +106,10 @@
 
 			<!--  메인메뉴  -->
 			<button onclick="menubarSelect('Demo2')"
-				class="w3-button w3-block w3-black w3-left-align">메인 메뉴</button>
+				class="w3-button w3-block w3-deep-orange w3-left-align">메인
+				메뉴</button>
 			<div class="w3-container">
-				<div id="Demo2" class="w3-hide">
+				<div id="Demo2" class="w3-show">
 					<ul class="w3-ul w3-card-4">
 						<c:forEach items="${menuList}" var="menu">
 							<c:if test="${menu.type eq 20 }">
@@ -108,9 +126,10 @@
 			</div>
 			<!--  사이드메뉴  -->
 			<button onclick="menubarSelect('Demo3')"
-				class="w3-button w3-block w3-black w3-left-align">사이드 메뉴</button>
+				class="w3-button w3-block w3-deep-orange w3-left-align">사이드
+				메뉴</button>
 			<div class="w3-container">
-				<div id="Demo3" class="w3-hide">
+				<div id="Demo3" class="w3-show">
 					<ul class="w3-ul w3-card-4">
 						<c:forEach items="${menuList}" var="menu">
 							<c:if test="${menu.type eq 30 }">
@@ -128,9 +147,9 @@
 			</div>
 			<!--  음료  -->
 			<button onclick="menubarSelect('Demo4')"
-				class="w3-button w3-block w3-black w3-left-align">음료</button>
+				class="w3-button w3-block w3-deep-orange w3-left-align">음료</button>
 			<div class="w3-container">
-				<div id="Demo4" class="w3-hide">
+				<div id="Demo4" class="w3-show">
 					<ul class="w3-ul w3-card-4">
 						<c:forEach items="${menuList}" var="menu">
 							<c:if test="${menu.type eq 40 }">
@@ -150,12 +169,13 @@
 
 		<!--  리뷰  -->
 		<div id="review" class="w3-container tabs" style="display: none">
-			<div class="w3-container w3-border w3-large w3-center" >
+			<div class="w3-container w3-border w3-large w3-center">
 				<p></p>
 			</div>
 
 
-			<div class="w3-container w3-border" style="min-height: 150px; background-color: white;">
+			<div class="w3-container w3-border"
+				style="min-height: 150px; background-color: white;">
 				<c:forEach var="r" items="${ reviews }">
 					<c:if test="${ r.reviewd == 'Y'}">
 						<span class="w3-large">${ r.review.nickname }님</span>
@@ -190,43 +210,45 @@
 	<!-- 장바구니 -->
 	<div class="w3-col"
 		style="width: 25%; padding-left: 10px; padding-right: 30px">
-		<div class="scroll-menu  w3-container" style="width: 310px; ">
+		<div class="scroll-menu  w3-container" style="width: 310px;">
 			<div class="w3-border" style="background-color: white;">
-			
+
 				<div class="w3-container w3-border-bottom">주문표</div>
 				<div class="w3-container" id="orderDiv">
 					<ul id="orderList">
-					<c:choose>
-						<c:when test="${empty sessionScope.orderList }">
-							<li id="orderNull"> 주문표에 담긴 메뉴가 없습니다. </li>
-						</c:when>
-						
-						<c:otherwise>
-						<c:forEach items="${sessionScope.orderList}" var="orderList">
-							<li id="${orderList.no}">
-								<div class='w3-row'>
-									<div>${orderList.name }</div>
-									<div class='w3-row'>
-										<div class='w3-half w3-left-align'>
-											<button
-												class='w3-button w3-padding-small w3-tiny w3-red orderRemove w3-border'
-												onclick='orderListRemove(this)'>X</button>
-											<span id="price"> ${orderList.price * orderList.cnt }원</span>
+						<c:choose>
+							<c:when test="${empty sessionScope.orderList }">
+								<li id="orderNull">주문표에 담긴 메뉴가 없습니다.</li>
+							</c:when>
+
+							<c:otherwise>
+								<c:forEach items="${sessionScope.orderList}" var="orderList">
+									<li id="${orderList.no}">
+										<div class='w3-row'>
+											<div>${orderList.name }</div>
+											<div class='w3-row'>
+												<div class='w3-half w3-left-align'>
+													<button
+														class='w3-button w3-padding-small w3-tiny w3-red orderRemove w3-border'
+														onclick='orderListRemove(this)'>X</button>
+													<span id="price"> ${orderList.price * orderList.cnt }원</span>
+												</div>
+												<div class="w3-half w3-right-align">
+													<button
+														class="w3-button w3-border w3-padding-small w3-tiny"
+														onclick='orderListMinus(this)'>-</button>
+													<!-- <span class='w3-button w3-small' onclick='orderListMinus(this)'>-</span>  -->
+													<span id="count">${orderList.cnt }</span>
+													<button
+														class="w3-button w3-border w3-padding-small w3-tiny"
+														onclick='orderListPlus(this)'>+</button>
+													<!-- <span class='w3-button w3-small' onclick='orderListPlus(this)'>+</span>  -->
+												</div>
+											</div>
 										</div>
-										<div class="w3-half w3-right-align">
-											<button class="w3-button w3-border w3-padding-small w3-tiny"
-												onclick='orderListMinus(this)'>-</button>
-											<!-- <span class='w3-button w3-small' onclick='orderListMinus(this)'>-</span>  -->
-											<span id="count">${orderList.cnt }</span>
-											<button class="w3-button w3-border w3-padding-small w3-tiny"
-												onclick='orderListPlus(this)'>+</button>
-											<!-- <span class='w3-button w3-small' onclick='orderListPlus(this)'>+</span>  -->
-										</div>
-									</div>
-								</div>
-							</li>
-						</c:forEach>
-						</c:otherwise>
+									</li>
+								</c:forEach>
+							</c:otherwise>
 						</c:choose>
 					</ul>
 					총 가격 : <span id="totalPrice"> ${sessionScope.totalPrice}</span>
@@ -234,13 +256,14 @@
 			</div>
 			<div class='w3-row'>
 				<c:choose>
-					<c:when test="${sessionScope.orderList[0].store eq storeVo.no or empty sessionScope.orderList}">
-						<button onclick="order()"
-								class="w3-button w3-red" style="width: 100%;" >주문하기</button> 
+					<c:when
+						test="${sessionScope.orderList[0].store eq storeVo.no or empty sessionScope.orderList}">
+						<button onclick="order()" class="w3-button w3-red"
+							style="width: 100%;">주문하기</button>
 					</c:when>
 					<c:otherwise>
-						<button onclick="order()"
-								class="w3-button w3-red" style="width: 100%;" disabled="disabled">주문하기</button> 
+						<button onclick="order()" class="w3-button w3-red"
+							style="width: 100%;" disabled="disabled">주문하기</button>
 					</c:otherwise>
 
 				</c:choose>
@@ -252,14 +275,13 @@
 </div>
 
 <script>
-	function order(){
-		if($("#totalPrice").text() == 0){
-				window.alert("메뉴를 담아주세요");
-			}else{
-				location.href= "/order/ordered?storeNo=${storeVo.no}";
-			}
+	function order() {
+		if ($("#totalPrice").text() == 0) {
+			window.alert("메뉴를 담아주세요");
+		} else {
+			location.href = "/order/ordered?storeNo=${storeVo.no}";
 		}
-	
+	}
 
 	// 메뉴 / 리뷰 탭 전환 함수 
 	function openTabs(evt, tabsName) {
@@ -358,7 +380,7 @@
 						console.log($("#orderStore").val());
 
 						if ("${storeVo.no}" == $("#orderStore").val()) {
-	
+
 							var xhr = new XMLHttpRequest();
 							var no = this.id;
 							xhr.open("get", "/sendJson?no=" + no + "&mode=add",
@@ -395,10 +417,10 @@
 																+ "</span> <button class='w3-button w3-border w3-padding-small w3-tiny' onclick='orderListPlus(this)'>+</button> </div></div></div></li>");
 										$("#orderDiv").find("#totalPrice")
 												.text(obj.totalPrice);
-										
+
 										$("#orderNull").remove();
 									}
-									
+
 								}
 							}
 							xhr.send();
