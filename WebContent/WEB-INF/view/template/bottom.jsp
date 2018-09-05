@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
 /*-- bottom.jsp--*/
-footer {margin-top:408px;}
+footer {margin-top:10%;}
 p.shopReg {text-align:center;}
 p.shopReg b.shopReg_inquiry {text-align:center;}
 </style>
@@ -25,5 +25,3 @@ p.shopReg b.shopReg_inquiry {text-align:center;}
 	      </p>
 	    </div>
 	</footer><!--//footer -->
-</body>
-</html>

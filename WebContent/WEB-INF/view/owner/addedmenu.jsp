@@ -7,7 +7,9 @@
 <div id="menuList"> 
 		<div id="menu" class="w3-container t`abs" style="display: block">
 			<button onclick="menubarSelect('Demo1')"
-				class="w3-button w3-block w3-left-align w3-light-grey">추천
+				class="w3-button w3-block w3-left-align w3-deep-orange" style="
+    color: white !important;
+				">추천
 				메뉴</button>
 			<div class="w3-container">
 				<div id="Demo1">
@@ -18,10 +20,10 @@
 									src="${pageContext.request.contextPath}${menu.fileUri}" class="w3-round w3-right "
 									style="width: 100px">
 									<div class="w3-bar-item">
-										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
+										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }원</span>
 										<p class="w3-small">
-										<button type="button" id="del" onclick="menuDelete(this)">삭제</button>
-											<button type="button" onclick="menuUpdate(this)">수정</button>
+										<button type="button" id="del" onclick="menuDelete(this)" class="w3-btn w3-white w3-border w3-round-large">삭제</button>
+											<button type="button" onclick="menuUpdate(this)" class="w3-btn w3-white w3-border w3-round-large">수정</button>
 									</p>
 									</div></li>
 							</c:if>
@@ -31,7 +33,7 @@
 			</div>
 
 			<button onclick="menubarSelect('Demo2')"
-				class="w3-button w3-block w3-black w3-left-align">메인 메뉴</button>
+				class="w3-button w3-block w3-deep-orange w3-left-align">메인 메뉴</button>
 			<div class="w3-container">
 				<div id="Demo2" class="w3-show">
 					<ul class="w3-ul w3-card-4">
@@ -41,10 +43,10 @@
 									src="${pageContext.request.contextPath}${menu.fileUri }" class="w3-round w3-right "
 									style="width: 100px">
 									<div class="w3-bar-item">
-										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
+										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }원</span>
 										<p class="w3-small">
-										<button type="button" id="del" onclick="menuDelete(this)">삭제</button>
-											<button type="button" onclick="menuUpdate(this)">수정</button>
+										<button type="button" id="del" onclick="menuDelete(this)" class="w3-btn w3-white w3-border w3-round-large">삭제</button>
+											<button type="button" onclick="menuUpdate(this)" class="w3-btn w3-white w3-border w3-round-large">수정</button>
 									</p>
 									</div></li>
 							</c:if>
@@ -53,7 +55,7 @@
 				</div>
 			</div>
 			<button onclick="menubarSelect('Demo3')"
-				class="w3-button w3-block w3-black w3-left-align">사이드 메뉴</button>
+				class="w3-button w3-block w3-deep-orange w3-left-align">사이드 메뉴</button>
 			<div class="w3-container">
 				<div id="Demo3" class="w3-show">
 					<ul class="w3-ul w3-card-4">
@@ -63,10 +65,10 @@
 									src="${pageContext.request.contextPath}${menu.fileUri }" class="w3-round w3-right "
 									style="width: 100px">
 									<div class="w3-bar-item">
-										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
+										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }원</span>
 										<p class="w3-small">
-										<button type="button" id="del" onclick="menuDelete(this)">삭제</button>
-											<button type="button" onclick="menuUpdate(this)">수정</button>
+										<button type="button" id="del" onclick="menuDelete(this)" class="w3-btn w3-white w3-border w3-round-large">삭제</button>
+											<button type="button" onclick="menuUpdate(this)" class="w3-btn w3-white w3-border w3-round-large">수정</button>
 									</p>
 									</div></li>
 							</c:if>
@@ -76,7 +78,7 @@
 				</div>
 			</div>
 			<button onclick="menubarSelect('Demo4')"
-				class="w3-button w3-block w3-black w3-left-align">음료</button>
+				class="w3-button w3-block w3-deep-orange w3-left-align">음료</button>
 			<div class="w3-container">
 				<div id="Demo4" class="w3-show">
 					<ul class="w3-ul w3-card-4">
@@ -86,10 +88,10 @@
 									src="${pageContext.request.contextPath}${menu.fileUri }" class="w3-round w3-right "
 									style="width: 100px">
 									<div class="w3-bar-item">
-										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }</span>
+										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }원</span>
 										<p class="w3-small">
-										<button type="button" id="del" onclick="menuDelete(this)">삭제</button>
-											<button type="button" onclick="menuUpdate(this)">수정</button>
+										<button type="button" id="del" onclick="menuDelete(this)" class="w3-btn w3-white w3-border w3-round-large">삭제</button>
+											<button type="button" onclick="menuUpdate(this)" class="w3-btn w3-white w3-border w3-round-large">수정</button>
 									</p>
 									</div></li>
 							</c:if>
