@@ -34,15 +34,26 @@
 			<div class="w3-border">
 				<ul class="w3-ul w3-card-4">
 					<c:forEach items="${storeList}" var="store">
-						<li class="w3-bar cate" id="${store.no}"><span
-							class="w3-bar-item w3-xlarge w3-right">${store.star }</span> <img
+						<li class="w3-bar cate" id="${store.no}">
+						<span class="w3-bar-item w3-xlarge w3-right">
+						<c:choose>
+							<c:when test="${ store.star == null || empty store.star }">
+								0.0
+							</c:when>
+							<c:otherwise>
+								${store.star }
+							</c:otherwise>
+						</c:choose>
+						</span>
+						<img
 							src="${pageContext.request.contextPath}${store.img}"
 							class="w3-bar-item w3-circle w3-hide-small w3-padding-small"
 							style="width: 85px">
 							<div class="w3-bar-item">
 								<span class="w3-large">${store.name }</span><br> <span>${store.addr }</span>
 								<br /> <span class="w3-right-align w3-small">리뷰 : ${ store.review }개</span>
-							</div></li>
+							</div>
+						</li>
 					</c:forEach>
 				</ul>
 			</div>

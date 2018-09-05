@@ -5,10 +5,7 @@
 
 <div style="padding-top: 50px;">
 	<button onclick="myFunction('Demo1')"
-		class="w3-button w3-block w3-black w3-left-align">오늘의 총 매출액 :
-		${todayPrice}원</button>
-	<button onclick="myFunction('Demo1')"
-		class="w3-button w3-block w3-black w3-left-align">총 주문 내역</button>
+		class="w3-button w3-block w3-deep-orange w3-left-align">총 주문 내역</button>
 
 	<div id="Demo1" class="w3-show w3-container">
 		<ul class="w3-ul w3-card-4">
@@ -28,4 +25,7 @@
 			</c:forEach>
 		</ul>
 	</div>
+	<button onclick="myFunction('Demo1')"
+		class="w3-button w3-block w3-deep-orange w3-left-align">오늘의 총 매출액 :
+		${todayPrice}원</button>
 </div>

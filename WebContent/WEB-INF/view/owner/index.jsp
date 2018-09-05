@@ -8,7 +8,7 @@
 
 <div style="padding-top: 50px;">
 	<button onclick="myFunction('Demo1')"
-		class="w3-button w3-block w3-black w3-left-align">미완료 주문내역</button>
+		class="w3-button w3-block w3-deep-orange w3-left-align">미완료 주문내역</button>
 
 	<div id="Demo1" class="w3-show w3-container">
 		<ul class="w3-ul w3-card-4">

@@ -32,11 +32,19 @@ textarea {
 <!-- 전체 영역 - -->
 <div class="w3-row">
 	<!-- 왼쪽 공백  -->
-	<div class="w3-col" style="width: 10%">&nbsp;</div>
 	<div class="w3-col" style="width: 70%">
 	<!--  가게정보  -->
 		<div class="w3-bar" id="${storeVo.no}" style="padding-bottom: 10px">
-			<span class="w3-bar-item w3-xlarge w3-right">${storeVo.star }</span>
+			<span class="w3-bar-item w3-xlarge w3-right">
+			<c:choose>
+				<c:when test="${ store.star == null }">
+					0.0
+				</c:when>
+				<c:otherwise>
+					${store.star }
+				</c:otherwise>
+			</c:choose>
+			</span>
 			<img src="${pageContext.request.contextPath}${storeVo.img}"
 				class="w3-bar-item w3-circle w3-hide-small w3-padding-small"
 				style="width: 85px">
@@ -99,14 +107,13 @@ textarea {
 
 			<div id="Demo4" class="w3-show w3-container">
 			<p></p>
-  				쿠폰 <input type="radio" name ="discount" id="copunDiscount" value="copun" form="form1" onclick="discountSelect(this)" > 
+  				쿠폰 <input type="radio" name ="discount" id="copunDiscount" value="coupon" form="form1" onclick="discountSelect(this)" > 
   					<select name="coupon" disabled="disabled" id="coupon" form ="form1" > 
   						<option selected disabled hidden>쿠폰선택</option>
 					<c:choose>
 						<c:when test="${empty coupons}">
 							<option value= "null"> 쿠폰 없음 </option>
 						</c:when>
-
 						<c:otherwise>
 							<c:forEach var="c" items="${ coupons }">
 									<option value="${ c.id }">${c.name}|${c.sale}|${c.unit}</option>
@@ -127,31 +134,42 @@ textarea {
 
 	</div>
 	<div class="w3-col"
-		style="width: 20%; padding-left: 10px; padding-right: 30px">
+		style="width: 30%; padding-left: 10px; padding-right: 30px">
 		<form action="/order/ordered" method="post" id="form1">
-		<div class="scroll-menu  w3-border w3-container">
-			<div class="w3-container w3-border-bottom"> <span class="fa fa-shopping-cart"></span> 주문표</div>
-			<div class="w3-container" id="orderDiv">
-		
-				<ul id="orderList">
-					<c:forEach items="${sessionScope.orderList}" var="orderList">
-						<li id="${orderList.no}">
-							<div class='w3-row'>${orderList.name }</div>
-							<div class='w3-left-align'>
-								<span id="price">${orderList.price * orderList.cnt } </span> <span id="count">${orderList.cnt }</span>
-							</div>
-						</li>
-					</c:forEach>
-				</ul>
-			총 가격 : <span id="totalPrice"> ${sessionScope.totalPrice}</span> <br/>
-			할인 가격 : <span id="salsePrice" >0</span> <br/>
-			최종 가격 : <span id ="sumPrice"> ${sessionScope.totalPrice} </span> <br/>
+		<div class="scroll-menu  w3-container">
+				<div class="w3-border">
+					<div class="w3-container w3-border-bottom w3-padding-16 w3-light-grey">
+						<span class="fa fa-shopping-cart"></span> 주문표
+					</div>
+					<div class="w3-container w3-border-bottom w3-padding-16">
+						${storeVo.name }
+					</div>
+					<div class="w3-container w3-sand w3-padding-16" id="orderDiv">
+						<ul id="orderList">
+							<c:forEach items="${sessionScope.orderList}" var="orderList">
+								<li id="${orderList.no}">
+								<div class='w3-row' >
+									<div class='w3-half w3-right-left' style="padding: 5px;">${orderList.name } X
+										 <span id="count"> ${orderList.cnt }</span> 
+									</div>
+									<div class='w3-half w3-right-align'>
+										 <span id="price"> ${orderList.price * orderList.cnt } 원</span> 
+									 </div>
+								</div>
+								</li>
+							</c:forEach>
+						</ul>
+						총 가격 : <span id="totalPrice"> ${sessionScope.totalPrice}</span> <br />
+						할인 가격 : <span id="salsePrice">0</span> <br />  <span 
+							id="sumPrice">최종 가격 :  ${sessionScope.totalPrice} </span> <br />
 
-			</div>
-		</div>
-		<div class='w3-row'>
+					</div>
+				</div>
+				<div class='w3-row'>
 			<button class="w3-button w3-red" type="submit" style="width: 100%;">완료</button>
 		</div>
+		</div>
+
 		</form>
 	</div>
 	<!-- ------장바구니 끝  -->
@@ -216,7 +234,7 @@ textarea {
 			$("#point").val(point);
 			$("#salsePrice").text(point);
 			$("#sumPrice").text($("#totalPrice").text() - point);
-			$("#copunDiscount").prop("disabled", true);
+			//$("#copunDiscount").prop("disabled", true);
 			
 		}
 	});
@@ -228,9 +246,8 @@ textarea {
 		console.log(aa[1]);
 		
 		if(aa[2] == "%"){
-			var salse = Math.round((aa[1] * 0.01) *  $("#sumPrice").text());
-			$("#salsePrice").text(salse);
-			$("#sumPrice").text($("#totalPrice").text() - salse);
+			$("#salsePrice").text(Math.round((aa[1] * 0.01) *  $("#totalPrice").text()));
+			$("#sumPrice").text($("#totalPrice").text() - Math.round((aa[1] * 0.01) *  $("#totalPrice").text()));
 		}else{
 			$("#salsePrice").text(aa[1]);
 			$("#sumPrice").text($("#totalPrice").text() - aa[1]);

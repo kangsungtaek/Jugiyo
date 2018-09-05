@@ -15,7 +15,7 @@
 	max-width: 100%;
 }
 </style>
-<div style="height: 200px"></div>
+<div style="height: 50px"></div>
 
 <!--메뉴 추가 css + 파일업로드 시 필요한 css-->
 <div class="w3-container"
@@ -60,16 +60,17 @@
 						</div>
 					</div>
 				</div>
+				<hr style="border-top: 1px solid red;"/>
 			</div>
 		</div>
 		<!-- 여기까지 클론 -->
 		<div id="plus"></div>
 		<div class="w3-row" style="padding-bottom: 10px">
-			<div class="w3-half">
-				<button type="submit">확인</button>
+			<div class="w3-half" align="right">
+				<button class= "w3-btn w3-white w3-border w3-round-large" type="submit">확인</button>
 			</div>
 			<div class="w3-right">
-				<button class="w3-button w3-small w3-black" id="bt" type="button">+</button>
+				<button class="w3-btn w3-white w3-border w3-round-large" id="bt" type="button">+</button>
 			</div>
 		</div>
 	</form>
@@ -162,7 +163,7 @@
 						$("#plus").append(e.html());
 						$("#plus")
 								.append(
-										"<button id='del' type ='button' onclick='Remove(this)'>삭제</button>");
+										"<button id='del' class='w3-btn w3-white w3-border w3-round-large' type ='button' onclick='Remove(this)'>삭제</button>");
 						//$("#del").click(function() {
 						//	$(this).remove();
 						//});

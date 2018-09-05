@@ -47,7 +47,11 @@ public class MainController {
 			for(int i=0; i<r.size(); i++) {
 				s += r.get(i).getStar();
 			}
-			v.setStar(s/r.size());
+			if(r.size() == 0) {
+				v.setStar(0);
+			} else {
+				v.setStar(s/r.size());				
+			}
 			v.setReview(r.size());
 		}
 		

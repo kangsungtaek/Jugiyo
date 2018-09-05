@@ -19,7 +19,7 @@
 		select * from member_detail where id like #{id} order by id asc
 	</select>
 	<update id="addAddr" parameterType="java.util.Map">
-		update member set address=#{addr} where id=#{id}
+		update member set address=#{addr}, xcor=#{xcor}, ycor=#{ycor} where id=#{id}
 	</update>
 	<update id="updatePoint" parameterType="java.util.Map">
 		update member set point = point + #{point} where id = #{id}
