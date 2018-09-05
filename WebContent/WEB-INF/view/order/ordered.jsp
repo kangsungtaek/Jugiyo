@@ -218,7 +218,7 @@ textarea {
 			$("#point").val(point);
 			$("#salsePrice").text(point);
 			$("#sumPrice").text($("#totalPrice").text() - point);
-			$("#copunDiscount").prop("disabled", true);
+			//$("#copunDiscount").prop("disabled", true);
 			
 		}
 	});
