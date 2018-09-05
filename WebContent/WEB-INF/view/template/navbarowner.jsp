@@ -41,9 +41,8 @@
 
 <script>
 	var idx = 0;
-	
-	//var ws = new WebSocket("ws://jugiyo.mockingu.com/ws/conn.do");
-	var ws = new WebSocket("ws://127.0.0.1/ws/conn.do");
+	var ws = new WebSocket("ws://jugiyo.mockingu.com/ws/conn.do");
+	//var ws = new WebSocket("ws://127.0.0.1/ws/conn.do");
 	console.log("test");
 	ws.onopen = function(ev) {
 		  console.log('Connection opened.');
