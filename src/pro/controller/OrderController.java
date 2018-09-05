@@ -141,8 +141,9 @@ public class OrderController {
 
 	// 주문완료 처리
 	@PostMapping("/ordered")
-	public String orderedHandle2(@RequestParam Map<String, String> map, WebRequest req) {
-		System.out.println("redirect:" + map.get("storeNo"));
+
+	public String orderedHandle2(@RequestParam Map<String, String> map,
+			@RequestParam(value="discount", required=true, defaultValue="dis") String discount, WebRequest req) {
 
 		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
 		int totalPrice = (int) req.getAttribute("totalPrice", WebRequest.SCOPE_SESSION);
@@ -178,10 +179,10 @@ public class OrderController {
 		// 토탈 프라이스
 		data.put("totalPrice", totalPrice);
 
-		if (map.get("discount") != null || map.get("discount") != "") {
-			if (map.get("discount").equals("point")) {
+		if (discount != null) {
+			if (discount.equals("point")) {
 				data.put("discount", map.get("point"));
-			} else {
+			} else if(discount.equals("coupon")) {
 				// 쿠폰사용시 여기서 쿠폰 제거 하면될듯
 				// coupon이라는 이름으로 쿠폰의 아이디가 넘어옴
 				Map c = new HashMap<>();
@@ -208,8 +209,8 @@ public class OrderController {
 			System.out.println("[controller:order] point : " + point);
 			Map memberPoint = new HashMap<>();
 			memberPoint.put("id", mVo.getId());
-			System.out.println(map.get("point"));
-			if (map.get("discount").equals("point")) {
+			if (discount.equals("point")) {
+				System.out.println("asdasdasd");
 				point = point - Integer.parseInt(map.get("point"));
 			}
 			System.out.println(point);

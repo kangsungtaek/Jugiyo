@@ -118,6 +118,7 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		LogVo log = memberDao.readByObjectId(id);
 		req.setAttribute("orderList", log.getOrderList(), WebRequest.SCOPE_SESSION);
+		req.setAttribute("totalPrice", log.getTotalPrice(), WebRequest.SCOPE_SESSION);
 		mav.setViewName("redirect:/order/ordered?storeNo=" + log.getStoreNo());
 		return mav;
 	}
