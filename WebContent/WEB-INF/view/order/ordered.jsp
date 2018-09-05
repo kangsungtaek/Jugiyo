@@ -101,7 +101,7 @@ textarea {
 
 			<div id="Demo4" class="w3-show w3-container">
 			<p></p>
-  				쿠폰 <input type="radio" name ="discount" id="copunDiscount" value="copun" form="form1" onclick="discountSelect(this)" > 
+  				쿠폰 <input type="radio" name ="discount" id="copunDiscount" value="coupun" form="form1" onclick="discountSelect(this)" > 
   					<select name="coupon" disabled="disabled" id="coupon" form ="form1" > 
   						<option selected disabled hidden>쿠폰선택</option>
 					<c:choose>
@@ -230,9 +230,8 @@ textarea {
 		console.log(aa[1]);
 		
 		if(aa[2] == "%"){
-			var salse = Math.round((aa[1] * 0.01) *  $("#sumPrice").text());
-			$("#salsePrice").text(salse);
-			$("#sumPrice").text($("#totalPrice").text() - salse);
+			$("#salsePrice").text(Math.round((aa[1] * 0.01) *  $("#totalPrice").text()));
+			$("#sumPrice").text($("#totalPrice").text() - Math.round((aa[1] * 0.01) *  $("#totalPrice").text()));
 		}else{
 			$("#salsePrice").text(aa[1]);
 			$("#sumPrice").text($("#totalPrice").text() - aa[1]);

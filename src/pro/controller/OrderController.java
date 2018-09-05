@@ -165,7 +165,7 @@ public class OrderController {
 		// 토탈 프라이스
 		data.put("totalPrice", totalPrice);
 
-		if (map.get("discount") == null || map.get("discount") == "") {
+		if (map.get("discount") != null || map.get("discount") != "") {
 			if (map.get("discount").equals("point")) {
 				data.put("discount", map.get("point"));
 			} else {
