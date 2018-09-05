@@ -40,7 +40,7 @@ public class MemberController {
 			ip.put("id", vo.getId());
 			ip.put("password", vo.getPassword());
 		vo = memberDao.findById(ip);
-		// 등급조정 -> 관리자페이지에서 하는게 좋을듯
+		// 등급조정 
 		List<LogVo> list = memberDao.readAllById(vo.getId());
 		Map grade = new HashMap<>();
 		grade.put("id", vo.getId());
@@ -53,20 +53,22 @@ public class MemberController {
 		} else {
 			grade.put("grade", 4);
 		}
-
+		System.out.println("변경될 등급 : " + grade.get("grade"));
 		Map m = new HashMap<>();
 			m.put("id", vo.getId());
 			m.put("password", vo.getPassword());
 		vo = memberDao.findById(m);
+		System.out.println("원래 등급 : " + vo.getGrade());
 		
 		if (vo.getGrade() != (int) grade.get("grade")) {
 			memberDao.updateGrade(grade);
 			List<CouponVo> c = memberDao.getCoupon((int) grade.get("grade"));
+			System.out.println("변경될등급의 쿠폰:" + c.toString());
 			Map map = new HashMap<>();
 				map.put("userId", vo.getId());
 				map.put("coupons", c);
 			memberDao.updateCoupon(map);
-			
+			vo.setGrade((int) grade.get("grade"));
 			vo.setCoupons(c);
 		} else {
 			MultiCouponVo coupons = memberDao.findCoupon(vo.getId());

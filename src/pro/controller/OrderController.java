@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pro.dao.MemberDao;
 import pro.dao.MenuDao;
@@ -26,7 +25,6 @@ import pro.service.OrderService;
 import pro.vo.LogVo;
 import pro.vo.MemberVo;
 import pro.vo.MenuVo;
-import pro.vo.MultiCouponVo;
 import pro.vo.ReviewVo;
 import pro.vo.StoreVo;
 
@@ -142,7 +140,6 @@ public class OrderController {
 	// 주문완료 처리
 	@PostMapping("/ordered")
 	public String orderedHandle2(@RequestParam Map<String, String> map, WebRequest req) {
-		System.out.println("redirect:" + map.get("storeNo"));
 
 		ArrayList<MenuVo> orderList = (ArrayList<MenuVo>) req.getAttribute("orderList", WebRequest.SCOPE_SESSION);
 		int totalPrice = (int) req.getAttribute("totalPrice", WebRequest.SCOPE_SESSION);
