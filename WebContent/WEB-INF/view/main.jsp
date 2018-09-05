@@ -20,7 +20,7 @@
 						<li class="w3-bar cate" id="${store.no}">
 						<span class="w3-bar-item w3-xlarge w3-right">
 						<c:choose>
-							<c:when test="${ store.star == null }">
+							<c:when test="${ store.star == null || empty store.star }">
 								0.0
 							</c:when>
 							<c:otherwise>
