@@ -24,13 +24,15 @@
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
 	</definition>
 
-	<!-- 로그인 페이지 -->
+
+	
+	<!-- 로그인 페이지	-->
 	<definition name="login/loginForm" template="/WEB-INF/view/layout/layout.jsp">
 		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
 		<put-attribute name="content" value="/WEB-INF/view/login/loginForm.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
 	</definition>
-
+ 
 	<!-- 로그인 페이지 -->
 	<definition name="login/regForm" template="/WEB-INF/view/layout/layout.jsp">
 		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
