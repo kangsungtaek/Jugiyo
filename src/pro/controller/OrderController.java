@@ -51,6 +51,16 @@ public class OrderController {
 		List<MenuVo> menuList = menuDao.getMenuList(vo.getNo());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("order/order");
+		
+		//평점 star에 setting해둘것
+		List<ReviewVo> r = storeDao.findReview(storeNo);
+		double s = 0;
+		for(int i=0; i<r.size(); i++) {
+			s += r.get(i).getStar();
+		}
+		vo.setStar(s/r.size());	
+		mav.addObject("r", r.size());
+		
 		mav.addObject("storeVo", vo);
 		System.out.println("menuList =" + menuList);
 		mav.addObject("menuList", menuList);
@@ -58,7 +68,7 @@ public class OrderController {
 		List<LogVo> list = storeDao.findLogByStoreNo(storeNo);
 		for (LogVo v : list) {
 			if (v.getReviewd().equals("Y")) {
-				ReviewVo review = memberDao.findByLogId(v.getId());
+				ReviewVo review = memberDao.findReivewByLogId(v.getId());
 				v.setReview(review);
 			}
 		}
