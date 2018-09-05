@@ -36,7 +36,16 @@ textarea {
 	<div class="w3-col" style="width: 70%">
 	<!--  가게정보  -->
 		<div class="w3-bar" id="${storeVo.no}" style="padding-bottom: 10px">
-			<span class="w3-bar-item w3-xlarge w3-right">${storeVo.star }</span>
+			<span class="w3-bar-item w3-xlarge w3-right">
+			<c:choose>
+				<c:when test="${ store.star == null }">
+					0.0
+				</c:when>
+				<c:otherwise>
+					${store.star }
+				</c:otherwise>
+			</c:choose>
+			</span>
 			<img src="${pageContext.request.contextPath}${storeVo.img}"
 				class="w3-bar-item w3-circle w3-hide-small w3-padding-small"
 				style="width: 85px">
