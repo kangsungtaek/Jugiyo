@@ -117,7 +117,7 @@
          $("#emailajax").html("사용가능한 Email 입니다.");
       } else {
     	 // check--;
-         $("#emailajax").css("color", "red");
+         $("#emailajax").css("color", "green");
          $("#emailajax").html("Email 형식에 맞지 않습니다.");
       }
    });

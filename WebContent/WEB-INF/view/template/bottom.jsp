@@ -8,8 +8,8 @@
 <style>
 /*-- bottom.jsp--*/
 footer {width:100%; height:80px; /*position:relative; margin-top:740px;*/}
-footer .f_wrap {width:100%; height:80px; margin-top:385px; border:1px solid #ccc;}
-p.call {width:700px; height:auto;}
+footer .f_wrap {width:100%; height:80px; position:relative; top:40px;}
+p.call {width:700px; height:auto; padding:0 0 0 20px;}
 p.shopReg {text-align:center;}
 p.shopReg b.shopReg_inquiry {text-align:center;}
 </style>

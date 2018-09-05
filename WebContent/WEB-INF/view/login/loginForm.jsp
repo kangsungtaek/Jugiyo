@@ -8,12 +8,15 @@
 	.w3-row {margin:0 auto; width:400px; height:100px; top:0px;}
 	/*-- top.jsp--*/
 	.w3-orange {width:100%; height:auto; position:relative; top:0pxt;border:1px solid #ccc;}
-	p.logo {margin:0 auto; width:400px; height:100px;}
+	div p {width:400px; height:100px; border:2px solid cyan;}
+	div p .logo {margin:0 auto; width:400px; height:100px; border:2px solid red;}
 </style>
 <hr style="position:relative; bottom:33px; background:gray; border:1px solid #ddd;" />
-<p class="logo">
-	<a href="#"><img src="../../../images/logo_b.png" alt="로고" /></a>
-</p>
+<div>
+	<p>
+		<a href="#"><img src="../../../images/logo_b.png" class="logo" alt="로고" /></a>
+	</p>
+</div>
 <div id="wrap" class="w3-panel w3-padding-32 w3-orange w3-container">
    <div class="w3-row" style="width:169px;">
        <h2 class="hide" style="text-align: center;"> 로그인</h2>
