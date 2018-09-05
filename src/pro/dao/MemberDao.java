@@ -80,7 +80,7 @@ public class MemberDao {
 	}
 	
 	//사용자가 작성한 리뷰불러오기
-	public ReviewVo findByLogId(String logId) {
+	public ReviewVo findReivewByLogId(String logId) {
 		Query query = new BasicQuery(new Document().append("logId", logId));
 		return mongoTemplate.findOne(query, ReviewVo.class, "review");
 	}
