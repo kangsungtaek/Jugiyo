@@ -15,14 +15,14 @@
       <div class="w3-container"
          style="padding-left: 100px; padding-right: 100px;">
          <div class="w3-border">
-            <ul class="w3-ul w3-card-4">
+            <ul class="w3-ul w3-card-4" >
                <c:forEach items="${storeList}" var="store">
                   <li class="w3-bar cate" id="${store.no}">
                   <span class="w3-bar-item w3-xlarge w3-right">
                   <c:choose>
                      <c:when test="${ store.star == null || empty store.star }">
                         0.0
-                     </c:when>
+                     </c:when> 
                      <c:otherwise>
                         ${store.star }
                      </c:otherwise>

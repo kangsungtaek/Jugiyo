@@ -23,11 +23,19 @@
 <div class="w3-row">
 	<!-- 왼쪽 공백  -->
 	<div class="w3-col" style="width: 75%">
+		<c:choose>
+			<c:when test="${sessionScope.orderList[0].store eq null}">
+				<input type="hidden" id="orderStore" value="${storeVo.no}">
+			</c:when>
+			<c:otherwise>
+				<input type="hidden" id="orderStore"
+					value="${sessionScope.orderList[0].store }">
+			</c:otherwise>
+		</c:choose>
 
 		<!--  가게정보  -->
 		<div class="w3-bar" id="${storeVo.no}">
-			<span class="w3-bar-item w3-xlarge w3-right">
-				<c:choose>
+			<span class="w3-bar-item w3-xlarge w3-right"> <c:choose>
 					<c:when test="${ store.star == null }">
 						0.0
 					</c:when>
@@ -35,8 +43,7 @@
 						${store.star }
 					</c:otherwise>
 				</c:choose>
-			</span>
-			<img src="${pageContext.request.contextPath}${storeVo.img}"
+			</span> <img src="${pageContext.request.contextPath}${storeVo.img}"
 				class="w3-bar-item w3-circle w3-hide-small w3-padding-small"
 				style="width: 85px">
 			<div class="w3-bar-item">
@@ -143,12 +150,12 @@
 
 		<!--  리뷰  -->
 		<div id="review" class="w3-container tabs" style="display: none">
-			<div class="w3-container w3-border w3-large w3-center">
+			<div class="w3-container w3-border w3-large w3-center" >
 				<p></p>
 			</div>
 
 
-			<div class="w3-container w3-border" style="min-height: 150px">
+			<div class="w3-container w3-border" style="min-height: 150px; background-color: white;">
 				<c:forEach var="r" items="${ reviews }">
 					<c:if test="${ r.reviewd == 'Y'}">
 						<span class="w3-large">${ r.review.nickname }님</span>
@@ -183,39 +190,60 @@
 	<!-- 장바구니 -->
 	<div class="w3-col"
 		style="width: 25%; padding-left: 10px; padding-right: 30px">
-		<div class="scroll-menu  w3-container" style="width: 310px;">
-			<div class="w3-border">
+		<div class="scroll-menu  w3-container" style="width: 310px; ">
+			<div class="w3-border" style="background-color: white;">
+			
 				<div class="w3-container w3-border-bottom">주문표</div>
 				<div class="w3-container" id="orderDiv">
 					<ul id="orderList">
+					<c:choose>
+						<c:when test="${empty sessionScope.orderList }">
+							<li id="orderNull"> 주문표에 담긴 메뉴가 없습니다. </li>
+						</c:when>
+						
+						<c:otherwise>
 						<c:forEach items="${sessionScope.orderList}" var="orderList">
 							<li id="${orderList.no}">
 								<div class='w3-row'>
 									<div>${orderList.name }</div>
 									<div class='w3-row'>
 										<div class='w3-half w3-left-align'>
-											<button class='w3-button w3-padding-small w3-tiny w3-red orderRemove w3-border'
-												onclick='orderListRemove(this)'>X</button> <span id="price">
-												${orderList.price * orderList.cnt }원</span>
+											<button
+												class='w3-button w3-padding-small w3-tiny w3-red orderRemove w3-border'
+												onclick='orderListRemove(this)'>X</button>
+											<span id="price"> ${orderList.price * orderList.cnt }원</span>
 										</div>
 										<div class="w3-half w3-right-align">
-											<button class="w3-button w3-border w3-padding-small w3-tiny" onclick='orderListMinus(this)'>-</button>
+											<button class="w3-button w3-border w3-padding-small w3-tiny"
+												onclick='orderListMinus(this)'>-</button>
 											<!-- <span class='w3-button w3-small' onclick='orderListMinus(this)'>-</span>  -->
 											<span id="count">${orderList.cnt }</span>
-											<button class="w3-button w3-border w3-padding-small w3-tiny" onclick='orderListPlus(this)'>+</button>
+											<button class="w3-button w3-border w3-padding-small w3-tiny"
+												onclick='orderListPlus(this)'>+</button>
 											<!-- <span class='w3-button w3-small' onclick='orderListPlus(this)'>+</span>  -->
 										</div>
 									</div>
 								</div>
 							</li>
 						</c:forEach>
+						</c:otherwise>
+						</c:choose>
 					</ul>
 					총 가격 : <span id="totalPrice"> ${sessionScope.totalPrice}</span>
 				</div>
 			</div>
 			<div class='w3-row'>
-				<a href="/order/ordered?storeNo=${storeVo.no}"><button
-						class="w3-button w3-red" style="width: 100%;">주문하기</button> </a>
+				<c:choose>
+					<c:when test="${sessionScope.orderList[0].store eq storeVo.no or empty sessionScope.orderList}">
+						<button onclick="order()"
+								class="w3-button w3-red" style="width: 100%;" >주문하기</button> 
+					</c:when>
+					<c:otherwise>
+						<button onclick="order()"
+								class="w3-button w3-red" style="width: 100%;" disabled="disabled">주문하기</button> 
+					</c:otherwise>
+
+				</c:choose>
 			</div>
 		</div>
 
@@ -224,6 +252,15 @@
 </div>
 
 <script>
+	function order(){
+		if($("#totalPrice").text() == 0){
+				window.alert("메뉴를 담아주세요");
+			}else{
+				location.href= "/order/ordered?storeNo=${storeVo.no}";
+			}
+		}
+	
+
 	// 메뉴 / 리뷰 탭 전환 함수 
 	function openTabs(evt, tabsName) {
 		var i, x, tablinks;
@@ -262,7 +299,7 @@
 				if (obj.result) {
 					$("#orderList").find("#" + no).remove();
 					$("#orderDiv").find("#totalPrice").text(obj.totalPrice);
-
+					location.reload();
 				}
 			}
 		}
@@ -317,46 +354,58 @@
 			.on(
 					"click",
 					function() {
-						var xhr = new XMLHttpRequest();
-						var no = this.id;
-						xhr.open("get", "/sendJson?no=" + no + "&mode=add",
-								true);
-						xhr.onreadystatechange = function() {
-							if (this.readyState == 4) {
-								var obj = JSON.parse(this.responseText);
-								// 이미 클릭한 메뉴를 또 누를 경우 숫자만 증가 
-								if (obj.overLap) {
-									//$("#orderList").find("#"+obj.menu).find("#count").text(parseInt($("#orderList").find("#"+obj.menu).find("#count").text())+1);
-									$("#orderList").find("#" + no).find(
-											"#count").text(obj.menu.cnt);
-									$("#orderList").find("#" + no).find(
-											"#price").text(obj.price);
-									$("#orderDiv").find("#totalPrice").text(
-											obj.totalPrice);
+						console.log("${storeVo.no}");
+						console.log($("#orderStore").val());
 
-									// 새로운 메뉴 클릭시 메뉴 추가.
-								} else {
-									$("#orderList")
-											.append(
-													"<li id="+obj.menu.no+"> <div class='w3-row'>"
-															+ "<div>" +obj.menu.name + "</div>"
-															+ "<div class='w3-row'>" 
-															+ "<div class='w3-half w3-left-align'><button class='w3-button w3-padding-small w3-tiny w3-red orderRemove w3-border' onclick='orderListRemove(this)' >X</button> "
-															+ " <span id ='price'>"
-															+ obj.menu.price
-															+ "원 </span> </div>"
-															+ "<div class='w3-half w3-right-align'>"
-															+ " <button class='w3-button w3-border w3-padding-small w3-tiny' onclick='orderListMinus(this)'>-</button> <span id='count'>"
-															+ obj.menu.cnt
-															+ "</span> <button class='w3-button w3-border w3-padding-small w3-tiny' onclick='orderListPlus(this)'>+</button> </div></div></div></li>");
-									$("#orderDiv").find("#totalPrice").text(
-											obj.totalPrice);
+						if ("${storeVo.no}" == $("#orderStore").val()) {
+	
+							var xhr = new XMLHttpRequest();
+							var no = this.id;
+							xhr.open("get", "/sendJson?no=" + no + "&mode=add",
+									true);
+							xhr.onreadystatechange = function() {
+								if (this.readyState == 4) {
+									var obj = JSON.parse(this.responseText);
+									// 이미 클릭한 메뉴를 또 누를 경우 숫자만 증가 
+									if (obj.overLap) {
+										//$("#orderList").find("#"+obj.menu).find("#count").text(parseInt($("#orderList").find("#"+obj.menu).find("#count").text())+1);
+										$("#orderList").find("#" + no).find(
+												"#count").text(obj.menu.cnt);
+										$("#orderList").find("#" + no).find(
+												"#price").text(obj.price);
+										$("#orderDiv").find("#totalPrice")
+												.text(obj.totalPrice);
 
+										// 새로운 메뉴 클릭시 메뉴 추가.
+									} else {
+										$("#orderList")
+												.append(
+														"<li id="+obj.menu.no+"> <div class='w3-row'>"
+																+ "<div>"
+																+ obj.menu.name
+																+ "</div>"
+																+ "<div class='w3-row'>"
+																+ "<div class='w3-half w3-left-align'><button class='w3-button w3-padding-small w3-tiny w3-red orderRemove w3-border' onclick='orderListRemove(this)' >X</button> "
+																+ " <span id ='price'>"
+																+ obj.menu.price
+																+ "원 </span> </div>"
+																+ "<div class='w3-half w3-right-align'>"
+																+ " <button class='w3-button w3-border w3-padding-small w3-tiny' onclick='orderListMinus(this)'>-</button> <span id='count'>"
+																+ obj.menu.cnt
+																+ "</span> <button class='w3-button w3-border w3-padding-small w3-tiny' onclick='orderListPlus(this)'>+</button> </div></div></div></li>");
+										$("#orderDiv").find("#totalPrice")
+												.text(obj.totalPrice);
+										
+										$("#orderNull").remove();
+									}
+									
 								}
 							}
+							xhr.send();
+						} else {
+							window
+									.alert("이미 다른 음식점의 음식이 담겨있습니다. 다른 음식점 메뉴를 삭제해주세요.");
 						}
-						xhr.send();
-
 					});
 
 	// 장바구니 스크롤
