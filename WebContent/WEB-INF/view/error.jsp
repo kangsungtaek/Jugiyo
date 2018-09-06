@@ -22,9 +22,9 @@
 		error : <c:out value="${requestScope['javax.servlet.error.message']}" />
 	</p>
 	<b>${name}</b>:  ${message}
-	<a href="../../../index">
+<%--<a href="../../../index">
 		<img src="../images/logo_s.png" class="logo_s" alt="로고">
-	</a>
+	</a> --%>	
 	<p>
 		<a href="/"><button>홈으로</button></a> 
 		<a href="/login/loginForm"><button>로그인하기</button></a>
