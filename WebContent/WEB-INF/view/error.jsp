@@ -10,6 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>에러페이지(error page)</title>
 <title>JUGIYO</title>
 <script>
 </script>
@@ -20,6 +21,10 @@
 		잘못된 요청정보이거나, 서버측의 장애로 해당 요청을 처리하지 못하였습니다.<br/>
 		error : <c:out value="${requestScope['javax.servlet.error.message']}" />
 	</p>
+	<b>${name}</b>:  ${message}
+<%--<a href="../../../index">
+		<img src="../images/logo_s.png" class="logo_s" alt="로고">
+	</a> --%>	
 	<p>
 		<a href="/"><button>홈으로</button></a> 
 		<a href="/login/loginForm"><button>로그인하기</button></a>

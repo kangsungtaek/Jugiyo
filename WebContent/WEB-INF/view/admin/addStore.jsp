@@ -6,6 +6,14 @@
 .img_wrap {
 	height: 200px;
 	margin-top: 10px;
+
+}
+
+input, button, select {
+	height:30px;
+	padding: 0;	
+	font-size: 11pt;
+	font-family: 맑은 고딕;
 }
 
 .img_wrap img {
@@ -67,12 +75,8 @@
 		</div>
 	</form>
 </div>
-
-
-
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
@@ -180,3 +184,47 @@
 	}
 
 </script>
+</head>
+<body>
+	<div id="header">
+		<a href="../../../index">
+			<img src="../images/logo_s.png" class="logo_addStore" alt="로고">
+		</a>
+	</div><!--// 헤더 -->
+	<div id="content">
+		<div style="marge-left:70px;">
+			<form action="${ pageContext.servletContext.contextPath }/admin/addStore" method="post">
+				<div class="reg_company">
+					<h2>【상점등록】</h2>
+					<ul class="reg_category size">
+						<li>
+							 ▶ <span>상표명 </span> &nbsp;|
+							<input type="text" class="input_size"  name="name" required />
+						</li>
+						<li>
+							 ▶ <span>주  &nbsp;&nbsp;소 </span> &nbsp;| 
+							<input type="text" class="input_size" name="addr" required />
+						</li>
+						<li>
+							▶ <span>업  &nbsp;&nbsp;종 </span> &nbsp;| 
+							<select name="type">
+								<c:forEach var="t" items="${ types }">
+									<option value="${ t.id }">${ t.name }</option>
+								</c:forEach>
+							</select>
+						</li>
+						<li>
+							 ▶ <span>연락처 </span> &nbsp;| 
+							<input type="text" class="input_size" name="contact" required />
+						</li>
+					</ul>
+				</div>
+				<div class="btn_reg">
+					<button type="submit">등록</button> <button type="reset">취소</button>
+				</div>
+			</form>
+		</div>
+	</div><!--//컨텐츠 -->
+	<hr />
+</body>
+</html>

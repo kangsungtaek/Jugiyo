@@ -24,7 +24,7 @@
 		});	
 	});
 */	
-	var check = 0;
+
 	//-------- //ID 중복체크 ----------- 
 	function idCheck(target) {
 		var id = target.value;
@@ -32,7 +32,6 @@
 		
 		if (id.length > 2) {
 			if (!id.match("^[a-zA-Z0-9]*$")) {
-				//check--;
 				document.getElementById("ajax").innerHTML="아이디형식에 맞지 않습니다.";
 				document.getElementById("id").value = "";
 			}else {	
@@ -42,12 +41,9 @@
 					if(xhr.readyState==4) {
 						var ar = JSON.parse(xhr.responseText);
 						if(ar==1) {
-							//check--;
 							document.getElementById("ajax").innerHTML="사용할 수 없는 아이디입니다.";
 							document.getElementById("id").value="";
 						}else {
-							check++;
-							document.getElementById("ajax").style.color="green";
 							document.getElementById("ajax").innerHTML="사용할 수 있는 아이디입니다.";
 						}
 					}
@@ -113,11 +109,9 @@
 	   console.log($(this).val());
          $("#emailajax").val("");   // #emailCheck는 span id
       if (emailRule.test($("#email").val())) {
-    	 check++;
          $("#emailajax").css("color", "green");
          $("#emailajax").html("사용가능한 Email 입니다.");
       } else {
-    	 // check--;
          $("#emailajax").css("color", "red");
          $("#emailajax").html("Email 형식에 맞지 않습니다.");
       }
@@ -127,28 +121,11 @@
 	   console.log($(this).val());
       $("#pwajax").val("");
       if(passRule.test($(this).val())) {
-    	 check++;
          $("#pwajax").css("color", "green");
          $("#pwajax").html("사용가능한 비밀번호 입니다.")
       }else {
-    	 // check--;
          $("#pwajax").css("color", "red");
          $("#pwajax").html("비밀번호 형식에 맞지 않습니다.");   
-      }
-   });
-   
-   $("#pwck").on("change", function() {
-	   console.log($(this).val());
-	   console.log("pw : " + $("#pw").val());
-      $("#pwckajax").val("");
-      if($("#pw").val() == ($(this).val())) {
-    	 check++;
-         $("#pwdConfirm").css("color", "green");
-         $("#pwdConfirm").html("비밀번호가 일치합니다.")
-      }else {
-    	 // check--;
-         $("#pwdConfirm").css("color", "red");
-         $("#pwdConfirm").html("비밀번호가 일치하지 않습니다.");   
       }
    });
    
@@ -156,26 +133,15 @@
 	   console.log($(this).val());
       $("#phoneajax").html("");
       if(phoneRule.test($(this).val())) {
-    	 check++;
          $("#phoneajax").css("color", "green");
          $("#phoneajax").html("사용가능한 폰번호 입니다.");
       }else {
-    	 // check--;
          $("#phoneajax").css("color", "red");
          $("#phoneajax").html("폰번호 형식에 맞지 않습니다.");   
       }
    });
    
-   function validcheck() {
-	   console.log(check);
-	   if(check >= 5) {
-		   return true;
-	   } else {
-		   return false;
-	   }
-   }
-   
-   var geocoder = new daum.maps.services.Geocoder();
+
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
         new daum.Postcode({
@@ -209,21 +175,6 @@
                 document.getElementById('zonecode').value = data.zonecode; //5자리 새우편번호 사용
                 document.getElementById('addr').value = fullRoadAddr;
                 //document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
-                
-                geocoder.addressSearch(fullRoadAddr, function(result, status) {
-					// 정상적으로 검색이 완료됐으면 
-					console.log("search" + status);
-					if (status === daum.maps.services.Status.OK) {
-						var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-						console.log(coords.getLat());
-						console.log(coords.getLng());
-
-						document.getElementById("lat").value = coords.getLat();
-						document.getElementById("lng").value = coords.getLng();
-
-					}
-				});
 				
             }
         }).open();

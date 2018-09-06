@@ -8,7 +8,6 @@
 	color: #FFBB00;
 }
 </style>
-
 <c:choose>
 	<c:when test="${empty storeList}">
 		<div class="w3-container w3-center w3-animate-fading">
@@ -68,4 +67,5 @@
 	$(".cate").on("click", function() {
 		location.href = "order/order?storeNo=" + $(this).attr("id");
 	});
+
 </script>
