@@ -1,80 +1,80 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="store"> 
-	<!-- sequence검색 -->
-	<select id="getSeq" resultType="java.lang.Integer">
-		select store_seq.nextval from dual
-	</select>
-	<!-- 상점등록 -->
-	<insert id="addStore">
-		insert into store(no, id, password, name, addr, type, contact, xcor, ycor, img) values(
-			#{no}, #{id}, #{password}, #{name}, #{addr}, #{type}, #{contact}, #{xcor} , #{ycor} , #{img}
-		)
-	</insert>
-	
-	<!-- 사용자 정보에 따른 반경안의 스토어 검색(전체) -->
-	<select id="getStoreByCoords" resultType="pro.vo.StoreVo">
-		SELECT * FROM (
-			SELECT s.*, ( 6371 * acos( cos( radians( #{xcor} ) ) * cos( radians( xcor) ) * cos( radians( ycor ) 
-					- radians(#{ycor}) ) + sin( radians(#{xcor}) ) * sin( radians(xcor) ) ) ) AS distance
-			FROM store s) DATA
-		WHERE DATA.distance &lt; 3
-	</select>
-	
-	<select id="getStoreByCoordsWithType" resultType="pro.vo.StoreVo">
-		SELECT * FROM (
-			SELECT s.*,t.name typeName, ( 6371 * acos( cos( radians( #{xcor} ) ) * cos( radians( xcor) ) * cos( radians( ycor ) 
-					- radians(#{ycor}) ) + sin( radians(#{xcor}) ) * sin( radians(xcor) ) ) ) AS distance
-			FROM store s join type t on s.type=t.id where s.type=#{type}) DATA
-		WHERE DATA.distance &lt; 3
-	</select>
-		
-	<!--  스토어 전체조회(강성택) -->
-	<select id="getAll" resultType="pro.vo.StoreVo">
-		select * from store_detail
-	</select>
-	<!--  스토어 음식점별 조회 -->
-	<select id="getType" resultType="pro.vo.StoreVo" parameterType="java.lang.String">
-		select * from store_detail where type = #{type}
-	</select>
-	
-	<select id="getStore" resultType="pro.vo.StoreVo" parameterType="java.lang.Integer">
-		select * from store_detail where no = #{storeNo} 
-	</select>
-	
-	<!-- 검색어를 통한 상점검색 -->
-	<select id="searchStoreMenu" resultType="pro.vo.StoreVo">
-		select * from(
-    			select s.*, m.c from STORE s left join
-    			(select store, count(*) c from menu where name like  '%' || #{search} || '%' group by store) m
-   				on s.no = m.store
-    			where (s.name like  '%' || #{search} || '%')
-		)
-	</select>
+   <!-- sequence검색 -->
+   <select id="getSeq" resultType="java.lang.Integer">
+      select store_seq.nextval from dual
+   </select>
+   <!-- 상점등록 -->
+   <insert id="addStore">
+      insert into store(no, id, password, name, addr, type, contact, xcor, ycor, img) values(
+         #{no}, #{id}, #{password}, #{name}, #{addr}, #{type}, #{contact}, #{xcor} , #{ycor} , #{img}
+      )
+   </insert>
+   
+   <!-- 사용자 정보에 따른 반경안의 스토어 검색(전체) -->
+   <select id="getStoreByCoords" resultType="pro.vo.StoreVo">
+      SELECT * FROM (
+         SELECT s.*, ( 6371 * acos( cos( radians( #{xcor} ) ) * cos( radians( xcor) ) * cos( radians( ycor ) 
+               - radians(#{ycor}) ) + sin( radians(#{xcor}) ) * sin( radians(xcor) ) ) ) AS distance
+         FROM store s) DATA
+      WHERE DATA.distance &lt; 3
+   </select>
+   
+   <select id="getStoreByCoordsWithType" resultType="pro.vo.StoreVo">
+      SELECT * FROM (
+         SELECT s.*,t.name typeName, ( 6371 * acos( cos( radians( #{xcor} ) ) * cos( radians( xcor) ) * cos( radians( ycor ) 
+               - radians(#{ycor}) ) + sin( radians(#{xcor}) ) * sin( radians(xcor) ) ) ) AS distance
+         FROM store s join type t on s.type=t.id where s.type=#{type}) DATA
+      WHERE DATA.distance &lt; 3
+   </select>
+      
+   <!--  스토어 전체조회(강성택) -->
+   <select id="getAll" resultType="pro.vo.StoreVo">
+      select * from store_detail
+   </select>
+   <!--  스토어 음식점별 조회 -->
+   <select id="getType" resultType="pro.vo.StoreVo" parameterType="java.lang.String">
+      select * from store_detail where type = #{type}
+   </select>
+   
+   <select id="getStore" resultType="pro.vo.StoreVo" parameterType="java.lang.Integer">
+      select * from store_detail where no = #{storeNo} 
+   </select>
+   
+   <!-- 검색어를 통한 상점검색 -->
+   <select id="searchStoreMenu" resultType="pro.vo.StoreVo">
+      select * from(
+             select s.*, m.c from STORE s left join
+             (select store, count(*) c from menu where name like  '%' || #{search} || '%' group by store) m
+               on s.no = m.store
+             where (s.name like  '%' || #{search} || '%')
+      )
+   </select>
 
-	<!-- 검색어로 상점검색;반경 내 -->
-	<select id="searchStoreMenuByCoords" resultType="pro.vo.StoreVo">
-		SELECT * FROM (
-			SELECT s.*,m.*, ( 6371 * acos( cos( radians( #{xcor} ) ) * cos( radians( xcor) ) * cos( radians( ycor ) 
-					- radians(#{ycor}) ) + sin( radians(#{xcor}) ) * sin( radians(xcor) ) ) ) AS distance
-			FROM store s left join
-			(select store, count(*) c from menu where name like  '%' || #{search} || '%' group by store) m
-   			on s.no = m.store
-    		where (s.name like  '%' || #{search} || '%')) DATA
-		WHERE DATA.distance &lt; 3
-	</select>
-	<!-- 사장님 로그인 -->
-	<select id="login" parameterType="java.util.HashMap" resultType="pro.vo.StoreVo">
-		select * from store where id=#{id} and password=#{password}
-	</select>
-	
-	<!-- 전체 스토어 조회 -->
-	<select id="getStoreList" resultType="pro.vo.StoreVo">
-		select * from store_detail
-	</select>
-	
-	<update id="storeUpdate" parameterType="pro.vo.StoreVo">
-		update store set name=#{name}, addr=#{addr}, type=#{type}, xcor=#{xcor}, ycor=#{ycor},img=#{img}, contact =#{contact} where no= #{no}
-		
-	</update>
+   <!-- 검색어로 상점검색;반경 내 -->
+   <select id="searchStoreMenuByCoords" resultType="pro.vo.StoreVo">
+      SELECT * FROM (
+         SELECT s.*,m.*, ( 6371 * acos( cos( radians( #{xcor} ) ) * cos( radians( xcor) ) * cos( radians( ycor ) 
+               - radians(#{ycor}) ) + sin( radians(#{xcor}) ) * sin( radians(xcor) ) ) ) AS distance
+         FROM store s left join
+         (select store, count(*) c from menu where name like  '%' || #{search} || '%' group by store) m
+            on s.no = m.store
+          where (s.name like  '%' || #{search} || '%')) DATA
+      WHERE DATA.distance &lt; 3
+   </select>
+   <!-- 사장님 로그인 -->
+   <select id="login" parameterType="java.util.HashMap" resultType="pro.vo.StoreVo">
+      select * from store where id=#{id} and password=#{password}
+   </select>
+   
+   <!-- 전체 스토어 조회 -->
+   <select id="getStoreList" resultType="pro.vo.StoreVo">
+      select * from store_detail
+   </select>
+   
+   <update id="storeUpdate" parameterType="pro.vo.StoreVo">
+      update store set name=#{name}, addr=#{addr}, type=#{type}, xcor=#{xcor}, ycor=#{ycor},img=#{img}, contact =#{contact} where no= #{no}
+      
+   </update>
 </mapper>
