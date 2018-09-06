@@ -42,7 +42,7 @@
   <p>${ sessionScope.vo.nickname }님의 현재 포인트 : <b>${ sessionScope.vo.point }</b>
   <br/><small>(10000포인트부터 사용가능합니다.)</small></p>
   <p>당신의 멤버쉽등급은 <b>${sessionScope.vo.membership}</b>입니다.
-  	<br/> 사용가능한 쿠폰이 ${ fn:length(vo.coupons) }개 있습니다.
+     <br/> 사용가능한 쿠폰이 ${ fn:length(vo.coupons) }개 있습니다.
   </p>
   </div>
 </div>
@@ -50,7 +50,7 @@
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb011d80a6eb4b748c64a426b88f7b1d&libraries=services"></script>
 <script>
 var geocoder = new daum.maps.services.Geocoder();
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -83,24 +83,24 @@ var geocoder = new daum.maps.services.Geocoder();
                 }
                 
                 var addr = fullRoadAddr;
+            console.log(addr);
+
+            geocoder.addressSearch(addr, function(result, status) {
+               // 정상적으로 검색이 완료됐으면 
+               console.log("ddd" + status);
+               if (status === daum.maps.services.Status.OK) {
+                  var coords = new daum.maps.LatLng(result[0].y,
+                        result[0].x);
+
+                  console.log(coords.getLat());
+                  console.log(coords.getLng());
+                  
+                      var xhr = new XMLHttpRequest();
+                  xhr.open("get", "/member/addAddr?addr="+addr+"&xcor="+coords.getLat()+"&ycor="+coords.getLng(), true);
+                  xhr.send();
+               }
+            });
                 document.getElementById("addr").innerHTML = addr;
-				console.log(addr);
-
-				geocoder.addressSearch(addr, function(result, status) {
-					// 정상적으로 검색이 완료됐으면 
-					console.log("ddd" + status);
-					if (status === daum.maps.services.Status.OK) {
-						var coords = new daum.maps.LatLng(result[0].y,
-								result[0].x);
-
-						console.log(coords.getLat());
-						console.log(coords.getLng());
-						
-		                var xhr = new XMLHttpRequest();
-						xhr.open("get", "/member/addAddr?addr="+addr+"&xcor="+coords.getLat()+"&ycor="+coords.getLng(), true);
-						xhr.send();
-					}
-				});
             }
         }).open();
     }
