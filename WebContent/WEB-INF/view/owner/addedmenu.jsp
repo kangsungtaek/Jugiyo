@@ -39,9 +39,9 @@
 					<ul class="w3-ul w3-card-4">
 						<c:forEach items="${menuList}" var="menu">
 							<c:if test="${menu.type eq 20 }">
-								<li class="w3-bar menu" id="${menu.no }">
-								
-								<img src="${pageContext.request.contextPath}${menu.fileUri }" class="w3-round w3-right" style="width: 100px">
+								<li class="w3-bar menu" id="${menu.no }"><img
+									src="${pageContext.request.contextPath}${menu.fileUri }" class="w3-round w3-right "
+									style="width: 100px">
 									<div class="w3-bar-item">
 										<span class="w3-large">${menu.name }</span><br> <span>${menu.price }원</span>
 										<p class="w3-small">

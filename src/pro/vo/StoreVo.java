@@ -12,12 +12,9 @@ public class StoreVo {
    double xcor; //x좌표
    double ycor; //y좌표
    String img;
-
    String contact; 
    double star;
    int review; //리뷰갯수
-   
-   
    
    public int getNo() {
       return no;
