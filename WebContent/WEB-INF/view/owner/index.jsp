@@ -6,7 +6,7 @@
 
 <!-- 주문 관리 드롭다운 + 주문 테이블 -->
 
-<div style="padding-top: 50px;">
+<div style="padding-top: 30px;">
 	<button onclick="myFunction('Demo1')"
 		class="w3-button w3-block w3-deep-orange w3-left-align">미완료 주문내역</button>
 

@@ -13,8 +13,7 @@
    /*   .hide {display:none;}   */
 </style>
 
-<div id="wrap" class="w3-panel w3-padding-64 w3-orange w3-container">   
-
+<div id="wrap" class="w3-panel w3-padding-64 w3-container">	
    <div class="w3-row" style="width:169px;">
        <h2 class="hide" style="text-align: center;"> 로그인</h2>
        <div class="w3-bar w3-black" style="text-align: center;">
