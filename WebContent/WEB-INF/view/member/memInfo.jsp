@@ -83,6 +83,7 @@ var geocoder = new daum.maps.services.Geocoder();
                 }
                 
                 var addr = fullRoadAddr;
+                document.getElementById("addr").innerHTML = addr;
 				console.log(addr);
 
 				geocoder.addressSearch(addr, function(result, status) {
@@ -100,7 +101,6 @@ var geocoder = new daum.maps.services.Geocoder();
 						xhr.send();
 					}
 				});
-                document.getElementById("addr").innerHTML = addr;
             }
         }).open();
     }

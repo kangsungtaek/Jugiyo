@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!-- 로그인 페이지	-->
+	<definition name="login/loginForm" template="/WEB-INF/view/layout/layout.jsp">
+		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
+		<put-attribute name="content" value="/WEB-INF/view/login/loginForm.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
+	</definition>
+ 
+	<!-- 회원가입 페이지 -->
+	<definition name="login/regForm" template="/WEB-INF/view/layout/layout.jsp">
+		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
+		<put-attribute name="content" value="/WEB-INF/view/login/regForm.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
+	</definition>
+
+	<!-- 회원가입 완료페이지 -->
+	<definition name="login/reg" template="/WEB-INF/view/layout/layout.jsp">
+		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
+		<put-attribute name="content" value="/WEB-INF/view/login/reg.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
+	</definition>
+
+	<!-- 회원정보페이지 -->
+	<definition name="member/memInfo" template="/WEB-INF/view/layout/layout.jsp">
+		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
+		<put-attribute name="content" value="/WEB-INF/view/member/memInfo.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
+	</definition>
+	
+	<!-- 쿠폰확인페이지 -->
+	<definition name="member/coupon" template="/WEB-INF/view/layout/layout.jsp">
+		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
+		<put-attribute name="content" value="/WEB-INF/view/member/coupon.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
+	</definition>
+
+	<!-- 주문내역 페이지 -->
+	<definition name="member/history" template="/WEB-INF/view/layout/layout.jsp">
+		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
+		<put-attribute name="content" value="/WEB-INF/view/member/history.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
+	</definition>
+
+	<!-- 리뷰작성 페이지 -->
+	<definition name="member/writeReview" template="/WEB-INF/view/layout/layout.jsp">
+		<put-attribute name="top" value="/WEB-INF/view/template/top.jsp" />
+		<put-attribute name="content" value="/WEB-INF/view/member/writeReview.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/view/template/bottom.jsp" />
+	</definition>
+</tiles-definitions>

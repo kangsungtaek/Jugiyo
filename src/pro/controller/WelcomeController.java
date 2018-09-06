@@ -18,11 +18,6 @@ public class WelcomeController {
 		System.out.println("[controller:welcome]");
 		return "index";
 	}
-	
-	@RequestMapping("/test")
-	public String Test() {
-		return "test";
-	}
 
 	@RequestMapping("/getAddr")
 	public String getAddrHandle(@RequestParam("addr") String addr,
@@ -37,9 +32,5 @@ public class WelcomeController {
 
 		return "redirect:/main?type=all"; //음식점 전체메뉴로 이동하도록
 	}
-	
-	@RequestMapping("/error")
-	public String errorHandle() {
-		return "error";
-	}
+
 }

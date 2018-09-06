@@ -127,12 +127,12 @@ public class OrderController {
 			mav.addObject("addr", addr);
 		} else {
 			mav.addObject("addr", member.getAddress());
+			mav.addObject("coupons", member.getCoupons());
 		}
 		mav.addObject("member", member);
 		mav.addObject("orderList", orderList);
 		mav.addObject("storeVo", vo);
 
-		mav.addObject("coupons", member.getCoupons());
 
 		return mav;
 	}

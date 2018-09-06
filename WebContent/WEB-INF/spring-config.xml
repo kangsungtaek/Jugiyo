@@ -39,11 +39,11 @@
 		</property>
 	</bean>
 	
-	<!-- errorpage설정 -->
+	<!-- errorpage설정 
 	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
     	<property name="defaultErrorView" value="error" />
     </bean>
-	
+	-->
 	
 	<!-- websocket controller등록 -->
 	<websocket:handlers>
