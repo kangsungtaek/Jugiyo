@@ -9,7 +9,7 @@
    .tab_width {text-align:center;}
    .w3-row {margin:0 auto;}
    /*-- top.jsp--*/
-   .w3-orange {width:100%; height:400px; margin-top: 20px; position:absolute; top:0px; border:1px solid #ccc;}
+   .w3-orange {width:100%; height:400px; margin-top: 20px; position:relative; margin-bottom:100px; border:1px solid #ccc;}
    /*   .hide {display:none;}   */
 </style>
 <div id="wrap" class="w3-panel w3-padding-64 w3-orange w3-container">   

@@ -3,37 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<style>
-	/*-- 헤더--*/
-	#wrap #header {width:100%; height:130px; position:relative; bottom:105px;}
-	
-	/*-- 헤더 백그라운드(background)--*/
-	#wrap .bg {width:100%; height:130px; background:#F15F5F;}
-	
-	/*-- 컨텐츠 --*/
-	#wrap #content {margin:0 auto; width:1000px; height:620px;}  
-	
-	/*-- 폼(form)--*/
-	#wrap #content form {width:1000px; height:620px;  position:relative; bottom:40px;}
-	
-	/*-- 테이블(table) --*/
-	#wrap #content form table {width:100%; height:560px; border:1px solid #ccc;}
-	
-	/*-- 타이틀(title:회원가입페이지) --*/
-	#wrap #content form table tr th.tit_join {width:100%; height:30px; line-height:55px; color:#000; border:1px solid #ccc; }
-	
-	/*-- 회원정보(mInfo) --*/
-	table tr th {width:150px; height:30px; line-height:40px; background:#EAEAEA;}
-	table tr th.mInfo {text-align:center; width:130px; height:40px; color:#000;}
-	
-</style>
+<link rel="stylesheet" type="text/css" href="../../../include/common/css/style.css" />
 	<div id="wrap">
-		<div id="header" class="bg"></div>
+		<div id="header" class="bg">
+			<a href="../../../index"><img src="../../../images/logo_n.png" class=" logo_n" alt="로고_n" /></a>
+		</div>
 		<div id="content"><!-- 컨텐츠 -->
 			<form action="/login/regForm" name="regForm" method="post" onsubmit="return validcheck();">
 				<table class="reg">
 					<tr>
-						<th class="tit_join" colspan="2"><h3>회 원 가 입 페 이 지</h3></th>
+						<th colspan="2"><h3>회원가입페이지</h3></th>
 					</tr>
 					<tr>
 						<th class="mInfo">회원정보</th> 
@@ -77,13 +56,11 @@
 						<th class="n"> 핸드폰</th>
 				 		<td><input type="text" name="contact" id="phone" class="size" placeholder="ex)xxx-xxxx-xxxx" required /><span id="phoneajax"></span></td> 
 					</tr>
-					<tr>
-                    	<td colspan="2" style="text-align:center; padding:15px 20px;">
-	                    	<input type="submit" value="가입하기" />
-	                    	<input type="reset" value="다시작성" />
-                    	</td>
-	            	</tr>
 				</table>
+				<p class="btn_reg" colspan="2">
+	            	<input type="submit" value="가입하기" />
+	                <input type="reset" value="다시작성" />
+               <p>
 			</form>
 		</div><!--// 컨텐츠 -->
 	</div><!--//wrap -->	

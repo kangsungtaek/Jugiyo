@@ -118,7 +118,7 @@
          $("#emailajax").html("사용가능한 Email 입니다.");
       } else {
     	 // check--;
-         $("#emailajax").css("color", "green");
+         $("#emailajax").css("color", "red");
          $("#emailajax").html("Email 형식에 맞지 않습니다.");
       }
    });
@@ -143,12 +143,12 @@
       $("#pwckajax").val("");
       if($("#pw").val() == ($(this).val())) {
     	 check++;
-         $("#pwckajax").css("color", "green");
-         $("#pwckajax").html("비밀번호가 일치합니다.")
+         $("#pwdConfirm").css("color", "green");
+         $("#pwdConfirm").html("비밀번호가 일치합니다.")
       }else {
     	 // check--;
-         $("#pwckajax").css("color", "red");
-         $("#pwckajax").html("비밀번호가 일치하지 않습니다.");   
+         $("#pwdConfirm").css("color", "red");
+         $("#pwdConfirm").html("비밀번호가 일치하지 않습니다.");   
       }
    });
    
