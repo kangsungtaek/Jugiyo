@@ -103,7 +103,7 @@ body, html {
 }
 </style>
 </head>
-<body>
+<body class="bgimg-1" style="background-image: url('/images/imgaa.png')">
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar" id="myNavbar">
