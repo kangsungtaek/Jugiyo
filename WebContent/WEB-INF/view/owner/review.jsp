@@ -4,7 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+<style>
+.star {
+	color: #FFBB00;
+}
+</style>
 <div class="w3-container">
 	<ul class="w3-ul w3-card-4">
 		<c:choose>
@@ -20,7 +24,38 @@
 						</c:forEach>
 						<br/>
 		      		</c:if>
-		    		<h4>【${ r.nickname }님 (${ r.star })】</h4> 
+		    		<h4>【${ r.nickname }님 
+		    		<c:choose>
+									<c:when test="${ r.star == null || empty r.star }">
+										<i class="fa fa-star-o star"></i>
+										<i class="fa fa-star-o star"></i>
+										<i class="fa fa-star-o star"></i>
+										<i class="fa fa-star-o star"></i>
+										<i class="fa fa-star-o star"></i>
+									</c:when>
+									<c:otherwise>
+										<c:forEach var="i" begin="1" end="5" step="1">
+											<c:choose>
+												<c:when test="${r.star+0.5 eq i}">
+													<i class="fa fa-star-half-o star"></i>
+												</c:when>
+												<c:when test="${r.star ge i}">
+													<i class="fa fa-star star"></i>
+												</c:when>
+												<c:when test="${r.star lt i}">
+													<i class="fa fa-star-o star"></i>
+												</c:when>
+
+											</c:choose>
+
+										</c:forEach>
+
+
+									</c:otherwise>
+								</c:choose>
+		    		
+		    		
+		    		】</h4> 
 		    		▶${ r.content } 
 		    		<c:choose>
 		    			<c:when test="${empty r.reply }">	
