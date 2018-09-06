@@ -24,84 +24,84 @@ import pro.vo.StoreVo;
 
 @Repository
 public class StoreDao {
-	
-	@Autowired
-	SqlSessionTemplate template;
-	@Autowired
-	MongoTemplate mongoTemplate;
-	
-	//아이디 생성을 위한 sequence 불러오기
-	public int getSeq() {
-		return template.selectOne("store.getSeq");
-	}
-	
-	//상점등록
-	public boolean insertStore(StoreVo vo) {
-		Integer i = template.insert("store.addStore", vo);
-		return i==1;
-	}
-	// 음식점 조회 전체보기 / 음식점 종류별
-	public List<StoreVo> storeLIst(String type){
-		if(type.equals("all")) {
-			return template.selectList("store.getAll");
-		}else {
-			return template.selectList("store.getType",type);
-		}
-	}
-	
-	//반경계산한 음식점조회
-	public List<StoreVo> getStoreByCoords(Map map) {
-		if(map.get("type").equals("all")) {
-			return template.selectList("store.getStoreByCoords", map);			
-		} else {
-			return template.selectList("store.getStoreByCoordsWithType", map);
-		}
-	}
+   
+   @Autowired
+   SqlSessionTemplate template;
+   @Autowired
+   MongoTemplate mongoTemplate;
+   
+   //아이디 생성을 위한 sequence 불러오기
+   public int getSeq() {
+      return template.selectOne("store.getSeq");
+   }
+   
+   //상점등록
+   public boolean insertStore(StoreVo vo) {
+      Integer i = template.insert("store.addStore", vo);
+      return i==1;
+   }
+   // 음식점 조회 전체보기 / 음식점 종류별
+   public List<StoreVo> storeLIst(String type){
+      if(type.equals("all")) {
+         return template.selectList("store.getAll");
+      }else {
+         return template.selectList("store.getType",type);
+      }
+   }
+   
+   //반경계산한 음식점조회
+   public List<StoreVo> getStoreByCoords(Map map) {
+      if(map.get("type").equals("all")) {
+         return template.selectList("store.getStoreByCoords", map);         
+      } else {
+         return template.selectList("store.getStoreByCoordsWithType", map);
+      }
+   }
 
-	public StoreVo getStore(int storeNo) {
-		return template.selectOne("store.getStore", storeNo);
-	}
-	
-	public List<StoreVo> searchStoreMenu(String search) {
-		return template.selectList("store.searchStoreMenu", search);
-	}
-	//반경계산 음식점조회-검색
-	public List<StoreVo> searchStoreMenuByCoords(Map map) {
-		return template.selectList("store.searchStoreMenuByCoords", map);
-	}
+   public StoreVo getStore(int storeNo) {
+      return template.selectOne("store.getStore", storeNo);
+   }
+   
+   public List<StoreVo> searchStoreMenu(String search) {
+      return template.selectList("store.searchStoreMenu", search);
+   }
+   //반경계산 음식점조회-검색
+   public List<StoreVo> searchStoreMenuByCoords(Map map) {
+      return template.selectList("store.searchStoreMenuByCoords", map);
+   }
 
-	public StoreVo login(Map m) {
-		return template.selectOne("store.login",m);
-	}
-	
-	public List<ReviewVo> findReview(int no) {
-		System.out.println("[storeDao:mongo]");
-		
-		Query query = new BasicQuery(new Document().append("no", no));
-		System.out.println("[storeDao:mongo] " + query);
-		
-		return mongoTemplate.find(query, ReviewVo.class, "review");
-	}
-	
-	public List<LogVo> findLogByStoreNo(int storeNo) {
-		Query query = new BasicQuery(new Document().append("storeNo", storeNo));
-		return mongoTemplate.find(query, LogVo.class, "log");
-	}
-	
-	public void updateReply(Map m) {
-		System.out.println("[storeDao:mongo]");
-		Query query = Query.query(Criteria.where("_id").is(m.get("id")));
-		Update update = new BasicUpdate(new Document().append("$set", new Document().append("reply", m.get("reply"))));
-		
-		mongoTemplate.updateMulti(query, update, "review");
-	}
+   public StoreVo login(Map m) {
+      return template.selectOne("store.login",m);
+   }
+   
+   public List<ReviewVo> findReview(int no) {
+      System.out.println("[storeDao:mongo]");
+      
+      Query query = new BasicQuery(new Document().append("no", no));
+      System.out.println("[storeDao:mongo] " + query);
+      
+      return mongoTemplate.find(query, ReviewVo.class, "review");
+   }
+   
+   public List<LogVo> findLogByStoreNo(int storeNo) {
+      Query query = new BasicQuery(new Document().append("storeNo", storeNo));
+      return mongoTemplate.find(query, LogVo.class, "log");
+   }
+   
+   public void updateReply(Map m) {
+      System.out.println("[storeDao:mongo]");
+      Query query = Query.query(Criteria.where("_id").is(m.get("id")));
+      Update update = new BasicUpdate(new Document().append("$set", new Document().append("reply", m.get("reply"))));
+      
+      mongoTemplate.updateMulti(query, update, "review");
+   }
 
-	public List<StoreVo> getStoreList() {
-		return template.selectList("store.getStoreList" , null);
-	}
+   public List<StoreVo> getStoreList() {
+      return template.selectList("store.getStoreList" , null);
+   }
 
-	public boolean updateStore(StoreVo vo) {
-		return template.update("store.storeUpdate", vo) == 1?true:false;
-	}
-	
+   public boolean updateStore(StoreVo vo) {
+      return template.update("store.storeUpdate", vo) == 1?true:false;
+   }
+   
 }

@@ -179,11 +179,13 @@ public class OwnerController {
 		if (!files[0].isEmpty()) {
 			for (MultipartFile file : files) {
 				MenuAttachVo avo = uploadService.execute(file, vo.getStore());
-
 				avo.setParent(vo.getNo());
 				avo.setNo(vo.getFileNo());
 				System.out.println(avo.toString());
-				menuDao.updateMenuAttach(avo);
+				int i = menuDao.updateMenuAttach(avo);
+				if ( i== 0) {
+					menuDao.addMenuAttach(avo);
+				}
 			}
 		}
 		ModelAndView mav = new ModelAndView();

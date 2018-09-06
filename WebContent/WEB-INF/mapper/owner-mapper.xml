@@ -23,7 +23,7 @@
 	</update>
 	<!-- 메뉴파일 업데이트 -->
 	<update id="updateAttach" parameterType="pro.vo.MenuAttachVo">
-		update menuattach set uri=#{uri}, name=#{name} where no=#{no} 
+		update menuattach set uri=#{uri}, name=#{name} where parent=#{parent} 
 	</update>
 	
 	<!-- 메뉴 시퀀스  -->
