@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <br />
-<div style="background-color: white;">
 <form action="/owner/salesstats" id="yearf">
 	<select name="year" id="year" title="년도" class="select w80">
 		
@@ -20,9 +19,7 @@
 		</c:forEach>
 	</select>
 </form>
-
-<canvas id="myChart" ></canvas>
-</div>
+<canvas id="myChart"></canvas>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 <script>
