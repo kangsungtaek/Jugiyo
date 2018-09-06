@@ -13,10 +13,6 @@
    /*   .hide {display:none;}   */
 </style>
 
-<p class="logo">
-	<a href="#"><img src="../../../images/logo_b.png" alt="로고" /></a>
-</p>
-
 <div id="wrap" class="w3-panel w3-padding-64 w3-orange w3-container">   
 
    <div class="w3-row" style="width:169px;">
