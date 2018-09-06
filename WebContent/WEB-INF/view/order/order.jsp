@@ -156,13 +156,15 @@
 						<span class="w3-small">별점 : ${ r.review.star }</span>
 						<br />
 
-						<span class="w3-small"> <c:forEach var="menu"
-								items="${ r.orderList }" varStatus="vs">
+						<span class="w3-small"> 
+							주문내역 : 
+							<c:forEach var="menu" items="${ r.orderList }" varStatus="vs">
 							${ menu.name }
 							<c:if test="${ !vs.last }">
 								, 
 							</c:if>
-							</c:forEach> <br /> <c:if test="${ fn:length(r.review.img) > 0 }">
+							</c:forEach> <br />
+							<c:if test="${ fn:length(r.review.img) > 0 }">
 								<c:forEach var="i" items="${ r.review.img }">
 									<img src="${pageContext.request.contextPath}${ i }"
 										style="width: 10%; height: 10%;" />
@@ -171,6 +173,11 @@
 						</span>
 						<div class="w3-left-align w3-large">
 							<p>${ r.review.content }</p>
+							<c:if test="${ r.review.reply ne null && !empty r.review.reply }">
+								<p>
+								<small>사장님댓글  ▶  ${  r.review.reply } </small>
+								</p>
+							</c:if>
 						</div>
 					</c:if>
 				</c:forEach>
