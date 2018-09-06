@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div style="padding-top: 30px;">
+<div style="padding-top: 50px;">
 	<button onclick="myFunction('Demo1')"
 		class="w3-button w3-block w3-deep-orange w3-left-align">총 주문 내역</button>
 

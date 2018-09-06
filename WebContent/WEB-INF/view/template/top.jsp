@@ -2,11 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<style>
-.bgimg-1 {
-	min-height: 30%;
-}
-</style>
 <html>
 <head>
 <title>JUGIYO</title>
@@ -24,9 +19,7 @@ input, button, select {
 	font-size: 11pt;
 	font-family: 맑은 고딕;
 }
-ul {
-	background-color: white;
-}
+
 /*
 td, th {
 	text-align: center;
@@ -110,7 +103,7 @@ body, html {
 }
 </style>
 </head>
-<body class="bgimg-1" style="background-image: url('/images/imgaa.png')">
+<body>
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar" id="myNavbar">
@@ -140,6 +133,7 @@ body, html {
     </c:choose>  
   </div>
 </div>
+
 <div style="height: 50px;"></div>
 
 <script>
