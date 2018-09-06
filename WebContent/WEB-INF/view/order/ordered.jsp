@@ -56,7 +56,7 @@ textarea {
 		</div>
 		<div class="w3-container">
 			<button onclick="myFunction2('Demo1')"
-				class="w3-button w3-block w3-black w3-left-align">배달정보</button>
+				class="w3-button w3-block w3-deep-orange w3-left-align">배달정보</button>
 			<div id="Demo1" class="w3-show w3-container">
 				
 					<p>
@@ -77,7 +77,7 @@ textarea {
 			</div>
 
 			<button onclick="myFunction2('Demo2')"
-				class="w3-button w3-block w3-black w3-left-align">주문시 요청사항</button>
+				class="w3-button w3-block w3-deep-orange w3-left-align">주문시 요청사항</button>
 			<div id="Demo2" class="w3-show w3-container">
 			<p></p>
 			<textarea name="requested" placeholder="주문시 요청사항이 있으시면 남겨주세요" form="form1" ></textarea>
@@ -85,12 +85,12 @@ textarea {
 			</div>
 			
 			<button onclick="myFunction2('Demo3')"
-				class="w3-button w3-block w3-black w3-left-align">결제수단 선택</button>
+				class="w3-button w3-block w3-deep-orange w3-left-align">결제수단 선택</button>
 			<div id="Demo3" class="w3-hide w3-container">
 			
 			<div class="w3-bar">
 			<p></p>
-  				<button class="w3-bar-item w3-button w3-black" id="cacheBtn" style="width:50%" onclick="paymenSelect(this)">
+  				<button class="w3-bar-item w3-button w3-deep-orange" id="cacheBtn" style="width:50%" onclick="paymenSelect(this)">
   				 <i class="fa fa-cache"></i>현금
   				 <input class="w3-radio" type="radio" name="payment" id="cacheRadio" value="cache" form="form1" checked>
   				</button>
@@ -104,7 +104,7 @@ textarea {
 			</div>
 			
 			<button onclick="myFunction2('Demo4')"
-				class="w3-button w3-block w3-black w3-left-align">할인방법 선택</button>
+				class="w3-button w3-block w3-deep-orange w3-left-align">할인방법 선택</button>
 
 			<div id="Demo4" class="w3-show w3-container">
 			<p></p>
@@ -128,7 +128,7 @@ textarea {
   					<input type="text" disabled="disabled"  name="myPoint" id="myPoint" value="${member.point }" > 
   					<small>최대 3천원</small>
   					<button type="button" disabled="disabled" id="pointApp" >적용</button>
-  			    포인트 사용 금액 : <input type="text" readonly="readonly" name="point" id="point" form ="form1"> 
+  			     <input type="hidden" readonly="readonly" name="point" id="point" form ="form1"> 
 			<p>&nbsp;</p>
 			</div>
 		</div>
@@ -142,27 +142,27 @@ textarea {
 					<div class="w3-container w3-border-bottom w3-padding-16 w3-light-grey">
 						<span class="fa fa-shopping-cart"></span> 주문표
 					</div>
-					<div class="w3-container w3-border-bottom w3-padding-16">
+					<div class="w3-container w3-border-bottom w3-padding-16" style="background-color: white;">
 						${storeVo.name }
 					</div>
 					<div class="w3-container w3-sand w3-padding-16" id="orderDiv">
 						<ul id="orderList">
 							<c:forEach items="${sessionScope.orderList}" var="orderList">
-								<li id="${orderList.no}">
+								<li id="${orderList.no}" class="w3-sand">
 								<div class='w3-row' >
 									<div class='w3-half w3-right-left' style="padding: 5px;">${orderList.name } X
 										 <span id="count"> ${orderList.cnt }</span> 
 									</div>
 									<div class='w3-half w3-right-align'>
-										 <span id="price"> ${orderList.price * orderList.cnt } 원</span> 
+										 <span id="price"> ${orderList.price * orderList.cnt } </span> 원
 									 </div>
 								</div>
 								</li>
 							</c:forEach>
 						</ul>
-						총 가격 : <span id="totalPrice"> ${sessionScope.totalPrice}</span> <br />
-						할인 가격 : <span id="salsePrice">0</span> <br />  <span 
-							id="sumPrice">최종 가격 :  ${sessionScope.totalPrice} </span> <br />
+						총 가격 : <span id="totalPrice"> ${sessionScope.totalPrice} </span> 원 <br />
+						할인 가격 : <span id="salsePrice">0 </span> 원 <br />최종 가격 :  <span 
+							id="sumPrice">  ${sessionScope.totalPrice} </span> 원 <br />
 
 					</div>
 				</div>
@@ -253,7 +253,7 @@ textarea {
 			$("#salsePrice").text(aa[1]);
 			$("#sumPrice").text($("#totalPrice").text() - aa[1]);
 		}
-		$("#pointDiscount").prop("disabled", true);
+		//$("#pointDiscount").prop("disabled", true);
 		
 
 		
