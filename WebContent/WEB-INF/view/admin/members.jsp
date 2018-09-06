@@ -7,29 +7,29 @@
 
 <div class="w3-responsive">
 <table class="w3-table-all">
-	<thead>
-		<tr>
-			<td>ID</td>
-			<td>CONTACT</td>
-			<td>NICKNAME</td>
-			<td>ADDRESS</td>
-			<td>POINT</td>
-			<td>EMAIL</td>
-			<td>MEMBERSHIP</td>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach var="m" items="${ members }">
-			<tr>
-				<td>${ m.id }</td>
-				<td>${ m.contact }</td>
-				<td>${ m.nickname }</td>
-				<td>${ m.address }</td>
-				<td>${ m.point }</td>
-				<td>${ m.email }</td>
-				<td>${ m.membership }</td>
-			</tr>
-		</c:forEach>
-	</tbody>
+   <thead>
+      <tr>
+         <td>ID</td>
+         <td>CONTACT</td>
+         <td>NICKNAME</td>
+         <td>ADDRESS</td>
+         <td>POINT</td>
+         <td>EMAIL</td>
+         <td>MEMBERSHIP</td>
+      </tr>
+   </thead>
+   <tbody>
+      <c:forEach var="m" items="${ members }">
+         <tr>
+            <td>${ m.id }</td>
+            <td>${ m.contact }</td>
+            <td>${ m.nickname }</td>
+            <td>${ m.address }</td>
+            <td>${ m.point }</td>
+            <td>${ m.email }</td>
+            <td>${ m.membership }</td>
+         </tr>
+      </c:forEach>
+   </tbody>
 </table>
 </div>
