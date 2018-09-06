@@ -108,7 +108,9 @@ textarea {
 
 			<div id="Demo4" class="w3-show w3-container">
 			<p></p>
-  				쿠폰 <input type="radio" name ="discount" id="copunDiscount" value="coupon" form="form1" onclick="discountSelect(this)" > 
+			<c:choose>
+				<c:when test="${ !empty vo && vo != null }">
+					쿠폰 <input type="radio" name ="discount" id="copunDiscount" value="coupon" form="form1" onclick="discountSelect(this)" > 
   					<select name="coupon" disabled="disabled" id="coupon" form ="form1" > 
   						<option selected disabled hidden>쿠폰선택</option>
 					<c:choose>
@@ -129,7 +131,19 @@ textarea {
   					<small>최대 3천원</small>
   					<button type="button" disabled="disabled" id="pointApp" >적용</button>
   			     <input type="hidden" readonly="readonly" name="point" id="point" form ="form1"> 
-			<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</c:when>
+				<c:otherwise>
+					쿠폰 <input type="radio" name ="discount" id="copunDiscount" value="coupon" form="form1" onclick="discountSelect(this)" disabled > 
+  					<select name="coupon" disabled="disabled" id="coupon" form ="form1" > 
+  						<option selected disabled hidden>쿠폰선택</option>
+  					</select>
+  					<br/>
+  					내 포인트  <input  type="radio" name ="discount" id="pointDiscount" value="point" form="form1" onclick="discountSelect(this)" disabled >
+  					<input type="text" disabled="disabled"  name="myPoint" id="myPoint" value="${member.point }" > 
+				</c:otherwise>
+			</c:choose>
+  				
 			</div>
 		</div>
 

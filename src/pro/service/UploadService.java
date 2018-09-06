@@ -45,8 +45,7 @@ public class UploadService {
 		MenuAttachVo vo = new MenuAttachVo();
 		vo.setName(file.getOriginalFilename());
 		vo.setUri("/image/"+storeNo+"/"+file.getOriginalFilename());
-		
-		
+			
 		return vo;
 	}
 	
