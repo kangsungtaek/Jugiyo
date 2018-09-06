@@ -1,5 +1,6 @@
 package pro.dao;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +53,15 @@ public class MemberDao {
 	//주문내역불러오기
 	public List<LogVo> readAllById(String id) {
 		Query query = new BasicQuery(new Document().append("userId", id));
-		return mongoTemplate.find(query, LogVo.class, "log");
+		List<LogVo> list = mongoTemplate.find(query, LogVo.class, "log");
+		list.sort(new Comparator<LogVo>() {
+
+			@Override
+			public int compare(LogVo o1, LogVo o2) {
+				return o1.getOrderdate().compareTo(o2.getOrderdate()) * (-1);
+			}
+		});
+		return list;
 	}
 	
 	//특정 주문내역 불러오기
