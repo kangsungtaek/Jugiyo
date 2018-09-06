@@ -6,11 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<style>
-.w3-table-all {
-	vertical-align: middle;
-}
-</style>
+
 
 <div style="min-height:50px"></div>
 <div class="w3-center">
@@ -21,27 +17,27 @@
 <table class="w3-table-all w3-centered">
 	<thead style="height: 40px;">
 		<tr class="w3-red w3-row">
-			<td class="w3-col" style="width:5%;"></td>
-			<td class="w3-col" style="width:30%;">음식점</td>
-			<td class="w3-col" style="width:35%;">주문한 메뉴</td>
-			<td class="w3-col" style="width:10%; ">주문날짜</td>
-			<td class="w3-col" style="width:20%;">비고</td>
+			<td style="width:5%;"></td>
+			<td style="width:30%;">음식점</td>
+			<td style="width:35%;">주문한 메뉴</td>
+			<td style="width:10%; ">주문날짜</td>
+			<td style="width:20%;">비고</td>
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach var="log" items="${ list }" varStatus="vs">
 			<tr class="w3-row">
-				<td class="w3-col" style="width:5%;">${ vs.count }</td>
-				<td class="w3-col w3-layout-middle" style="width:30%; "><a href="/order/order?storeNo=${log.storeNo}">${ log.storeName }</a></td>
-				<td class="w3-col" style="width:35%;">
+				<td style="width:5%; vertical-align: middle;">${ vs.count }</td>
+				<td style="width:30%; vertical-align: middle;"><a href="/order/order?storeNo=${log.storeNo}">${ log.storeName }</a></td>
+				<td style="width:35%; vertical-align: middle;">
 						${ log.orderList[0].name }
 					<c:if test="${ fn:length(log.orderList) > 1 }">
 						외  ${ fn:length(log.orderList) - 1 } 
 					</c:if>													
 				</td>
-				<td class="w3-col" style="width:10%;">
+				<td style="width:10%; vertical-align: middle;">
 					<fmt:formatDate value="${ log.orderdate }" pattern="yyyy-MM-dd"/></td>
-				<td class="w3-col" style="width:20%;">
+				<td style="width:20%; vertical-align: middle;">
 					<c:choose>
 						<c:when test="${ log.reviewd == 'Y' }">
 							<button class="w3-btn w3-white w3-border w3-border-grey w3-round-large show">나의리뷰보기</button><br/>
