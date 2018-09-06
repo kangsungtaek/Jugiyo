@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -30,14 +30,14 @@
 <script>
 /*   2018-08-25/ 강성택   click 이벤트 안되서 다시 main.jsp 에 추가 .. 
 $(".cate").on("click", function() {
-	location.href = "order/order?no=" + $(this).attr("id");
+   location.href = "order/order?no=" + $(this).attr("id");
 });
 <<<<<<< HEAD
 
 function submit(target) {
-	var search = target.value;
-	console.log(search + "/" + typeof search);
-	location.href="/main/search?search="+search;
+   var search = target.value;
+   console.log(search + "/" + typeof search);
+   location.href="/main/search?search="+search;
 }
 
 =======
@@ -45,7 +45,7 @@ function submit(target) {
 $(document).ready(function(){
     $("#search").keypress(function (e) {
      if (e.which == 13){
-    	 console.log($(this).val());
+        console.log($(this).val());
          location.href="/main/search?search="+$(this).val();
      }
  });

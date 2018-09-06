@@ -39,30 +39,30 @@
 
 
 <script>
-	   var idx = 0;
-	   var ws = new WebSocket("ws://jugiyo.mockingu.com/ws/conn.do");
-	   //var ws = new WebSocket("ws://127.0.0.1/ws/conn.do");
-	   console.log("test");
-	   ws.onopen = function(ev) {
-	        console.log('Connection opened.');
-	      }
-	   ws.onmessage = function(ret) {
-	      console.log(ret.data);
-	      var obj = JSON.parse(ret.data);
-	      switch (obj.mode) {
-	      case "order":
-	         orderHandle(obj);
-	         break;
-	      }
-	   };
-	   ws.onerror = function(ev) {
-	        console.log('An error occurred. Sorry for that.');
-	      }
-	   function orderHandle(obj) {
-	      var html = "<span class=\"w3-tag w3-blue\" onclick=\"location.reload();\">New!</span>";
-	      $("#orederAdmin").append(html);
-	      
-	      
-	      
-	   }
-	</script>
+      var idx = 0;
+      var ws = new WebSocket("ws://jugiyo.mockingu.com/ws/conn.do");
+      //var ws = new WebSocket("ws://127.0.0.1/ws/conn.do");
+      console.log("test");
+      ws.onopen = function(ev) {
+           console.log('Connection opened.');
+         }
+      ws.onmessage = function(ret) {
+         console.log(ret.data);
+         var obj = JSON.parse(ret.data);
+         switch (obj.mode) {
+         case "order":
+            orderHandle(obj);
+            break;
+         }
+      };
+      ws.onerror = function(ev) {
+           console.log('An error occurred. Sorry for that.');
+         }
+      function orderHandle(obj) {
+         var html = "<span class=\"w3-tag w3-blue\" onclick=\"location.reload();\">New!</span>";
+         $("#orederAdmin").append(html);
+         
+         
+         
+      }
+   </script>

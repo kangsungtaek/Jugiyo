@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<style>
+.bgimg-1 {
+   min-height: 30%;
+}
+</style>
 <html>
 <head>
 <title>JUGIYO</title>
@@ -15,36 +20,38 @@
 
 <style>
 input, button, select {
-	padding: 5px;
-	font-size: 11pt;
-	font-family: 맑은 고딕;
+   padding: 5px;
+   font-size: 11pt;
+   font-family: 맑은 고딕;
 }
-
+ul {
+   background-color: white;
+}
 /*
 td, th {
-	text-align: center;
+   text-align: center;
 }
 
 th {
-	background-color: #C2E2E8;
-	border-bottom: 1px dotted;
+   background-color: #C2E2E8;
+   border-bottom: 1px dotted;
 }
 
 tr {
-	height: 30px;
+   height: 30px;
 }
 
 a {
-	text-decoration: none;
+   text-decoration: none;
 }
 
 .td-title {
-	width: 300px;
-	text-align: left;
+   width: 300px;
+   text-align: left;
 }
 
 .td-cnt {
-	width: 50px;
+   width: 50px;
 }
 */
 .reg {margin:0 auto; width:650px; height:100%; position:relative;}
@@ -60,14 +67,14 @@ a {
 #wrap {margin:0 auto; width:100%;  margin-top:5%; text-align:center; }
 #wrap form {margin:0 auto; width:700px; margin-top:50px;}
 #wrap h1 {text-align:center;}
-	
+   
 a {
-	text-decoration: none;
+   text-decoration: none;
 }
 
 ul {
-	list-style: none;
-	padding: 5px 0px 5px 5px;
+   list-style: none;
+   padding: 5px 0px 5px 5px;
 }
 
 
@@ -111,29 +118,28 @@ body, html {
       <i class="fa fa-bars"></i>
     </a>
     <c:choose>
-    	<c:when test="${ empty sessionScope.vo && empty sessionScope.storeVo }">
-		    <a href="/index" class="w3-bar-item w3-button">HOME</a>
-    		<a href="/login/loginForm" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> 로그인</a>
-    		<a href="/login/regForm" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"><i class="fa fa-th"></i> 회원가입</a>
-    	</c:when>
-    	<c:otherwise>
-    		<c:choose>
-    			<c:when test="${ empty sessionScope.storeVo }">
-    				<a href="/index" class="w3-bar-item w3-button">HOME</a>
-	    			<a href="/member/memInfo" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> 내정보</a>
-	    			<a href="/main" class="w3-bar-item w3-button w3-hide-small">👋 주문하기</a>
-    				<a href="/login/logout" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"><i class="fa fa-th"></i> 로그아웃</a>
-    			</c:when>
-    			<c:otherwise>
-	    			<a href="/owner/index" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> 내가게</a>
-    				<a href="/owner/logout" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"><i class="fa fa-th"></i> 로그아웃</a>	
-    			</c:otherwise>
-    		</c:choose>
-    	</c:otherwise>
+       <c:when test="${ empty sessionScope.vo && empty sessionScope.storeVo }">
+          <a href="/index" class="w3-bar-item w3-button">HOME</a>
+          <a href="/login/loginForm" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> 로그인</a>
+          <a href="/login/regForm" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"><i class="fa fa-th"></i> 회원가입</a>
+       </c:when>
+       <c:otherwise>
+          <c:choose>
+             <c:when test="${ empty sessionScope.storeVo }">
+                <a href="/index" class="w3-bar-item w3-button">HOME</a>
+                <a href="/member/memInfo" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> 내정보</a>
+                <a href="/main" class="w3-bar-item w3-button w3-hide-small">👋 주문하기</a>
+                <a href="/login/logout" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"><i class="fa fa-th"></i> 로그아웃</a>
+             </c:when>
+             <c:otherwise>
+                <a href="/owner/index" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> 내가게</a>
+                <a href="/owner/logout" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"><i class="fa fa-th"></i> 로그아웃</a>   
+             </c:otherwise>
+          </c:choose>
+       </c:otherwise>
     </c:choose>  
   </div>
 </div>
-
 <div style="height: 50px;"></div>
 
 <script>
